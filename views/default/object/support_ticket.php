@@ -140,6 +140,11 @@
 		</div>
 		<?php
 
+		$ia = elgg_get_ignore_access();
+		elgg_set_ignore_access(true);
+		
 		echo elgg_view_comments($entity);
+		
+		elgg_set_ignore_access($ia);
 	}
-?>
+	

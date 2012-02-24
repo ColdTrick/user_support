@@ -24,6 +24,9 @@ ToDo
 =========================
 Version Information
 =========================
+x.x:
+	- fixed: not all comments shown on Support ticket
+
 1.3 (2011-07-29):
 	- added: option for admins to get notification on create/update support ticket
 	- fixed: fancybox css
