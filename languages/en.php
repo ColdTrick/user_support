@@ -2,6 +2,8 @@
 
 	$english = array(
 	
+		'user_support' => "User Support",
+	
 		// objects
 		'item:object:faq' => "User support FAQ",
 		'item:object:help' => "User support Contextual help",
@@ -30,10 +32,32 @@
 		
 		'user_support:settings:auto_close_tickets' => "Auto close support tickets on an answer from an admin?",
 	
+		// user settings
+		'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",
+		
 		// annotations
 		'support_ticket:river:annotate' => "a comment on",
 		'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
 		'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
+	
+		// admin notify
+		'user_support:notify:admin:create:subject' => "A new Support Ticket was reported",
+		'user_support:notify:admin:create:message' => "Hi,
+
+%s reported a new Support Ticket:
+%s
+
+To view the Ticket click on this link:
+%s",
+		
+		'user_support:notify:admin:updated:subject' => "A Support Ticket was updated",
+		'user_support:notify:admin:updated:message' => "Hi,
+		
+%s updated the Support Ticket %s:
+%s
+
+To view the Ticket click on this link:
+%s",
 	
 		// menu
 		'user_support:menu:support_tickets' => "Support tickets",

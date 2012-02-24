@@ -1,5 +1,24 @@
 <?php
 $language = array (
+  'user_support' => 'Helpdesk',
+  'user_support:settings:auto_close_tickets' => 'Helpdesk tickets automatisch sluiten als een beheerder reageert?',
+  'user_support:usersettings:admin_notify' => 'Wil je een bericht ontvangen als een Helpdesk ticket wordt aangemaakt/bijgewerkt',
+  'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket is gemeld',
+  'user_support:notify:admin:create:message' => 'Hallo,
+
+%s heeft een nieuwe Helpdesk ticket gemeld:
+%s
+
+Om de ticket te bekijken klik op de volgende link:
+%s',
+  'user_support:notify:admin:updated:subject' => 'Een Helpdesk ticket is bijgewerkt',
+  'user_support:notify:admin:updated:message' => 'Hallo,
+
+%s heeft de Helpdesk ticket %s bijgewerkt:
+%s
+
+Om de ticket te bekijken klik op de volgende link:
+%s',
   'user_support:settings:help_group' => 'Selecteer een groep waar gebruikers meer hulp kunnen krijgen',
   'user_support:settings:help_group:non' => 'Geen help groep',
   'user_support:help_center:help_group' => 'Help groep',

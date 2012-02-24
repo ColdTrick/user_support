@@ -26,6 +26,9 @@
 		} else {
 			$ticket = new UserSupportTicket();
 			
+			$ticket->title = elgg_get_excerpt($title, 50);
+			$ticket->description = $title;
+			
 			if(!$ticket->save()){
 				register_error(elgg_echo("user_support:action:ticket:edit:error:create"));
 				unset($ticket);

@@ -82,5 +82,46 @@
 		
 		return $result;
 	}
+	
+	function user_support_get_admin_notify_users(UserSupportTicket $ticket){
+		global $CONFIG;
+		
+		$result = false;
+		
+		if(!empty($ticket) && ($ticket instanceof UserSupportTicket)){
+			$options = array(
+				"type" => "user",
+				"limit" => false,
+				"site_guids" => false,
+				"relationship" => "member_of_site",
+				"relationship_guid" => $CONFIG->site_guid,
+				"inverse_relationship" => true,
+				"joins" => array(
+					"JOIN " . $CONFIG->dbprefix . "private_settings ps ON e.guid = ps.entity_guid",
+					"JOIN " . $CONFIG->dbprefix . "users_entity ue ON e.guid = ue.guid"
+				),
+				"wheres" => array(
+					"(ps.name = 'plugin:settings:user_support:admin_notify' AND ps.value = 'yes')",
+					"(ue.admin = 'yes')",
+					"(e.guid <> " . $ticket->getOwner() . ")"
+				)
+			);
+				
+			$users = elgg_get_entities_from_relationship($options);
+				
+			// trigger hook to get more/less users
+			$users = trigger_plugin_hook("admin_notify", "user_support", array("users" => $users, "entity" => $ticket), $users);
+
+			if(!empty($users)){
+				if(is_array($users)){
+					$result = $users;
+				} else {
+					$result = array($users);
+				}
+			}
+		}
+		
+		return $result;
+	}
 
 ?>

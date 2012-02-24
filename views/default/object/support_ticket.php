@@ -38,7 +38,7 @@
 		}
 		$title = $entity->title;
 		if(strlen($title) > 50){
-			$title = elgg_get_exerpt($title, 50);
+			$title = elgg_get_excerpt($title, 50);
 		}
 		$info .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title));
 		
@@ -75,7 +75,11 @@
 					echo elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
 				}
 				
-				echo $entity->title; 
+				$title = $entity->title;
+				if(strlen($title) > 50){
+					$title = elgg_get_excerpt($title, 50);
+				}
+				echo $title; 
 			?></h3>
 			
 			<!-- Subtitle info -->

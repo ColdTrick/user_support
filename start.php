@@ -174,6 +174,7 @@
 
 	// register other events
 	register_elgg_event_handler("create", "annotation", "user_support_create_annotation_event");
+	register_elgg_event_handler("create", "object", "user_support_create_object_event");
 	
 	// register actions
 	register_action("user_support/help/edit", false, dirname(__FILE__) . "/actions/help/edit.php", true);
