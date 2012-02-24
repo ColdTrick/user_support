@@ -27,6 +27,8 @@
 		// settings
 		'user_support:settings:help_group' => "Select a group for users to ask for help",
 		'user_support:settings:help_group:non' => "No support group",
+		
+		'user_support:settings:auto_close_tickets' => "Auto close support tickets on an answer from an admin?",
 	
 		// annotations
 		'support_ticket:river:annotate' => "a comment on",

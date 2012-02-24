@@ -1,6 +1,11 @@
 <?php 
 
 	$plugin = $vars["entity"];
+	
+	$noyes_options = array(
+		"no" => elgg_echo("option:no"),
+		"yes" => elgg_echo("option:yes")
+	);
 
 	if(is_plugin_enabled("groups")){
 		$group_options = array(
@@ -23,5 +28,8 @@
 		echo "<div>" . elgg_echo("user_support:settings:help_group") . "</div>";
 		echo elgg_view("input/pulldown", array("internalname" => "params[help_group_guid]", "options_values" => $group_options_value, "value" => (int) $plugin->help_group_guid));
 	}
+	
+	echo "<div>" . elgg_echo("user_support:settings:auto_close_tickets") . "</div>";
+	echo elgg_view("input/pulldown", array("internalname" => "params[auto_close_tickets]", "options_values" => $noyes_options, "value" => (int) $plugin->auto_close_tickets));
 
 ?>

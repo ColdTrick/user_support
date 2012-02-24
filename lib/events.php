@@ -9,7 +9,9 @@
 			if(!empty($entity) && ($entity instanceof UserSupportTicket) && !empty($user)){
 				if($user->getGUID() != $entity->getOwner()){
 					// user is not owner and is admin, so close ticket
-					$entity->setStatus(UserSupportTicket::CLOSED);
+					if(get_plugin_Setting("auto_close_tickets", "user_support") == "yes"){
+						$entity->setStatus(UserSupportTicket::CLOSED);
+					}
 				} elseif($user->getGUID() == $entity->getOwner()){
 					// user is the owner, so reopen
 					$entity->setStatus(UserSupportTicket::OPEN);

@@ -36,7 +36,11 @@
 		if(!empty($entity->support_type)){
 			$info .= elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
 		}
-		$info .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $entity->title));
+		$title = $entity->title;
+		if(strlen($title) > 50){
+			$title = elgg_get_exerpt($title, 50);
+		}
+		$info .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title));
 		
 		$info .= "<div class='clearfloat'></div>";
 		
@@ -100,6 +104,12 @@
 			<?php 
 			if(!empty($entity->help_url)){
 				echo elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
+			}
+			
+			if(!empty($entity->description)){
+				echo elgg_view("output/longtext", array("value" => $entity->description));
+			} elseif(strlen($entity->title) > 50) {
+				echo elgg_view("output/longtext", array("value" => $entity->title));
 			}
 			
 			?>

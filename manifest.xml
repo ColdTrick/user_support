@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest>
 	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="1.1" />
+	<field key="version" value="1.2" />
 	<field key="description" value="Offers user support" />
 	<field key="website" value="http://www.coldtrick.com/" />
 	<field key="copyright" value="(C) ColdTrick IT Solutions 2011" />
@@ -23,6 +23,11 @@ ToDo
 =========================
 Version Information
 =========================
+1.2 (2011-05-27):
+	- added: option to auto close supoprt tickets
+	- changed: layout of a support ticket
+	- fixed: unable to display contextual help on front page
+
 1.1 (2011-05-20):
 	- added: option to select a support group
 	- added: search in Help Center now searches in contextual help

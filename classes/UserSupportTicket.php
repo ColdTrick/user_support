@@ -18,7 +18,13 @@
 		public function getURL(){
 			global $CONFIG;
 			
-			return $CONFIG->wwwroot . "pg/user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title);
+			$title = $this->title;
+			if(strlen($title) > 50){
+				$title = elgg_get_excerpt($title, 50);
+			}
+			$title = str_replace("...", "", $title);
+			
+			return $CONFIG->wwwroot . "pg/user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($title);
 		}
 		
 		public function getStatus(){

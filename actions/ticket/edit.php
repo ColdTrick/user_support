@@ -33,7 +33,8 @@
 		}
 		
 		if(!empty($ticket)){
-			$ticket->title = $title;
+			$ticket->title = elgg_get_excerpt($title, 50);
+			$ticket->description = $title;
 			
 			$ticket->help_url = $help_url;
 			$ticket->help_context = $help_context;

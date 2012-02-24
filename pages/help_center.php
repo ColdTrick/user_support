@@ -4,6 +4,9 @@
 
 	$help_url = $_SERVER["HTTP_REFERER"];
 	$help_context = user_support_get_help_context($help_url);
+	if(empty($help_context)){
+		$help_context = user_support_get_help_context();
+	}
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 	
 	if(is_plugin_enabled("groups")){
