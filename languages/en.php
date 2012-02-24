@@ -24,6 +24,10 @@
 		'user_support:reopen' => "Reopen",
 		'user_support:last_comment' => "last comment by: %s",
 	
+		// settings
+		'user_support:settings:help_group' => "Select a group for users to ask for help",
+		'user_support:settings:help_group:non' => "No support group",
+	
 		// annotations
 		'support_ticket:river:annotate' => "a comment on",
 		'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
@@ -46,6 +50,7 @@
 		'user_support:help_center:ask' => "Ask a question",
 		'user_support:help_center:help' => "Create help",
 		'user_support:help_center:faq:title' => "FAQ",
+		'user_support:help_center:help_group' => "Help group",
 	
 		// forms
 		'user_support:forms:help:title' => "Create Contextual Help",

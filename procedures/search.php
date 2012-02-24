@@ -6,7 +6,7 @@
 		"query" => $q,
 		"search_type" => "entities",
 		"type" => "object",
-		"subtype" => UserSupportFAQ::SUBTYPE,
+		"subtype" => UserSupportHelp::SUBTYPE,
 		"limit" => 5,
 		"offset" => 0,
 		"sort" => "relevance",
@@ -16,22 +16,42 @@
 		"pagination" => false
 	);
 	
-	if($result = trigger_plugin_hook("search", "object:" . UserSupportFAQ::SUBTYPE, $params, array())){
-		$entities = $result["entities"];
+	if($result = trigger_plugin_hook("search", "object:" . UserSupportHelp::SUBTYPE, $params, array())){
+		$help_entities = $result["entities"];
 	} elseif($result = trigger_plugin_hook("search", "object", $params, array())){
-		$entities = $result["entities"];
+		$help_entities = $result["entities"];
 	}
 	
 	echo "<h3 class='settings'>" . sprintf(elgg_echo("search:results"), "\"" . $q . "\"") . "</h3>";
 	
-	if(!empty($entities)){
+	if(!empty($help_entities)){
 		$context = get_context();
 		set_context("search");
 		
-		echo elgg_view_entity_list($entities, $result["count"], 0, 5, false, false, false);
+		echo elgg_view_entity_list($help_entities, $result["count"], 0, 5, false, false, false);
 		
 		set_context($context);
-	} else {
+	}
+	
+	// Search in FAQ
+	$params["subtype"] = UserSupportFAQ::SUBTYPE;
+	
+	if($result = trigger_plugin_hook("search", "object:" . UserSupportFAQ::SUBTYPE, $params, array())){
+		$faq_entities = $result["entities"];
+	} elseif($result = trigger_plugin_hook("search", "object", $params, array())){
+		$faq_entities = $result["entities"];
+	}
+	
+	if(!empty($faq_entities)){
+		$context = get_context();
+		set_context("search");
+		
+		echo elgg_view_entity_list($faq_entities, $result["count"], 0, 5, false, false, false);
+		
+		set_context($context);
+	}
+	
+	if(empty($help_entities) && empty($faq_entities)){
 		echo elgg_echo("search:no_results");
 	}
 	

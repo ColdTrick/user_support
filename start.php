@@ -12,8 +12,10 @@
 	function user_support_init(){
 		// extend css & js
 		elgg_extend_view("css", "user_support/css");
+		elgg_extend_view("css", "fancybox/css");
 		elgg_extend_view("js/initialise_elgg", "user_support/js");
 		elgg_extend_view("metatags", "user_support/metatags");
+		
 		
 		// extend header
 		elgg_extend_view("page_elements/header_contents", "user_support/button");

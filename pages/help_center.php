@@ -6,6 +6,15 @@
 	$help_context = user_support_get_help_context($help_url);
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 	
+	if(is_plugin_enabled("groups")){
+		$group_guid = (int) get_plugin_setting("help_group_guid", "user_support");
+		if(!empty($group_guid) && ($group = get_entity($group_guid))){
+			if(!($group instanceof ElggGroup)){
+				$group = null;
+			}
+		}
+	}
+	
 	$faq_options = array(
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
@@ -34,10 +43,14 @@
 		<div id="user_support_help_center_actions">
 			<?php if(isloggedin()){?>
 				<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:help_center:ask"); ?>" onclick="$('#user_support_ticket_edit_form_wrapper').toggle();$.fancybox.resize();" />
-				<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:menu:support_tickets:mine"); ?>" onclick="window.location.href='<?php echo $CONFIG->wwwroot; ?>/pg/user_support/support_tickets/mine';" />
+				<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:menu:support_tickets:mine"); ?>" onclick="window.location.href='<?php echo $CONFIG->wwwroot; ?>/pg/user_support/support_ticket/mine';" />
 			<?php }?>
 			<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:menu:faq"); ?>" onclick="window.location.href='<?php echo $CONFIG->wwwroot; ?>/pg/user_support/faq';" />
-			
+			<?php 
+				if(!empty($group)){;
+			?>
+			<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:help_center:help_group"); ?>" onclick="window.location.href='<?php echo $group->getURL(); ?>';" />
+			<?php } ?>
 			<?php if(isadminloggedin() && empty($contextual_help_object)){ ?>
 			<input type="button" class="submit_button" value="<?php echo elgg_echo("user_support:help_center:help"); ?>" onclick="$('#user_support_help_edit_form_wrapper').toggle();$.fancybox.resize();" />
 			<?php } ?>
