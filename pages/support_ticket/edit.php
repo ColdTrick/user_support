@@ -6,26 +6,24 @@
 	
 	$forward = true;
 	
-	if($entity = get_entity($guid)){
-		if(($entity instanceof UserSupportTicket) && $entity->canEdit()){
-			set_page_owner($entity->getOwner());
-			
+	if(($entity = get_entity($guid)) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
+		if($entity->canEdit()){
 			$forward = false;
 			
+			elgg_set_page_owner_guid($entity->getOwnerGUID());
+			
 			$title_text = $entity->title;
-			$title = elgg_view_title($title_text);
 			
-			$body = elgg_view("user_support/forms/support_ticket", array("entity" => $entity));
-			$body = elgg_view("page_elements/contentwrapper", array("body" => $body));
-			
-			$page_data = $title . $body;
+			$page_data = elgg_view_layout("content", array(
+				"title" => $title_text,
+				"content" => elgg_view("user_support/forms/support_ticket", array("entity" => $entity))
+			));
 		}
 	}
 
 	if(!$forward){
-		page_draw($title_text, elgg_view_layout("two_column_left_sidebar", "", $page_data));
+		echo elgg_view_page($title_text, $page_data);
 	} else {
 		forward(REFERER);
 	}
-
-?>
+	

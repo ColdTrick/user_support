@@ -5,9 +5,9 @@
 		const OPEN = "open";
 		const CLOSED = "closed";
 		
-		protected function initialise_attributes() {
+		protected function initializeAttributes() {
 			global $CONFIG;
-			parent::initialise_attributes();
+			parent::initializeAttributes();
 			
 			$this->attributes["subtype"] = self::SUBTYPE;
 			$this->attributes["access_id"] = ACCESS_PRIVATE;
@@ -16,15 +16,13 @@
 		}
 		
 		public function getURL(){
-			global $CONFIG;
-			
 			$title = $this->title;
 			if(strlen($title) > 50){
 				$title = elgg_get_excerpt($title, 50);
 			}
 			$title = str_replace("...", "", $title);
 			
-			return $CONFIG->wwwroot . "pg/user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($title);
+			return elgg_get_site_entity()->url . "user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($title);
 		}
 		
 		public function getStatus(){
@@ -51,9 +49,7 @@
 			return $result;
 		}
 		
-		public function getIcon($size = "medium"){
-			global $CONFIG;
-			
+		public function getIconURL($size = "medium"){
 			$result = false;
 			
 			$support_type = strtolower($this->support_type);
@@ -63,18 +59,14 @@
 			
 			switch($size){
 				case "tiny":
-					$result = $CONFIG->wwwroot . "mod/user_support/_graphics/" . $support_type . "/tiny.png";
+					$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/" . $support_type . "/tiny.png";
 					break;
 				default:
-					$result = $CONFIG->wwwroot . "mod/user_support/_graphics/" . $support_type . "/small.png";
+					$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/" . $support_type . "/small.png";
 					break;
 			}
 			
 			return $result;
 		}
 	}
-
-
-
-
-?>
+	

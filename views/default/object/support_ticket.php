@@ -1,145 +1,99 @@
 <?php 
 
-	$entity = $vars["entity"];
+	$entity = elgg_extract("entity", $vars);
+	$full_view = elgg_extract("full_view", $vars);
+	
+	// entity menu
+	$entity_menu = elgg_view_menu("entity", array(
+		"entity" => $entity,
+		"handler" => "user_support/support_ticket",
+		"sort_by" => "priority",
+		"class" => "elgg-menu-hz"
+	));
+	
+	if(elgg_in_context("widgets")){
+		unset($entity_menu);
+	}
+	
+	$loggedin_user = elgg_get_logged_in_user_entity();
 	$owner = $entity->getOwnerEntity();
 	
-	$full_view = $vars["full"];
-	
-	$loggedin_user = get_loggedin_user();
-
 	if(!$full_view){
 		// icon
-//		$icon = elgg_view("profile/icon", array("entity" => $entity->getOwnerEntity(), "size" => "small"));
-		$icon = "<img src='" . $entity->getIcon("small") . "' title='" . $entity->title . "' alt='" . $entity->title . "' />";
-		
-		// info
-		$info = "<div class='user_support_list_entity'>";
-		
-		// edit actions
-		if($entity->canEdit()){
-			$info .= "<div class='user_support_entity_actions'>";
-			$info .= elgg_view("output/url", array("href" => $vars["url"] . "pg/user_support/support_ticket/edit/" . $entity->getGUID(), "text" => elgg_echo("edit")));
-			$info .= " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/delete?guid=" . $entity->getGUID(), "text" => elgg_echo("delete")));
-			
-			if($loggedin_user->isAdmin()){
-				if(($entity->getStatus() == UserSupportTicket::OPEN)){
-					$info .= " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/close?guid=" . $entity->getGUID(), "text" => elgg_echo("close")));
-				} else {
-					$info .= " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/reopen?guid=" . $entity->getGUID(), "text" => elgg_echo("user_support:reopen")));
-				}
-			}
-			
-			$info .= "</div>";
-		}
+		$icon = elgg_view_entity_icon($entity, "small");
 		
 		// title
 		if(!empty($entity->support_type)){
-			$info .= elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
+			$title = elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
 		}
-		$title = $entity->title;
-		if(strlen($title) > 50){
-			$title = elgg_get_excerpt($title, 50);
+		$title_text = $entity->title;
+		if(strlen($title_text) > 50){
+			$title_text = elgg_get_excerpt($title, 50);
 		}
-		$info .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title));
-		
-		$info .= "<div class='clearfloat'></div>";
+		$title .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title_text));
 		
 		// strapline
-		$info .= "<div class='user_support_strapline'>";
-		$info .= user_support_time_created_string($entity);
-		$info .= " " . elgg_echo("by");
-		$info .= " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
+		$subtitle = user_support_time_created_string($entity);
+		$subtitle .= " " . elgg_echo("by");
+		$subtitle .= " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
 		
+		// last comment by
 		if($ann = $entity->getAnnotations("generic_comment", 1, 0, "desc")){
 			$ann_owner = get_user($ann[0]->owner_guid);
 			$url = elgg_view("output/url", array("href" => $ann_owner->getURL(), "text" => $ann_owner->name));
-			$info .= ", " . sprintf(elgg_echo("user_support:last_comment"), $url);
+			$info = elgg_echo("user_support:last_comment", array($url));
 		}
 		
-		$info .= "</div>";
+		$params = array(
+			"entity" => $entity,
+			"metadata" => $entity_menu,
+			"content" => $info,
+			"subtitle" => $subtitle,
+			"tags" => elgg_view("output/tags", array("value" => $entity->tags)),
+			"title" => $title
+		);
+		$params = $params + $vars;
+		$list_body = elgg_view("object/elements/summary", $params);
 		
-		// tags
-		if(!empty($entity->tags)){
-			$info .= "<div class='user_support_tags'>" . elgg_view("output/tags", array("value" => $entity->tags)) . "</div>";
-		}
-		
-		$info .= "</div>";
-		$info .= "<div class='clearfloat'></div>";
-		
-		echo elgg_view_listing($icon, $info);
+		echo elgg_view_image_block($icon, $list_body);
 	} else {
-		?>
-		<div class="contentWrapper user_support_full_entity">
-			<h3><?php 
-				if(!empty($entity->support_type)){
-					echo elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
-				}
-				
-				$title = $entity->title;
-				if(strlen($title) > 50){
-					$title = elgg_get_excerpt($title, 50);
-				}
-				echo $title; 
-			?></h3>
-			
-			<!-- Subtitle info -->
-			<div class="user_support_entity_owner_icon">
-				<?php //echo elgg_view("profile/icon", array("entity" => $owner, "size" => "tiny")); ?>
-				<img src="<?php echo $entity->getIcon("tiny"); ?>" title="<?php echo $entity->title; ?>" alt="<?php echo $entity->title; ?>" />
-			</div>
-			
-			<div class="user_support_strapline">
-				<?php 
-					echo user_support_time_created_string($entity);
-					echo " " . elgg_echo("by");
-					echo " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
-				?>
-			</div>
-			
-			<?php if(!empty($entity->tags)) { ?>
-			<div class="user_support_tags">
-				<?php echo elgg_view("output/tags", array("value" => $entity->tags)); ?>
-			</div>
-			<?php } ?>
-			
-			<div class="clearfloat"></div>
-			
-			<!-- main content -->
-			<?php 
-			if(!empty($entity->help_url)){
-				echo elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
-			}
-			
-			if(!empty($entity->description)){
-				echo elgg_view("output/longtext", array("value" => $entity->description));
-			} elseif(strlen($entity->title) > 50) {
-				echo elgg_view("output/longtext", array("value" => $entity->title));
-			}
-			
-			?>
-			<div class="clearfloat"></div>
-			
-			<!-- edit parts -->
-			<?php if($entity->canEdit()) { ?>
-			<div class="user_support_entity_actions">
-				<?php 
-					echo elgg_view("output/url", array("href" => $vars["url"] . "pg/user_support/support_ticket/edit/" . $entity->getGUID(), "text" => elgg_echo("edit")));
-					echo " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/delete?guid=" . $entity->getGUID(), "text" => elgg_echo("delete")));
-					
-					if($loggedin_user->isAdmin()){
-						if(($entity->getStatus() == UserSupportTicket::OPEN)){
-							echo " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/close?guid=" . $entity->getGUID(), "text" => elgg_echo("close")));
-						} else {
-							echo " | " . elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/user_support/ticket/reopen?guid=" . $entity->getGUID(), "text" => elgg_echo("user_support:reopen")));
-						}
-					}
-				?>
-			</div>
-			<?php } ?>
-			
-		</div>
-		<?php
-
+		// icon
+		$icon = elgg_view_entity_icon($entity, "tiny");
+		
+		$subtitle = user_support_time_created_string($entity);
+		$subtitle .= " " . elgg_echo("by");
+		$subtitle .= " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
+		
+		// summary
+		$params = array(
+			"entity" => $entity,
+			"metadata" => $entity_menu,
+			"tags" => elgg_view("output/tags", array("value" => $entity->tags)),
+			"subtitle" => $subtitle,
+			"title" => false
+		);
+		$params = $params + $vars;
+		$summary = elgg_view("object/elements/summary", $params);
+		
+		// body
+		if(!empty($entity->help_url)){
+			$body = elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
+		}
+		
+		if(!empty($entity->description)){
+			$body .= elgg_view("output/longtext", array("value" => $entity->description));
+		} elseif(strlen($entity->title) > 50) {
+			$body .= elgg_view("output/longtext", array("value" => $entity->title));
+		}
+		
+		// blog
+		echo elgg_view('object/elements/full', array(
+			'summary' => $summary,
+			'icon' => $icon,
+			'body' => $body,
+		));
+		
+		// show all comments
 		$ia = elgg_get_ignore_access();
 		elgg_set_ignore_access(true);
 		

@@ -1,7 +1,5 @@
 <?php 
 
-	admin_gatekeeper();
-
 	$guid = (int) get_input("guid", 0);
 	$title = get_input("title");
 	$desc = get_input("description");
@@ -14,16 +12,16 @@
 	
 	if(!empty($title) && !empty($desc)){
 		if(!empty($guid) && ($entity = get_entity($guid))){
-			if($entity->getSubtype() != UserSupportFAQ::SUBTYPE){
+			if(!elgg_instanceof($entity, "object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ")){
 				$entity = null;
-				register_error(elgg_echo("user_support:action:faq:edit:error:entity"));
+				register_error(elgg_echo("InvalidClassException:NotValidElggStar", array($guid, "UserSupportFAQ")));
 			}
 		} else {
 			$entity = new UserSupportFAQ();
 			
 			if(!$entity->save()){
 				$entity = null;
-				register_error(elgg_echo("user_support:action:faq:edit:error:create"));
+				register_error(elgg_echo("IOException:UnableToSaveNew", array("UserSupportFAQ")));
 			}
 		}
 		
@@ -35,7 +33,7 @@
 			$entity->tags = $tags;
 			$entity->allow_comments = $comments;
 			
-			if(isadminloggedin()){
+			if(elgg_is_admin_logged_in()){
 				$entity->help_context = $help_context;
 			}
 			
@@ -51,5 +49,3 @@
 	}
 
 	forward($forward_url);
-
-?>

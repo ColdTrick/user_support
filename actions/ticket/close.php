@@ -1,13 +1,11 @@
 <?php 
 
-	admin_gatekeeper();
-	
 	$guid = (int) get_input("guid");
 	
-	$user = get_loggedin_user();
+	$user = elgg_get_logged_in_user_entity();
 	
 	if(!empty($guid) && ($entity = get_entity($guid))){
-		if($entity->getSubtype() == UserSupportTicket::SUBTYPE){
+		if(elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
 			create_annotation($entity->getGUID(), 
 								'generic_comment',
 								elgg_echo("user_support:support_ticket:closed"), 
@@ -19,15 +17,14 @@
 				notify_user($entity->getOwner(),
 					$user->getGUID(),
 					elgg_echo('generic_comment:email:subject'),
-					sprintf(
-						elgg_echo('generic_comment:email:body'),
+					elgg_echo('generic_comment:email:body', array(
 						$entity->title,
 						$user->name,
 						elgg_echo("user_support:support_ticket:closed"),
 						$entity->getURL(),
 						$user->name,
 						$user->getURL()
-					)
+					))
 				);
 				
 				system_message(elgg_echo("user_support:action:ticket:close:success"));
@@ -35,13 +32,10 @@
 				register_error(elgg_echo("user_support:action:ticket:close:error:disable"));
 			}
 		} else {
-			register_error(elgg_echo("user_support:action:ticket:close:error:subtype"));
+			register_error(elgg_echo("InvalidClassException:NotValidElggStar", array($guid, "UserSupportTicket")));
 		}
 	} else {
-		register_error(elgg_echo("user_support:action:ticket:close:error:input"));
+		register_error(elgg_echo("InvalidParameterException:MissingParameter"));
 	}
 
 	forward("pg/user_support/support_ticket");
-
-
-?>

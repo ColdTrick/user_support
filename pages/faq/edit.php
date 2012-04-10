@@ -2,11 +2,11 @@
 
 	admin_gatekeeper();
 	
-	set_page_owner(get_loggedin_userid());
+	elgg_set_page_owner_guid(elgg_get_logged_in_user_guid());
 	
 	$guid = (int) get_input("guid");
 	if(!empty($guid) && ($entity = get_entity($guid))){
-		if($entity->getSubtype() != UserSupportFAQ::SUBTYPE){
+		if(!elgg_instanceof($entity, "object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ")){
 			$entity = null;
 		} else {
 			$title_text = elgg_echo("user_support:faq:edit:title:edit");
@@ -17,17 +17,18 @@
 		$title_text = elgg_echo("user_support:faq:edit:title:create");
 	}
 	
+	// make breadcrumb
+	elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
+	elgg_push_breadcrumb($title_text);
+	
 	$help_context = user_support_find_unique_help_context();
 
-	// build page elements
-	$title = elgg_view_title($title_text);
-	
-	$form = elgg_view("user_support/forms/faq", array("entity" => $entity, "help_context" => $help_context));
-	
 	// build page
-	$page_data = $title . $form;
+	$page_data = elgg_view_layout("content", array(
+		"title" => $title_text,
+		"content" => elgg_view_form("user_support/faq/edit", null, array("entity" => $entity, "help_context" => $help_context)),
+		"filter" => ""
+	));
 	
 	// draw page
-	page_draw($title_text, elgg_view_layout("two_column_left_sidebar", "", $page_data));
-
-?>
+	echo elgg_view_page($title_text, $page_data);

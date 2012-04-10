@@ -1,6 +1,5 @@
 <?php 
 
-
 	function user_support_get_help_for_context($help_context){
 		$result = false;
 		
@@ -22,8 +21,6 @@
 	}
 	
 	function user_support_get_help_context($url = ""){
-		global $CONFIG;
-		
 		$result = false;
 		
 		if(empty($url)){
@@ -34,12 +31,16 @@
 			if($path = parse_url($url, PHP_URL_PATH)){
 				$parts = explode("/", $path);
 				
+				if(!($page_owner = elgg_get_page_owner_entity())){
+					$page_owner = elgg_get_logged_in_user_entity();
+				}
+				
 				$new_parts = array();
 				
 				foreach($parts as $index => $part){
-					if(empty($part) || ($part == "pg")){
+					if(empty($part)){
 						continue;
-					} elseif(is_numeric($part) || get_user_by_username($part) || (stripos($part, "group:") !== false)){
+					} elseif(is_numeric($part) || (!empty($page_owner) && ($page_owner->username == $part))){
 						break;
 					} else {
 						$new_parts[] = $part;
@@ -58,9 +59,9 @@
 	function user_support_time_created_string(ElggObject $entity){
 		$result = false;
 		
-		if(!empty($entity) && ($entity instanceof ElggObject)){
+		if(!empty($entity) && elgg_instanceof($entity, "object", null, "ElggObject")){
 			if($date_array = getdate($entity->time_created)){
-				$result = sprintf(elgg_echo("date:month:" . str_pad($date_array["mon"], 2, "0", STR_PAD_LEFT)), $date_array["mday"]) . " " . $date_array["year"];
+				$result = elgg_echo("date:month:" . str_pad($date_array["mon"], 2, "0", STR_PAD_LEFT), array($date_array["mday"])) . " " . $date_array["year"];
 			}
 		}
 		
@@ -68,15 +69,25 @@
 	}
 	
 	function user_support_find_unique_help_context(){
-		$result = false;
+		static $result;
 		
-		// get all metadata values of help_context
-		if($metadata = find_metadata("help_context", "", "object", "", 99999)){
-			// make it into an array
-			if($filtered = metadata_array_to_values($metadata)){
-				//get unique values
-				$result = array_unique($filtered);
-				natcasesort($result);
+		if(!isset($result)){
+			$result = false;
+			
+			// get all metadata values of help_context
+			$options = array(
+				"metadata_name" => "help_context", 
+				"type" => "object",
+				"subtypes" => array(UserSupportFAQ::SUBTYPE, UserSupportHelp::SUBTYPE, UserSupportTicket::SUBTYPE),
+				"limit" => false
+			);
+			if($metadata = elgg_get_metadata($options)){
+				// make it into an array
+				if($filtered = metadata_array_to_values($metadata)){
+					//get unique values
+					$result = array_unique($filtered);
+					natcasesort($result);
+				}
 			}
 		}
 		
@@ -84,24 +95,22 @@
 	}
 	
 	function user_support_get_admin_notify_users(UserSupportTicket $ticket){
-		global $CONFIG;
-		
 		$result = false;
 		
-		if(!empty($ticket) && ($ticket instanceof UserSupportTicket)){
+		if(!empty($ticket) && elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
 			$options = array(
 				"type" => "user",
 				"limit" => false,
 				"site_guids" => false,
 				"relationship" => "member_of_site",
-				"relationship_guid" => $CONFIG->site_guid,
+				"relationship_guid" => elgg_get_site_entity()->getGUID(),
 				"inverse_relationship" => true,
 				"joins" => array(
-					"JOIN " . $CONFIG->dbprefix . "private_settings ps ON e.guid = ps.entity_guid",
-					"JOIN " . $CONFIG->dbprefix . "users_entity ue ON e.guid = ue.guid"
+					"JOIN " . get_config("dbprefix") . "private_settings ps ON e.guid = ps.entity_guid",
+					"JOIN " . get_config("dbprefix") . "users_entity ue ON e.guid = ue.guid"
 				),
 				"wheres" => array(
-					"(ps.name = 'plugin:settings:user_support:admin_notify' AND ps.value = 'yes')",
+					"(ps.name = '" . ELGG_PLUGIN_USER_SETTING_PREFIX . "user_support:admin_notify' AND ps.value = 'yes')",
 					"(ue.admin = 'yes')",
 					"(e.guid <> " . $ticket->getOwner() . ")"
 				)
@@ -110,7 +119,7 @@
 			$users = elgg_get_entities_from_relationship($options);
 				
 			// trigger hook to get more/less users
-			$users = trigger_plugin_hook("admin_notify", "user_support", array("users" => $users, "entity" => $ticket), $users);
+			$users = elgg_trigger_plugin_hook("admin_notify", "user_support", array("users" => $users, "entity" => $ticket), $users);
 
 			if(!empty($users)){
 				if(is_array($users)){
@@ -123,5 +132,4 @@
 		
 		return $result;
 	}
-
-?>
+	

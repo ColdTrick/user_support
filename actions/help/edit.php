@@ -1,20 +1,15 @@
 <?php 
-
-	global $CONFIG;
-
-	gatekeeper();
 	
 	$guid = (int) get_input("guid");
 	$desc = get_input("description");
 	$help_context = get_input("help_context");
 	$tags = string_to_tag_array(get_input("tags"));
 	
-	
 	if(!empty($desc) && !empty($help_context)){
 		if(!empty($guid)){
 			if($help = get_entity($guid)){
-				if(!($help instanceof UserSupportHelp)){
-					register_error(elgg_echo("user_support:action:help:edit:error:entity"));
+				if(!elgg_instanceof($help, "object", UserSupportHelp::SUBTYPE, "UserSupportHelp")){
+					register_error("InvalidClassException:NotValidElggStar", array($guid, "UserSupportHelp"));	
 					unset($help);
 				}
 			}
@@ -22,7 +17,7 @@
 			$help = new UserSupportHelp();
 			
 			if(!$help->save()){
-				register_error(elgg_echo("user_support:action:help:edit:error:create"));
+				register_error(elgg_echo("IOException:UnableToSaveNew", array("UserSupportHelp")));
 				unset($help);
 			}
 		}
@@ -43,4 +38,4 @@
 	}
 
 	forward(REFERER);
-?>
+	

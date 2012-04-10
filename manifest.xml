@@ -1,48 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin_manifest>
-	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="1.3" />
-	<field key="description" value="Offers user support" />
-	<field key="website" value="http://www.coldtrick.com/" />
-	<field key="copyright" value="(C) ColdTrick IT Solutions 2011" />
-	<field key="licence" value="GNU Public License version 2" />
-	<field key="elgg_version" value="2010040201" />
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>User Support</name>
+	<author>ColdTrick IT Solutions</author>
+	<version>2.0</version>
+	<description>Offers user support / faq</description>
+	<website>http://www.coldtrick.com/</website>
+	<copyright>(C) ColdTrick IT Solutions 2011 - 2012</copyright>
+	<license>GNU Public License version 2</license>
+	
+	<requires>
+		<type>elgg_version</type>
+		<version>2011061200</version>
+	</requires>
+	
+	<suggests>
+		<type>plugin</type>
+		<name>groups</name>
+	</suggests>
+	
+ 	<category>ColdTrick</category>
 </plugin_manifest>
-<!-- 
-
-=========================
-Features
-=========================
-
-=========================
-ToDo
-=========================
-- support ticket -> faq
-- expert roles
-- email notification
-
-=========================
-Version Information
-=========================
-x.x:
-	- fixed: not all comments shown on Support ticket
-
-1.3 (2011-07-29):
-	- added: option for admins to get notification on create/update support ticket
-	- fixed: fancybox css
-	- fixed: delete ticket forward error
-
-1.2 (2011-05-27):
-	- added: option to auto close supoprt tickets
-	- changed: layout of a support ticket
-	- fixed: unable to display contextual help on front page
-
-1.1 (2011-05-20):
-	- added: option to select a support group
-	- added: search in Help Center now searches in contextual help
-	- fixed: Fancybox CSS error in IE
-
-1.0:
-	- first release
-
--->

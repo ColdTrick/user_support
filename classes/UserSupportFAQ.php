@@ -3,9 +3,9 @@
 	class UserSupportFAQ extends ElggObject {
 		const SUBTYPE = "faq";
 		
-		protected function initialise_attributes() {
+		protected function initializeAttributes() {
 			global $CONFIG;
-			parent::initialise_attributes();
+			parent::initializeAttributes();
 			
 			$this->attributes["subtype"] = self::SUBTYPE;
 			$this->attributes["owner_guid"] = $CONFIG->site_guid;
@@ -13,31 +13,21 @@
 		}
 		
 		public function getURL(){
-			global $CONFIG;
-			
-			return $CONFIG->wwwroot . "pg/user_support/faq/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title);
+			return elgg_get_site_entity()->url . "user_support/faq/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title);
 		}
 		
-		public function getIcon($size = "medium"){
-			global $CONFIG;
-			
+		public function getIconURL($size = "medium"){
 			$result = false;
 			
 			switch($size){
 				case "tiny":
-					$result = $CONFIG->wwwroot . "mod/user_support/_graphics/faq/tiny.png";
+					$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/faq/tiny.png";
 					break;
 				default:
-					$result = $CONFIG->wwwroot . "mod/user_support/_graphics/faq/small.png";
+					$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/faq/small.png";
 					break;
 			}
 			
 			return $result;
 		}
 	}
-
-
-
-
-
-?>

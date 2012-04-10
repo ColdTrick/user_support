@@ -19,10 +19,12 @@
 		$img_src = $vars["url"] . "mod/user_support/_graphics/help_center/helpcenter16_gray.png";
 	}
 
+	elgg_load_js("lightbox");
+	elgg_load_css("lightbox");
 
 ?>
 <div id="user_support_button" title="<?php echo elgg_echo("user_support:button:hover");?>">
-	<a href="<?php echo $vars["url"]; ?>pg/user_support/help_center">
+	<a href="<?php echo $vars["url"]; ?>user_support/help_center" class="elgg-lightbox">
 		<?php 
 		foreach(str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char){
 			echo $char . "<br />";

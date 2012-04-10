@@ -1,9 +1,5 @@
 <?php 
 
-	global $CONFIG;
-	
-	gatekeeper();
-	
 	$guid = (int) get_input("guid");
 	$title = get_input("title");
 	$help_url = get_input("help_url");
@@ -13,13 +9,13 @@
 	
 	$forward_url = REFERER;
 	
-	$loggedin_user = get_loggedin_user();
+	$loggedin_user = elgg_get_logged_in_user_entity();
 	
 	if(!empty($title) && !empty($support_type)){
 		if(!empty($guid)){
 			if($ticket = get_entity($guid)){
-				if(!($ticket instanceof UserSupportTicket)){
-					register_error(elgg_echo("user_support:action:ticket:edit:error:entity"));
+				if(!elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
+					register_error(elgg_echo("InvalidClassException:NotValidElggStar", array($guid, "UserSupportTicket")));
 					unset($ticket);
 				}
 			}
@@ -30,7 +26,7 @@
 			$ticket->description = $title;
 			
 			if(!$ticket->save()){
-				register_error(elgg_echo("user_support:action:ticket:edit:error:create"));
+				register_error(elgg_echo("IOException:UnableToSaveNew", array("UserSupportTicket")));
 				unset($ticket);
 			}
 		}
@@ -58,5 +54,3 @@
 	}
 
 	forward($forward_url);
-
-?>

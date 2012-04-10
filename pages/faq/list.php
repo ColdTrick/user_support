@@ -1,12 +1,13 @@
 <?php 
 
-	if($user_guid = get_loggedin_userid()){
-		set_page_owner($user_guid);
+	if($user_guid = elgg_get_logged_in_user_guid()){
+		elgg_set_page_owner_guid($user_guid);
 	}
 
+	elgg_push_context("faq");
+	
 	// build page elements
 	$title_text = elgg_echo("user_support:faq:list:title");
-	$title = elgg_view_title($title_text);
 	
 	$list_options = array(
 		"type" => "object",
@@ -15,19 +16,18 @@
 		"full_view" => false
 	);
 	
-	$context = get_context();
-	set_context("search");
-	
 	if(!($list = elgg_list_entities($list_options))){
-		$list .= elgg_view("page_elements/contentwrapper", array("body" => elgg_echo("user_support:faq:not_found")));
+		$list = elgg_echo("notfound");
 	}
 	
-	set_context($context);
-	
 	// build page
-	$page_data = $title . $list;
+	$page_data = elgg_view_layout("content", array(
+		"title" => $title_text,
+		"content" => $list,
+		"filter" => ""
+	));
+	
+	elgg_pop_context();
 	
 	// draw page
-	page_draw($title_text, elgg_view_layout("two_column_left_sidebar", "", $page_data));
-
-?>
+	echo elgg_view_page($title_text, $page_data);
