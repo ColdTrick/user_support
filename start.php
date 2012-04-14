@@ -12,7 +12,9 @@
 		elgg_extend_view("css/elgg", "user_support/css");
 		
 		// extend header
-		elgg_extend_view("page/elements/foot", "user_support/button");
+		if(!elgg_in_context("admin")){
+			elgg_extend_view("page/elements/foot", "user_support/button");
+		}
 		
 		// register page handler for nice URL's
 		elgg_register_page_handler("user_support", "user_support_page_handler");
