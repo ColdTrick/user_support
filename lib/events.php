@@ -7,12 +7,12 @@
 			$user = $annotation->getOwnerEntity();
 			
 			if(!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket") && !empty($user)){
-				if($user->getGUID() != $entity->getOwner()){
+				if($user->getGUID() != $entity->getOwnerGUID()){
 					// user is not owner and is admin, so close ticket
 					if(elgg_get_plugin_setting("auto_close_tickets", "user_support") == "yes"){
 						$entity->setStatus(UserSupportTicket::CLOSED);
 					}
-				} elseif($user->getGUID() == $entity->getOwner()){
+				} elseif($user->getGUID() == $entity->getOwnerGUID()){
 					// user is the owner, so reopen
 					$entity->setStatus(UserSupportTicket::OPEN);
 					
@@ -27,7 +27,7 @@
 						));
 						
 						foreach($admins as $admin){
-							notify_user($admin->getGUID(), $entity->getOwner(), $subject, $message);
+							notify_user($admin->getGUID(), $entity->getOwnerGUID(), $subject, $message);
 						}
 					}
 				}
@@ -51,7 +51,7 @@
 				));
 				
 				foreach($users as $user){
-					notify_user($user->getGUID(), $object->getOwner(), $subject, $message);
+					notify_user($user->getGUID(), $object->getOwnerGUID(), $subject, $message);
 				}
 			}
 		}

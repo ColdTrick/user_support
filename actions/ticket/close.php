@@ -14,7 +14,7 @@
 								$entity->access_id);
 								
 			if($entity->setStatus(UserSupportTicket::CLOSED)){
-				notify_user($entity->getOwner(),
+				notify_user($entity->getOwnerGUID(),
 					$user->getGUID(),
 					elgg_echo('generic_comment:email:subject'),
 					elgg_echo('generic_comment:email:body', array(

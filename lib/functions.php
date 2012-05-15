@@ -112,7 +112,7 @@
 				"wheres" => array(
 					"(ps.name = '" . ELGG_PLUGIN_USER_SETTING_PREFIX . "user_support:admin_notify' AND ps.value = 'yes')",
 					"(ue.admin = 'yes')",
-					"(e.guid <> " . $ticket->getOwner() . ")"
+					"(e.guid <> " . $ticket->getOwnerGUID() . ")"
 				)
 			);
 				
