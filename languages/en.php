@@ -37,6 +37,7 @@
 		
 		// annotations
 		'river:comment:object:support_ticket' => "%s posted a comment on %s",
+		'river:create:object:support_ticket' => "%s posted a comment on %s",
 		'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
 		'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
 	
