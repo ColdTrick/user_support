@@ -13,7 +13,7 @@
 		
 		// extend header
 		if(!elgg_in_context("admin")){
-			elgg_extend_view("page/elements/foot", "user_support/button");
+			elgg_extend_view("page/elements/footer", "user_support/button");
 		}
 		
 		// register page handler for nice URL's
