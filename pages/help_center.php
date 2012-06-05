@@ -9,6 +9,7 @@
 	}
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 	
+	$group = null;
 	if(elgg_is_active_plugin("groups")){
 		$group_guid = (int) elgg_get_plugin_setting("help_group_guid", "user_support");
 		if(!empty($group_guid) && ($group = get_entity($group_guid))){

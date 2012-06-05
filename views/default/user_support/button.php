@@ -1,6 +1,6 @@
 <?php 
 
-	$help_context = user_support_get_help_context($help_url);
+	$help_context = user_support_get_help_context();
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 
 	$faq_options = array(
