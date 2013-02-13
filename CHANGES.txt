@@ -1,6 +1,7 @@
 = Version Information =
 x.x:
 
+- added: Help Center can now be viewed as a normal page
 - changed: Elgg 1.8 support
 
 1.3.1:

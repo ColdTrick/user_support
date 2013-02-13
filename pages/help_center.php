@@ -31,10 +31,23 @@
 	
 	$faq = elgg_list_entities_from_metadata($faq_options);
 	
-	echo elgg_view("user_support/help_center", array(
+	$help_center = elgg_view("user_support/help_center", array(
 			"group" => $group,
 			"contextual_help_object" => $contextual_help_object,
 			"faq" => $faq,
 			"help_url" => $help_url,
 			"help_context" => $help_context
 	));
+	
+	// check if this is popup or not
+	if (elgg_is_xhr()) {
+		echo $help_center;
+	} else {
+		$page_data = elgg_view_layout("content", array(
+			"header" => "",
+			"content" => $help_center,
+			"filter" => false
+		));
+		
+		echo elgg_view_page(elgg_echo("user_support:help_center:title"), $page_data);
+	}
