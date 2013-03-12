@@ -40,21 +40,21 @@
 <?php
 
 	if(!empty($contextual_help_object)){
-		echo elgg_view_module("info", "", elgg_view_entity($contextual_help_object), array("id" => "user_support_help_center_help"));
+		echo elgg_view_module("info", "", elgg_view_entity($contextual_help_object), array("id" => "user_support_help_center_help", "class" => "mts"));
 	}
 	
 	if(!empty($faq)){
-		echo elgg_view_module("inline", elgg_echo("user_support:help_center:faq:title"), $faq);
+		echo elgg_view_module("info", elgg_echo("user_support:help_center:faq:title"), $faq, array("class" => "mts"));
 	}
 
 	if(elgg_is_admin_logged_in()){
 		$form = elgg_view_form("user_support/help/edit", null, $vars);
-		echo elgg_view_module("inline", elgg_echo("user_support:forms:help:title"), $form, array("id" => "user_support_help_edit_form_wrapper", "class" => "hidden"));
+		echo elgg_view_module("info", elgg_echo("user_support:forms:help:title"), $form, array("id" => "user_support_help_edit_form_wrapper", "class" => "hidden mts"));
 	}
 	
 	if(elgg_is_logged_in()){
 		$form = elgg_view_form("user_support/support_ticket/edit", null, $vars);
-		echo elgg_view_module("inline", elgg_echo("user_support:help_center:ask"), $form, array("id" => "user_support_ticket_edit_form_wrapper", "class" => "hidden"));
+		echo elgg_view_module("info", elgg_echo("user_support:help_center:ask"), $form, array("id" => "user_support_ticket_edit_form_wrapper", "class" => "hidden mts"));
 	}
 	
 	echo "<div id='user_support_help_search_result_wrapper' class='hidden'></div>";

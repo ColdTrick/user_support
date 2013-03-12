@@ -59,7 +59,7 @@
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	display: inline-block;
-	margin: 5px 0 0;
+	margin: 5px 0;
     padding: 0 15px 0 5px;
     width: 250px;
 }
