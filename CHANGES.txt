@@ -1,5 +1,5 @@
 = Version Information =
-x.x:
+1.4 (2013-04-05):
 
 - added: Help Center can now be viewed as a normal page
 - changed: Elgg 1.8 support
