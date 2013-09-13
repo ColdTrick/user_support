@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	// load helper functions
 	require_once(dirname(__FILE__) . "/lib/events.php");
@@ -9,7 +9,7 @@
 	
 	function user_support_init(){
 		// extend css & js
-		elgg_extend_view("css/elgg", "user_support/css");
+		elgg_extend_view("css/elgg", "css/user_support/site");
 		
 		// extend header
 		if(!elgg_in_context("admin")){
