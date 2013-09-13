@@ -1,15 +1,14 @@
-<?php 
+<?php
 
 	class UserSupportFAQ extends ElggObject {
 		const SUBTYPE = "faq";
 		
 		protected function initializeAttributes() {
-			global $CONFIG;
 			parent::initializeAttributes();
 			
 			$this->attributes["subtype"] = self::SUBTYPE;
-			$this->attributes["owner_guid"] = $CONFIG->site_guid;
-			$this->attributes["container_guid"] = $CONFIG->site_guid;
+			$this->attributes["owner_guid"] = elgg_get_config("site_guid");
+			$this->attributes["container_guid"] = elgg_get_config("site_guid");
 		}
 		
 		public function getURL(){
