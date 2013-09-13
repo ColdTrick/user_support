@@ -1,24 +1,18 @@
-<?php 
+<?php
 
 	$noyes_options = array(
 		"no" => elgg_echo("option:no"),
 		"yes" => elgg_echo("option:yes")
 	);
 
-	$access_options = array(
-		ACCESS_PRIVATE => elgg_echo("PRIVATE"),
-		ACCESS_LOGGED_IN => elgg_echo("LOGGED_IN"),
-		ACCESS_PUBLIC => elgg_echo("PUBLIC"),
-	);
+	$help_context = elgg_extract("help_context", $vars);
+	$form_data = "";
 	
-	$help_context = $vars["help_context"];
-	
-	if(!empty($vars["entity"])){
-		$entity = $vars["entity"];
-		
+	if($entity = elgg_extract("entity", $vars, false)){
 		$title = $entity->title;
 		$desc = $entity->description;
-		$access_id = $entity->access_id;
+		$access_id = (int) $entity->access_id;
+		$container_guid = $entity->getContainerGUID();
 		
 		$tags = $entity->tags;
 		$comments = $entity->allow_comments;
@@ -31,11 +25,12 @@
 		
 		$submit_text = elgg_echo("edit");
 		
-		$form_data = elgg_view("input/hidden", array("name" => "guid", "value" => $entity->getGUID()));
+		$form_data = elgg_view("input/hidden", array("name" => "guid", "value" => (int) $entity->getGUID()));
 	} else {
 		$title = "";
 		$desc = "";
-		$acess_id = ACCESS_PUBLIC;
+		$access_id = get_default_access();
+		$container_guid = elgg_get_page_owner_guid();
 		
 		$tags = array();
 		$comments = "no";
@@ -61,7 +56,7 @@
 	
 	if(elgg_is_admin_logged_in() && !empty($help_context)){
 		$form_data .= "<div>";
-		$form_data .= "<label>" . elgg_echo("user_support:help_context") . "</label>";
+		$form_data .= "<label>" . elgg_echo("user_support:help_context") . "</label><br />";
 		
 		$form_data .= "<select name='help_context[]' multiple='multiple' size='" . min(count($help_context), 5) . "'>";
 		foreach($help_context as $hc){
@@ -77,7 +72,7 @@
 	
 	$form_data .= "<div>";
 	$form_data .= "<label>" . elgg_echo("access") . "</label>";
-	$form_data .= "&nbsp;" . elgg_view("input/access", array("name" => "access_id", "value" => $access_id, "options_values" => $access_options));
+	$form_data .= "&nbsp;" . elgg_view("input/access", array("name" => "access_id", "value" => $access_id));
 	$form_data .= "</div>";
 
 	$form_data .= "<div>";
@@ -86,6 +81,7 @@
 	$form_data .= "</div>";
 	
 	$form_data .= "<div class='elgg-foot'>";
+	$form_data .= elgg_view("input/hidden", array("name" => "container_guid", "value" => $container_guid));
 	$form_data .= elgg_view("input/submit", array("value" => $submit_text));
 	$form_data .= "</div>";
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$english = array(
 	
@@ -67,6 +67,7 @@ To view the Ticket click on this link:
 		'user_support:menu:support_tickets:mine:archive' => "My closed Support tickets",
 		
 		'user_support:menu:faq' => "FAQ",
+		'user_support:menu:faq:group' => "Group FAQ",
 		'user_support:menu:faq:create' => "Create FAQ",
 		
 		// button
@@ -83,7 +84,7 @@ To view the Ticket click on this link:
 		// forms
 		'user_support:forms:help:title' => "Create Contextual Help",
 		'user_support:faq:edit:title:edit' => "Edit a FAQ item",
-		'user_support:faq:edit:title:create' => "Create a FAQ item",
+		'user_support:faq:create:title' => "Create a FAQ item",
 	
 		// ticket - list
 		'user_support:tickets:list:title' => "Support tickets",
@@ -98,6 +99,10 @@ To view the Ticket click on this link:
 		// faq - list
 		'user_support:faq:list:title' => "View all FAQ items",
 		'user_support:faq:not_found' => "No FAQ items available",
+		
+		// group faq
+		'user_support:group:tool_option' => "Enable support for group FAQs",
+		'user_support:faq:group:title' => "%s FAQ",
 	
 		// actions
 		// help - edit

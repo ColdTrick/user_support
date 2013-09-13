@@ -48,3 +48,49 @@
 		
 		return $result;
 	}
+	
+	function user_support_owner_block_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (!empty($params) && is_array($params)) {
+			$group = elgg_extract("entity", $params);
+			
+			if (elgg_instanceof($group, "group")) {
+				if ($group->faq_enable == "yes") {
+					$result[] = ElggMenuItem::factory(array(
+						"name" => "faq",
+						"text" => elgg_echo("user_support:menu:faq:group"),
+						"href" => "user_support/faq/group/" . $group->getGUID() . "/all"
+					));
+				}
+			}
+		}
+		
+		return $result;
+	}
+	
+	function user_support_title_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (elgg_in_context("faq")) {
+			$user = elgg_get_logged_in_user_entity();
+			$page_owner = elgg_get_page_owner_entity();
+			
+			if (!empty($user) && ($user->isAdmin() || (!empty($page_owner) && elgg_instanceof($page_owner, "group") && $page_owner->canEdit()))) {
+				$container_guid = elgg_get_site_entity()->getGUID();
+				
+				if (!empty($page_owner) && elgg_instanceof($page_owner, "group")) {
+					$container_guid = $page_owner->getGUID();
+				}
+				
+				$result[] = ElggMenuItem::factory(array(
+					"name" => "add",
+					"text" => elgg_echo("user_support:menu:faq:create"),
+					"href" => "user_support/faq/add/" . $container_guid,
+					"class" => "elgg-button elgg-button-action"
+				));
+			}
+		}
+		
+		return $result;
+	}

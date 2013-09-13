@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 	$guid = (int) get_input("guid", 0);
+	$container_guid = (int) get_input("container_guid", 0);
 	$title = get_input("title");
 	$desc = get_input("description");
 	$access_id = (int) get_input("access_id", ACCESS_PRIVATE);
@@ -18,6 +19,8 @@
 			}
 		} else {
 			$entity = new UserSupportFAQ();
+			$entity->owner_guid = $container_guid;
+			$entity->container_guid = $container_guid;
 			
 			if(!$entity->save()){
 				$entity = null;

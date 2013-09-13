@@ -18,6 +18,18 @@
 						}
 						include(dirname(dirname(__FILE__)) . "/pages/faq/edit.php");
 						break;
+					case "group":
+						if (!empty($page[2]) && is_numeric($page[2])) {
+							elgg_set_page_owner_guid($page[2]);
+						}
+						include(dirname(dirname(__FILE__)) . "/pages/faq/group.php");
+						break;
+					case "add":
+						if (!empty($page[2]) && is_numeric($page[2])) {
+							elgg_set_page_owner_guid($page[2]);
+						}
+						include(dirname(dirname(__FILE__)) . "/pages/faq/add.php");
+						break;
 					default:
 						if(!empty($page[1]) && is_numeric($page[1])){
 							set_input("guid", $page[1]);

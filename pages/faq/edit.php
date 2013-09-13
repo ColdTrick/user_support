@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	admin_gatekeeper();
 	
@@ -13,10 +13,6 @@
 		}
 	}
 
-	if(empty($title_text)){
-		$title_text = elgg_echo("user_support:faq:edit:title:create");
-	}
-	
 	// make breadcrumb
 	elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
 	elgg_push_breadcrumb($title_text);

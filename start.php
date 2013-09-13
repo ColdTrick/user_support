@@ -7,6 +7,10 @@
 	require_once(dirname(__FILE__) . "/lib/page_handlers.php");
 	require_once(dirname(__FILE__) . "/lib/run_once.php");
 	
+	// register default Elgg events
+	elgg_register_event_handler("init", "system", "user_support_init");
+	elgg_register_event_handler("pagesetup", "system", "user_support_pagesetup");
+	
 	function user_support_init(){
 		// extend css
 		elgg_extend_view("css/elgg", "css/user_support/site");
@@ -29,6 +33,31 @@
 		if (!get_subtype_class("object", UserSupportFAQ::SUBTYPE)) {
 			run_function_once("user_support_faq_class_update");
 		}
+		
+		// add a group tool option for FAQ
+		add_group_tool_option("faq", elgg_echo("user_support:group:tool_option"), false);
+		
+		// register events
+		elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
+		elgg_register_event_handler("create", "object", "user_support_create_object_event");
+		
+		// plugin hooks
+		elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
+		elgg_register_plugin_hook_handler("register", "menu:owner_block", "user_support_owner_block_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:title", "user_support_title_menu_hook");
+		
+		// register actions
+		elgg_register_action("user_support/help/edit", dirname(__FILE__) . "/actions/help/edit.php", "admin");
+		elgg_register_action("user_support/help/delete", dirname(__FILE__) . "/actions/help/delete.php", "admin");
+		
+		elgg_register_action("user_support/support_ticket/edit", dirname(__FILE__) . "/actions/ticket/edit.php");
+		elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php", "admin");
+		elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php", "admin");
+		elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php", "admin");
+		
+		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php", "admin");
+		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php", "admin");
+		
 	}
 	
 	function user_support_pagesetup(){
@@ -94,37 +123,7 @@
 					"context" => "user_support"
 				));
 				
-				// faq title menu
-				elgg_register_menu_item("title", array(
-					"name" => "add",
-					"text" => elgg_echo("user_support:menu:faq:create"),
-					"href" => "user_support/faq/edit",
-					"context" => "faq",
-					"class" => "elgg-button elgg-button-action"
-				));
 			}
 		}
 	}
 	
-	// register default Elgg events
-	elgg_register_event_handler("init", "system", "user_support_init");
-	elgg_register_event_handler("pagesetup", "system", "user_support_pagesetup");
-
-	// register other events
-	elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
-	elgg_register_event_handler("create", "object", "user_support_create_object_event");
-	
-	// plugin hooks
-	elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
-	
-	// register actions
-	elgg_register_action("user_support/help/edit", dirname(__FILE__) . "/actions/help/edit.php", "admin");
-	elgg_register_action("user_support/help/delete", dirname(__FILE__) . "/actions/help/delete.php", "admin");
-	
-	elgg_register_action("user_support/support_ticket/edit", dirname(__FILE__) . "/actions/ticket/edit.php");
-	elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php", "admin");
-	elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php", "admin");
-	elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php", "admin");
-	
-	elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php", "admin");
-	elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php", "admin");
