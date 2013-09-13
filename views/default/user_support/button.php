@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+if (!elgg_in_context("admin")) {
 	$help_context = user_support_get_help_context();
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 
@@ -22,16 +22,18 @@
 	elgg_load_js("lightbox");
 	elgg_load_css("lightbox");
 
-?>
-<div id="user_support_button" title="<?php echo elgg_echo("user_support:button:hover");?>">
-	<a href="<?php echo $vars["url"]; ?>user_support/help_center" class="elgg-lightbox">
-		<?php 
-		foreach(str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char){
-			echo $char . "<br />";
-		}
-		?>
-	</a>
-	<div>
-		<img src="<?php echo $img_src; ?>" />
+	?>
+	<div id="user_support_button" title="<?php echo elgg_echo("user_support:button:hover");?>">
+		<a href="<?php echo $vars["url"]; ?>user_support/help_center" class="elgg-lightbox">
+			<?php
+			foreach(str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char){
+				echo $char . "<br />";
+			}
+			?>
+		</a>
+		<div>
+			<img src="<?php echo $img_src; ?>" />
+		</div>
 	</div>
-</div>
+	<?php
+}

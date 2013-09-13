@@ -8,13 +8,10 @@
 	require_once(dirname(__FILE__) . "/lib/run_once.php");
 	
 	function user_support_init(){
-		// extend css & js
+		// extend css
 		elgg_extend_view("css/elgg", "css/user_support/site");
 		
-		// extend header
-		if(!elgg_in_context("admin")){
-			elgg_extend_view("page/elements/footer", "user_support/button");
-		}
+		elgg_extend_view("page/elements/footer", "user_support/button");
 		
 		// register page handler for nice URL's
 		elgg_register_page_handler("user_support", "user_support_page_handler");
@@ -29,7 +26,7 @@
 		elgg_register_entity_type("object", UserSupportHelp::SUBTYPE);
 		
 		// update class for FAQ, since user_support v1.0
-		if(!get_subtype_class("object", UserSupportFAQ::SUBTYPE)){
+		if (!get_subtype_class("object", UserSupportFAQ::SUBTYPE)) {
 			run_function_once("user_support_faq_class_update");
 		}
 	}
@@ -51,7 +48,7 @@
 			"context" => "user_support"
 		));
 		
-		if(elgg_is_logged_in()){
+		if (elgg_is_logged_in()) {
 			// site (topbar) menu
 			elgg_register_menu_item("site", array(
 				"name" => "support_ticket_mine",
@@ -82,7 +79,7 @@
 			));
 			
 			// admin menu items
-			if(elgg_is_admin_logged_in()){
+			if (elgg_is_admin_logged_in()) {
 				// filter menu
 				elgg_register_menu_item("user_support", array(
 					"name" => "all",
