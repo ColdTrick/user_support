@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	class UserSupportTicket extends ElggObject {
 		const SUBTYPE = "support_ticket";
@@ -6,7 +6,6 @@
 		const CLOSED = "closed";
 		
 		protected function initializeAttributes() {
-			global $CONFIG;
 			parent::initializeAttributes();
 			
 			$this->attributes["subtype"] = self::SUBTYPE;
