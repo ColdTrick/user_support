@@ -27,11 +27,29 @@
 		'user_support:last_comment' => "Last comment by: %s",
 	
 		// settings
-		'user_support:settings:help_group' => "Select a group for users to ask for help",
-		'user_support:settings:help_group:non' => "No support group",
+		'user_support:settings:support_tickets:title' => "Support Tickets Settings",
+		'user_support:settings:support_tickets:help_group' => "Select a group for users to ask for help",
+		'user_support:settings:support_tickets:help_group:none' => "No support group",
+		'user_support:settings:support_tickets:auto_close_tickets' => "Auto close support tickets on an answer from an admin?",
+
+		'user_support:settings:help:title' => "Contextual Help Settings",
+		'user_support:settings:help:enabled' => "Is contextual help enabled?",
+
+		'user_support:settings:help_center:title' => "Help Center Settings",
+		'user_support:settings:help_center:add_help_center_site_menu_item' => "Add a site menu item for the Help Center",
+		'user_support:settings:help_center:show_floating_button' => "Show a floating button which links to the Help Center",
+		'user_support:settings:help_center:show_floating_button:left_top' => "Left - Top",
+		'user_support:settings:help_center:show_floating_button:left_bottom' => "Left - Bottom",
+		'user_support:settings:help_center:show_floating_button:right_top' => "Right - Top",
+		'user_support:settings:help_center:show_floating_button:right_bottom' => "Right - Bottom",
+		'user_support:settings:help_center:float_button_offset' => "Vertical offset of the floating button",
+		'user_support:settings:help_center:show_as_popup' => "Show the Help Center in a popup",
+			
+		'user_support:settings:faq:title' => "FAQ Settings",
+		'user_support:settings:faq:add_faq_site_menu_item' => "Add a site menu item to the FAQ",
+		'user_support:settings:faq:add_faq_footer_menu_item' => "Add a footer menu item to the FAQ",
+				
 		
-		'user_support:settings:auto_close_tickets' => "Auto close support tickets on an answer from an admin?",
-	
 		// user settings
 		'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",
 		

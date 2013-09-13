@@ -11,12 +11,12 @@ if (!elgg_in_context("admin")) {
 		"metadata_name_value_pairs" => array("help_context" => $help_context)
 	);
 	
-	if(!empty($contextual_help_object)){
-		$img_src = $vars["url"] . "mod/user_support/_graphics/help_center/helpcenter16.png";
-	} elseif(elgg_get_entities_from_metadata($faq_options) > 0) {
-		$img_src = $vars["url"] . "mod/user_support/_graphics/help_center/helpcenter16.png";
+	if (!empty($contextual_help_object)) {
+		$img_src = elgg_get_site_url() . "mod/user_support/_graphics/help_center/helpcenter16.png";
+	} elseif (elgg_get_entities_from_metadata($faq_options) > 0) {
+		$img_src = elgg_get_site_url() . "mod/user_support/_graphics/help_center/helpcenter16.png";
 	} else {
-		$img_src = $vars["url"] . "mod/user_support/_graphics/help_center/helpcenter16_gray.png";
+		$img_src = elgg_get_site_url() . "mod/user_support/_graphics/help_center/helpcenter16_gray.png";
 	}
 
 	elgg_load_js("lightbox");
@@ -24,9 +24,9 @@ if (!elgg_in_context("admin")) {
 
 	?>
 	<div id="user_support_button" title="<?php echo elgg_echo("user_support:button:hover");?>">
-		<a href="<?php echo $vars["url"]; ?>user_support/help_center" class="elgg-lightbox">
+		<a href="<?php echo elgg_get_site_url(); ?>user_support/help_center" class="elgg-lightbox">
 			<?php
-			foreach(str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char){
+			foreach (str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char) {
 				echo $char . "<br />";
 			}
 			?>

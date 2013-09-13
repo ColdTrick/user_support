@@ -21,7 +21,7 @@ Om de ticket te bekijken klik op de volgende link:
 Om de ticket te bekijken klik op de volgende link:
 %s',
   'user_support:settings:help_group' => 'Selecteer een groep waar gebruikers meer hulp kunnen krijgen',
-  'user_support:settings:help_group:non' => 'Geen help groep',
+  'user_support:settings:help_group:none' => 'Geen help groep',
   'user_support:help_center:help_group' => 'Help groep',
   'item:object:faq' => 'User Support FAQ',
   'item:object:help' => 'User Support Contextuele Help',

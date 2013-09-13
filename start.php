@@ -14,6 +14,7 @@
 	function user_support_init(){
 		// extend css
 		elgg_extend_view("css/elgg", "css/user_support/site");
+		elgg_extend_view("css/admin", "css/user_support/admin");
 		
 		elgg_extend_view("page/elements/footer", "user_support/button");
 		
