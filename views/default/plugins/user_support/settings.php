@@ -69,9 +69,4 @@
 		$support_tickets .= "</div>";
 	}
 	
-	$support_tickets .= "<div>";
-	$support_tickets .= elgg_echo("user_support:settings:support_tickets:auto_close_tickets");
-	$support_tickets .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "params[auto_close_tickets]", "options_values" => $noyes_options, "value" => $plugin->auto_close_tickets));
-	$support_tickets .= "</div>";
-	
 	echo elgg_view_module("inline", elgg_echo("user_support:settings:support_tickets:title"), $support_tickets);

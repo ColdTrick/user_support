@@ -59,11 +59,16 @@
 		
 		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		
+		elgg_register_plugin_hook_handler("comments", "object", "user_support_comments_hook");
+		
+		elgg_register_plugin_hook_handler("permissions_check", "object", "user_support_permissions_check_hook");
+		
 		// register actions
 		elgg_register_action("user_support/help/edit", dirname(__FILE__) . "/actions/help/edit.php", "admin");
 		elgg_register_action("user_support/help/delete", dirname(__FILE__) . "/actions/help/delete.php", "admin");
 		
 		elgg_register_action("user_support/support_ticket/edit", dirname(__FILE__) . "/actions/ticket/edit.php");
+		elgg_register_action("user_support/support_ticket/comment", dirname(__FILE__) . "/actions/ticket/comment.php");
 		elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php", "admin");
 		elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php", "admin");
 		elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php", "admin");

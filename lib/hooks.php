@@ -175,7 +175,7 @@
 				"href" => "user_support/support_ticket/mine/archive"
 			));
 			
-			if (elgg_is_admin_logged_in()) {
+			if (user_support_staff_gatekeeper(false)) {
 				// filter menu
 				$result[] = ElggMenuItem::factory(array(
 					"name" => "all",
@@ -294,6 +294,35 @@
 						"section" => "admin"
 					));
 				}
+			}
+		}
+		
+		return $result;
+	}
+	
+	function user_support_comments_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (!empty($params) && is_array($params)) {
+			$entity = elgg_extract("entity", $params);
+			
+			if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
+				$result = elgg_view("user_support/support_ticket/comments", $params);
+			}
+		}
+		
+		return $result;
+	}
+	
+	function user_support_permissions_check_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (!$result && !empty($params) && is_array($params)) {
+			$entity = elgg_extract("entity", $params);
+			$user = elgg_extract("user", $params);
+			
+			if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
+				$result = user_support_staff_gatekeeper(false, $user->getGUID());
 			}
 		}
 		

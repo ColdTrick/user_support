@@ -25,6 +25,7 @@
 		'user_support:help_context' => "Contextual help",
 		'user_support:reopen' => "Reopen",
 		'user_support:last_comment' => "Last comment by: %s",
+		'user_support:comment_close' => "Comment and close",
 	
 		'user_support:staff_gatekeeper' => "This page is only available for support staff",
 		

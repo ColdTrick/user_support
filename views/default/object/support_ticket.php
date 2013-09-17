@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$entity = elgg_extract("entity", $vars);
 	$full_view = elgg_extract("full_view", $vars);
@@ -94,8 +94,7 @@
 		));
 		
 		// show all comments
-		$ia = elgg_get_ignore_access();
-		elgg_set_ignore_access(true);
+		$ia = elgg_set_ignore_access(true);
 		
 		echo elgg_view_comments($entity);
 		

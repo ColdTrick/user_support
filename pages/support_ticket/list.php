@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-	admin_gatekeeper();
+	user_support_staff_gatekeeper();
 	
 	$options = array(
 		"type" => "object",
@@ -13,9 +13,15 @@
 	// build page elements
 	$title_text = elgg_echo("user_support:tickets:list:title");
 	
+	// ignore access for support staff
+	$ia = elgg_set_ignore_access(true);
+	
 	if(!($body = elgg_list_entities_from_metadata($options))){
 		$body = elgg_echo("notfound");
 	}
+	
+	// restore access
+	elgg_set_ignore_access($ia);
 	
 	// build page
 	$page_data = elgg_view_layout("content", array(

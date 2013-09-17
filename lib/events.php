@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	function user_support_create_annotation_event($event, $type, $annotation){
 		
@@ -7,12 +7,7 @@
 			$user = $annotation->getOwnerEntity();
 			
 			if(!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket") && !empty($user)){
-				if($user->getGUID() != $entity->getOwnerGUID()){
-					// user is not owner and is admin, so close ticket
-					if(elgg_get_plugin_setting("auto_close_tickets", "user_support") == "yes"){
-						$entity->setStatus(UserSupportTicket::CLOSED);
-					}
-				} elseif($user->getGUID() == $entity->getOwnerGUID()){
+				if($user->getGUID() == $entity->getOwnerGUID()){
 					// user is the owner, so reopen
 					$entity->setStatus(UserSupportTicket::OPEN);
 					

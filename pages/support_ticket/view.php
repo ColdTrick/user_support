@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	gatekeeper();
 	
@@ -6,7 +6,12 @@
 
 	$forward = true;
 	
-	if(($entity = get_entity($guid)) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
+	// ignore access for support staff
+	$ia = elgg_set_ignore_access(true);
+	
+	$entity = get_entity($guid);
+	
+	if(!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
 		$forward = false;
 		elgg_set_page_owner_guid($entity->getOwnerGUID());
 
@@ -36,6 +41,9 @@
 			"filter" => ""
 		));
 	}
+	
+	// restore access
+	elgg_set_ignore_access($ia);
 	
 	if(!$forward){
 		echo elgg_view_page($title_text, $page_data);
