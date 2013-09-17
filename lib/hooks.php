@@ -49,6 +49,52 @@
 		return $result;
 	}
 	
+	function user_support_site_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		// site (topbar) menu
+		$result[] = ElggMenuItem::factory(array(
+			"name" => "faq",
+			"text" => elgg_echo("user_support:menu:faq"),
+			"href" => "user_support/faq"
+		));
+		
+		if (elgg_is_logged_in()) {
+			// site (topbar) menu
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "support_ticket_mine",
+				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
+				"href" => "user_support/support_ticket/mine"
+			));
+		}
+		
+		return $result;
+	}
+
+	function user_support_page_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		//page (side) menu
+		$result[] = ElggMenuItem::factory(array(
+			"name" => "faq",
+			"text" => elgg_echo("user_support:menu:faq"),
+			"href" => "user_support/faq",
+			"context" => "user_support"
+		));
+		
+		if (elgg_is_logged_in()) {
+			// page (side) menu
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "support_ticket_mine",
+				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
+				"href" => "user_support/support_ticket/mine",
+				"context" => "user_support"
+			));
+		}
+		
+		return $result;
+	}
+	
 	function user_support_owner_block_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		

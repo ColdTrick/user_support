@@ -48,6 +48,8 @@
 		elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
 		elgg_register_plugin_hook_handler("register", "menu:owner_block", "user_support_owner_block_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:title", "user_support_title_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:site", "user_support_site_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:page", "user_support_page_menu_hook");
 		
 		// register actions
 		elgg_register_action("user_support/help/edit", dirname(__FILE__) . "/actions/help/edit.php", "admin");
@@ -65,36 +67,12 @@
 	
 	function user_support_pagesetup(){
 		
-		// site (topbar) menu
-		elgg_register_menu_item("site", array(
-			"name" => "faq",
-			"text" => elgg_echo("user_support:menu:faq"),
-			"href" => "user_support/faq"
-		));
 		
-		//page (side) menu
-		elgg_register_menu_item("page", array(
-			"name" => "faq",
-			"text" => elgg_echo("user_support:menu:faq"),
-			"href" => "user_support/faq",
-			"context" => "user_support"
-		));
+		
 		
 		if (elgg_is_logged_in()) {
-			// site (topbar) menu
-			elgg_register_menu_item("site", array(
-				"name" => "support_ticket_mine",
-				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine"
-			));
 			
-			// page (side) menu
-			elgg_register_menu_item("page", array(
-				"name" => "support_ticket_mine",
-				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine",
-				"context" => "user_support"
-			));
+			
 			
 			// filter menu
 			elgg_register_menu_item("user_support", array(
