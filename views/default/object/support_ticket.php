@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$entity = elgg_extract("entity", $vars);
 	$full_view = elgg_extract("full_view", $vars);
@@ -21,6 +21,7 @@
 	if(!$full_view){
 		// icon
 		$icon = elgg_view_entity_icon($entity, "small");
+		$info = "";
 		
 		// title
 		if(!empty($entity->support_type)){
