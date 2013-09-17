@@ -88,6 +88,9 @@ To view the Ticket click on this link:
 		'user_support:menu:faq:group' => "Group FAQ",
 		'user_support:menu:faq:create' => "Create FAQ",
 		
+		'user_support:menu_user_hover:make_staff' => "Add to the support staff",
+		'user_support:menu_user_hover:remove_staff' => "Remove from the support staff",
+		
 		// button
 		'user_support:button:text' => "Support",
 		'user_support:button:hover' => "Click to open the Help Center",
@@ -161,6 +164,10 @@ To view the Ticket click on this link:
 		// ticket - reopen
 		'user_support:action:ticket:reopen:error:enable' => "An unknown error occured while reopening the Support Ticket",
 		'user_support:action:ticket:reopen:success' => "The Support Ticket was reopened successfully",
+		
+		// support staff
+		'user_support:action:support_staff:added' => "The user is added to the support staff",
+		'user_support:action:support_staff:removed' => "The user was removed from the support staff",
 		
 	);
 	

@@ -55,6 +55,7 @@
 		elgg_register_plugin_hook_handler("register", "menu:site", "user_support_site_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:page", "user_support_page_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:footer", "user_support_footer_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:user_hover", "user_support_user_hover_menu_hook");
 		
 		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		
@@ -69,6 +70,8 @@
 		
 		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php");
 		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php");
+		
+		elgg_register_action("user_support/support_staff", dirname(__FILE__) . "/actions/support_staff.php", "admin");
 	}
 	
 	function user_support_pagesetup(){
