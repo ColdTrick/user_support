@@ -14,7 +14,6 @@
 	}
 
 	// make breadcrumb
-	elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
 	elgg_push_breadcrumb($title_text);
 	
 	$help_context = user_support_find_unique_help_context();

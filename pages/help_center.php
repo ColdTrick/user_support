@@ -1,19 +1,17 @@
 <?php
 
-	global $CONFIG;
-
-	$help_url = $_SERVER["HTTP_REFERER"];
+	$help_url = elgg_extract("HTTP_REFERER", $_SERVER);
 	$help_context = user_support_get_help_context($help_url);
-	if(empty($help_context)){
+	if (empty($help_context)) {
 		$help_context = user_support_get_help_context();
 	}
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 	
 	$group = null;
-	if(elgg_is_active_plugin("groups")){
+	if (elgg_is_active_plugin("groups")) {
 		$group_guid = (int) elgg_get_plugin_setting("help_group_guid", "user_support");
-		if(!empty($group_guid) && ($group = get_entity($group_guid))){
-			if(!elgg_instanceof($group, "group", null, "ElggGroup")){
+		if (!empty($group_guid) && ($group = get_entity($group_guid))) {
+			if (!elgg_instanceof($group, "group", null, "ElggGroup")) {
 				$group = null;
 			}
 		}

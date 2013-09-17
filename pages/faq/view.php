@@ -15,7 +15,7 @@
 		$title_text = $entity->title;
 		
 		// make breadcrumb
-		elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
+		
 		if (elgg_instanceof($container, "group")) {
 			elgg_push_breadcrumb($container->name, "user_support/faq/group/" . $container->getGUID() . "/all");
 			elgg_set_page_owner_guid($container->getGUID());

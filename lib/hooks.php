@@ -68,6 +68,22 @@
 				"href" => "user_support/faq"
 			));
 		}
+
+		if (elgg_get_plugin_setting("add_help_center_site_menu_item", "user_support") == "yes") {
+			$options = array(
+				"name" => "help_center",
+				"text" => elgg_echo("user_support:button:text"),
+				"href" => "user_support/help_center"
+			);
+			
+			if (elgg_get_plugin_setting("show_as_popup", "user_support") != "no") {
+				elgg_load_js("lightbox");
+				elgg_load_css("lightbox");
+				$options["class"] = "elgg-lightbox";
+			}
+			
+			$result[] = ElggMenuItem::factory($options);
+		}
 		
 		if (elgg_is_logged_in()) {
 			$result[] = ElggMenuItem::factory(array(

@@ -11,7 +11,6 @@
 	elgg_push_context("faq");
 	
 	// build breadcrumb
-	elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
 	elgg_push_breadcrumb($page_owner->name);
 	
 	// build page elements
