@@ -154,14 +154,22 @@
 		$result = $return_value;
 		
 		if (!empty($params) && is_array($params)) {
-			$group = elgg_extract("entity", $params);
+			$entity = elgg_extract("entity", $params);
 			
-			if (elgg_instanceof($group, "group")) {
-				if ($group->faq_enable == "yes") {
+			if (elgg_instanceof($entity, "group")) {
+				if ($entity->faq_enable == "yes") {
 					$result[] = ElggMenuItem::factory(array(
 						"name" => "faq",
 						"text" => elgg_echo("user_support:menu:faq:group"),
-						"href" => "user_support/faq/group/" . $group->getGUID() . "/all"
+						"href" => "user_support/faq/group/" . $entity->getGUID() . "/all"
+					));
+				}
+			} elseif (elgg_instanceof($entity, "user")) {
+				if ($entity->getGUID() == elgg_get_logged_in_user_guid()) {
+					$result[] = ElggMenuItem::factory(array(
+						"name" => "support_ticket_mine",
+						"text" => elgg_echo("user_support:menu:support_tickets:mine"),
+						"href" => "user_support/support_ticket/mine"
 					));
 				}
 			}
