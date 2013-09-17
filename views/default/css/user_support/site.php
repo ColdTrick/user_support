@@ -47,10 +47,6 @@
 }
 
 /* Help Center */
-#user_support_help_center {
-	width: 650px;
-}
-
 #user_support_help_center_logo {
 	background: transparent url(<?php echo $graphics_folder; ?>help_center/helpcenter64.png) top left no-repeat;
 	width: 64px;
