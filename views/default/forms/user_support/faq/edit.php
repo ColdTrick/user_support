@@ -26,6 +26,24 @@
 		$submit_text = elgg_echo("edit");
 		
 		$form_data = elgg_view("input/hidden", array("name" => "guid", "value" => (int) $entity->getGUID()));
+	} elseif ($annotation = elgg_extract("annotation", $vars, false)) {
+		$entity = $annotation->getEntity();
+		
+		$title = elgg_get_sticky_value("user_support_faq", "title", $entity->title);
+		$desc = elgg_get_sticky_value("user_support_faq", "description", $annotation->value);
+		$access_id = elgg_get_sticky_value("user_support_faq", "access_id", $annotation->access_id);
+		$container_guid = elgg_get_page_owner_guid();
+		
+		$tags = elgg_get_sticky_value("user_support_faq", "tags", $entity->tags);
+		$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", "no");
+		$context = elgg_get_sticky_value("user_support_faq", "help_context", $entity->help_context);
+		if(!empty($context) && !is_array($context)){
+			$context = array($context);
+		} elseif(empty($context)){
+			$context = array();
+		}
+		
+		$submit_text = elgg_echo("save");
 	} else {
 		$title = elgg_get_sticky_value("user_support_faq", "title");
 		$desc = elgg_get_sticky_value("user_support_faq", "description");
@@ -36,7 +54,7 @@
 		$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", "no");
 		$context = elgg_get_sticky_value("user_support_faq", "help_context", array());
 		
-		$submit_text = elgg_echo("submit");
+		$submit_text = elgg_echo("save");
 	}
 	
 	elgg_clear_sticky_form("user_support_faq");

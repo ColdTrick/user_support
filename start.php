@@ -56,6 +56,7 @@
 		elgg_register_plugin_hook_handler("register", "menu:footer", "user_support_footer_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:user_hover", "user_support_user_hover_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:user_support", "user_support_user_support_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:annotation", "user_support_annotation_menu_hook");
 		
 		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		

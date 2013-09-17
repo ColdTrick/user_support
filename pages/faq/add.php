@@ -17,6 +17,17 @@
 		admin_gatekeeper();
 	}
 	
+	$annotation = false;
+	if (elgg_is_admin_logged_in()) {
+		if ($annotation_id = (int) get_input("annotation")) {
+			if ($temp_anno = elgg_get_annotation_from_id($annotation_id)) {
+				if (($entity = $temp_anno->getEntity()) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
+					$annotation = $temp_anno;
+				}
+			}
+		}
+	}
+	
 	elgg_push_context("faq");
 	
 	// make breadcrumb
@@ -28,8 +39,11 @@
 	// page elements
 	$title_text = elgg_echo("user_support:faq:create:title");
 	
-	$help_context = user_support_find_unique_help_context();
-	$content = elgg_view_form("user_support/faq/edit", null, array("help_context" => $help_context));
+	$body_vars = array(
+		"help_context" => user_support_find_unique_help_context(),
+		"annotation" => $annotation
+	);
+	$content = elgg_view_form("user_support/faq/edit", null, $body_vars);
 	
 	// build page
 	$page_data = elgg_view_layout("content", array(

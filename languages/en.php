@@ -61,7 +61,8 @@
 		'river:create:object:support_ticket' => "%s posted a comment on %s",
 		'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
 		'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
-	
+		'user_support:support_ticket:promote' => "Promote to FAQ",
+		
 		// admin notify
 		'user_support:notify:admin:create:subject' => "A new Support Ticket was reported",
 		'user_support:notify:admin:create:message' => "Hi,
