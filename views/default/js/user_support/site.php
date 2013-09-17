@@ -4,7 +4,7 @@
 elgg.provide("elgg.user_support");
 
 elgg.user_support.init = function() {
-	$('#user_support_help_center_search input[name="q"]').live({
+	$('#user-support-help-center-search').live({
 		focus: function() {
 			if ($(this).val() === $(this).attr("title")) {
 				$(this).val("");

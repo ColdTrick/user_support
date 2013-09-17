@@ -47,37 +47,9 @@
 }
 
 /* Help Center */
-#user_support_help_center {
+.user-support-help-center-popup {
 	width: 650px;
-}
-
-#user_support_help_center_logo {
-	background: transparent url(<?php echo $graphics_folder; ?>help_center/helpcenter64.png) top left no-repeat;
-	width: 64px;
-	height: 64px;
-	float: right;
-}
-
-#user_support_help_center_search {
-	background: url("<?php echo $vars["url"]; ?>_graphics/elgg_sprites.png") no-repeat scroll right -918px transparent;
-	border: 1px solid #CCCCCC;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	display: inline-block;
-	margin: 5px 0;
-    padding: 0 15px 0 5px;
-    width: 250px;
-}
-
-#user_support_help_center_search input[name='q']{
-	border: none;
-	background: none;
-	padding: 0px;
-	width: 100%;
-}
-
-#user_support_help_center_actions .elgg-button {
-	margin-right: 5px;
+	margin: 0px;
 }
 
 #user_support_help_center_help {
