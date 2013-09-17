@@ -52,7 +52,6 @@
 		elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
 		elgg_register_plugin_hook_handler("register", "menu:owner_block", "user_support_owner_block_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:title", "user_support_title_menu_hook");
-
 		elgg_register_plugin_hook_handler("register", "menu:site", "user_support_site_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:page", "user_support_page_menu_hook");
 		
@@ -73,14 +72,7 @@
 	}
 	
 	function user_support_pagesetup(){
-		
-		
-		
-		
 		if (elgg_is_logged_in()) {
-			
-			
-			
 			// filter menu
 			elgg_register_menu_item("user_support", array(
 				"name" => "mine",
@@ -110,8 +102,6 @@
 					"href" => "user_support/support_ticket/archive",
 					"context" => "user_support"
 				));
-				
 			}
 		}
 	}
-	
