@@ -56,8 +56,8 @@
 		elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php", "admin");
 		elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php", "admin");
 		
-		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php", "admin");
-		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php", "admin");
+		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php");
+		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php");
 		
 	}
 	

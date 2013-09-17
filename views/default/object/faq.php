@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 	$entity = elgg_extract("entity", $vars);
-	$full_view = elgg_extract("full_view", $vars, false);
+	$container = $entity->getContainerEntity();
+	$full_view = (bool) elgg_extract("full_view", $vars, false);
 	
 	// entity menu
-	$entity_menu = elgg_view_menu("entity", array(
-		"entity" => $entity,
-		"handler" => "user_support/faq",
-		"sort_by" => "priority",
-		"class" => "elgg-menu-hz"
-	));
-	
-	if(elgg_in_context("widgets")){
-		unset($entity_menu);
+	$entity_menu = "";
+	if(!elgg_in_context("widgets")){
+		$entity_menu = elgg_view_menu("entity", array(
+			"entity" => $entity,
+			"handler" => "user_support/faq",
+			"sort_by" => "priority",
+			"class" => "elgg-menu-hz"
+		));
 	}
 	
 	if(!$full_view){
@@ -21,14 +21,21 @@
 		// anwser
 		$info = "<div>";
 		$info .= elgg_echo("user_support:anwser:short") . ": " . elgg_get_excerpt($entity->description, 150);
-		$info .= "&nbsp;" . elgg_view("output/url", array("href" => $entity->getURL(), "text" => elgg_echo("user_support:read_more")));
+		$info .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => elgg_echo("user_support:read_more"), "class" => "mlm"));
 		$info .= "</div>";
+		
+		$subtext = "";
+		if (elgg_instanceof($container, "group") && ($container->getGUID() != elgg_get_page_owner_guid())) {
+			$group_link = elgg_view("output/url", array("text" => $container->name, "href" => $container->getURL(), "is_trusted" => true));
+			$subtext = elgg_echo("river:ingroup", array($group_link));
+		}
 		
 		$params = array(
 			"entity" => $entity,
 			"metadata" => $entity_menu,
 			"content" => $info,
-			"title" => elgg_view("output/url", array("href" => $entity->getURL(), "text" => $entity->title))
+			"title" => elgg_view("output/url", array("href" => $entity->getURL(), "text" => $entity->title)),
+			"subtitle" => $subtext
 		);
 		$params = $params + $vars;
 		$list_body = elgg_view("object/elements/summary", $params);
