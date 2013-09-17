@@ -37,7 +37,7 @@
 	echo elgg_view_module("inline", elgg_echo("user_support:settings:help_center:title"), $help_center);
 	
 	$faq = "<label>" . elgg_echo("user_support:settings:faq:add_faq_site_menu_item") . "&nbsp;";
-	$faq .= elgg_view("input/dropdown", array("name" => "params[add_faq_site_menu_item]", "value" => $plugin->add_faq_site_menu_item, "options_values" => $noyes_options)) . "</label><br />";
+	$faq .= elgg_view("input/dropdown", array("name" => "params[add_faq_site_menu_item]", "value" => $plugin->add_faq_site_menu_item, "options_values" => $yesno_options)) . "</label><br />";
 	
 	$faq .= "<label>" . elgg_echo("user_support:settings:faq:add_faq_footer_menu_item") . "&nbsp;";
 	$faq .= elgg_view("input/dropdown", array("name" => "params[add_faq_footer_menu_item]", "value" => $plugin->add_faq_footer_menu_item, "options_values" => $noyes_options)) . "</label><br />";
