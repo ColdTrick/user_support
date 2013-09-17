@@ -8,15 +8,15 @@
 	$help_context = elgg_extract("help_context", $vars);
 	$form_data = "";
 	
-	if($entity = elgg_extract("entity", $vars, false)){
-		$title = $entity->title;
-		$desc = $entity->description;
-		$access_id = (int) $entity->access_id;
+	if ($entity = elgg_extract("entity", $vars, false)) {
+		$title = elgg_get_sticky_value("user_support_faq", "title", $entity->title);
+		$desc = elgg_get_sticky_value("user_support_faq", "description", $entity->description);
+		$access_id = (int) elgg_get_sticky_value("user_support_faq", "access_id", $entity->access_id);
 		$container_guid = $entity->getContainerGUID();
 		
-		$tags = $entity->tags;
-		$comments = $entity->allow_comments;
-		$context = $entity->help_context;
+		$tags = elgg_get_sticky_value("user_support_faq", "tags", $entity->tags);
+		$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", $entity->allow_comments);
+		$context = elgg_get_sticky_value("user_support_faq", "help_context", $entity->help_context);
 		if(!empty($context) && !is_array($context)){
 			$context = array($context);
 		} elseif(empty($context)){
@@ -27,17 +27,19 @@
 		
 		$form_data = elgg_view("input/hidden", array("name" => "guid", "value" => (int) $entity->getGUID()));
 	} else {
-		$title = "";
-		$desc = "";
-		$access_id = get_default_access();
+		$title = elgg_get_sticky_value("user_support_faq", "title");
+		$desc = elgg_get_sticky_value("user_support_faq", "description");
+		$access_id = elgg_get_sticky_value("user_support_faq", "access_id", get_default_access());
 		$container_guid = elgg_get_page_owner_guid();
 		
-		$tags = array();
-		$comments = "no";
-		$context = array();
+		$tags = elgg_get_sticky_value("user_support_faq", "tags", array());
+		$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", "no");
+		$context = elgg_get_sticky_value("user_support_faq", "help_context", array());
 		
 		$submit_text = elgg_echo("submit");
 	}
+	
+	elgg_clear_sticky_form("user_support_faq");
 
 	$form_data .= "<div>";
 	$form_data .= "<label>" . elgg_echo("user_support:question") . "</label>";

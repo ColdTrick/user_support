@@ -140,3 +140,29 @@
 		
 		return $result;
 	}
+	
+	function user_support_widget_url_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (!$result && !empty($params) && is_array($params)) {
+			$entity = elgg_extract("entity", $params);
+			
+			if (!empty($entity) && elgg_instanceof($entity, "object", "widget")) {
+				switch ($entity->handler) {
+					case "faq":
+						$owner = $entity->getOwnerEntity();
+						$link = "user_support/faq";
+						if (elgg_instanceof($owner, "group")) {
+							$link .= "/group/" . $owner->getGUID() . "/all";
+						}
+						
+						$result = $link;
+						
+						break;
+				}
+			}
+		}
+		
+		return $result;
+	}
+	
