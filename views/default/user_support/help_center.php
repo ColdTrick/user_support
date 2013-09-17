@@ -16,7 +16,7 @@
 		</span>
 		
 		<div id="user_support_help_center_actions">
-			<?php 
+			<?php
 			
 				if(elgg_is_logged_in()){
 					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:ask"), "href" => "#","onclick" => "$('#user_support_ticket_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action"));
@@ -61,23 +61,3 @@
 	
 ?>
 </div>
-
-<script type="text/javascript">
-	$('#user_support_help_center_search input[name="q"]').focus(function(){
-			if($(this).val() === $(this).attr("title")){
-				$(this).val("");
-			}
-		}).blur(function(){
-			if($(this).val() == ""){
-				$(this).val($(this).attr("title"));
-			}
-		}).keypress(function(event){
-			if(event.which == 13){
-				$('#user_support_help_search_result_wrapper').hide();
-				
-				elgg.ajax("user_support/search/?q=" + $(this).val(), function(data){
-					$('#user_support_help_search_result_wrapper').html(data).show();
-				});
-			}
-		});
-</script>
