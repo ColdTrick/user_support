@@ -9,7 +9,6 @@
 	
 	// register default Elgg events
 	elgg_register_event_handler("init", "system", "user_support_init");
-	elgg_register_event_handler("pagesetup", "system", "user_support_pagesetup");
 	
 	function user_support_init(){
 		// extend css
@@ -56,6 +55,7 @@
 		elgg_register_plugin_hook_handler("register", "menu:page", "user_support_page_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:footer", "user_support_footer_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:user_hover", "user_support_user_hover_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:user_support", "user_support_user_support_menu_hook");
 		
 		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		
@@ -72,39 +72,4 @@
 		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php");
 		
 		elgg_register_action("user_support/support_staff", dirname(__FILE__) . "/actions/support_staff.php", "admin");
-	}
-	
-	function user_support_pagesetup(){
-		if (elgg_is_logged_in()) {
-			// filter menu
-			elgg_register_menu_item("user_support", array(
-				"name" => "mine",
-				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine",
-				"context" => "user_support"
-			));
-			elgg_register_menu_item("user_support", array(
-				"name" => "my_archive",
-				"text" => elgg_echo("user_support:menu:support_tickets:mine:archive"),
-				"href" => "user_support/support_ticket/mine/archive",
-				"context" => "user_support"
-			));
-			
-			// admin menu items
-			if (elgg_is_admin_logged_in()) {
-				// filter menu
-				elgg_register_menu_item("user_support", array(
-					"name" => "all",
-					"text" => elgg_echo("user_support:menu:support_tickets"),
-					"href" => "user_support/support_ticket",
-					"context" => "user_support"
-				));
-				elgg_register_menu_item("user_support", array(
-					"name" => "archive",
-					"text" => elgg_echo("user_support:menu:support_tickets:archive"),
-					"href" => "user_support/support_ticket/archive",
-					"context" => "user_support"
-				));
-			}
-		}
 	}

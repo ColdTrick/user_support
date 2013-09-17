@@ -150,6 +150,50 @@
 		return $result;
 	}
 	
+	/**
+	 * Adds items to user support filter
+	 *
+	 * @param unknown_type $hook
+	 * @param unknown_type $type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $params
+	 * @return Ambigous <ElggMenuItem, NULL>
+	 */
+	function user_support_user_support_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (elgg_is_logged_in()) {
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "mine",
+				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
+				"href" => "user_support/support_ticket/mine"
+			));
+
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "my_archive",
+				"text" => elgg_echo("user_support:menu:support_tickets:mine:archive"),
+				"href" => "user_support/support_ticket/mine/archive"
+			));
+			
+			if (elgg_is_admin_logged_in()) {
+				// filter menu
+				$result[] = ElggMenuItem::factory(array(
+					"name" => "all",
+					"text" => elgg_echo("user_support:menu:support_tickets"),
+					"href" => "user_support/support_ticket"
+				));
+				
+				$result[] = ElggMenuItem::factory(array(
+					"name" => "archive",
+					"text" => elgg_echo("user_support:menu:support_tickets:archive"),
+					"href" => "user_support/support_ticket/archive"
+				));
+			}
+		}
+		
+		return $result;
+	}
+	
 	function user_support_owner_block_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		
