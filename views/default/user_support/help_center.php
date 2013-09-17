@@ -24,22 +24,22 @@
 			<input type="text" name="q" value="<?php echo elgg_echo("search"); ?>" title="<?php echo elgg_echo("search"); ?>" />
 		</span>
 		
-		<div id="user_support_help_center_actions">
+		<div>
 			<?php
 			
 				if (elgg_is_logged_in()) {
-					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:ask"), "href" => "#","onclick" => "$('#user_support_ticket_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action"));
-					echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:support_tickets:mine"), "href" => $vars["url"] . "user_support/support_ticket/mine", "class" => "elgg-button elgg-button-action"));
+					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:ask"), "href" => "#","onclick" => "$('#user_support_ticket_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
+					echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:support_tickets:mine"), "href" => $vars["url"] . "user_support/support_ticket/mine", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
 				}
 				
-				echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:faq"), "href" => $vars["url"] . "user_support/faq", "class" => "elgg-button elgg-button-action"));
+				echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:faq"), "href" => $vars["url"] . "user_support/faq", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
 				
 				if (!empty($group)) {
-					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:help_group"), "href" => $group->getURL(), "class" => "elgg-button elgg-button-action"));
+					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:help_group"), "href" => $group->getURL(), "class" => "elgg-button elgg-button-action")) . "&nbsp;";
 				}
 				
 				if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled && elgg_is_xhr()) {
-					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:help"), "href" => "#", "onclick" => "$('#user_support_help_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action"));
+					echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:help"), "href" => "#", "onclick" => "$('#user_support_help_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
 				}
 			?>
 		</div>

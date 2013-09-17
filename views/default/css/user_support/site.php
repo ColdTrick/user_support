@@ -72,10 +72,6 @@
 	width: 100%;
 }
 
-#user_support_help_center_actions .elgg-button {
-	margin-right: 5px;
-}
-
 #user_support_help_center_help {
 	max-height: 250px;
 	overflow-x: hidden;
