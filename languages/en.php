@@ -26,6 +26,8 @@
 		'user_support:reopen' => "Reopen",
 		'user_support:last_comment' => "Last comment by: %s",
 	
+		'user_support:staff_gatekeeper' => "This page is only available for support staff",
+		
 		// settings
 		'user_support:settings:support_tickets:title' => "Support Tickets Settings",
 		'user_support:settings:support_tickets:help_group' => "Select a group for users to ask for help",
