@@ -28,7 +28,7 @@ $content = elgg_list_entities_from_metadata($options);
 elgg_pop_context();
 
 if (!$content) {
-	$content = elgg_view("output/longtext", array("value" => elgg_echo("notfound")));
+	$content = elgg_view("output/longtext", array("value" => elgg_echo("user_support:faq:not_found")));
 }
 
 $new_link = "";

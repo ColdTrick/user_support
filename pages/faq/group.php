@@ -26,7 +26,7 @@
 	);
 	
 	if (!($content = elgg_list_entities($list_options))) {
-		$content = elgg_echo("notfound");
+		$content = elgg_echo("user_support:faq:not_found");
 	}
 	
 	// build page
