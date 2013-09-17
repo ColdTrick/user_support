@@ -230,7 +230,7 @@
 				
 				if ($entity->getGUID() != $user->getGUID()) {
 					$text = elgg_echo("user_support:menu_user_hover:make_staff");
-					if ($entity->support_staff) {
+					if (user_support_staff_gatekeeper(false, $entity->getGUID())) {
 						$text = elgg_echo("user_support:menu_user_hover:remove_staff");
 					}
 					

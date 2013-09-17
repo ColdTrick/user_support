@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	function user_support_get_help_for_context($help_context){
 		$result = false;
@@ -76,7 +76,7 @@
 			
 			// get all metadata values of help_context
 			$options = array(
-				"metadata_name" => "help_context", 
+				"metadata_name" => "help_context",
 				"type" => "object",
 				"subtypes" => array(UserSupportFAQ::SUBTYPE, UserSupportHelp::SUBTYPE, UserSupportTicket::SUBTYPE),
 				"limit" => false
@@ -128,6 +128,30 @@
 					$result = array($users);
 				}
 			}
+		}
+		
+		return $result;
+	}
+	
+	function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
+		$result = false;
+		
+		$user_guid = sanitise_int($user_guid, false);
+		if (empty($user_guid)) {
+			$user_guid = elgg_get_logged_in_user_guid();
+		}
+		
+		if (!empty($user_guid)) {
+			if ($user = get_user($user_guid)) {
+				if ($user->isAdmin() || $user->support_staff) {
+					$result = true;
+				}
+			}
+		}
+		
+		if (!$result && $forward) {
+			register_error(elgg_echo("user_support:staff_gatekeeper"));
+			forward(REFERER);
 		}
 		
 		return $result;
