@@ -49,18 +49,27 @@
 		return $result;
 	}
 	
+	/**
+	 * Adds items to site menu
+	 *
+	 * @param unknown_type $hook
+	 * @param unknown_type $type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $params
+	 * @return Ambigous <ElggMenuItem, NULL>
+	 */
 	function user_support_site_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		
-		// site (topbar) menu
-		$result[] = ElggMenuItem::factory(array(
-			"name" => "faq",
-			"text" => elgg_echo("user_support:menu:faq"),
-			"href" => "user_support/faq"
-		));
+		if (elgg_get_plugin_setting("add_faq_site_menu_item", "user_support") != "no") {
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "faq",
+				"text" => elgg_echo("user_support:menu:faq"),
+				"href" => "user_support/faq"
+			));
+		}
 		
 		if (elgg_is_logged_in()) {
-			// site (topbar) menu
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "support_ticket_mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
@@ -71,10 +80,18 @@
 		return $result;
 	}
 
+	/**
+	 * Adds items to page menu
+	 *
+	 * @param unknown_type $hook
+	 * @param unknown_type $type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $params
+	 * @return Ambigous <ElggMenuItem, NULL>
+	 */
 	function user_support_page_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		
-		//page (side) menu
 		$result[] = ElggMenuItem::factory(array(
 			"name" => "faq",
 			"text" => elgg_echo("user_support:menu:faq"),
@@ -83,7 +100,6 @@
 		));
 		
 		if (elgg_is_logged_in()) {
-			// page (side) menu
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "support_ticket_mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),

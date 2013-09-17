@@ -68,7 +68,6 @@
 		
 		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php");
 		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php");
-		
 	}
 	
 	function user_support_pagesetup(){
