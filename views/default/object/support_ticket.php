@@ -77,8 +77,9 @@
 		$summary = elgg_view("object/elements/summary", $params);
 		
 		// body
+		$body = "";
 		if(!empty($entity->help_url)){
-			$body = elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
+			$body .= elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
 		}
 		
 		if(!empty($entity->description)){
