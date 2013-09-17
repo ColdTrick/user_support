@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$types_values = array(
 		"question" => elgg_echo("user_support:support_type:question"),
@@ -50,10 +50,12 @@
 	$form_body .= elgg_view("input/tags", array("name" => "tags", "value" => $tags));
 	$form_body .= "</div>";
 	
-	$form_body .= "<div>";
-	$form_body .= "<label>" . elgg_echo("user_support:url") . "</label>";
-	$form_body .= elgg_view("input/url", array("name" => "help_url", "value" => $help_url));
-	$form_body .= "</div>";
+	if ($help_url) {
+		$form_body .= "<div>";
+		$form_body .= "<label>" . elgg_echo("user_support:url") . "</label>";
+		$form_body .= elgg_view("input/url", array("name" => "help_url", "value" => $help_url));
+		$form_body .= "</div>";
+	}
 	
 	$form_body .= "<div class='elgg-foot'>";
 	$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
