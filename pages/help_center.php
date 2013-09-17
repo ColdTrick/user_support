@@ -43,10 +43,11 @@
 	
 	// check if this is popup or not
 	if (elgg_is_xhr()) {
-		echo $help_center;
+		echo elgg_view_module("info", elgg_echo("user_support:help_center:title"), $help_center, array("class" => "user-support-help-center-popup"));
 	} else {
 		$page_data = elgg_view_layout("content", array(
-			"header" => "",
+				
+			"title" => elgg_echo("user_support:help_center:title"),
 			"content" => $help_center,
 			"filter" => false
 		));
