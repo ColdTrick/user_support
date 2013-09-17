@@ -81,6 +81,29 @@
 	}
 
 	/**
+	 * Adds items to footer menu
+	 *
+	 * @param unknown_type $hook
+	 * @param unknown_type $type
+	 * @param unknown_type $return_value
+	 * @param unknown_type $params
+	 * @return Ambigous <ElggMenuItem, NULL>
+	 */
+	function user_support_footer_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (elgg_get_plugin_setting("add_faq_footer_menu_item", "user_support") == "yes") {
+			$result[] = ElggMenuItem::factory(array(
+				"name" => "faq",
+				"text" => elgg_echo("user_support:menu:faq"),
+				"href" => "user_support/faq"
+			));
+		}
+		
+		return $result;
+	}
+
+	/**
 	 * Adds items to page menu
 	 *
 	 * @param unknown_type $hook
