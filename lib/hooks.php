@@ -221,3 +221,30 @@
 		return $result;
 	}
 	
+	function user_support_user_hover_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (($user = elgg_get_logged_in_user_entity()) && $user->isAdmin()) {
+			if (!empty($params) && is_array($params)) {
+				$entity = elgg_extract("entity", $params);
+				
+				if ($entity->getGUID() != $user->getGUID()) {
+					$text = elgg_echo("user_support:menu_user_hover:make_staff");
+					if ($entity->support_staff) {
+						$text = elgg_echo("user_support:menu_user_hover:remove_staff");
+					}
+					
+					$result[] = ElggMenuItem::factory(array(
+						"name" => "user_support_staff",
+						"text" => $text,
+						"href" => "action/user_support/support_staff?guid=" . $entity->getGUID(),
+						"confirm" => elgg_echo("question:areyousure"),
+						"section" => "admin"
+					));
+				}
+			}
+		}
+		
+		return $result;
+	}
+	
