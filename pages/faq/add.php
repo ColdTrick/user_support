@@ -20,7 +20,6 @@
 	elgg_push_context("faq");
 	
 	// make breadcrumb
-	elgg_push_breadcrumb(elgg_echo("user_support:menu:faq"), "user_support/faq");
 	if (elgg_instanceof($page_owner, "group")) {
 		elgg_push_breadcrumb($page_owner->name, "user_support/faq/group/" . $page_owner->getGUID() . "/all");
 	}
