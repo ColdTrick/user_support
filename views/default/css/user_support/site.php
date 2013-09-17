@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 	$graphics_folder = $vars["url"] . "mod/user_support/_graphics/";
 
 ?>
 /* User support button */
-#user_support_button {
+#user-support-button {
 	background: transparent url(<?php echo $graphics_folder; ?>button_bg.png) top right repeat-y;
 	border-color: #B6B6B6;
 	border-style: solid;
@@ -17,28 +17,33 @@
 	
 	font-size: 16px;
     font-weight: bold;
-    left: 0;
     position: fixed;
-    padding: 4px 0 4px 4px;
+    padding: 4px 2px 4px 4px;
     line-height: 18px;
     text-align: left;
-    top: 150px;
     width: 18px;
     z-index: 10000;
 }
 
-#user_support_button a {
+#user-support-button a {
 	color: #FFFFFF;
-	text-decoration: none;    
+	text-decoration: none;
+	display: block;
+	width: 16px;
+	padding-bottom: 20px;
+	text-align: center;
 }
 
-#user_support_button img {
-    margin-left: -1px;
-    padding-top: 10px;
-}
-
-#user_support_button a:hover {
+#user-support-button a:hover {
 	color: #000;
+}
+
+.user-support-button-help-center {
+	background: transparent url(<?php echo $graphics_folder; ?>help_center/helpcenter16_gray.png) no-repeat scroll right bottom;
+}
+
+.user-support-button-help-center.elgg-state-active {
+	background-image: url(<?php echo $graphics_folder; ?>help_center/helpcenter16.png)
 }
 
 /* Help Center */
