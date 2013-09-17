@@ -37,6 +37,7 @@
 		
 		// add a group tool option for FAQ
 		add_group_tool_option("faq", elgg_echo("user_support:group:tool_option"), false);
+		elgg_extend_view("groups/tool_latest", "user_support/faq/group_module");
 		
 		// register events
 		elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
