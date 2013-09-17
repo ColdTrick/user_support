@@ -122,6 +122,10 @@ To view the Ticket click on this link:
 		'user_support:group:tool_option' => "Enable support for group FAQs",
 		'user_support:faq:group:title' => "%s FAQ",
 	
+		// widgets
+		'user_support:widgets:faq:title' => "FAQ",
+		'user_support:widgets:faq:description' => "Show a list of the most recently added FAQ items",
+		
 		// actions
 		// help - edit
 		'user_support:action:help:edit:error:input' => "Invalid input to create/edit this contextual help",

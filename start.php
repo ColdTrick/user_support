@@ -39,6 +39,9 @@
 		add_group_tool_option("faq", elgg_echo("user_support:group:tool_option"), false);
 		elgg_extend_view("groups/tool_latest", "user_support/faq/group_module");
 		
+		// register widgets
+		elgg_register_widget_type("faq", elgg_echo("user_support:widgets:faq:title"), elgg_echo("user_support:widgets:faq:description"), "groups");
+		
 		// register events
 		elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
 		elgg_register_event_handler("create", "object", "user_support_create_object_event");
@@ -47,6 +50,7 @@
 		elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
 		elgg_register_plugin_hook_handler("register", "menu:owner_block", "user_support_owner_block_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:title", "user_support_title_menu_hook");
+		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		
 		// register actions
 		elgg_register_action("user_support/help/edit", dirname(__FILE__) . "/actions/help/edit.php", "admin");
