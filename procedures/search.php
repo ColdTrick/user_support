@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$q = sanitise_string(get_input("q"));
 	$content = "";
@@ -46,4 +46,4 @@
 		$content = elgg_echo("notfound");
 	}
 	
-	echo elgg_view_module("info", elgg_echo("search:results", array("\"" . $q . "\"")), $content);
+	echo elgg_view_module("info", elgg_echo("search:results", array("\"" . $q . "\"")), $content, array("class" => "mts"));
