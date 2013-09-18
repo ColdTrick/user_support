@@ -266,6 +266,14 @@
 						$result = $link;
 						
 						break;
+					case "support_ticket":
+						$link = "user_support/support_ticket/mine";
+						if ($entity->filter == UserSupportTicket::CLOSED) {
+							$link .= "/archive";
+						}
+						
+						$result = $link;
+						break;
 				}
 			}
 		}
@@ -323,6 +331,32 @@
 			
 			if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
 				$result = user_support_staff_gatekeeper(false, $user->getGUID());
+			}
+		}
+		
+		return $result;
+	}
+	
+	function user_support_annotation_menu_hook($hook, $type, $return_value, $params) {
+		$result = $return_value;
+		
+		if (elgg_is_admin_logged_in()) {
+			if (!empty($params) && is_array($params)) {
+				$annotation = elgg_extract("annotation", $params);
+				
+				if (!empty($annotation) && ($annotation instanceof ElggAnnotation)) {
+					$entity = $annotation->getEntity();
+					
+					if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
+						$result[] = ElggMenuItem::factory(array(
+							"name" => "user_support_promote",
+							"text" => elgg_echo("user_support:support_ticket:promote"),
+							"href" => "user_support/faq/add/" . elgg_get_site_entity()->getGUID() . "?annotation=" . $annotation->id,
+							"is_trusted" => true,
+							"priority" => 99
+						));
+					}
+				}
 			}
 		}
 		

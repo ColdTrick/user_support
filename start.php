@@ -42,6 +42,7 @@
 		
 		// register widgets
 		elgg_register_widget_type("faq", elgg_echo("user_support:widgets:faq:title"), elgg_echo("user_support:widgets:faq:description"), "groups");
+		elgg_register_widget_type("support_ticket", elgg_echo("user_support:widgets:support_ticket:title"), elgg_echo("user_support:widgets:support_ticket:description"), "dashboard", true);
 		
 		// register events
 		elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
@@ -56,6 +57,7 @@
 		elgg_register_plugin_hook_handler("register", "menu:footer", "user_support_footer_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:user_hover", "user_support_user_hover_menu_hook");
 		elgg_register_plugin_hook_handler("register", "menu:user_support", "user_support_user_support_menu_hook");
+		elgg_register_plugin_hook_handler("register", "menu:annotation", "user_support_annotation_menu_hook");
 		
 		elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 		
