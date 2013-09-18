@@ -1,10 +1,15 @@
 <?php
 $filter = (array) get_input("filter");
 $query_params = array("filter" => $filter);
+$faq_query = get_input("faq_query");
 $menu = "";
 $guids = null;
 
-if (!empty($filter)) {
+if (!empty($faq_query)) {
+	$query_params["faq_query"] = $faq_query;
+}
+
+if (!empty($filter) || !empty($faq_query)) {
 	// get entity guids for filtering elgg_get_tags
 	$guid_options = array(
 		"type" => "object",
@@ -21,6 +26,12 @@ if (!empty($filter)) {
 			break;
 		}
 		$guid_options["metadata_name_value_pairs"][] = array("name" => "tags", "value" => $tag);
+	}
+	
+	// text search
+	if (!empty($faq_query)) {
+		$guid_options["joins"] = array("JOIN " . elgg_get_config("dbprefix") . "objects_entity oe ON e.guid = oe.guid");
+		$guid_options["wheres"] = array("(oe.title LIKE '%$faq_query%' OR oe.description LIKE '%$faq_query%')");
 	}
 	
 	$guids = elgg_get_entities_from_metadata($guid_options);
