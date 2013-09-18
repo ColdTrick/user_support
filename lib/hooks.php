@@ -257,6 +257,17 @@
 					"class" => "elgg-button elgg-button-action"
 				));
 			}
+		} elseif (elgg_in_context("support_ticket_title")) {
+			$user = elgg_get_logged_in_user_entity();
+			
+			if (!empty($user)) {
+				$result[] = ElggMenuItem::factory(array(
+					"name" => "add",
+					"text" => elgg_echo("user_support:help_center:ask"),
+					"href" => "user_support/support_ticket/add",
+					"class" => "elgg-button elgg-button-action"
+				));
+			}
 		}
 		
 		return $result;

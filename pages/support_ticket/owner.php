@@ -32,6 +32,8 @@
 	
 	$search_action = "user_support/support_ticket/owner/" . $user->username;
 	
+	elgg_push_context("support_ticket_title");
+	
 	// build page elements
 	if ($status == UserSupportTicket::CLOSED) {
 		$search_action .= "/archive";
@@ -65,6 +67,8 @@
 		"content" => $search . $body,
 		"filter" => elgg_view_menu("user_support", array("class" => "elgg-tabs"))
 	));
+	
+	elgg_pop_context();
 	
 	// draw page
 	echo elgg_view_page($title_text, $page_data);

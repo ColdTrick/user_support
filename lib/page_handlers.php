@@ -77,6 +77,9 @@
 						}
 						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/owner.php");
 						break;
+					case "add":
+						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/add.php");
+						break;
 					default:
 						if (!empty($page[1]) && is_numeric($page[1])) {
 							set_input("guid", $page[1]);
