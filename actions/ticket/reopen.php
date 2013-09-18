@@ -1,19 +1,22 @@
-<?php 
+<?php
+
+	// staff only action
+	user_support_staff_gatekeeper();
 
 	$guid = (int) get_input("guid");
 	
 	$user = elgg_get_logged_in_user_entity();
 
-	if(!empty($guid) && ($entity = get_entity($guid))){
-		if(elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
-			create_annotation($entity->getGUID(), 
+	if (!empty($guid) && ($entity = get_entity($guid))) {
+		if (elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+			create_annotation($entity->getGUID(),
 								'generic_comment',
-								elgg_echo("user_support:support_ticket:reopened"), 
-								"", 
-								$user->getGUID(), 
+								elgg_echo("user_support:support_ticket:reopened"),
+								"",
+								$user->getGUID(),
 								$entity->access_id);
 			
-			if($entity->setStatus(UserSupportTicket::OPEN)){
+			if ($entity->setStatus(UserSupportTicket::OPEN)) {
 				notify_user($entity->getOwnerGUID(),
 					$user->getGUID(),
 					elgg_echo('generic_comment:email:subject'),

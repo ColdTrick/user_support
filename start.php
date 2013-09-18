@@ -74,9 +74,9 @@
 		
 		elgg_register_action("user_support/support_ticket/edit", dirname(__FILE__) . "/actions/ticket/edit.php");
 		elgg_register_action("user_support/support_ticket/comment", dirname(__FILE__) . "/actions/ticket/comment.php");
-		elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php", "admin");
-		elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php", "admin");
-		elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php", "admin");
+		elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php");
+		elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php");
+		elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php");
 		
 		elgg_register_action("user_support/faq/edit", dirname(__FILE__) . "/actions/faq/edit.php");
 		elgg_register_action("user_support/faq/delete", dirname(__FILE__) . "/actions/faq/delete.php");

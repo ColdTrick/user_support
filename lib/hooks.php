@@ -3,13 +3,13 @@
 	function user_support_entity_menu_hook($hook, $type, $return_value, $params){
 		$result = $return_value;
 		
-		if(!empty($params) && is_array($params)){
+		if (!empty($params) && is_array($params)) {
 			$entity = elgg_extract("entity", $params);
 			
-			if(!empty($entity)){
-				if(elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
-					if(elgg_is_admin_logged_in()){
-						if($entity->getStatus() == UserSupportTicket::OPEN){
+			if (!empty($entity) ){
+				if (elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+					if (user_support_staff_gatekeeper(false)) {
+						if ($entity->getStatus() == UserSupportTicket::OPEN) {
 							$result[] = ElggMenuItem::factory(array(
 								"name" => "status",
 								"text" => elgg_echo("close"),
@@ -27,10 +27,19 @@
 							));
 						}
 					}
-				} elseif(elgg_instanceof($entity, "object", UserSupportHelp::SUBTYPE, "UserSupportHelp")){
+
+					// cleanup some menu items
+					foreach ($result as $index => $menu_item) {
+						if (($menu_item->getName() == "delete") && !user_support_staff_gatekeeper(false)) {
+							unset($result[$index]);
+						} elseif (in_array($menu_item->getName(), array("likes", "likes_count"))) {
+							unset($result[$index]);
+						}
+					}
+				} elseif (elgg_instanceof($entity, "object", UserSupportHelp::SUBTYPE, "UserSupportHelp")) {
 					// cleanup all menu items
-					foreach($result as $index => $menu_item){
-						if($menu_item->getName() != "delete"){
+					foreach ($result as $index => $menu_item) {
+						if ($menu_item->getName() != "delete") {
 							unset($result[$index]);
 						}
 					}
@@ -343,7 +352,7 @@
 	function user_support_annotation_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		
-		if (elgg_is_admin_logged_in()) {
+		if ($user = elgg_get_logged_in_user_entity()) {
 			if (!empty($params) && is_array($params)) {
 				$annotation = elgg_extract("annotation", $params);
 				
@@ -351,13 +360,23 @@
 					$entity = $annotation->getEntity();
 					
 					if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
-						$result[] = ElggMenuItem::factory(array(
-							"name" => "user_support_promote",
-							"text" => elgg_echo("user_support:support_ticket:promote"),
-							"href" => "user_support/faq/add/" . elgg_get_site_entity()->getGUID() . "?annotation=" . $annotation->id,
-							"is_trusted" => true,
-							"priority" => 99
-						));
+						if ($user->isAdmin()) {
+							$result[] = ElggMenuItem::factory(array(
+								"name" => "user_support_promote",
+								"text" => elgg_echo("user_support:support_ticket:promote"),
+								"href" => "user_support/faq/add/" . elgg_get_site_entity()->getGUID() . "?annotation=" . $annotation->id,
+								"is_trusted" => true,
+								"priority" => 99
+							));
+						}
+						
+						if ($annotation->getOwnerGUID() != $user->getGUID()) {
+							foreach ($result as $index => $menu_item) {
+								if ($menu_item->getName() == "delete") {
+									unset($result[$index]);
+								}
+							}
+						}
 					}
 				}
 			}
