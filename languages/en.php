@@ -120,7 +120,9 @@ To view the Ticket click on this link:
 		// ticket - mine
 		'user_support:tickets:mine:title' => "My Support Tickets",
 		'user_support:tickets:mine:archive:title' => "My closed Support Tickets",
-	
+		'user_support:tickets:owner:title' => "%s Support Tickets",
+		'user_support:tickets:owner:archive:title' => "%s closed Support Tickets",
+		
 		// ticket - archive
 		'user_support:tickets:archive:title' => "Support tickets archive",
 	

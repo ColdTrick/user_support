@@ -28,7 +28,7 @@
 		
 		// build breadcrumb
 		if($entity->getOwnerGUID() == elgg_get_logged_in_user_guid()){
-			elgg_push_breadcrumb(elgg_echo("user_support:menu:support_tickets:mine"), "user_support/support_ticket/mine");
+			elgg_push_breadcrumb(elgg_echo("user_support:menu:support_tickets:mine"), "user_support/support_ticket/owner/" . $entity->getOwnerEntity()->username);
 		} else {
 			elgg_push_breadcrumb(elgg_echo("user_support:menu:support_tickets"), "user_support/support_ticket");
 		}

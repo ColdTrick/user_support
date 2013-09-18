@@ -94,11 +94,11 @@
 			$result[] = ElggMenuItem::factory($options);
 		}
 		
-		if (elgg_is_logged_in()) {
+		if ($user = elgg_get_logged_in_user_entity()) {
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "support_ticket_mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine"
+				"href" => "user_support/support_ticket/owner/" . $user->username
 			));
 		}
 		
@@ -147,11 +147,11 @@
 			"context" => "user_support"
 		));
 		
-		if (elgg_is_logged_in()) {
+		if ($user = elgg_get_logged_in_user_entity()) {
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "support_ticket_mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine",
+				"href" => "user_support/support_ticket/owner/" . $user->username,
 				"context" => "user_support"
 			));
 		}
@@ -171,17 +171,17 @@
 	function user_support_user_support_menu_hook($hook, $type, $return_value, $params) {
 		$result = $return_value;
 		
-		if (elgg_is_logged_in()) {
+		if ($user = elgg_get_logged_in_user_entity()) {
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/mine"
+				"href" => "user_support/support_ticket/owner/" . $user->username
 			));
 
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "my_archive",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine:archive"),
-				"href" => "user_support/support_ticket/mine/archive"
+				"href" => "user_support/support_ticket/owner/" . $user->username . "/archive"
 			));
 			
 			if (user_support_staff_gatekeeper(false)) {
@@ -222,7 +222,7 @@
 					$result[] = ElggMenuItem::factory(array(
 						"name" => "support_ticket_mine",
 						"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-						"href" => "user_support/support_ticket/mine"
+						"href" => "user_support/support_ticket/owner/" . $entity->username
 					));
 				}
 			}
@@ -264,6 +264,8 @@
 			$entity = elgg_extract("entity", $params);
 			
 			if (!empty($entity) && elgg_instanceof($entity, "object", "widget")) {
+				$owner = $entity->getOwnerEntity();
+				
 				switch ($entity->handler) {
 					case "faq":
 						$owner = $entity->getOwnerEntity();
@@ -276,7 +278,7 @@
 						
 						break;
 					case "support_ticket":
-						$link = "user_support/support_ticket/mine";
+						$link = "user_support/support_ticket/" . $owner->username;
 						if ($entity->filter == UserSupportTicket::CLOSED) {
 							$link .= "/archive";
 						}

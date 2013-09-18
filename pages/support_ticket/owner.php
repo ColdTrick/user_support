@@ -1,8 +1,13 @@
-<?php 
+<?php
 
 	gatekeeper();
 
-	elgg_set_page_owner_guid(elgg_get_logged_in_user_guid());
+	$user = elgg_get_page_owner_entity();
+	
+	if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
+		register_error(elgg_echo("user_support:staff_gatekeeper"));
+		forward(REFERER);
+	}
 	
 	$status = get_input("status", UserSupportTicket::OPEN);
 	if(!in_array($status, array(UserSupportTicket::OPEN, UserSupportTicket::CLOSED))){
@@ -12,17 +17,25 @@
 	$options = array(
 		"type" => "object",
 		"subtype" => UserSupportTicket::SUBTYPE,
-		"owner_guids" => array(elgg_get_logged_in_user_guid()),
+		"owner_guid" => $user->getGUID(),
 		"full_view" => false,
 		"metadata_name_value_pairs" => array("status" => $status),
 		"order_by" => "e.time_updated desc"
 	);
 	
 	// build page elements
-	if($status == UserSupportTicket::CLOSED){
-		$title_text = elgg_echo("user_support:tickets:mine:archive:title");
+	if ($status == UserSupportTicket::CLOSED) {
+		if ($user->getGUID() == elgg_get_logged_in_user_guid()) {
+			$title_text = elgg_echo("user_support:tickets:mine:archive:title");
+		} else {
+			$title_text = elgg_echo("user_support:tickets:owner:archive:title", array($user->name));
+		}
 	} else {
-		$title_text = elgg_echo("user_support:tickets:mine:title");
+		if ($user->getGUID() == elgg_get_logged_in_user_guid()) {
+			$title_text = elgg_echo("user_support:tickets:mine:title");
+		} else {
+			$title_text = elgg_echo("user_support:tickets:owner:title", array($user->name));
+		}
 	}
 	
 	if(!($body = elgg_list_entities_from_metadata($options))){

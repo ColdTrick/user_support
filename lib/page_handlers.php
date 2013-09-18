@@ -15,7 +15,7 @@
 				
 				switch(elgg_extract(1, $page)) {
 					case "edit":
-						if(!empty($page[2]) && is_numeric($page[2])){
+						if (!empty($page[2]) && is_numeric($page[2])) {
 							set_input("guid", $page[2]);
 						}
 						include(dirname(dirname(__FILE__)) . "/pages/faq/edit.php");
@@ -33,7 +33,7 @@
 						include(dirname(dirname(__FILE__)) . "/pages/faq/add.php");
 						break;
 					default:
-						if(!empty($page[1]) && is_numeric($page[1])){
+						if (!empty($page[1]) && is_numeric($page[1])) {
 							set_input("guid", $page[1]);
 							include(dirname(dirname(__FILE__)) . "/pages/faq/view.php");
 						} else {
@@ -47,7 +47,7 @@
 				
 				switch(elgg_extract(1, $page)) {
 					case "edit":
-						if(!empty($page[2]) && is_numeric($page[2])){
+						if (!empty($page[2]) && is_numeric($page[2])) {
 							set_input("guid", $page[2]);
 						}
 						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/edit.php");
@@ -56,13 +56,29 @@
 						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/archive.php");
 						break;
 					case "mine":
-						if(!empty($page[2]) && ($page[2] == "archive")){
+						gatekeeper();
+						
+						$user = elgg_get_logged_in_user_entity();
+						
+						$url = "user_support/support_ticket/owner/" . $user->username;
+						if (!empty($page[2]) && ($page[2] == "archive")) {
+							$url .= "/archive";
+						}
+						register_error(elgg_echo("changebookmark"));
+						forward($url);
+						break;
+					case "owner":
+						if (!empty($page[2])) {
+							set_input("username", $page[2]);
+						}
+						
+						if (!empty($page[3]) && ($page[3] == "archive")) {
 							set_input("status", UserSupportTicket::CLOSED);
 						}
-						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/mine.php");
+						include(dirname(dirname(__FILE__)) . "/pages/support_ticket/owner.php");
 						break;
 					default:
-						if(!empty($page[1]) && is_numeric($page[1])){
+						if (!empty($page[1]) && is_numeric($page[1])) {
 							set_input("guid", $page[1]);
 							include(dirname(dirname(__FILE__)) . "/pages/support_ticket/view.php");
 						} else {

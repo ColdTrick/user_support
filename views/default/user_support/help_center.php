@@ -13,9 +13,9 @@
 	
 	echo "<div>";
 	
-	if (elgg_is_logged_in()) {
+	if ($user = elgg_get_logged_in_user_entity()) {
 		echo elgg_view("output/url", array("text" => elgg_echo("user_support:help_center:ask"), "href" => "#user_support_ticket_edit_form_wrapper","onclick" => "$('#user_support_ticket_edit_form_wrapper').toggle();$.fancybox.resize();", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
-		echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:support_tickets:mine"), "href" => "user_support/support_ticket/mine", "class" => "elgg-button elgg-button-action")) . "&nbsp;";
+		echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:support_tickets:mine"), "href" => "user_support/support_ticket/owner/" . $user->username, "class" => "elgg-button elgg-button-action")) . "&nbsp;";
 	}
 	
 	echo elgg_view("output/url", array("text" => elgg_echo("user_support:menu:faq"), "href" => "user_support/faq", "class" => "elgg-button elgg-button-action")) . "&nbsp;";

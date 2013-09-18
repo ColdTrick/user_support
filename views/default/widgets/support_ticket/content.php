@@ -1,6 +1,7 @@
 <?php
 
 	$widget = elgg_extract("entity", $vars);
+	$owner = $widget->getOwnerEntity();
 	
 	$filter = $widget->filter;
 	if (empty($filter)) {
@@ -12,7 +13,7 @@
 		$num_display = 4;
 	}
 	
-	$more_link = "user_support/support_ticket/mine";
+	$more_link = "user_support/support_ticket/owner/" . $owner->username;
 	
 	$options = array(
 		"type" => "object",
