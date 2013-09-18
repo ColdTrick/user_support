@@ -97,7 +97,9 @@
 	function user_support_get_admin_notify_users(UserSupportTicket $ticket){
 		$result = false;
 		
-		if(!empty($ticket) && elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
+		if (!empty($ticket) && elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+			$support_staff_id = add_metastring("support_staff");
+			
 			$options = array(
 				"type" => "user",
 				"limit" => false,
@@ -107,11 +109,12 @@
 				"inverse_relationship" => true,
 				"joins" => array(
 					"JOIN " . get_config("dbprefix") . "private_settings ps ON e.guid = ps.entity_guid",
-					"JOIN " . get_config("dbprefix") . "users_entity ue ON e.guid = ue.guid"
+					"JOIN " . get_config("dbprefix") . "users_entity ue ON e.guid = ue.guid",
+					"JOIN " . get_config("dbprefix") . "metadata md ON e.guid = md.entity_guid"
 				),
 				"wheres" => array(
 					"(ps.name = '" . ELGG_PLUGIN_USER_SETTING_PREFIX . "user_support:admin_notify' AND ps.value = 'yes')",
-					"(ue.admin = 'yes')",
+					"(ue.admin = 'yes' OR md.name_id = " . $support_staff_id . ")",
 					"(e.guid <> " . $ticket->getOwnerGUID() . ")"
 				)
 			);
