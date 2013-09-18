@@ -10,11 +10,6 @@
 	border-style: solid;
 	border-width: 1px 1px 1px 0px;
 	
-	-moz-border-radius-topright:8px;
-	-moz-border-radius-bottomright:8px;
-	-webkit-border-top-right-radius:8px;
-	-webkit-border-bottom-right-radius:8px;
-	
 	font-size: 16px;
     font-weight: bold;
     position: fixed;
