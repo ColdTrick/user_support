@@ -1,4 +1,23 @@
 = Version Information =
+
+1.5 (2013-09-18):
+
+- added: Support Staff roles (support staff can perform actions on Support Tickets)
+- added: group FAQ support
+- added: ability to position floating Helpdesk button
+- added: setting to disable conditional help
+- added: optional site and footer menu items
+- added: new plugin settings to control more of the plugin
+- added: My Support Tickets to owner_block menu
+- added: option to promote support ticket to FAQ item
+- added: FAQ search (text and tags)
+- added: Support Ticket search
+- changed: css and js locations
+- changed: page handler for user_support/support_tickets/mine to user_support/support_tickets/owner/username 
+- changed: code cleanup
+- fixed: some deprecated urls
+- fixed: only show support ticket entity menu items for correct users
+
 1.4 (2013-04-05):
 
 - added: Help Center can now be viewed as a normal page
