@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	gatekeeper();
 	
@@ -6,8 +6,8 @@
 	
 	$forward = true;
 	
-	if(($entity = get_entity($guid)) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")){
-		if($entity->canEdit()){
+	if (($entity = get_entity($guid)) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+		if ($entity->canEdit()) {
 			$forward = false;
 			
 			elgg_set_page_owner_guid($entity->getOwnerGUID());
@@ -16,7 +16,8 @@
 			
 			$page_data = elgg_view_layout("content", array(
 				"title" => $title_text,
-				"content" => elgg_view("user_support/forms/support_ticket", array("entity" => $entity))
+				"content" => elgg_view_form("user_support/support_ticket/edit", array(), array("entity" => $entity)),
+				"filter" => ""
 			));
 		}
 	}

@@ -8,11 +8,8 @@
 
 	$entity = elgg_extract("entity", $vars);
 	
-	if(!empty($entity)){
-		$edit = true;
-		
-		$title = $entity->title;
-		$desc = $entity->description;
+	if (!empty($entity)) {
+		$title = $entity->description;
 		$tags = $entity->tags;
 		$help_url = $entity->help_url;
 		$support_type = $entity->support_type;
@@ -20,8 +17,6 @@
 		$form_body = elgg_view("input/hidden", array("name" => "guid", "value" => $entity->getGUID()));
 		$form_body .= elgg_view("input/hidden", array("name" => "help_context", "value" => $entity->help_context));
 	} else {
-		$edit = false;
-		
 		$title = "";
 		$tags = array();
 		$help_url = elgg_extract("help_url", $vars);
