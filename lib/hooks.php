@@ -172,16 +172,21 @@
 		$result = $return_value;
 		
 		if ($user = elgg_get_logged_in_user_entity()) {
+			$post_fix = "";
+			if ($q = get_input("q")){
+				$post_fix = "?q=" . $q;
+			}
+			
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "mine",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-				"href" => "user_support/support_ticket/owner/" . $user->username
+				"href" => "user_support/support_ticket/owner/" . $user->username . $post_fix
 			));
 
 			$result[] = ElggMenuItem::factory(array(
 				"name" => "my_archive",
 				"text" => elgg_echo("user_support:menu:support_tickets:mine:archive"),
-				"href" => "user_support/support_ticket/owner/" . $user->username . "/archive"
+				"href" => "user_support/support_ticket/owner/" . $user->username . "/archive" . $post_fix
 			));
 			
 			if (user_support_staff_gatekeeper(false)) {
@@ -189,13 +194,13 @@
 				$result[] = ElggMenuItem::factory(array(
 					"name" => "all",
 					"text" => elgg_echo("user_support:menu:support_tickets"),
-					"href" => "user_support/support_ticket"
+					"href" => "user_support/support_ticket" . $post_fix
 				));
 				
 				$result[] = ElggMenuItem::factory(array(
 					"name" => "archive",
 					"text" => elgg_echo("user_support:menu:support_tickets:archive"),
-					"href" => "user_support/support_ticket/archive"
+					"href" => "user_support/support_ticket/archive" . $post_fix
 				));
 			}
 		}
