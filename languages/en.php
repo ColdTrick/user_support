@@ -141,6 +141,9 @@ To view the Ticket click on this link:
 		'user_support:widgets:support_ticket:filter' => "Which tickets do you wish to see",
 		'user_support:widgets:support_ticket:filter:all' => "All",
 		
+		'user_support:widgets:support_staff:title' => "Support staff",
+		'user_support:widgets:support_staff:description' => "Shows you a list of the open support tickets",
+		
 		// actions
 		// help - edit
 		'user_support:action:help:edit:error:input' => "Invalid input to create/edit this contextual help",

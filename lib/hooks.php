@@ -274,6 +274,9 @@
 						
 						$result = $link;
 						break;
+					case "support_staff":
+						$result = "user_support/support_ticket";
+						break;
 				}
 			}
 		}
