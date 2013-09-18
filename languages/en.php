@@ -36,8 +36,7 @@
 		'user_support:settings:support_tickets:title' => "Support Tickets Settings",
 		'user_support:settings:support_tickets:help_group' => "Select a group for users to ask for help",
 		'user_support:settings:support_tickets:help_group:none' => "No support group",
-		'user_support:settings:support_tickets:auto_close_tickets' => "Auto close support tickets on an answer from an admin?",
-
+		
 		'user_support:settings:help:title' => "Contextual Help Settings",
 		'user_support:settings:help:enabled' => "Is contextual help enabled?",
 
