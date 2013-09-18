@@ -15,6 +15,9 @@
 		'user_support:support_type:bug' => "Bug",
 		'user_support:support_type:request' => "Feature request",
 	
+		'user_support:support_type:status:open' => "Open",
+		'user_support:support_type:status:closed' => "Closed",
+		
 		'user_support:anwser' => "Answer",
 		'user_support:anwser:short' => "A",
 		'user_support:question' => "Question",
@@ -132,6 +135,11 @@ To view the Ticket click on this link:
 		// widgets
 		'user_support:widgets:faq:title' => "FAQ",
 		'user_support:widgets:faq:description' => "Show a list of the most recently added FAQ items",
+		
+		'user_support:widgets:support_ticket:title' => "Support tickets",
+		'user_support:widgets:support_ticket:description' => "Shows you a list of your support tickets",
+		'user_support:widgets:support_ticket:filter' => "Which tickets do you wish to see",
+		'user_support:widgets:support_ticket:filter:all' => "All",
 		
 		// actions
 		// help - edit

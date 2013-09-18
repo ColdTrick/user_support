@@ -42,6 +42,7 @@
 		
 		// register widgets
 		elgg_register_widget_type("faq", elgg_echo("user_support:widgets:faq:title"), elgg_echo("user_support:widgets:faq:description"), "groups");
+		elgg_register_widget_type("support_ticket", elgg_echo("user_support:widgets:support_ticket:title"), elgg_echo("user_support:widgets:support_ticket:description"), "dashboard", true);
 		
 		// register events
 		elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");

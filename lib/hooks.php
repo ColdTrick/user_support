@@ -266,6 +266,14 @@
 						$result = $link;
 						
 						break;
+					case "support_ticket":
+						$link = "user_support/support_ticket/mine";
+						if ($entity->filter == UserSupportTicket::CLOSED) {
+							$link .= "/archive";
+						}
+						
+						$result = $link;
+						break;
 				}
 			}
 		}

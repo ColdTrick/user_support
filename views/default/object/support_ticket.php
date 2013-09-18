@@ -4,15 +4,14 @@
 	$full_view = elgg_extract("full_view", $vars);
 	
 	// entity menu
-	$entity_menu = elgg_view_menu("entity", array(
-		"entity" => $entity,
-		"handler" => "user_support/support_ticket",
-		"sort_by" => "priority",
-		"class" => "elgg-menu-hz"
-	));
-	
-	if(elgg_in_context("widgets")){
-		unset($entity_menu);
+	$entity_menu = "";
+	if(!elgg_in_context("widgets")){
+		$entity_menu = elgg_view_menu("entity", array(
+			"entity" => $entity,
+			"handler" => "user_support/support_ticket",
+			"sort_by" => "priority",
+			"class" => "elgg-menu-hz"
+		));
 	}
 	
 	$loggedin_user = elgg_get_logged_in_user_entity();
