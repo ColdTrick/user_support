@@ -66,7 +66,8 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
 		"tag_names" => array("tags"),
-		"wheres" => array()
+		"wheres" => array(),
+		"site_guids" => false
 	);
 	
 	if (!empty($filter)) {
