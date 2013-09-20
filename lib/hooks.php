@@ -43,14 +43,16 @@
 							unset($result[$index]);
 						}
 					}
-					// user_support_help_edit_form_wrapper
-					$result[] = ElggMenuItem::factory(array(
-						"name" => "edit",
-						"text" => elgg_echo("edit"),
-						"href" => "#user_support_help_edit_form_wrapper",
-						"rel" => "toggle",
-						"priority" => 200
-					));
+					if ($entity->canEdit()) {
+						// user_support_help_edit_form_wrapper
+						$result[] = ElggMenuItem::factory(array(
+							"name" => "edit",
+							"text" => elgg_echo("edit"),
+							"href" => "#user_support_help_edit_form_wrapper",
+							"rel" => "toggle",
+							"priority" => 200
+						));
+					}
 				}
 			}
 		}
