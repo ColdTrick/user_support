@@ -26,7 +26,7 @@ if (!elgg_in_context("admin")) {
 			"class" => array("user-support-button-help-center")
 		);
 		
-		if ((!empty($contextual_help_object) && (elgg_get_plugin_setting("help_enabled", "user_support") != "no")) || elgg_get_entities_from_metadata($faq_options)) {
+		if ((!empty($contextual_help_object) && (elgg_get_plugin_setting("help_enabled", "user_support") != "no")) || ($help_context !== false && elgg_get_entities_from_metadata($faq_options))) {
 			$link_options["class"][] = "elgg-state-active";
 		}
 		
