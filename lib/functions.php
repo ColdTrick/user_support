@@ -7,10 +7,13 @@
 			$options = array(
 				"type" => "object",
 				"subtype" => UserSupportHelp::SUBTYPE,
-				"site_guids" => false,
 				"limit" => false,
 				"metadata_name_value_pairs" => array("help_context" => $help_context)
 			);
+			
+			if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+				$options["site_guids"] = false;
+			}
 			
 			if($help = elgg_get_entities_from_metadata($options)){
 				$result = $help[0];

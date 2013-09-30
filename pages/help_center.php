@@ -24,12 +24,15 @@
 	$faq_options = array(
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
-		"site_guids" => false,
 		"limit" => 5,
 		"metadata_name_value_pairs" => array("name" => "help_context", "value" => $help_context),
 		"full_view" => false,
 		"pagination" => false
 	);
+	
+	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+		$faq_options["site_guids"] = false;
+	}
 	
 	$faq = elgg_list_entities_from_metadata($faq_options);
 	

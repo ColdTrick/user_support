@@ -11,10 +11,13 @@
 	$list_options = array(
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
-		"site_guids" => false,
 		"full_view" => false,
 		"metadata_name_value_pairs" => array()
 	);
+	
+	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+		$list_options["site_guids"] = false;
+	}
 	
 	// add tag filter
 	foreach ($filter as $index => $tag) {

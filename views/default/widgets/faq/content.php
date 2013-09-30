@@ -13,11 +13,14 @@
 	$options = array(
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
-		"site_guids" => false,
 		"limit" => $num_display,
 		"full_view" => false,
 		"pagination" => false
 	);
+	
+	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+		$options["site_guids"] = false;
+	}
 	
 	if (elgg_instanceof($owner, "group")) {
 		$options["container_guid"] = $owner->getGUID();

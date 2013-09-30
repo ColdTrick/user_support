@@ -13,12 +13,15 @@ if (!empty($filter) || !empty($faq_query)) {
 	// get entity guids for filtering elgg_get_tags
 	$guid_options = array(
 		"type" => "object",
-		"subtype" => UserSupportFAQ::SUBTYPE,
-		"site_guids" => false,
+		"subtype" => UserSupportFAQ::SUBTYPE
 		"limit" => false,
 		"metadata_name_value_pairs" => array(),
 		"callback" => create_function('$row', 'return (int) $row->guid;')
 	);
+	
+	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+		$guid_options["site_guids"] = false;
+	}
 	
 	foreach ($filter as $index => $tag) {
 		if ($index > 2) {
@@ -66,9 +69,12 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 		"type" => "object",
 		"subtype" => UserSupportFAQ::SUBTYPE,
 		"tag_names" => array("tags"),
-		"wheres" => array(),
-		"site_guids" => false
+		"wheres" => array()
 	);
+	
+	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+		$tag_options["site_guids"] = false;
+	}
 	
 	if (!empty($filter)) {
 		$tag_options["wheres"][] = "(msv.string NOT IN ('" . implode("', '", $filter) . "'))";

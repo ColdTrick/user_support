@@ -21,6 +21,9 @@ $language = array (
   'user_support:settings:faq:title' => 'FAQ instellingen',
   'user_support:settings:faq:add_faq_site_menu_item' => 'Voeg een site menu items toe voor de FAQ',
   'user_support:settings:faq:add_faq_footer_menu_item' => 'Voeg een footer menu item toe voor de FAQ',
+  'user_support:settings:other:title' => "Overige",
+  'user_support:settings:other:ignore_site_guid' => "Negeer site_guid bij het ophalen van helpteksten en FAQ's. Kan gebruikt worden op multisite installaties om help en FAQ te delen tussen sites.",
+		
   'river:create:object:support_ticket' => '%s reageerde op %s',
   'user_support:support_ticket:promote' => 'Maak FAQ',
   'user_support:menu:faq:group' => 'Groep FAQ',

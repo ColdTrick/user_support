@@ -70,3 +70,8 @@
 	}
 	
 	echo elgg_view_module("inline", elgg_echo("user_support:settings:support_tickets:title"), $support_tickets);
+
+	$other = "<label>" . elgg_echo("user_support:settings:other:ignore_site_guid") . "&nbsp;";
+	$other .= elgg_view("input/dropdown", array("name" => "params[ignore_site_guid]", "value" => $plugin->ignore_site_guid, "options_values" => $yesno_options)) . "</label><br />";
+	
+	echo elgg_view_module("inline", elgg_echo("user_support:settings:other:title"), $other);

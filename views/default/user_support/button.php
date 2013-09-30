@@ -10,10 +10,13 @@ if (!elgg_in_context("admin")) {
 		$faq_options = array(
 			"type" => "object",
 			"subtype" => UserSupportFAQ::SUBTYPE,
-			"site_guids" => false,
 			"count" => true,
 			"metadata_name_value_pairs" => array("help_context" => $help_context)
 		);
+		
+		if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+			$faq_options["site_guids"] = false;
+		}
 		
 		$link_text = "";
 	 	foreach (str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char) {
