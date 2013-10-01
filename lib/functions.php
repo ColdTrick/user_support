@@ -140,6 +140,8 @@
 	}
 	
 	function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
+		static $staff_cache;
+		
 		$result = false;
 		
 		$user_guid = sanitise_int($user_guid, false);
@@ -148,10 +150,32 @@
 		}
 		
 		if (!empty($user_guid)) {
-			if ($user = get_user($user_guid)) {
-				if ($user->isAdmin() || $user->support_staff) {
-					$result = true;
+			if (!isset($staff_cache)) {
+				$staff_cache = array();
+				
+				$support_staff_id = add_metastring("support_staff");
+				
+				$options = array(
+					"type" => "user",
+					"limit" => false,
+					"joins" => array("JOIN " . elgg_get_config("dbprefix") . "metadata md ON md.entity_guid = e.guid"),
+					"wheres" => array("(md.name_id = " . $support_staff_id . ")"),
+					"callback" => "user_support_row_to_guid"
+				);
+				
+				$options = elgg_trigger_plugin_hook("staff_gatekeeper:options", "user_support", $options, $options);
+				
+				if (!empty($options) && is_array($options)) {
+					if ($user_guids = elgg_get_entities($options)) {
+						$staff_cache = $user_guids;
+					}
 				}
+			}
+			
+			if (in_array($user_guid, $staff_cache)) {
+				$result = true;
+			} elseif (($user = get_user($user_guid)) && $user->isAdmin()) {
+				$result = true;
 			}
 		}
 		
@@ -161,5 +185,9 @@
 		}
 		
 		return $result;
+	}
+	
+	function user_support_row_to_guid($row) {
+		return (int) $row->guid;
 	}
 	

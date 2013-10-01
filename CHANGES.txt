@@ -1,5 +1,10 @@
 = Version Information =
 
+x.x:
+
+- changed: staff members are cached during runtime
+- changed: staff member options can be extended by other plugins (use the hook staff_gatekeeper:options, user_support)
+
 1.5 (2013-09-18):
 
 - added: Support Staff roles (support staff can perform actions on Support Tickets)
