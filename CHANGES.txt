@@ -2,6 +2,7 @@
 
 x.x:
 
+- fixed: problem with syntax in some PHP versions
 - changed: staff members are cached during runtime
 - changed: staff member options can be extended by other plugins (use the hook staff_gatekeeper:options, user_support)
 

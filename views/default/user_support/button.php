@@ -42,7 +42,11 @@ if (!elgg_in_context("admin")) {
 		// position settings
 		$horizontal = "left";
 		$vertical = "top";
-		$offset = sanitise_int(elgg_get_plugin_setting("float_button_offset", "user_support") ?: "150");
+		$offset = elgg_get_plugin_setting("float_button_offset", "user_support");
+		if (is_null($offset) || $offset === false) {
+			$offset = 150;
+		}
+		$offset = sanitise_int($offset);
 		
 		if ($show_floating_button) {
 			list($horizontal, $vertical) = explode("|", $show_floating_button);
