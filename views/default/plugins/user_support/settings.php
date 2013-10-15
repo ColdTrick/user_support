@@ -22,6 +22,13 @@
 	
 	echo elgg_view_module("inline", elgg_echo("user_support:settings:help:title"), $help);
 
+	
+	// help center settings
+	$float_button_offset = $plugin->float_button_offset;
+	if (is_null($float_button_offset) || $float_button_offset === false) {
+		$float_button_offset = 150;
+	}
+	
 	$help_center = "<label>" . elgg_echo("user_support:settings:help_center:add_help_center_site_menu_item") . "&nbsp;";
 	$help_center .= elgg_view("input/dropdown", array("name" => "params[add_help_center_site_menu_item]", "value" => $plugin->add_help_center_site_menu_item, "options_values" => $noyes_options)) . "</label><br />";
 	
@@ -29,7 +36,7 @@
 	$help_center .= elgg_view("input/dropdown", array("name" => "params[show_floating_button]", "value" => $plugin->show_floating_button, "options_values" => $floating_button_options)) . "</label><br />";
 	
 	$help_center .= "<label>" . elgg_echo("user_support:settings:help_center:float_button_offset") . "&nbsp;";
-	$help_center .= elgg_view("input/text", array("name" => "params[float_button_offset]", "value" => (int) $plugin->float_button_offset, "class" => "user-support-setting-small-input")) . "px</label><br />";
+	$help_center .= elgg_view("input/text", array("name" => "params[float_button_offset]", "value" => (int) $float_button_offset, "class" => "user-support-setting-small-input")) . "px</label><br />";
 	
 	$help_center .= "<label>" . elgg_echo("user_support:settings:help_center:show_as_popup") . "&nbsp;";
 	$help_center .= elgg_view("input/dropdown", array("name" => "params[show_as_popup]", "value" => $plugin->show_as_popup, "options_values" => $yesno_options)) . "</label><br />";
