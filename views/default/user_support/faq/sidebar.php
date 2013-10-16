@@ -13,10 +13,10 @@ if (!empty($filter) || !empty($faq_query)) {
 	// get entity guids for filtering elgg_get_tags
 	$guid_options = array(
 		"type" => "object",
-		"subtype" => UserSupportFAQ::SUBTYPE
+		"subtype" => UserSupportFAQ::SUBTYPE,
 		"limit" => false,
 		"metadata_name_value_pairs" => array(),
-		"callback" => create_function('$row', 'return (int) $row->guid;')
+		"callback" => "user_support_row_to_guid"
 	);
 	
 	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
@@ -33,6 +33,8 @@ if (!empty($filter) || !empty($faq_query)) {
 	
 	// text search
 	if (!empty($faq_query)) {
+		$faq_query = sanitise_string($faq_query);
+		
 		$guid_options["joins"] = array("JOIN " . elgg_get_config("dbprefix") . "objects_entity oe ON e.guid = oe.guid");
 		$guid_options["wheres"] = array("(oe.title LIKE '%$faq_query%' OR oe.description LIKE '%$faq_query%')");
 	}
