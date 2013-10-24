@@ -5,8 +5,10 @@
 	<version>1.5</version>
 	<description>Offers user support / faq / help</description>
 	<website>http://www.coldtrick.com/</website>
+	<repository>https://github.com/ColdTrick/user_support</repository>
+	<bugtracker>https://github.com/ColdTrick/user_support/issues</bugtracker>
 	<copyright>(C) ColdTrick IT Solutions 2011 - 2013</copyright>
-	<license>GNU Public License version 2</license>
+	<license>GNU General Public License version 2</license>
 	
 	<requires>
 		<type>elgg_release</type>
