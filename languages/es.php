@@ -20,10 +20,10 @@
 		
 		'user_support:anwser' => "Respuesta",
 		'user_support:anwser:short' => "A",
-		'user_support:question' => "Question",
+		'user_support:question' => "Consulta",
 		'user_support:question:short' => "Q",
 		'user_support:url' => "URL",
-		'user_support:allow_comments' => "Allow comments",
+		'user_support:allow_comments' => "Permitir comentarios",
 		'user_support:read_more' => "Read more",
 		'user_support:help_context' => "Contextual help",
 		'user_support:reopen' => "Reopen",
