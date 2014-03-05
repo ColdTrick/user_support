@@ -2,17 +2,17 @@
 
 	$english = array(
 	
-		'user_support' => "Soporte a Usuarios",
+		'user_support' => "Soporte de Usuarios",
 	
 		// objects
-		'item:object:faq' => "FAQ de Soporte a Usuarios",
-		'item:object:help' => "Ayuda Contextual del soporte a Usuarios",
-		'item:object:support_ticket' => "Ticket de soporte a usuarios",
+		'item:object:faq' => "FAQ de soporte de usuarios",
+		'item:object:help' => "Ayuda Contextual de soporte de usuarios",
+		'item:object:support_ticket' => "Ticket de soporte de usuarios",
 		
 		// general
-		'user_support:support_type' => "Categoria",
+		'user_support:support_type' => "Categoría",
 		'user_support:support_type:question' => "Consulta",
-		'user_support:support_type:bug' => "Bug",
+		'user_support:support_type:bug' => "Bug (error)",
 		'user_support:support_type:request' => "Solicitud de funcionalidad",
 	
 		'user_support:support_type:status:open' => "Abierto",
@@ -24,170 +24,170 @@
 		'user_support:question:short' => "Q",
 		'user_support:url' => "URL",
 		'user_support:allow_comments' => "Permitir comentarios",
-		'user_support:read_more' => "Read more",
-		'user_support:help_context' => "Contextual help",
-		'user_support:reopen' => "Reopen",
-		'user_support:last_comment' => "Last comment by: %s",
-		'user_support:comment_close' => "Comment and close",
+		'user_support:read_more' => "Leer más",
+		'user_support:help_context' => "Ayuda contextual",
+		'user_support:reopen' => "Reabrir",
+		'user_support:last_comment' => "Último comentario por: %s",
+		'user_support:comment_close' => "Comentar y cerrar",
 	
-		'user_support:staff_gatekeeper' => "This page is only available for support staff",
+		'user_support:staff_gatekeeper' => "Esta página sólo está disponible para el personal de soporte",
 		
 		// settings
-		'user_support:settings:support_tickets:title' => "Support Tickets Settings",
-		'user_support:settings:support_tickets:help_group' => "Select a group for users to ask for help",
-		'user_support:settings:support_tickets:help_group:none' => "No support group",
+		'user_support:settings:support_tickets:title' => "Preferencias de los Tickets de Soporte",
+		'user_support:settings:support_tickets:help_group' => "Seleccionar un grupo al que pedir ayuda",
+		'user_support:settings:support_tickets:help_group:none' => "Sin grupo de soporte",
 		
-		'user_support:settings:help:title' => "Contextual Help Settings",
-		'user_support:settings:help:enabled' => "Is contextual help enabled?",
+		'user_support:settings:help:title' => "Preferencias de la Ayuda Contextual",
+		'user_support:settings:help:enabled' => "Está habilitada la ayuda contextual?",
 
-		'user_support:settings:help_center:title' => "Help Center Settings",
-		'user_support:settings:help_center:add_help_center_site_menu_item' => "Add a site menu item for the Help Center",
-		'user_support:settings:help_center:show_floating_button' => "Show a floating button which links to the Help Center",
-		'user_support:settings:help_center:show_floating_button:left_top' => "Left - Top",
-		'user_support:settings:help_center:show_floating_button:left_bottom' => "Left - Bottom",
-		'user_support:settings:help_center:show_floating_button:right_top' => "Right - Top",
-		'user_support:settings:help_center:show_floating_button:right_bottom' => "Right - Bottom",
-		'user_support:settings:help_center:float_button_offset' => "Vertical offset of the floating button",
-		'user_support:settings:help_center:show_as_popup' => "Show the Help Center in a popup",
+		'user_support:settings:help_center:title' => "Preferencias del Centro de Ayuda",
+		'user_support:settings:help_center:add_help_center_site_menu_item' => "Añadir un elemento al menú del sitio para el Centro de Ayuda",
+		'user_support:settings:help_center:show_floating_button' => "Mostrar un botón flotante que enlaza al Centro de Ayuda",
+		'user_support:settings:help_center:show_floating_button:left_top' => "Izquierda - Arriba",
+		'user_support:settings:help_center:show_floating_button:left_bottom' => "Izquierda - Abajo",
+		'user_support:settings:help_center:show_floating_button:right_top' => "Derecha - Arriba",
+		'user_support:settings:help_center:show_floating_button:right_bottom' => "Derecha - Abajo",
+		'user_support:settings:help_center:float_button_offset' => "Desplazamiento vertical del botón flotante",
+		'user_support:settings:help_center:show_as_popup' => "Mostrar el Centro de Ayuda en un popup",
 			
-		'user_support:settings:faq:title' => "FAQ Settings",
-		'user_support:settings:faq:add_faq_site_menu_item' => "Add a site menu item to the FAQ",
-		'user_support:settings:faq:add_faq_footer_menu_item' => "Add a footer menu item to the FAQ",
+		'user_support:settings:faq:title' => "Preferencias del FAQ",
+		'user_support:settings:faq:add_faq_site_menu_item' => "Añadir un enlace al FAQ en el menú del sitio",
+		'user_support:settings:faq:add_faq_footer_menu_item' => "Añadir un enlace al FAQ en pié de página",
 
-		'user_support:settings:other:title' => "Other",
-		'user_support:settings:other:ignore_site_guid' => "Ignore site_guid when fetching Contextual Help and FAQ items. Could be used for multisite installations to share help and faq's across sites.",
+		'user_support:settings:other:title' => "Otro",
+		'user_support:settings:other:ignore_site_guid' => "Ignorar site_guid al buscar Ayuda Contextual y elementos del FAQ. Se puede utilizar para instalaciones multisitio para compartir ayuda y faq's entre sitios.",
 				
 		
 		// user settings
-		'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",
+		'user_support:usersettings:admin_notify' => "Quieres recibir una notificación cuando se crea/actualiza un ticket de soporte?",
 		
 		// annotations
-		'river:comment:object:support_ticket' => "%s posted a comment on %s",
-		'river:create:object:support_ticket' => "%s posted a comment on %s",
-		'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
-		'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
-		'user_support:support_ticket:promote' => "Promote to FAQ",
+		'river:comment:object:support_ticket' => "%s posteó un comentario a las %s",
+		'river:create:object:support_ticket' => "%s posteó un comentario a las %s",
+		'user_support:support_ticket:closed' => "Se ha cerrado tu ticket de soporte",
+		'user_support:support_ticket:reopened' => "Se ha abierto de nuevo tu ticket de soporte",
+		'user_support:support_ticket:promote' => "Promover al FAQ",
 		
 		// admin notify
-		'user_support:notify:admin:create:subject' => "A new Support Ticket was reported",
-		'user_support:notify:admin:create:message' => "Hi,
+		'user_support:notify:admin:create:subject' => "Se ha reportado un nuevo ticket de soporte",
+		'user_support:notify:admin:create:message' => "Hola,
 
-%s reported a new Support Ticket:
+%s ha reportado un nuevo ticket de soporte:
 %s
 
-To view the Ticket click on this link:
+Sigue el enlace para ver erl ticket:
 %s",
 		
-		'user_support:notify:admin:updated:subject' => "A Support Ticket was updated",
-		'user_support:notify:admin:updated:message' => "Hi,
+		'user_support:notify:admin:updated:subject' => "Se ha actualizado un ticket de soporte",
+		'user_support:notify:admin:updated:message' => "Ho,
 		
-%s updated the Support Ticket %s:
+%s actualizó el ticket de soporte %s:
 %s
 
-To view the Ticket click on this link:
+Sigue el enlace para ver el ticket:
 %s",
 	
 		// menu
-		'user_support:menu:support_tickets' => "Support tickets",
-		'user_support:menu:support_tickets:archive' => "Support tickets archive",
-		'user_support:menu:support_tickets:mine' => "My Support tickets",
-		'user_support:menu:support_tickets:mine:archive' => "My closed Support tickets",
+		'user_support:menu:support_tickets' => "Tickets de soporte",
+		'user_support:menu:support_tickets:archive' => "Archivo de tickets de soporte",
+		'user_support:menu:support_tickets:mine' => "Mis tickets de soporte",
+		'user_support:menu:support_tickets:mine:archive' => "Mis tickets de soporte cerrados",
 		
 		'user_support:menu:faq' => "FAQ",
-		'user_support:menu:faq:group' => "Group FAQ",
-		'user_support:menu:faq:create' => "Create FAQ",
+		'user_support:menu:faq:group' => "FAQ del grupo",
+		'user_support:menu:faq:create' => "Crear FAQ",
 		
-		'user_support:menu_user_hover:make_staff' => "Add to the support staff",
-		'user_support:menu_user_hover:remove_staff' => "Remove from the support staff",
+		'user_support:menu_user_hover:make_staff' => "Añadir al personal de soporte",
+		'user_support:menu_user_hover:remove_staff' => "Eliminar del personal de soporte",
 		
 		// button
-		'user_support:button:text' => "Support",
-		'user_support:button:hover' => "Click to open the Help Center",
+		'user_support:button:text' => "Soporte",
+		'user_support:button:hover' => "Click para abrir el Centro de Ayuda",
 		
-		'user_support:help_center:title' => "Help Center",
-		'user_support:help_center:ask' => "Ask a question",
-		'user_support:help_center:help' => "Create help",
-		'user_support:help_center:help:title' => "Contextual help",
+		'user_support:help_center:title' => "Centro de Ayuda",
+		'user_support:help_center:ask' => "Hacer una pregunta",
+		'user_support:help_center:help' => "Crear ayuda",
+		'user_support:help_center:help:title' => "Ayuda contextual",
 		'user_support:help_center:faq:title' => "FAQ",
-		'user_support:help_center:help_group' => "Help group",
+		'user_support:help_center:help_group' => "Grupo de ayuda",
 	
 		// forms
-		'user_support:forms:help:title' => "Create Contextual Help",
-		'user_support:faq:edit:title:edit' => "Edit a FAQ item",
-		'user_support:faq:create:title' => "Create a FAQ item",
+		'user_support:forms:help:title' => "Crear Ayuda Contextual",
+		'user_support:faq:edit:title:edit' => "Editar un elemento del FAQ",
+		'user_support:faq:create:title' => "Crear un elemento del FAQ",
 	
 		// ticket - list
-		'user_support:tickets:list:title' => "Support tickets",
+		'user_support:tickets:list:title' => "Soportar tickets",
 		
 		// ticket - mine
-		'user_support:tickets:mine:title' => "My Support Tickets",
-		'user_support:tickets:mine:archive:title' => "My closed Support Tickets",
-		'user_support:tickets:owner:title' => "%s Support Tickets",
-		'user_support:tickets:owner:archive:title' => "%s closed Support Tickets",
+		'user_support:tickets:mine:title' => "Mis tickets de soporte",
+		'user_support:tickets:mine:archive:title' => "Mis tickets de soporte cerrados",
+		'user_support:tickets:owner:title' => "%s Tickets de Soporte",
+		'user_support:tickets:owner:archive:title' => "%s Tickets de Soporte cerrados",
 		
 		// ticket - archive
-		'user_support:tickets:archive:title' => "Support tickets archive",
+		'user_support:tickets:archive:title' => "Archivo de Tickets de Soporte",
 	
 		// faq - list
-		'user_support:faq:list:title' => "View all FAQ items",
-		'user_support:faq:not_found' => "No FAQ items available",
+		'user_support:faq:list:title' => "Ver todos los elementos del FAQ",
+		'user_support:faq:not_found' => "No hay elementos disponibles en el FAQ",
 		
 		// group faq
-		'user_support:group:tool_option' => "Enable support for group FAQs",
+		'user_support:group:tool_option' => "Activar soporte para FAQs de grupo",
 		'user_support:faq:group:title' => "%s FAQ",
 	
 		// widgets
 		'user_support:widgets:faq:title' => "FAQ",
-		'user_support:widgets:faq:description' => "Show a list of the most recently added FAQ items",
+		'user_support:widgets:faq:description' => "Mostrar una lista de los elementos más recientes añadidos al FAQ",
 		
-		'user_support:widgets:support_ticket:title' => "Support tickets",
-		'user_support:widgets:support_ticket:description' => "Shows you a list of your support tickets",
-		'user_support:widgets:support_ticket:filter' => "Which tickets do you wish to see",
-		'user_support:widgets:support_ticket:filter:all' => "All",
+		'user_support:widgets:support_ticket:title' => "Tickets de soporte",
+		'user_support:widgets:support_ticket:description' => "Muestra una lista de tus tickets de soporte",
+		'user_support:widgets:support_ticket:filter' => "Tickets que quieres ver",
+		'user_support:widgets:support_ticket:filter:all' => "Todos",
 		
-		'user_support:widgets:support_staff:title' => "Support staff",
-		'user_support:widgets:support_staff:description' => "Shows you a list of the open support tickets",
+		'user_support:widgets:support_staff:title' => "Personal de soporte",
+		'user_support:widgets:support_staff:description' => "Muestra una lista de tickets abiertos",
 		
 		// actions
 		// help - edit
-		'user_support:action:help:edit:error:input' => "Invalid input to create/edit this contextual help",
-		'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",
-		'user_support:action:help:edit:success' => "The contextual help was saved successfully",
+		'user_support:action:help:edit:error:input' => "Entrada inválida para crear/editar esta ayuda contextual",
+		'user_support:action:help:edit:error:save' => "Hubo un error desconocido al guardar la ayuda contextual",
+		'user_support:action:help:edit:success' => "La ayuda contextual se guardó correctamente",
 		
 		// help - delete
-		'user_support:action:help:delete:error:delete' => "An unknown error occured while deleting the contextual help",
-		'user_support:action:help:delete:success' => "The contextual help was delete successfully",
+		'user_support:action:help:delete:error:delete' => "Hubo un error desconocido al eliminar la ayuda contextual",
+		'user_support:action:help:delete:success' => "Se ha borrado la ayuda contextual correctamente",
 	
 		// ticket - edit
-		'user_support:action:ticket:edit:error:input' => "Invalid input to create/edit a support ticket",
-		'user_support:action:ticket:edit:error:save' => "An unknown error occured while saving the support ticket",
-		'user_support:action:ticket:edit:success' => "The support ticket was saved successfully",
+		'user_support:action:ticket:edit:error:input' => "Entrada incorrecta para crear/editar un ticket de soporte",
+		'user_support:action:ticket:edit:error:save' => "Hubo un error desconocido al guardar el ticket de soporte",
+		'user_support:action:ticket:edit:success' => "El ticket de soporte se guardó correctamente",
 	
 		// ticket - delete
-		'user_support:action:ticket:delete:error:delete' => "An unknown error occured while deleting the support ticket",
-		'user_support:action:ticket:delete:success' => "Support ticket successfully deleted",
+		'user_support:action:ticket:delete:error:delete' => "Hubo un error desconocido al eliminar el ticket de soporte",
+		'user_support:action:ticket:delete:success' => "Ticket de soporte borrado correctamente",
 		
 		// faq - delete
-		'user_support:action:faq:delete:error:delete' => "An unknown error occured while deleting the FAQ, please try again",
-		'user_support:action:faq:delete:success' => "The FAQ was deleted successfully",
+		'user_support:action:faq:delete:error:delete' => "Hubo un error desconocido al borrar el FAQ, inténtalo de nuevo",
+		'user_support:action:faq:delete:success' => "El FAQ se ha borrado correctamente",
 		
 		// faq - edit
-		'user_support:action:faq:edit:error:input' => "Incorrect input to create/edit the FAQ, please provide a Question and an Anwser",
-		'user_support:action:faq:edit:error:create' => "An error occured while creating the FAQ",
-		'user_support:action:faq:edit:success' => "The FAQ was created/edited successfully",
+		'user_support:action:faq:edit:error:input' => "Entrada incorrecta para crear/editar el FAQ, proporciona una Pregunta y una Respuesta",
+		'user_support:action:faq:edit:error:create' => "Hubo un error al crear el FAQ",
+		'user_support:action:faq:edit:success' => "FAQ creado/editado correctamente",
 		
 		// ticket = close
-		'user_support:action:ticket:close:error:disable' => "An unknown error occured while closing the Support Ticket",
-		'user_support:action:ticket:close:success' => "The Support Ticket was closed successfully",
+		'user_support:action:ticket:close:error:disable' => "Hubo un error desconocido al cerrar el Ticket de Soporte",
+		'user_support:action:ticket:close:success' => "Ticket de Soporte cerrado correctamente",
 		
 		// ticket - reopen
-		'user_support:action:ticket:reopen:error:enable' => "An unknown error occured while reopening the Support Ticket",
-		'user_support:action:ticket:reopen:success' => "The Support Ticket was reopened successfully",
+		'user_support:action:ticket:reopen:error:enable' => "Hubo un error al reabrir el Ticket de Soporte",
+		'user_support:action:ticket:reopen:success' => "El Ticket de Soporte se abrió de nuevo correctamente",
 		
 		// support staff
-		'user_support:action:support_staff:added' => "The user is added to the support staff",
-		'user_support:action:support_staff:removed' => "The user was removed from the support staff",
+		'user_support:action:support_staff:added' => "Se ha añadido el usuario al personal de soporte",
+		'user_support:action:support_staff:removed' => "Se ha eliminado el usuario del personal de soporte",
 		
 	);
 	
-	add_translation("es", $language);
+	add_translation("en", $english);
