@@ -1,6 +1,6 @@
 <?php
 
-	$english = array(
+	$language = array(
 	
 		'user_support' => "Soporte de Usuarios",
 	
@@ -190,4 +190,4 @@ Sigue el enlace para ver el ticket:
 		
 	);
 	
-	add_translation("en", $english);
+	add_translation("es", $language);
