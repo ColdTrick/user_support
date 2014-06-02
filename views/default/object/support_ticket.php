@@ -28,7 +28,7 @@
 		}
 		$title_text = $entity->title;
 		if(strlen($title_text) > 50){
-			$title_text = elgg_get_excerpt($title, 50);
+			$title_text = elgg_get_excerpt($title_text, 50);
 		}
 		$title .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title_text));
 		
