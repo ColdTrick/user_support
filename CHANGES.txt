@@ -6,6 +6,8 @@ x.x:
 - changed: staff member options can be extended by other plugins (use the hook staff_gatekeeper:options, user_support)
 - fixed: problem with syntax in some PHP versions
 - fixed: syntax error in faq sidebar
+- fixed: wrong title in listing
+- fixed: edit FAQ in group not working (#17)
 
 1.5 (2013-09-18):
 
