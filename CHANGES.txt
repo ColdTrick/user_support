@@ -1,13 +1,20 @@
 = Version Information =
 
-x.x:
+1.6 (2014-11-27):
 
+- applied Elgg coding standards
+- added: spanish translation (thanks to @monfero)
 - changed: staff members are cached during runtime
 - changed: staff member options can be extended by other plugins (use the hook staff_gatekeeper:options, user_support)
+- changed: multisite faq and helptext is now a setting
 - fixed: problem with syntax in some PHP versions
 - fixed: syntax error in faq sidebar
 - fixed: wrong title in listing
 - fixed: edit FAQ in group not working (#17)
+- fixed: only show active help icon if there is a help_context
+- fixed: only show edit link if canEdit
+- fixed: default a setting to the same as it is used
+- fixed: syntax error in faq sidebar
 
 1.5 (2013-09-18):
 
