@@ -88,7 +88,7 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 	
 	$tags = elgg_get_tags($tag_options);
 	if ($tags) {
-		foreach($tags as $tag) {
+		foreach ($tags as $tag) {
 			$tag_text = $tag->tag;
 			
 			$tag_query_params = $query_params;

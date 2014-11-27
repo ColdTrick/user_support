@@ -1,193 +1,243 @@
 <?php
+/**
+ * All helper functions are bundled here
+ */
 
-	function user_support_get_help_for_context($help_context){
-		$result = false;
+/**
+ * Get the help for a context
+ *
+ * @param string $help_context the context to get help for
+ *
+ * @return bool|UserSupportHelp
+ */
+function user_support_get_help_for_context($help_context) {
+	$result = false;
+	
+	if (!empty($help_context)) {
+		$options = array(
+			"type" => "object",
+			"subtype" => UserSupportHelp::SUBTYPE,
+			"limit" => false,
+			"metadata_name_value_pairs" => array("help_context" => $help_context)
+		);
 		
-		if(!empty($help_context)){
-			$options = array(
-				"type" => "object",
-				"subtype" => UserSupportHelp::SUBTYPE,
-				"limit" => false,
-				"metadata_name_value_pairs" => array("help_context" => $help_context)
-			);
+		if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
+			$options["site_guids"] = false;
+		}
+		
+		if ($help = elgg_get_entities_from_metadata($options)) {
+			$result = $help[0];
+		}
+	}
+	
+	return $result;
+}
+
+/**
+ * Get the context for a page, for the help system
+ *
+ * @param string $url the (optional) url to get the context for
+ *
+ * @return bool|string
+ */
+function user_support_get_help_context($url = "") {
+	$result = false;
+	
+	if (empty($url)) {
+		$url = current_page_url();
+	}
+	
+	if (!empty($url)) {
+		if ($path = parse_url($url, PHP_URL_PATH)) {
+			$parts = explode("/", $path);
 			
-			if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
-				$options["site_guids"] = false;
+			if (!($page_owner = elgg_get_page_owner_entity())) {
+				$page_owner = elgg_get_logged_in_user_entity();
 			}
 			
-			if($help = elgg_get_entities_from_metadata($options)){
-				$result = $help[0];
-			}
-		}
-		
-		return $result;
-	}
-	
-	function user_support_get_help_context($url = ""){
-		$result = false;
-		
-		if(empty($url)){
-			$url = current_page_url();
-		}
-		
-		if(!empty($url)){
-			if($path = parse_url($url, PHP_URL_PATH)){
-				$parts = explode("/", $path);
-				
-				if(!($page_owner = elgg_get_page_owner_entity())){
-					$page_owner = elgg_get_logged_in_user_entity();
-				}
-				
-				$new_parts = array();
-				
-				foreach($parts as $index => $part){
-					if(empty($part)){
-						continue;
-					} elseif(is_numeric($part) || (!empty($page_owner) && ($page_owner->username == $part))){
-						break;
-					} else {
-						$new_parts[] = $part;
-					}
-				}
-				
-				if(!empty($new_parts)){
-					$result = implode("/", $new_parts);
-				}
-			}
-		}
-		
-		return $result;
-	}
-	
-	function user_support_time_created_string(ElggObject $entity){
-		$result = false;
-		
-		if(!empty($entity) && elgg_instanceof($entity, "object", null, "ElggObject")){
-			if($date_array = getdate($entity->time_created)){
-				$result = elgg_echo("date:month:" . str_pad($date_array["mon"], 2, "0", STR_PAD_LEFT), array($date_array["mday"])) . " " . $date_array["year"];
-			}
-		}
-		
-		return $result;
-	}
-	
-	function user_support_find_unique_help_context(){
-		static $result;
-		
-		if(!isset($result)){
-			$result = false;
+			$new_parts = array();
 			
-			// get all metadata values of help_context
-			$options = array(
-				"metadata_name" => "help_context",
-				"type" => "object",
-				"subtypes" => array(UserSupportFAQ::SUBTYPE, UserSupportHelp::SUBTYPE, UserSupportTicket::SUBTYPE),
-				"limit" => false
-			);
-			if($metadata = elgg_get_metadata($options)){
-				// make it into an array
-				if($filtered = metadata_array_to_values($metadata)){
-					//get unique values
-					$result = array_unique($filtered);
-					natcasesort($result);
+			foreach ($parts as $index => $part) {
+				if (empty($part)) {
+					continue;
+				} elseif (is_numeric($part) || (!empty($page_owner) && ($page_owner->username == $part))) {
+					break;
+				} else {
+					$new_parts[] = $part;
 				}
 			}
+			
+			if (!empty($new_parts)) {
+				$result = implode("/", $new_parts);
+			}
 		}
-		
-		return $result;
 	}
 	
-	function user_support_get_admin_notify_users(UserSupportTicket $ticket){
+	return $result;
+}
+
+/**
+ * Helper function to build a better time string
+ *
+ * @param ElggObject $entity the object to build the string for
+ *
+ * @return bool|string
+ */
+function user_support_time_created_string(ElggObject $entity) {
+	$result = false;
+	
+	if (!empty($entity) && elgg_instanceof($entity, "object", null, "ElggObject")) {
+		if ($date_array = getdate($entity->time_created)) {
+			$result = elgg_echo("date:month:" . str_pad($date_array["mon"], 2, "0", STR_PAD_LEFT), array($date_array["mday"])) . " " . $date_array["year"];
+		}
+	}
+	
+	return $result;
+}
+
+/**
+ * Get a list of all the unique help contexts
+ *
+ * @return bool|array
+ */
+function user_support_find_unique_help_context() {
+	static $result;
+	
+	if (!isset($result)) {
 		$result = false;
 		
-		if (!empty($ticket) && elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+		// get all metadata values of help_context
+		$options = array(
+			"metadata_name" => "help_context",
+			"type" => "object",
+			"subtypes" => array(UserSupportFAQ::SUBTYPE, UserSupportHelp::SUBTYPE, UserSupportTicket::SUBTYPE),
+			"limit" => false
+		);
+		if ($metadata = elgg_get_metadata($options)) {
+			// make it into an array
+			if ($filtered = metadata_array_to_values($metadata)) {
+				//get unique values
+				$result = array_unique($filtered);
+				natcasesort($result);
+			}
+		}
+	}
+	
+	return $result;
+}
+
+/**
+ * Get all the admins that need a notification about a ticket
+ *
+ * @param UserSupportTicket $ticket the ticket to get the admins for
+ *
+ * @return bool|ElggUser[]
+ */
+function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
+	$result = false;
+	
+	if (!empty($ticket) && elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+		$support_staff_id = add_metastring("support_staff");
+		
+		$options = array(
+			"type" => "user",
+			"limit" => false,
+			"site_guids" => false,
+			"relationship" => "member_of_site",
+			"relationship_guid" => elgg_get_site_entity()->getGUID(),
+			"inverse_relationship" => true,
+			"joins" => array(
+				"JOIN " . get_config("dbprefix") . "private_settings ps ON e.guid = ps.entity_guid",
+				"JOIN " . get_config("dbprefix") . "users_entity ue ON e.guid = ue.guid",
+				"JOIN " . get_config("dbprefix") . "metadata md ON e.guid = md.entity_guid"
+			),
+			"wheres" => array(
+				"(ps.name = '" . ELGG_PLUGIN_USER_SETTING_PREFIX . "user_support:admin_notify' AND ps.value = 'yes')",
+				"(ue.admin = 'yes' OR md.name_id = " . $support_staff_id . ")",
+				"(e.guid <> " . $ticket->getOwnerGUID() . ")"
+			)
+		);
+			
+		$users = elgg_get_entities_from_relationship($options);
+			
+		// trigger hook to get more/less users
+		$users = elgg_trigger_plugin_hook("admin_notify", "user_support", array("users" => $users, "entity" => $ticket), $users);
+
+		if (!empty($users)) {
+			if (is_array($users)) {
+				$result = $users;
+			} else {
+				$result = array($users);
+			}
+		}
+	}
+	
+	return $result;
+}
+
+/**
+ * Added gatekeeper function for support staff
+ *
+ * @param bool $forward   forward the user to REFERER
+ * @param int  $user_guid the user to check (default: current user)
+ *
+ * @return bool
+ */
+function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
+	static $staff_cache;
+	
+	$result = false;
+	
+	$user_guid = sanitise_int($user_guid, false);
+	if (empty($user_guid)) {
+		$user_guid = elgg_get_logged_in_user_guid();
+	}
+	
+	if (!empty($user_guid)) {
+		if (!isset($staff_cache)) {
+			$staff_cache = array();
+			
 			$support_staff_id = add_metastring("support_staff");
 			
 			$options = array(
 				"type" => "user",
 				"limit" => false,
-				"site_guids" => false,
-				"relationship" => "member_of_site",
-				"relationship_guid" => elgg_get_site_entity()->getGUID(),
-				"inverse_relationship" => true,
-				"joins" => array(
-					"JOIN " . get_config("dbprefix") . "private_settings ps ON e.guid = ps.entity_guid",
-					"JOIN " . get_config("dbprefix") . "users_entity ue ON e.guid = ue.guid",
-					"JOIN " . get_config("dbprefix") . "metadata md ON e.guid = md.entity_guid"
-				),
-				"wheres" => array(
-					"(ps.name = '" . ELGG_PLUGIN_USER_SETTING_PREFIX . "user_support:admin_notify' AND ps.value = 'yes')",
-					"(ue.admin = 'yes' OR md.name_id = " . $support_staff_id . ")",
-					"(e.guid <> " . $ticket->getOwnerGUID() . ")"
-				)
+				"joins" => array("JOIN " . elgg_get_config("dbprefix") . "metadata md ON md.entity_guid = e.guid"),
+				"wheres" => array("(md.name_id = " . $support_staff_id . ")"),
+				"callback" => "user_support_row_to_guid"
 			);
-				
-			$users = elgg_get_entities_from_relationship($options);
-				
-			// trigger hook to get more/less users
-			$users = elgg_trigger_plugin_hook("admin_notify", "user_support", array("users" => $users, "entity" => $ticket), $users);
-
-			if(!empty($users)){
-				if(is_array($users)){
-					$result = $users;
-				} else {
-					$result = array($users);
-				}
-			}
-		}
-		
-		return $result;
-	}
-	
-	function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
-		static $staff_cache;
-		
-		$result = false;
-		
-		$user_guid = sanitise_int($user_guid, false);
-		if (empty($user_guid)) {
-			$user_guid = elgg_get_logged_in_user_guid();
-		}
-		
-		if (!empty($user_guid)) {
-			if (!isset($staff_cache)) {
-				$staff_cache = array();
-				
-				$support_staff_id = add_metastring("support_staff");
-				
-				$options = array(
-					"type" => "user",
-					"limit" => false,
-					"joins" => array("JOIN " . elgg_get_config("dbprefix") . "metadata md ON md.entity_guid = e.guid"),
-					"wheres" => array("(md.name_id = " . $support_staff_id . ")"),
-					"callback" => "user_support_row_to_guid"
-				);
-				
-				$options = elgg_trigger_plugin_hook("staff_gatekeeper:options", "user_support", $options, $options);
-				
-				if (!empty($options) && is_array($options)) {
-					if ($user_guids = elgg_get_entities($options)) {
-						$staff_cache = $user_guids;
-					}
-				}
-			}
 			
-			if (in_array($user_guid, $staff_cache)) {
-				$result = true;
-			} elseif (($user = get_user($user_guid)) && $user->isAdmin()) {
-				$result = true;
+			$options = elgg_trigger_plugin_hook("staff_gatekeeper:options", "user_support", $options, $options);
+			
+			if (!empty($options) && is_array($options)) {
+				if ($user_guids = elgg_get_entities($options)) {
+					$staff_cache = $user_guids;
+				}
 			}
 		}
 		
-		if (!$result && $forward) {
-			register_error(elgg_echo("user_support:staff_gatekeeper"));
-			forward(REFERER);
+		if (in_array($user_guid, $staff_cache)) {
+			$result = true;
+		} elseif (($user = get_user($user_guid)) && $user->isAdmin()) {
+			$result = true;
 		}
-		
-		return $result;
 	}
 	
-	function user_support_row_to_guid($row) {
-		return (int) $row->guid;
+	if (!$result && $forward) {
+		register_error(elgg_echo("user_support:staff_gatekeeper"));
+		forward(REFERER);
 	}
 	
+	return $result;
+}
+
+/**
+ * Helper function to return only the GUID of a DB row
+ *
+ * @param stdClass $row the database row
+ *
+ * @return int
+ */
+function user_support_row_to_guid($row) {
+	return (int) $row->guid;
+}

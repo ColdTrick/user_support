@@ -1,7 +1,7 @@
 <?php
 $filter = (array) elgg_extract("filter", $vars);
 if (!empty($filter)) {
-	foreach($filter as $tag) {
+	foreach ($filter as $tag) {
 		echo elgg_view("input/hidden", array("name" => "filter[]", "value" => $tag));
 	}
 }

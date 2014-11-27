@@ -4,11 +4,12 @@ gatekeeper();
 
 elgg_set_page_owner_guid(elgg_get_site_entity()->getGUID());
 
+$title_text = "";
+$entity = null;
 $guid = (int) get_input("guid");
-if(!empty($guid) && ($entity = get_entity($guid))){
-	if(!elgg_instanceof($entity, "object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ")){
-		$entity = null;
-	} else {
+if (!empty($guid) && ($entity = get_entity($guid))) {
+	if (elgg_instanceof($entity, "object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ")) {
+		
 		$title_text = elgg_echo("user_support:faq:edit:title:edit");
 		
 		// check for group container

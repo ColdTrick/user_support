@@ -19,9 +19,9 @@ if (!elgg_in_context("admin")) {
 		}
 		
 		$link_text = "";
-	 	foreach (str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char) {
-	 		$link_text .= $char . "<br />";
-	 	}
+		foreach (str_split(strtoupper(elgg_echo("user_support:button:text"))) as $char) {
+			$link_text .= $char . "<br />";
+		}
 		
 		$link_options = array(
 			"href" => "user_support/help_center",
