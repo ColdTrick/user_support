@@ -1,7 +1,7 @@
 <?php
 
 $entity = elgg_extract("entity", $vars);
-$full_view = elgg_extract("full_view", $vars);
+$full_view = (bool) elgg_extract("full_view", $vars, false);
 
 // entity menu
 $entity_menu = "";
@@ -23,5 +23,6 @@ if (!$full_view) {
 		"content" => elgg_view("output/longtext", array("value" => $entity->description))
 	);
 	$params = array_merge($params, $vars);
+	
 	echo elgg_view("object/elements/summary", $params);
 }

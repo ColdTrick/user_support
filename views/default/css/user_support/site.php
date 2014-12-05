@@ -1,6 +1,6 @@
 <?php
 
-$graphics_folder = $vars["url"] . "mod/user_support/_graphics/";
+$graphics_folder = elgg_normalize_url("mod/user_support/_graphics/");
 
 ?>
 /* User support button */

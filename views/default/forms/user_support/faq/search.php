@@ -1,4 +1,5 @@
 <?php
+
 $filter = (array) elgg_extract("filter", $vars);
 if (!empty($filter)) {
 	foreach ($filter as $tag) {

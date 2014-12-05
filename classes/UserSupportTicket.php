@@ -40,7 +40,7 @@ class UserSupportTicket extends ElggObject {
 		}
 		$title = str_replace("...", "", $title);
 		
-		return elgg_get_site_entity()->url . "user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($title);
+		return elgg_normalize_url("user_support/support_ticket/" . $this->getGUID() . "/" . elgg_get_friendly_title($title));
 	}
 	
 	/**
@@ -97,13 +97,13 @@ class UserSupportTicket extends ElggObject {
 		
 		switch ($size) {
 			case "tiny":
-				$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/" . $support_type . "/tiny.png";
+				$result = "mod/user_support/_graphics/" . $support_type . "/tiny.png";
 				break;
 			default:
-				$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/" . $support_type . "/small.png";
+				$result = "mod/user_support/_graphics/" . $support_type . "/small.png";
 				break;
 		}
 		
-		return $result;
+		return elgg_normalize_url($result);
 	}
 }

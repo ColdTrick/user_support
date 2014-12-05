@@ -1,4 +1,5 @@
 <?php
+
 $filter = (array) get_input("filter");
 $query_params = array("filter" => $filter);
 $faq_query = get_input("faq_query");

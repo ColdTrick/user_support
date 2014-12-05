@@ -94,11 +94,4 @@ if (!$full_view) {
 		'icon' => $icon,
 		'body' => $body,
 	));
-	
-	// show all comments
-	$ia = elgg_set_ignore_access(true);
-	
-	echo elgg_view_comments($entity);
-	
-	elgg_set_ignore_access($ia);
 }

@@ -9,7 +9,8 @@ $options = array(
 	"subtype" => UserSupportTicket::SUBTYPE,
 	"full_view" => false,
 	"metadata_name_value_pairs" => array("status" => UserSupportTicket::OPEN),
-	"order_by" => "e.time_updated DESC"
+	"order_by" => "e.time_updated DESC",
+	"no_results" => elgg_echo("notfound")
 );
 
 if (!empty($q)) {
@@ -30,9 +31,7 @@ $form_vars = array(
 );
 $search = elgg_view_form("user_support/support_ticket/search", $form_vars);
 
-if (!($body = elgg_list_entities_from_metadata($options))) {
-	$body = elgg_echo("notfound");
-}
+$body = elgg_list_entities_from_metadata($options);
 
 // restore access
 elgg_set_ignore_access($ia);

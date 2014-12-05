@@ -67,7 +67,7 @@ function user_support_page_handler($page) {
 					include(dirname(dirname(__FILE__)) . "/pages/support_ticket/archive.php");
 					break;
 				case "mine":
-					gatekeeper();
+					elgg_gatekeeper();
 					
 					$user = elgg_get_logged_in_user_entity();
 					

@@ -23,7 +23,7 @@ if (!empty($entity)) {
 
 $form_body .= "<div>";
 $form_body .= "<label>" . elgg_echo("description") . "</label>";
-$form_body .= elgg_view("input/plaintext", array("name" => "description", "value" => $desc));
+$form_body .= elgg_view("input/longtext", array("name" => "description", "value" => $desc));
 $form_body .= "</div>";
 
 $form_body .= "<div>";
@@ -33,6 +33,7 @@ $form_body .= "</div>";
 
 $form_body .= "<div class='elgg-foot'>";
 $form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
+$form_body .= elgg_view("input/reset", array("value" => elgg_echo("cancel")));
 $form_body .= "</div>";
 
 echo $form_body;

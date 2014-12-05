@@ -1,5 +1,14 @@
 <?php
-$language = array (
+/**
+ * This file was created by Translation Editor v2.0
+ * On 2014-12-05 15:33
+ */
+
+return array (
+  'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket %s is gemeld',
+  'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket %s is bijgewerkt',
+  'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket %s is gemeld',
+  'user_support:notify:admin:updated:summary' => 'De Helpdesk ticket %s is bijgewerkt',
   'user_support:support_type:status:open' => 'Open',
   'user_support:support_type:status:closed' => 'Gesloten',
   'user_support:comment_close' => 'Reageer en sluit',
@@ -21,9 +30,8 @@ $language = array (
   'user_support:settings:faq:title' => 'FAQ instellingen',
   'user_support:settings:faq:add_faq_site_menu_item' => 'Voeg een site menu items toe voor de FAQ',
   'user_support:settings:faq:add_faq_footer_menu_item' => 'Voeg een footer menu item toe voor de FAQ',
-  'user_support:settings:other:title' => "Overige",
-  'user_support:settings:other:ignore_site_guid' => "Negeer site_guid bij het ophalen van helpteksten en FAQ's. Kan gebruikt worden op multisite installaties om help en FAQ te delen tussen sites.",
-		
+  'user_support:settings:other:title' => 'Overige',
+  'user_support:settings:other:ignore_site_guid' => 'Negeer site_guid bij het ophalen van helpteksten en FAQ\'s. Kan gebruikt worden op multisite installaties om help en FAQ te delen tussen sites.',
   'river:create:object:support_ticket' => '%s reageerde op %s',
   'user_support:support_ticket:promote' => 'Maak FAQ',
   'user_support:menu:faq:group' => 'Groep FAQ',
@@ -47,7 +55,6 @@ $language = array (
   'user_support:help_center:help:title' => 'Contextuele help',
   'user_support' => 'Helpdesk',
   'user_support:usersettings:admin_notify' => 'Wil je een bericht ontvangen als een Helpdesk ticket wordt aangemaakt/bijgewerkt',
-  'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket is gemeld',
   'user_support:notify:admin:create:message' => 'Hallo,
 
 %s heeft een nieuwe Helpdesk ticket gemeld:
@@ -55,7 +62,6 @@ $language = array (
 
 Om de ticket te bekijken klik op de volgende link:
 %s',
-  'user_support:notify:admin:updated:subject' => 'Een Helpdesk ticket is bijgewerkt',
   'user_support:notify:admin:updated:message' => 'Hallo,
 
 %s heeft de Helpdesk ticket %s bijgewerkt:
@@ -124,4 +130,3 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:action:ticket:reopen:error:enable' => 'Een onbekende fout tijdens het heropenen van het Support Ticket',
   'user_support:action:ticket:reopen:success' => 'Het support ticket was succesvol heropend',
 );
-add_translation("nl", $language);

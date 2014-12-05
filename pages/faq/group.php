@@ -16,17 +16,15 @@ elgg_push_breadcrumb($page_owner->name);
 // build page elements
 $title_text = elgg_echo("user_support:faq:group:title", array($page_owner->name));
 
-
 $list_options = array(
 	"type" => "object",
 	"subtype" => UserSupportFAQ::SUBTYPE,
 	"container_guid" => $page_owner->getGUID(),
-	"full_view" => false
+	"full_view" => false,
+	"no_results" => elgg_echo("user_support:faq:not_found")
 );
 
-if (!($content = elgg_list_entities($list_options))) {
-	$content = elgg_echo("user_support:faq:not_found");
-}
+$content = elgg_list_entities($list_options);
 
 // build page
 $page_data = elgg_view_layout("content", array(

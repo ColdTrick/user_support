@@ -4,48 +4,7 @@
  */
 
 /**
- * Listen to the creation of an annotation
- *
- * @param string         $event      the name of the event
- * @param string         $type       the type of the event
- * @param ElggAnnotation $annotation the supplied annotation
- *
- * @return void
- */
-function user_support_create_annotation_event($event, $type, $annotation) {
-	
-	if (!empty($annotation) && ($annotation instanceof ElggAnnotation)) {
-		$entity = $annotation->getEntity();
-		$user = $annotation->getOwnerEntity();
-		
-		if (!empty($entity) && elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket") && !empty($user)) {
-			if ($user->getGUID() == $entity->getOwnerGUID()) {
-				// user is the owner, so reopen
-				$entity->setStatus(UserSupportTicket::OPEN);
-				
-				// notify admins about update
-				if ($admins = user_support_get_admin_notify_users($entity)) {
-					$subject = elgg_echo("user_support:notify:admin:updated:subject");
-					$message = elgg_echo("user_support:notify:admin:updated:message", array(
-										$entity->getOwnerEntity()->name,
-										$entity->title,
-										$annotation->value,
-										$entity->getURL()
-					));
-					
-					foreach ($admins as $admin) {
-						notify_user($admin->getGUID(), $entity->getOwnerGUID(), $subject, $message);
-					}
-				}
-			}
-			
-			$entity->save();
-		}
-	}
-}
-
-/**
- * Listen to the creation of en object
+ * Listen to the creation of a comment
  *
  * @param string     $event  the name of the event
  * @param string     $type   the type of the event
@@ -53,23 +12,30 @@ function user_support_create_annotation_event($event, $type, $annotation) {
  *
  * @return void
  */
-function user_support_create_object_event($event, $type, $object) {
-	global $CONFIG;
+function user_support_create_comment_event($event, $type, $object) {
 	
-	if (!empty($object) && elgg_instanceof($object, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
+	// is it a comment
+	if (empty($object) || !elgg_instanceof($object, "object", "comment")) {
+		return;
+	}
+	
+	// on a support ticket
+	$entity = $object->getContainerEntity();
+	if (empty($entity) || !elgg_instanceof($entity, "object", UserSupportTicket::SUBTYPE)) {
+		return;
+	}
+	
+	$comment_close = get_input("support_ticket_comment_close");
+	
+	if (!empty($comment_close)) {
+		// comment and close the ticket
+		$entity->setStatus(UserSupportTicket::CLOSED);
 		
-		if ($users = user_support_get_admin_notify_users($object)) {
-			$subject = elgg_echo("user_support:notify:admin:create:subject");
-			$message = elgg_echo("user_support:notify:admin:create:message", array(
-									$object->getOwnerEntity()->name,
-									$object->description,
-									$object->getURL()
-			));
-			
-			foreach ($users as $user) {
-				notify_user($user->getGUID(), $object->getOwnerGUID(), $subject, $message);
-			}
-		}
+		$entity->save();
+	} elseif ($entity->getOwnerGUID() == $object->getOwnerGUID()) {
+		// if the ticket owner comments, re-open the ticket
+		$entity->setStatus(UserSupportTicket::OPEN);
+		
+		$entity->save();
 	}
 }
-	

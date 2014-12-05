@@ -32,4 +32,3 @@ if (!empty($guid)) {
 }
 
 forward($forward_url);
-	

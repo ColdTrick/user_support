@@ -31,7 +31,7 @@ class UserSupportFAQ extends ElggObject {
 	 * @return string
 	 */
 	public function getURL() {
-		return elgg_get_site_entity()->url . "user_support/faq/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title);
+		return elgg_normalize_url("user_support/faq/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title));
 	}
 	
 	/**
@@ -47,11 +47,21 @@ class UserSupportFAQ extends ElggObject {
 		
 		switch ($size) {
 			case "tiny":
-				$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/faq/tiny.png";
+				$result = "mod/user_support/_graphics/faq/tiny.png";
 				break;
 			default:
-				$result = elgg_get_site_entity()->url . "mod/user_support/_graphics/faq/small.png";
+				$result = "mod/user_support/_graphics/faq/small.png";
 				break;
+		}
+		
+		return elgg_normalize_url($result);
+	}
+	
+	public function canComment($user_guid = 0) {
+		$result = false;
+		
+		if ($this->allow_comments == "yes") {
+			$result = true;
 		}
 		
 		return $result;

@@ -1,6 +1,6 @@
 <?php
 
-gatekeeper();
+elgg_gatekeeper();
 
 elgg_set_page_owner_guid(elgg_get_site_entity()->getGUID());
 
@@ -27,18 +27,23 @@ if (elgg_instanceof($page_owner, "group") && !$page_owner->canEdit()) {
 	register_error(elgg_echo("user_support:page_owner:cant_edit"));
 	forward(REFERER);
 } elseif (elgg_instanceof($page_owner, "site")) {
-	admin_gatekeeper();
+	elgg_admin_gatekeeper();
 }
 
 // make breadcrumb
 elgg_push_breadcrumb($title_text);
 
 $help_context = user_support_find_unique_help_context();
+$body_vars = array(
+	"entity" => $entity,
+	"help_context" => $help_context
+);
+$form = elgg_view_form("user_support/faq/edit", array(), $body_vars);
 
 // build page
 $page_data = elgg_view_layout("content", array(
 	"title" => $title_text,
-	"content" => elgg_view_form("user_support/faq/edit", null, array("entity" => $entity, "help_context" => $help_context)),
+	"content" => $form,
 	"filter" => ""
 ));
 

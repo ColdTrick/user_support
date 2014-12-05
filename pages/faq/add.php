@@ -1,6 +1,6 @@
 <?php
 
-gatekeeper();
+elgg_gatekeeper();
 
 $user = elgg_get_logged_in_user_entity();
 $page_owner = elgg_get_page_owner_entity();
@@ -14,7 +14,7 @@ if (elgg_instanceof($page_owner, "group") && !$page_owner->canEdit()) {
 	register_error(elgg_echo("user_support:page_owner:cant_edit"));
 	forward(REFERER);
 } elseif (elgg_instanceof($page_owner, "site")) {
-	admin_gatekeeper();
+	elgg_admin_gatekeeper();
 }
 
 $annotation = false;
@@ -43,7 +43,7 @@ $body_vars = array(
 	"help_context" => user_support_find_unique_help_context(),
 	"annotation" => $annotation
 );
-$content = elgg_view_form("user_support/faq/edit", null, $body_vars);
+$content = elgg_view_form("user_support/faq/edit", array(), $body_vars);
 
 // build page
 $page_data = elgg_view_layout("content", array(

@@ -12,7 +12,8 @@ $list_options = array(
 	"type" => "object",
 	"subtype" => UserSupportFAQ::SUBTYPE,
 	"full_view" => false,
-	"metadata_name_value_pairs" => array()
+	"metadata_name_value_pairs" => array(),
+	"no_results" => elgg_echo("notfound")
 );
 
 if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
@@ -30,15 +31,23 @@ foreach ($filter as $index => $tag) {
 
 // text search
 if (!empty($faq_query)) {
+	$faq_query = sanitise_string($faq_query);
+	
 	$list_options["joins"] = array("JOIN " . elgg_get_config("dbprefix") . "objects_entity oe ON e.guid = oe.guid");
 	$list_options["wheres"] = array("(oe.title LIKE '%$faq_query%' OR oe.description LIKE '%$faq_query%')");
 }
 
-if (!($list = elgg_list_entities_from_metadata($list_options))) {
-	$list = elgg_echo("notfound");
-}
+$list = elgg_list_entities_from_metadata($list_options);
 
-$search = elgg_view_form("user_support/faq/search", array("action" => "user_support/faq", "disable_security" => true, "method" => "GET"), array("filter" => $filter));
+$form_vars = array(
+	"action" => "user_support/faq",
+	"disable_security" => true,
+	"method" => "GET"
+);
+$body_vars = array(
+	"filter" => $filter
+);
+$search = elgg_view_form("user_support/faq/search", $form_vars, $body_vars);
 
 $header = elgg_view("page/layouts/content/header", array("title" => $title_text));
 

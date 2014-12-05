@@ -1,6 +1,6 @@
 <?php
 
-$language = array(
+return array(
 
 	'user_support' => "Soporte de Usuarios",
 
@@ -189,5 +189,3 @@ Sigue el enlace para ver el ticket:
 	'user_support:action:support_staff:removed' => "Se ha eliminado el usuario del personal de soporte",
 	
 );
-
-add_translation("es", $language);

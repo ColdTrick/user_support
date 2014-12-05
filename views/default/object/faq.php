@@ -64,8 +64,8 @@ if (!$full_view) {
 	
 	// blog
 	echo elgg_view('object/elements/full', array(
-			'summary' => $summary,
-			'icon' => $icon,
-			'body' => $body,
+		'summary' => $summary,
+		'icon' => $icon,
+		'body' => $body,
 	));
 }

@@ -6,7 +6,7 @@
 $group = elgg_get_page_owner_entity();
 
 if ($group->faq_enable != "yes") {
-	return true;
+	return;
 }
 
 $all_link = elgg_view("output/url", array(

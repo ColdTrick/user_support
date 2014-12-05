@@ -32,7 +32,7 @@ class UserSupportHelp extends ElggObject {
 	 * @return string
 	 */
 	public function getURL() {
-		return elgg_get_site_entity()->url . "user_support/help/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title);
+		return elgg_normalize_url("user_support/help/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title));
 	}
 	
 }

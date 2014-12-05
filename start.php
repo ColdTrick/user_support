@@ -24,6 +24,8 @@ function user_support_init() {
 	
 	elgg_extend_view("page/elements/footer", "user_support/button");
 	
+	elgg_extend_view("forms/comment/save", "user_support/support_ticket/comment");
+	
 	// register page handler for nice URL's
 	elgg_register_page_handler("user_support", "user_support_page_handler");
 	
@@ -36,6 +38,15 @@ function user_support_init() {
 	elgg_register_entity_type("object", UserSupportFAQ::SUBTYPE);
 	elgg_register_entity_type("object", UserSupportHelp::SUBTYPE);
 	
+	// register notifications
+	elgg_register_notification_event("object", "comment");
+	elgg_register_plugin_hook_handler("get", "subscriptions", "user_support_get_subscriptions_support_ticket_comment_hook");
+	elgg_register_plugin_hook_handler("prepare", "notification:create:object:comment", "user_support_prepare_support_ticket_comment_message_hook");
+	
+	elgg_register_notification_event("object", UserSupportTicket::SUBTYPE);
+	elgg_register_plugin_hook_handler("get", "subscriptions", "user_support_get_subscriptions_support_ticket_hook");
+	elgg_register_plugin_hook_handler("prepare", "notification:create:object:" . UserSupportTicket::SUBTYPE, "user_support_prepare_support_ticket_message_hook");
+	
 	// update class for FAQ, since user_support v1.0
 	if (!get_subtype_class("object", UserSupportFAQ::SUBTYPE)) {
 		run_function_once("user_support_faq_class_update");
@@ -46,15 +57,14 @@ function user_support_init() {
 	elgg_extend_view("groups/tool_latest", "user_support/faq/group_module");
 	
 	// register widgets
-	elgg_register_widget_type("faq", elgg_echo("user_support:widgets:faq:title"), elgg_echo("user_support:widgets:faq:description"), "groups");
-	elgg_register_widget_type("support_ticket", elgg_echo("user_support:widgets:support_ticket:title"), elgg_echo("user_support:widgets:support_ticket:description"), "dashboard", true);
+	elgg_register_widget_type("faq", elgg_echo("user_support:widgets:faq:title"), elgg_echo("user_support:widgets:faq:description"), array("groups"));
+	elgg_register_widget_type("support_ticket", elgg_echo("user_support:widgets:support_ticket:title"), elgg_echo("user_support:widgets:support_ticket:description"), array("dashboard"), true);
 	if (user_support_staff_gatekeeper(false)) {
-		elgg_register_widget_type("support_staff", elgg_echo("user_support:widgets:support_staff:title"), elgg_echo("user_support:widgets:support_staff:description"), "dashboard,admin");
+		elgg_register_widget_type("support_staff", elgg_echo("user_support:widgets:support_staff:title"), elgg_echo("user_support:widgets:support_staff:description"), array("dashboard", "admin"));
 	}
 	
 	// register events
-	elgg_register_event_handler("create", "annotation", "user_support_create_annotation_event");
-	elgg_register_event_handler("create", "object", "user_support_create_object_event");
+	elgg_register_event_handler("create", "object", "user_support_create_comment_event");
 	
 	// plugin hooks
 	elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
@@ -69,8 +79,6 @@ function user_support_init() {
 	
 	elgg_register_plugin_hook_handler("widget_url", "widget_manager", "user_support_widget_url_hook");
 	
-	elgg_register_plugin_hook_handler("comments", "object", "user_support_comments_hook");
-	
 	elgg_register_plugin_hook_handler("permissions_check", "object", "user_support_permissions_check_hook");
 	
 	// register actions
@@ -78,7 +86,6 @@ function user_support_init() {
 	elgg_register_action("user_support/help/delete", dirname(__FILE__) . "/actions/help/delete.php", "admin");
 	
 	elgg_register_action("user_support/support_ticket/edit", dirname(__FILE__) . "/actions/ticket/edit.php");
-	elgg_register_action("user_support/support_ticket/comment", dirname(__FILE__) . "/actions/ticket/comment.php");
 	elgg_register_action("user_support/support_ticket/delete", dirname(__FILE__) . "/actions/ticket/delete.php");
 	elgg_register_action("user_support/support_ticket/close", dirname(__FILE__) . "/actions/ticket/close.php");
 	elgg_register_action("user_support/support_ticket/reopen", dirname(__FILE__) . "/actions/ticket/reopen.php");

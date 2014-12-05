@@ -10,9 +10,11 @@
 * @return bool
 */
 function user_support_faq_class_update() {
-	$sql = "UPDATE " . get_config("dbprefix") . "entity_subtypes";
-	$sql .= " SET class = 'UserSupportFAQ'";
-	$sql .= " WHERE type='object' AND subtype='" . UserSupportFAQ::SUBTYPE . "'";
-
-	return update_data($sql);
+	
+	$class = get_subtype_class("object", UserSupportFAQ::SUBTYPE);
+	if ($class != "UserSupportFAQ") {
+		return update_subtype("object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ");
+	}
+	
+	return true;
 }
