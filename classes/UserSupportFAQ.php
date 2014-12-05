@@ -59,6 +59,10 @@ class UserSupportFAQ extends ElggObject {
 	
 	/**
 	 * Can a user comment on this FAQ
+	 *
+	 * @param int $user_guid the user to check (ignored)
+	 *
+	 * @return bool
 	 */
 	public function canComment($user_guid = 0) {
 		$result = false;
