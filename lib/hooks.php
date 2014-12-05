@@ -333,7 +333,7 @@ function user_support_title_menu_hook($hook, $type, $return_value, $params) {
  */
 function user_support_widget_url_hook($hook, $type, $return_value, $params) {
 	
-	if ($return_value){
+	if ($return_value) {
 		return $return_value;
 	}
 	
@@ -646,7 +646,6 @@ function user_support_prepare_support_ticket_comment_message_hook($hook, $type, 
 		return $return_value;
 	}
 	
-	$recipient = elgg_extract("recipient", $params);
 	$language = elgg_extract("language", $params);
 	
 	$return_value->subject = elgg_echo("user_support:notify:admin:updated:subject", array($entity->title), $language);
@@ -772,7 +771,6 @@ function user_support_prepare_support_ticket_message_hook($hook, $type, $return_
 		return $return_value;
 	}
 
-	$recipient = elgg_extract("recipient", $params);
 	$language = elgg_extract("language", $params);
 
 	$return_value->subject = elgg_echo("user_support:notify:admin:create:subject", array($object->title), $language);

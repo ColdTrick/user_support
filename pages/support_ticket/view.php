@@ -16,6 +16,7 @@ $entity = get_entity($guid);
 elgg_set_page_owner_guid($entity->getOwnerGUID());
 
 // build page elements
+$title_text = "";
 if (!empty($entity->support_type)) {
 	$title_text = elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
 }

@@ -57,6 +57,9 @@ class UserSupportFAQ extends ElggObject {
 		return elgg_normalize_url($result);
 	}
 	
+	/**
+	 * Can a user comment on this FAQ
+	 */
 	public function canComment($user_guid = 0) {
 		$result = false;
 		
