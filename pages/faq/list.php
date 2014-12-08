@@ -52,10 +52,10 @@ $search = elgg_view_form("user_support/faq/search", $form_vars, $body_vars);
 $header = elgg_view("page/layouts/content/header", array("title" => $title_text));
 
 // build page
-$page_data = elgg_view_layout("two_sidebar", array(
+$page_data = elgg_view_layout("one_sidebar", array(
 	"title" => $title_text,
 	"content" => $header . $search . $list,
-	"sidebar_alt" => elgg_view("user_support/faq/sidebar")
+	"sidebar" => elgg_view("user_support/faq/sidebar")
 ));
 
 elgg_pop_context();
