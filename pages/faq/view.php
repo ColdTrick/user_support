@@ -8,6 +8,7 @@ if ($user_guid = elgg_get_logged_in_user_guid()) {
 $guid = (int) get_input("guid");
 elgg_entity_gatekeeper($guid, "object", UserSupportFAQ::SUBTYPE);
 
+$entity = get_entity($guid);
 $container = $entity->getContainerEntity();
 
 // build page elements
