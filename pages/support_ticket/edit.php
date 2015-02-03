@@ -5,6 +5,7 @@ elgg_gatekeeper();
 $guid = (int) get_input("guid");
 elgg_entity_gatekeeper($guid, "object", UserSupportTicket::SUBTYPE);
 
+$entity = get_entity($guid);
 if (!$entity->canEdit()) {
 	register_error(elgg_echo("limited_access"));
 	forward(REFERER);

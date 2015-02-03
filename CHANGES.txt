@@ -4,6 +4,7 @@ Version Information
 2.0:
 
 - changes for Elgg 1.9
+- fixed: wsod on support ticket edit #19
 
 1.6 (2014-11-27):
 
