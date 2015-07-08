@@ -1,6 +1,9 @@
 User Support
 ============
 
+[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/user_support/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/user_support/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/user_support/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/user_support/?branch=master)
+
 Offers different community master features to support your users.
 
 Features
