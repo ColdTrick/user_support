@@ -1,9 +1,11 @@
 Version Information
 ===================
 
-2.0:
+2.0 (2015-08-07):
 
 - changes for Elgg 1.9
+- changed: site FAQ to one sidebar
+- fixed: forgot to get the entity
 - fixed: wsod on support ticket edit #19
 
 1.6 (2014-11-27):
