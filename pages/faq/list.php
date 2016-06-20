@@ -49,12 +49,10 @@ $body_vars = array(
 );
 $search = elgg_view_form("user_support/faq/search", $form_vars, $body_vars);
 
-$header = elgg_view("page/layouts/content/header", array("title" => $title_text));
-
 // build page
 $page_data = elgg_view_layout("one_sidebar", array(
 	"title" => $title_text,
-	"content" => $header . $search . $list,
+	"content" => $search . $list,
 	"sidebar" => elgg_view("user_support/faq/sidebar")
 ));
 
