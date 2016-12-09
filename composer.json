@@ -1,0 +1,16 @@
+{
+  "name": "coldtrik/user_support",
+  "description": "Offers user support / faq / help",
+  "type": "elgg-plugin",
+  "keywords": [
+    "elgg",
+    "plugin"
+  ],
+  "keywords": ["elgg", "plugin", "tools"],
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "ColdTrick IT"
+    }
+  ]
+}
