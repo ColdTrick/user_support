@@ -12,8 +12,7 @@ $list_options = array(
 	"type" => "object",
 	"subtype" => UserSupportFAQ::SUBTYPE,
 	"full_view" => false,
-	"metadata_name_value_pairs" => array(
-    ),
+	"metadata_name_value_pairs" => array(),
 	"no_results" => elgg_echo("notfound")
 );
 
