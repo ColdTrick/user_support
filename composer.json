@@ -1,16 +1,21 @@
 {
-  "name": "centillien/user_support",
-  "description": "Offers user support / faq / help",
-  "type": "elgg-plugin",
-  "keywords": [
-    "elgg",
-    "plugin"
-  ],
-  "keywords": ["elgg", "plugin", "tools"],
-  "license": "GPL-2.0",
-  "authors": [
-    {
-      "name": "ColdTrick IT"
-    }
-  ]
+	"name": "coldtrick/user_support",
+	"description": "Offers different community master features to support your users",
+	"type": "elgg-plugin",
+	"keywords": ["elgg", "plugin", "faq", "support"],
+	"license": "GPL-2.0",
+	"support": {
+		"source": "https://github.com/ColdTrick/user_support",
+		"issues": "https://github.com/ColdTrick/user_support/issues"
+	},
+	"require": {
+		"composer/installers": "^1.0.8"
+	},
+	"require-dev": {
+		"coldtrick/sniffs": "dev-master",
+		"coldtrick/releases": "dev-master"
+	},
+	"conflict": {
+		"elgg/elgg": "<1.9"
+	}
 }

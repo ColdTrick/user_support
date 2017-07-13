@@ -189,5 +189,7 @@ To view the Ticket click on this link:
 	// support staff
 	'user_support:action:support_staff:added' => "The user is added to the support staff",
 	'user_support:action:support_staff:removed' => "The user was removed from the support staff",
-	
+
+    "user_support:show:group" => "Show groups?",
+    "user_support:show:group:title" => "Settings for main FAQ page",
 );

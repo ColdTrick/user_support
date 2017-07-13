@@ -129,4 +129,7 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:action:ticket:close:success' => 'De Support Tickets zijn succesvol gesloten',
   'user_support:action:ticket:reopen:error:enable' => 'Een onbekende fout tijdens het heropenen van het Support Ticket',
   'user_support:action:ticket:reopen:success' => 'Het support ticket was succesvol heropend',
+
+  "user_support:show:group" => "Groepen weergeven?",
+  "user_support:show:group:title" => "Instellingen voor hoofd weergaven FAQ",
 );

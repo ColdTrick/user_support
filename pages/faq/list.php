@@ -12,12 +12,17 @@ $list_options = array(
 	"type" => "object",
 	"subtype" => UserSupportFAQ::SUBTYPE,
 	"full_view" => false,
-	"metadata_name_value_pairs" => array(),
+	"metadata_name_value_pairs" => array(
+    ),
 	"no_results" => elgg_echo("notfound")
 );
 
 if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
 	$list_options["site_guids"] = false;
+}
+
+if (elgg_get_plugin_setting("show_group_faq", "user_support") == "no") {
+    $list_options["container_guid"] = elgg_get_site_entity()->guid;
 }
 
 // add tag filter

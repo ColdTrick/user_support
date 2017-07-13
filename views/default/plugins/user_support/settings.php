@@ -113,3 +113,8 @@ $other .= elgg_view("input/select", array(
 )) . "</label><br />";
 
 echo elgg_view_module("inline", elgg_echo("user_support:settings:other:title"), $other);
+
+$show_groups = "<label>" . elgg_echo("user_support:show:group") . "&nbsp;";
+$show_groups .= elgg_view("input/select", array("name" => "params[show_group_faq]", "value" => $plugin->show_group_faq, "options_values" => $noyes_options)) . "</label><br />";
+
+echo elgg_view_module("inline", elgg_echo("user_support:show:group:title"), $show_groups);
