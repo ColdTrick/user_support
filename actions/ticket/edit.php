@@ -1,59 +1,49 @@
 <?php
 
-$guid = (int) get_input("guid");
-$title = get_input("title");
-$help_url = get_input("help_url");
-$help_context = get_input("help_context");
-$tags = string_to_tag_array(get_input("tags"));
-$support_type = get_input("support_type");
-$elgg_xhr = get_input("elgg_xhr");
+$guid = (int) get_input('guid');
 
-$forward_url = REFERER;
+$title = get_input('title');
+$help_url = get_input('help_url');
+$help_context = get_input('help_context');
+$tags = string_to_tag_array(get_input('tags'));
+$support_type = get_input('support_type');
 
 $loggedin_user = elgg_get_logged_in_user_entity();
 
-if (!empty($title) && !empty($support_type)) {
-	if (!empty($guid)) {
-		if ($ticket = get_entity($guid)) {
-			if (!elgg_instanceof($ticket, "object", UserSupportTicket::SUBTYPE, "UserSupportTicket")) {
-				register_error(elgg_echo("InvalidClassException:NotValidElggStar", array($guid, "UserSupportTicket")));
-				unset($ticket);
-			}
-		}
-	} else {
-		$ticket = new UserSupportTicket();
-		
-		$ticket->title = elgg_get_excerpt($title, 50);
-		$ticket->description = $title;
-		
-		if (!$ticket->save()) {
-			register_error(elgg_echo("IOException:UnableToSaveNew", array("UserSupportTicket")));
-			unset($ticket);
-		}
-	}
-	
-	if (!empty($ticket)) {
-		$ticket->title = elgg_get_excerpt($title, 50);
-		$ticket->description = $title;
-		
-		$ticket->help_url = $help_url;
-		$ticket->help_context = $help_context;
-		$ticket->tags = $tags;
-		$ticket->support_type = $support_type;
-		
-		if ($ticket->save()) {
-			if (!empty($guid)) {
-				$forward_url = $ticket->getURL();
-			} elseif (empty($elgg_xhr)) {
-				$forward_url = "user_support/support_ticket/owner/" . $loggedin_user->username;
-			}
-			system_message(elgg_echo("user_support:action:ticket:edit:success"));
-		} else {
-			register_error(elgg_echo("user_support:action:ticket:edit:error:save"));
-		}
-	}
-} else {
-	register_error(elgg_echo("user_support:action:ticket:edit:error:input"));
+if (empty($title) || empty($support_type)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
-forward($forward_url);
+if (!empty($guid)) {
+	$entity = get_entity($guid);
+	if (!$entity instanceof UserSupportTicket || !$entity->canEdit()) {
+		return elgg_error_response(elgg_echo('actionunauthorized'));
+	}
+} else {
+	$entity = new UserSupportTicket();
+	
+	$entity->title = elgg_get_excerpt($title, 50);
+	$entity->description = $title;
+	
+	if (!$entity->save()) {
+		return elgg_error_response(elgg_echo('save:fail'));
+	}
+}
+
+if (empty($entity)) {
+	return elgg_error_response(elgg_echo('save:fail'));
+}
+
+$entity->title = elgg_get_excerpt($title, 50);
+$entity->description = $title;
+
+$entity->help_url = $help_url;
+$entity->help_context = $help_context;
+$entity->tags = $tags;
+$entity->support_type = $support_type;
+
+if (!$entity->save()) {
+	return elgg_error_response(elgg_echo('user_support:action:ticket:edit:error:save'));
+}
+
+return elgg_ok_response('', elgg_echo('user_support:action:ticket:edit:success'), $entity->getURL());

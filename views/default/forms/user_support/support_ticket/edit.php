@@ -53,7 +53,6 @@ if ($help_url) {
 }
 
 $form_body .= "<div class='elgg-foot'>";
-$form_body .= elgg_view("input/hidden", array("name" => "elgg_xhr", "value" => elgg_is_xhr()));
 $form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
 $form_body .= "</div>";
 

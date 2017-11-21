@@ -6,33 +6,28 @@
  * @package User_Support
  */
 class UserSupportHelp extends ElggObject {
-	const SUBTYPE = "help";
+	
+	const SUBTYPE = 'help';
 	
 	/**
-	 * Initialize base attributes
-	 *
-	 * @see ElggObject::initializeAttributes()
-	 *
-	 * @return void
+	 * {@inheritDoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 		
-		$this->attributes["subtype"] = self::SUBTYPE;
-		$this->attributes["access_id"] = ACCESS_PUBLIC;
-		$this->attributes["owner_guid"] = elgg_get_config("site_guid");
-		$this->attributes["container_guid"] = elgg_get_config("site_guid");
+		$site = elgg_get_site_entity();
+		
+		$this->attributes['subtype'] = self::SUBTYPE;
+		$this->attributes['access_id'] = ACCESS_PUBLIC;
+		$this->attributes['owner_guid'] = $site->guid;
+		$this->attributes['container_guid'] = $site->guid;
 	}
 	
 	/**
-	 * Get the URL for this entity
-	 *
-	 * @see ElggEntity::getURL()
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getURL() {
-		return elgg_normalize_url("user_support/help/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title));
+		return elgg_normalize_url('user_support/help/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
 	
 }

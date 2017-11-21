@@ -1,34 +1,23 @@
 <?php
 
-$guid = (int) get_input("guid", 0);
-
-$forward_url = REFERER;
-
-if (!empty($guid)) {
-	if (($entity = get_entity($guid)) && $entity->canEdit()) {
-		$container = $entity->getContainerEntity();
-		
-		if (elgg_instanceof($entity, "object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ")) {
-			if ($entity->delete()) {
-				
-				if (elgg_instanceof($container, "group")) {
-					$forward_url = "user_support/faq/group/" . $container->getGUID() . "/all";
-				} else {
-					$forward_url = "user_support/faq";
-				}
-				
-				system_message(elgg_echo("user_support:action:faq:delete:success"));
-			} else {
-				register_error(elgg_echo("user_support:action:faq:delete:error:delete"));
-			}
-		} else {
-			register_error(elgg_echo("InvalidClassException:NotValidElggStar", array($guid, "UserSupportFAQ")));
-		}
-	} else {
-		register_error(elgg_echo("InvalidParameterException:NoEntityFound"));
-	}
-} else {
-	register_error(elgg_echo("InvalidParameterException:MissingParameter"));
+$guid = (int) get_input('guid', 0);
+if (empty($guid)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
-forward($forward_url);
+$entity = get_entity($guid);
+if (!$entity instanceof UserSupportFAQ || !$entity->canDelete()) {
+	return elgg_error_response(elgg_echo('actionunauthorized'));
+}
+
+$container = $entity->getContainerEntity();
+$forward_url = 'user_support/faq';
+if ($container instanceof ElggGroup) {
+	$forward_url .= "/group/{$container->guid}/all";
+}
+
+if (!$entity->delete()) {
+	return elgg_error_response(elgg_echo('user_support:action:faq:delete:error:delete'));
+}
+
+return elgg_ok_response('', elgg_echo('user_support:action:faq:delete:success'), $forward_url);

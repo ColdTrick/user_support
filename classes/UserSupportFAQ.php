@@ -6,51 +6,40 @@
  * @package User_Support
  */
 class UserSupportFAQ extends ElggObject {
-	const SUBTYPE = "faq";
+	
+	const SUBTYPE = 'faq';
 	
 	/**
-	 * Initialize base attributes
-	 *
-	 * @see ElggObject::initializeAttributes()
-	 *
-	 * @return void
+	 * {@inheritDoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 		
-		$this->attributes["subtype"] = self::SUBTYPE;
-		$this->attributes["owner_guid"] = elgg_get_config("site_guid");
-		$this->attributes["container_guid"] = elgg_get_config("site_guid");
+		$site = elgg_get_site_entity();
+		
+		$this->attributes['subtype'] = self::SUBTYPE;
+		$this->attributes['owner_guid'] = $site->guid;
+		$this->attributes['container_guid'] = $site->guid;
 	}
 	
 	/**
-	 * Get the URL for this entity
-	 *
-	 * @see ElggEntity::getURL()
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
 	public function getURL() {
-		return elgg_normalize_url("user_support/faq/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title));
+		return elgg_normalize_url('user_support/faq/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
 	
 	/**
-	 * Get the icon URL
-	 *
-	 * @param string $size the size of the image
-	 *
-	 * @see ElggEntity::getIconURL()
-	 *
-	 * @return string
+	 * {@inheritDoc}
 	 */
-	public function getIconURL($size = "medium") {
+	public function getIconURL($size = 'medium') {
 		
 		switch ($size) {
-			case "tiny":
-				$result = "mod/user_support/_graphics/faq/tiny.png";
+			case 'tiny':
+				$result = 'mod/user_support/_graphics/faq/tiny.png';
 				break;
 			default:
-				$result = "mod/user_support/_graphics/faq/small.png";
+				$result = 'mod/user_support/_graphics/faq/small.png';
 				break;
 		}
 		
@@ -58,19 +47,14 @@ class UserSupportFAQ extends ElggObject {
 	}
 	
 	/**
-	 * Can a user comment on this FAQ
-	 *
-	 * @param int $user_guid the user to check (ignored)
-	 *
-	 * @return bool
+	 * {@inheritDoc}
 	 */
-	public function canComment($user_guid = 0) {
-		$result = false;
+	public function canComment($user_guid = 0, $default = null) {
 		
-		if ($this->allow_comments == "yes") {
-			$result = true;
+		if ($this->allow_comments !== 'yes') {
+			return false;
 		}
 		
-		return $result;
+		return parent::canComment($user_guid, $default);
 	}
 }

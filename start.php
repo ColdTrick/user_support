@@ -1,11 +1,9 @@
 <?php
 
 // load helper functions
-require_once(dirname(__FILE__) . "/lib/events.php");
 require_once(dirname(__FILE__) . "/lib/functions.php");
 require_once(dirname(__FILE__) . "/lib/hooks.php");
 require_once(dirname(__FILE__) . "/lib/page_handlers.php");
-require_once(dirname(__FILE__) . "/lib/run_once.php");
 
 // register default Elgg events
 elgg_register_event_handler("init", "system", "user_support_init");
@@ -29,11 +27,6 @@ function user_support_init() {
 	// register page handler for nice URL's
 	elgg_register_page_handler("user_support", "user_support_page_handler");
 	
-	// register subtype handlers
-	add_subtype("object", UserSupportFAQ::SUBTYPE, "UserSupportFAQ");
-	add_subtype("object", UserSupportHelp::SUBTYPE, "UserSupportHelp");
-	add_subtype("object", UserSupportTicket::SUBTYPE, "UserSupportTicket");
-	
 	// register subtypes for search
 	elgg_register_entity_type("object", UserSupportFAQ::SUBTYPE);
 	elgg_register_entity_type("object", UserSupportHelp::SUBTYPE);
@@ -47,11 +40,6 @@ function user_support_init() {
 	elgg_register_plugin_hook_handler("get", "subscriptions", "user_support_get_subscriptions_support_ticket_hook");
 	elgg_register_plugin_hook_handler("prepare", "notification:create:object:" . UserSupportTicket::SUBTYPE, "user_support_prepare_support_ticket_message_hook");
 	
-	// update class for FAQ, since user_support v1.0
-	if (!get_subtype_class("object", UserSupportFAQ::SUBTYPE)) {
-		run_function_once("user_support_faq_class_update");
-	}
-	
 	// add a group tool option for FAQ
 	add_group_tool_option("faq", elgg_echo("user_support:group:tool_option"), false);
 	elgg_extend_view("groups/tool_latest", "user_support/faq/group_module");
@@ -64,10 +52,15 @@ function user_support_init() {
 	}
 	
 	// register events
-	elgg_register_event_handler("create", "object", "user_support_create_comment_event");
+	elgg_register_event_handler("create", "object", "\ColdTrick\UserSupport\Comments::supportTicketStatus");
+	
+	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\UserSupport\Upgrade::setFAQClass');
+	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\UserSupport\Upgrade::setHelpClass');
+	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\UserSupport\Upgrade::setTicketClass');
 	
 	// plugin hooks
-	elgg_register_plugin_hook_handler("register", "menu:entity", "user_support_entity_menu_hook", 550);
+	elgg_register_plugin_hook_handler("register", "menu:entity", "\ColdTrick\UserSupport\Menus\Entity::registerTicket");
+	elgg_register_plugin_hook_handler("register", "menu:entity", "\ColdTrick\UserSupport\Menus\Entity::registerHelp");
 	elgg_register_plugin_hook_handler("register", "menu:owner_block", "user_support_owner_block_menu_hook");
 	elgg_register_plugin_hook_handler("register", "menu:title", "user_support_title_menu_hook");
 	elgg_register_plugin_hook_handler("register", "menu:site", "user_support_site_menu_hook");

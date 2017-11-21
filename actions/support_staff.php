@@ -1,21 +1,22 @@
 <?php
 
-$user_guid = (int) get_input("guid");
+$user_guid = (int) get_input('guid');
 
-if (!empty($user_guid)) {
-	if ($user = get_user($user_guid)) {
-		if ($user->support_staff) {
-			unset($user->support_staff);
-			system_message(elgg_echo("user_support:action:support_staff:removed"));
-		} else {
-			$user->support_staff = time();
-			system_message(elgg_echo("user_support:action:support_staff:added"));
-		}
-	} else {
-		register_error(elgg_echo("InvalidParameterException:NoEntityFound"));
-	}
-} else {
-	register_error(elgg_echo("InvalidParameterException:MissingParameter"));
+if (empty($user_guid)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
-forward(REFERER);
+$user = get_user($user_guid);
+if (empty($user)) {
+	return elgg_error_response(elgg_echo('actionunauthorized'));
+}
+	
+if (!empty($user->support_staff)) {
+	// remove staff
+	unset($user->support_staff);
+	return elgg_ok_response('', elgg_echo('user_support:action:support_staff:removed'));
+}
+
+// add staff
+$user->support_staff = time();
+return elgg_ok_response('', elgg_echo('user_support:action:support_staff:added'));
