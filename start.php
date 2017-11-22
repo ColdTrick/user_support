@@ -2,7 +2,6 @@
 
 // load helper functions
 require_once(dirname(__FILE__) . "/lib/functions.php");
-require_once(dirname(__FILE__) . "/lib/page_handlers.php");
 
 // register default Elgg events
 elgg_register_event_handler("init", "system", "user_support_init");
@@ -24,7 +23,7 @@ function user_support_init() {
 	elgg_extend_view("forms/comment/save", "user_support/support_ticket/comment");
 	
 	// register page handler for nice URL's
-	elgg_register_page_handler("user_support", "user_support_page_handler");
+	elgg_register_page_handler("user_support", "\ColdTrick\UserSupport\PageHandler::userSupport");
 	
 	// register subtypes for search
 	elgg_register_entity_type("object", UserSupportFAQ::SUBTYPE);

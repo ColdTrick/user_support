@@ -32,7 +32,7 @@ class UserSupportTicket extends ElggObject {
 		}
 		$title = str_replace('...', '', $title);
 		
-		return elgg_normalize_url('user_support/support_ticket/' . $this->guid . '/' . elgg_get_friendly_title($title));
+		return elgg_normalize_url('user_support/support_ticket/view/' . $this->guid . '/' . elgg_get_friendly_title($title));
 	}
 	
 	/**

@@ -26,7 +26,7 @@ class UserSupportFAQ extends ElggObject {
 	 * {@inheritDoc}
 	 */
 	public function getURL() {
-		return elgg_normalize_url('user_support/faq/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
+		return elgg_normalize_url('user_support/faq/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
 	
 	/**
