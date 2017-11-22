@@ -7,10 +7,10 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Ticket
 	 *
-	 * @param string          $hook
-	 * @param string          $type
-	 * @param \ElggMenuItem[] $return_vaule
-	 * @param array           $params
+	 * @param string          $hook         the name of the hook
+	 * @param string          $type         the type of the hook
+	 * @param \ElggMenuItem[] $return_value current return value
+	 * @param array           $params       supplied params
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
@@ -53,10 +53,10 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Help
 	 *
-	 * @param string          $hook
-	 * @param string          $type
-	 * @param \ElggMenuItem[] $return_vaule
-	 * @param array           $params
+	 * @param string          $hook         the name of the hook
+	 * @param string          $type         the type of the hook
+	 * @param \ElggMenuItem[] $return_value current return value
+	 * @param array           $params       supplied params
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */

@@ -44,6 +44,8 @@ elgg.user_support.init = function() {
 	$(document).on("click", "#user-support-help-center-add-help", elgg.user_support.add_help);
 	$(document).on("click", "#user-support-help-center-edit-help", elgg.user_support.add_help);
 	$(document).on("click", ".elgg-form-user-support-help-edit .elgg-button-cancel", elgg.user_support.add_help);
+
+	elgg.ui.registerTogglableMenuItems('user-support-staff-make', 'user-support-staff-remove');
 };
 
 elgg.register_hook_handler('init', 'system', elgg.user_support.init);
