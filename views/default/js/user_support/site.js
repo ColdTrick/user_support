@@ -1,6 +1,4 @@
-<?php
-?>
-//<script>
+
 elgg.provide("elgg.user_support");
 
 elgg.user_support.search = function(event) {

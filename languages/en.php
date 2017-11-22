@@ -48,15 +48,12 @@ return array(
 	'user_support:settings:help_center:show_floating_button:right_top' => "Right - Top",
 	'user_support:settings:help_center:show_floating_button:right_bottom' => "Right - Bottom",
 	'user_support:settings:help_center:float_button_offset' => "Vertical offset of the floating button",
+	'user_support:settings:help_center:float_button_offset:help' => "Offset in pixels",
 	'user_support:settings:help_center:show_as_popup' => "Show the Help Center in a popup",
 		
 	'user_support:settings:faq:title' => "FAQ Settings",
 	'user_support:settings:faq:add_faq_site_menu_item' => "Add a site menu item to the FAQ",
 	'user_support:settings:faq:add_faq_footer_menu_item' => "Add a footer menu item to the FAQ",
-
-	'user_support:settings:other:title' => "Other",
-	'user_support:settings:other:ignore_site_guid' => "Ignore site_guid when fetching Contextual Help and FAQ items. Could be used for multisite installations to share help and faq's across sites.",
-			
 	
 	// user settings
 	'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",

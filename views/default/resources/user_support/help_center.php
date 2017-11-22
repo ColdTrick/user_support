@@ -30,10 +30,6 @@ $faq_options = array(
 	"pagination" => false
 );
 
-if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
-	$faq_options["site_guids"] = false;
-}
-
 $faq = elgg_list_entities_from_metadata($faq_options);
 
 $help_center = elgg_view("user_support/help_center", array(

@@ -1,5 +1,8 @@
 <?php
 
-echo "<div>";
-echo elgg_view("input/text", array("name" => "q", "value" => get_input("q"), "placeholder" => elgg_echo("search")));
-echo "</div>";
+echo elgg_view_field([
+	'#type' => 'text',
+	'name' => 'q',
+	'value' => get_input('q'),
+	'placeholder' => elgg_echo('search'),
+]);

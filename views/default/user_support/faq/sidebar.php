@@ -20,10 +20,6 @@ if (!empty($filter) || !empty($faq_query)) {
 		"callback" => "user_support_row_to_guid"
 	);
 	
-	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
-		$guid_options["site_guids"] = false;
-	}
-	
 	foreach ($filter as $index => $tag) {
 		if ($index > 2) {
 			// prevent filtering on too much tags
@@ -74,10 +70,6 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 		"tag_names" => array("tags"),
 		"wheres" => array()
 	);
-	
-	if (elgg_get_plugin_setting("ignore_site_guid", "user_support") !== "no") {
-		$tag_options["site_guids"] = false;
-	}
 	
 	if (!empty($filter)) {
 		$tag_options["wheres"][] = "(msv.string NOT IN ('" . implode("', '", $filter) . "'))";

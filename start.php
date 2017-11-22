@@ -13,10 +13,9 @@ elgg_register_event_handler("init", "system", "user_support_init");
  */
 function user_support_init() {
 	// extend css
-	elgg_extend_view("css/elgg", "css/user_support/site");
-	elgg_extend_view("css/admin", "css/user_support/admin");
-
-	elgg_extend_view("js/elgg", "js/user_support/site");
+	elgg_extend_view("elgg.css", "css/user_support/site");
+	
+	elgg_extend_view("elgg.js", "js/user_support/site.js");
 	
 	elgg_extend_view("page/elements/footer", "user_support/button");
 	
