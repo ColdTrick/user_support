@@ -1,108 +1,88 @@
 <?php
 
-$noyes_options = array(
-	"no" => elgg_echo("option:no"),
-	"yes" => elgg_echo("option:yes")
-);
+$help_contexts = user_support_find_unique_help_context();
+$submit_text = elgg_echo('save');
 
-$help_context = elgg_extract("help_context", $vars);
-$form_data = "";
-
-if ($entity = elgg_extract("entity", $vars, false)) {
-	$title = elgg_get_sticky_value("user_support_faq", "title", $entity->title);
-	$desc = elgg_get_sticky_value("user_support_faq", "description", $entity->description);
-	$access_id = (int) elgg_get_sticky_value("user_support_faq", "access_id", $entity->access_id);
-	$container_guid = $entity->getContainerGUID();
+$entity = elgg_extract('entity', $vars);
+if ($entity instanceof UserSupportFAQ) {
 	
-	$tags = elgg_get_sticky_value("user_support_faq", "tags", $entity->tags);
-	$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", $entity->allow_comments);
-	$context = elgg_get_sticky_value("user_support_faq", "help_context", $entity->help_context);
-	if (!empty($context) && !is_array($context)) {
-		$context = array($context);
-	} elseif (empty($context)) {
-		$context = array();
-	}
+	$submit_text = elgg_echo('edit');
 	
-	$submit_text = elgg_echo("edit");
-	
-	$form_data = elgg_view("input/hidden", array("name" => "guid", "value" => (int) $entity->getGUID()));
-} elseif ($annotation = elgg_extract("annotation", $vars, false)) {
-	$entity = $annotation->getEntity();
-	
-	$title = elgg_get_sticky_value("user_support_faq", "title", $entity->title);
-	$desc = elgg_get_sticky_value("user_support_faq", "description", $annotation->value);
-	$access_id = elgg_get_sticky_value("user_support_faq", "access_id", $annotation->access_id);
-	$container_guid = elgg_get_page_owner_guid();
-	
-	$tags = elgg_get_sticky_value("user_support_faq", "tags", $entity->tags);
-	$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", "no");
-	$context = elgg_get_sticky_value("user_support_faq", "help_context", $entity->help_context);
-	if (!empty($context) && !is_array($context)) {
-		$context = array($context);
-	} elseif (empty($context)) {
-		$context = array();
-	}
-	
-	$submit_text = elgg_echo("save");
-} else {
-	$title = elgg_get_sticky_value("user_support_faq", "title");
-	$desc = elgg_get_sticky_value("user_support_faq", "description");
-	$access_id = elgg_get_sticky_value("user_support_faq", "access_id", get_default_access());
-	$container_guid = elgg_get_page_owner_guid();
-	
-	$tags = elgg_get_sticky_value("user_support_faq", "tags", array());
-	$comments = elgg_get_sticky_value("user_support_faq", "allow_comments", "no");
-	$context = elgg_get_sticky_value("user_support_faq", "help_context", array());
-	
-	$submit_text = elgg_echo("save");
+	echo elgg_view_field([
+		'#type' => 'hidden',
+		'name' => 'guid',
+		'value' => $entity->guid,
+	]);
 }
 
-elgg_clear_sticky_form("user_support_faq");
+echo elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'container_guid',
+	'value' => (int) elgg_extract('container_guid', $vars),
+]);
 
-$form_data .= "<div>";
-$form_data .= "<label>" . elgg_echo("user_support:question") . "</label>";
-$form_data .= elgg_view("input/text", array("name" => "title", "value" => $title));
-$form_data .= "</div>";
+echo elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('user_support:question'),
+	'name' => 'title',
+	'value' => elgg_extract('title', $vars),
+	'required' => true,
+]);
 
-$form_data .= "<div>";
-$form_data .= "<label>" . elgg_echo("user_support:anwser") . "</label>";
-$form_data .= elgg_view("input/longtext", array("name" => "description", "value" => $desc));
-$form_data .= "</div>";
+echo elgg_view_field([
+	'#type' => 'longtext',
+	'#label' => elgg_echo('user_support:anwser'),
+	'name' => 'description',
+	'value' => elgg_extract('description', $vars),
+	'required' => true,
+]);
 
-$form_data .= "<div>";
-$form_data .= "<label>" . elgg_echo("tags") . "<label>";
-$form_data .= elgg_view("input/tags", array("name" => "tags", "value" => $tags));
-$form_data .= "</div>";
+echo elgg_view_field([
+	'#type' => 'tags',
+	'#label' => elgg_echo('tags'),
+	'name' => 'tags',
+	'value' => elgg_extract('tags', $vars),
+]);
 
-if (elgg_is_admin_logged_in() && !empty($help_context)) {
-	$form_data .= "<div>";
-	$form_data .= "<label>" . elgg_echo("user_support:help_context") . "</label><br />";
+if (elgg_is_admin_logged_in() && !empty($help_contexts)) {
 	
-	$form_data .= "<select name='help_context[]' multiple='multiple' size='" . min(count($help_context), 5) . "'>";
-	foreach ($help_context as $hc) {
-		$selected = "";
-		if (in_array($hc, $context)) {
-			$selected = "selected='selected'";
-		}
-		$form_data .= "<option value='" . $hc . "' " . $selected . ">" . $hc . "</option>";
-	}
-	$form_data .= "</select>";
-	$form_data .= "</div>";
+	echo elgg_view_field([
+		'#type' => 'select',
+		'#label' => elgg_echo('user_support:help_context'),
+		'name' => 'help_context',
+		'value' => elgg_extract('help_context', $vars),
+		'options' => $help_contexts,
+		'multiple' => true,
+		'size' => min(count($help_contexts), 5),
+	]);
 }
 
-$form_data .= "<div>";
-$form_data .= "<label>" . elgg_echo("access") . "</label>";
-$form_data .= "&nbsp;" . elgg_view("input/access", array("name" => "access_id", "value" => $access_id));
-$form_data .= "</div>";
+echo elgg_view_field([
+	'#type' => 'access',
+	'#label' => elgg_echo('access'),
+	'name' => 'access_id',
+	'value' => (int) elgg_extract('access_id', $vars),
+	'entity' => $entity,
+	'entity_type' => 'object',
+	'entity_subtype' => UserSupportFAQ::SUBTYPE,
+	'container_guid' => (int) elgg_extract('container_guid', $vars),
+]);
 
-$form_data .= "<div>";
-$form_data .= "<label>" . elgg_echo("user_support:allow_comments") . "</label>";
-$form_data .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "allow_comments", "options_values" => $noyes_options, "value" => $comments));
-$form_data .= "</div>";
+echo elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('user_support:allow_comments'),
+	'name' => 'allow_comments',
+	'value' => elgg_extract('allow_comments', $vars),
+	'options_values' => [
+		'no' => elgg_echo('option:no'),
+		'yes' => elgg_echo('option:yes'),
+	],
+]);
 
-$form_data .= "<div class='elgg-foot'>";
-$form_data .= elgg_view("input/hidden", array("name" => "container_guid", "value" => $container_guid));
-$form_data .= elgg_view("input/submit", array("value" => $submit_text));
-$form_data .= "</div>";
+// form footer
+$footer = elgg_view_field([
+	'#type' => 'submit',
+	'value' => $submit_text,
+]);
 
-echo $form_data;
+elgg_set_form_footer($footer);

@@ -12,24 +12,15 @@ if (empty($page_owner) || !($page_owner instanceof ElggSite || $page_owner insta
 	forward(REFERER);
 }
 
-if ($page_owner instanceof ElggGroup && !$page_owner->canEdit()) {
-	register_error(elgg_echo('user_support:page_owner:cant_edit'));
+if (!$page_owner->canWriteToContainer(0, 'object', UserSupportFAQ::SUBTYPE)) {
+	register_error(elgg_echo('noaccess'));
 	forward(REFERER);
-} else {
-	elgg_admin_gatekeeper();
 }
 
-$annotation = false;
+// allow promotion of comment on UserSupportTicket
+$comment_guid = false;
 if (elgg_is_admin_logged_in()) {
-	// @todo this should be moved to an ElggComment
-	$annotation_id = (int) get_input('annotation');
-	$temp_anno = elgg_get_annotation_from_id($annotation_id);
-	if ($temp_anno instanceof ElggAnnotation) {
-		$entity = $temp_anno->getEntity();
-		if ($entity instanceof UserSupportTicket) {
-			$annotation = $temp_anno;
-		}
-	}
+	$comment_guid = (int) get_input('comment_guid');
 }
 
 elgg_push_context('faq');
@@ -43,10 +34,9 @@ elgg_push_breadcrumb(elgg_echo('user_support:faq:create:title'));
 // page elements
 $title_text = elgg_echo('user_support:faq:create:title');
 
-$body_vars = [
-	'help_context' => user_support_find_unique_help_context(),
-	'annotation' => $annotation,
-];
+$body_vars = user_support_prepare_faq_form_vars([
+	'comment_guid' => $comment_guid,
+]);
 $content = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
 // build page

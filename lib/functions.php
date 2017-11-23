@@ -254,3 +254,71 @@ function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
 function user_support_row_to_guid($row) {
 	return (int) $row->guid;
 }
+
+/**
+ * Prepare the form values for an FAQ
+ *
+ * @param array $params params to prefill parts of the form
+ * 	- entity 			UserSupportFAQ when editing an FAQ
+ * 	- comment_guid 		for promoting a comment on a support ticket to a FAQ
+ * 	- url				to fill the help context (default: current URL)
+ * 	- container_guid	the container where the FAQ will be created (default: page_owner_guid)
+ *
+ * @return array
+ */
+function user_support_prepare_faq_form_vars(array $params = []) {
+	
+	// defaults
+	$result = [
+		'title' => '',
+		'description' => '',
+		'tags' => [],
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+		'access_id' => get_default_access(null, [
+			'entity_type' => 'object',
+			'entity_subtype' => UserSupportFAQ::SUBTYPE,
+			'container_guid' => elgg_extract('container_guid', $params, elgg_get_page_owner_guid()),
+		]),
+		'allow_comments' => 'no',
+		'container_guid' => elgg_extract('container_guid', $params, elgg_get_page_owner_guid()),
+	];
+	
+	// check for comment promotion
+	$comment_guid = (int) elgg_extract('comment_guid', $params);
+	if (!empty($comment_guid)) {
+		$comment = get_entity($comment_guid);
+		if ($comment instanceof ElggComment) {
+			$support = $comment->getContainerEntity();
+			if ($support instanceof UserSupportTicket) {
+				$result['title'] = $support->getDisplayName();
+				$result['description'] = $comment->description;
+				$result['tags'] = $support->tags;
+				$result['help_context'] = $support->help_context;
+				
+				$result['comment'] = $comment;
+			}
+		}
+	}
+	
+	// edit FAQ
+	$entity = elgg_extract('entity', $params);
+	if ($entity instanceof UserSupportFAQ) {
+		foreach ($result as $key => $value) {
+			$result[$key] = $entity->$key;
+		}
+		
+		$result['entity'] = $entity;
+	}
+	
+	// sticky form
+	$sticky_form = elgg_get_sticky_values('user_support_faq');
+	if (!empty($sticky_form)) {
+		foreach ($sticky_form as $key => $value) {
+			$result[$key] = $value;
+		}
+		
+		elgg_clear_sticky_form('user_support_faq');
+	}
+	
+	return $result;
+}

@@ -34,11 +34,9 @@ elgg_push_breadcrumb($entity->getDisplayName(), $entity->getURL());
 elgg_push_breadcrumb($title_text);
 
 // build page elements
-$help_context = user_support_find_unique_help_context();
-$body_vars = [
+$body_vars = user_support_prepare_faq_form_vars([
 	'entity' => $entity,
-	'help_context' => $help_context,
-];
+]);
 $form = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
 // build page
