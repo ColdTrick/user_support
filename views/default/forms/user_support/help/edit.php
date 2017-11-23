@@ -1,39 +1,49 @@
 <?php
 
-$entity = elgg_extract("contextual_help_object", $vars);
-
-if (!empty($entity)) {
-	$desc = $entity->description;
-	$tags = $entity->tags;
+$entity = elgg_extract('entity', $vars);
+if ($entity instanceof UserSupportHelp) {
 	
-	$form_body = elgg_view("input/hidden", array("name" => "guid", "value" => $entity->getGUID()));
-	$form_body .= elgg_view("input/hidden", array("name" => "help_context", "value" => $entity->help_context));
-} else {
-	
-	$desc = "";
-	$tags = array();
-	$help_context = elgg_extract("help_context", $vars);
-	
-	if (!empty($help_context)) {
-		$form_body = elgg_view("input/hidden", array("name" => "help_context", "value" => $help_context));
-	} else {
-		$form_body = elgg_view("input/hidden", array("name" => "help_context", "value" => user_support_get_help_context()));
-	}
+	echo elgg_view_field([
+		'#type' => 'hidden',
+		'name' => 'guid',
+		'value' => $entity->guid,
+	]);
 }
 
-$form_body .= "<div>";
-$form_body .= "<label>" . elgg_echo("description") . "</label>";
-$form_body .= elgg_view("input/longtext", array("name" => "description", "value" => $desc));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'help_context',
+	'value' => elgg_extract('help_context', $vars),
+]);
 
-$form_body .= "<div>";
-$form_body .= "<label>" . elgg_echo("tags") . "</label>";
-$form_body .= elgg_view("input/tags", array("name" => "tags", "value" => $tags));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'longtext',
+	'#label' => elgg_echo('description'),
+	'name' => 'description',
+	'value' => elgg_extract('description', $vars),
+	'required' => true,
+]);
 
-$form_body .= "<div class='elgg-foot'>";
-$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
-$form_body .= elgg_view("input/reset", array("value" => elgg_echo("cancel")));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'tags',
+	'#label' => elgg_echo('tags'),
+	'name' => 'tags',
+	'value' => elgg_extract('tags', $vars),
+]);
 
-echo $form_body;
+// footer
+$footer = elgg_view_field([
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => [
+		[
+			'#type' => 'submit',
+			'value' => elgg_echo('save'),
+		],
+		[
+			'#type' => 'reset',
+			'value' => elgg_echo('cancel'),
+		],
+	],
+]);
+elgg_set_form_footer($footer);

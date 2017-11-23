@@ -365,3 +365,34 @@ function user_support_prepare_ticket_form_vars(array $params = []) {
 	
 	return $result;
 }
+
+/**
+ * Prepare form vars for create/edit a contextual help
+ *
+ * @param array $params params to prefill parts of the form
+ * 	- entity 			UserSupportHelp when editing an help
+ * 	- url				to fill the help context (default: current URL)
+ *
+ * @return array
+ */
+function user_support_prepare_help_form_vars(array $params = []) {
+	
+	// defaults
+	$result = [
+		'description' => '',
+		'tags' => [],
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+	];
+	
+	// edit help
+	$entity = elgg_extract('entity', $params);
+	if ($entity instanceof UserSupportHelp) {
+		foreach ($result as $key => $value) {
+			$result[$key] = $entity->$key;
+		}
+		
+		$result['entity'] = $entity;
+	}
+	
+	return $result;
+}

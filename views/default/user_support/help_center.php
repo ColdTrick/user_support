@@ -1,87 +1,103 @@
 <?php
 
-$group = elgg_extract("group", $vars);
-$contextual_help_object = elgg_extract("contextual_help_object", $vars);
-$faq = elgg_extract("faq", $vars);
+$group = elgg_extract('group', $vars);
+/* @var $contextual_help_object UserSupportHelp */
+$contextual_help_object = elgg_extract('contextual_help_object', $vars);
+$faq = elgg_extract('faq', $vars);
 
 $help_enabled = false;
-if (elgg_get_plugin_setting("help_enabled", "user_support") != "no") {
+if (elgg_get_plugin_setting('help_enabled', 'user_support') != 'no') {
 	$help_enabled = true;
 }
 
-echo elgg_view("input/text", array(
-	"id" => "user-support-help-center-search",
-	"name" => "q",
-	"placeholder" => elgg_echo("search"),
-	"class" => "mbs",
-));
+echo elgg_view_form('user_support/help_center/search', ['class' => 'mbs']);
 
-echo "<div>";
-
+// action buttons
+$buttons = [];
 if ($user = elgg_get_logged_in_user_entity()) {
-	echo elgg_view("output/url", array(
-		"text" => elgg_echo("user_support:help_center:ask"),
-		"href" => "#",
-		"id" => "user-support-help-center-ask",
-		"class" => "elgg-button elgg-button-action mrs"
-	));
-	echo elgg_view("output/url", array(
-		"text" => elgg_echo("user_support:menu:support_tickets:mine"),
-		"href" => "user_support/support_ticket/owner/" . $user->username,
-		"class" => "elgg-button elgg-button-action mrs"
-	));
+	$buttons[] = [
+		'text' => elgg_echo('user_support:help_center:ask'),
+		'href' => '#',
+		'id' => 'user-support-help-center-ask',
+	];
+	$buttons[] = [
+		'text' => elgg_echo('user_support:menu:support_tickets:mine'),
+		'href' => 'user_support/support_ticket/owner/' . $user->username,
+	];
 }
 
-echo elgg_view("output/url", array(
-	"text" => elgg_echo("user_support:menu:faq"),
-	"href" => "user_support/faq",
-	"class" => "elgg-button elgg-button-action mrs"
-));
+$buttons[] = [
+	'text' => elgg_echo('user_support:menu:faq'),
+	'href' => 'user_support/faq',
+];
 
-if (!empty($group)) {
-	echo elgg_view("output/url", array(
-		"text" => elgg_echo("user_support:help_center:help_group"),
-		"href" => $group->getURL(),
-		"class" => "elgg-button elgg-button-action mrs"
-	));
+if ($group instanceof ElggGroup) {
+	$buttons[] = [
+		'text' => elgg_echo('user_support:help_center:help_group'),
+		'href' => $group->getURL(),
+	];
 }
 
 if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled && elgg_is_xhr()) {
-	echo elgg_view("output/url", array(
-		"text" => elgg_echo("user_support:help_center:help"),
-		"href" => "#",
-		"id" => "user-support-help-center-add-help",
-		"class" => "elgg-button elgg-button-action mrs"
-	));
+	$buttons[] = [
+		'text' => elgg_echo('user_support:help_center:help'),
+		'href' => '#',
+		'id' => 'user-support-help-center-add-help',
+	];
 }
 
-echo "</div>";
+if (!empty($buttons)) {
+	$button_content = '';
+	foreach ($buttons as $options) {
+		$options['class'] = elgg_extract_class($options, ['elgg-button', 'elgg-button-action', 'mrs']);
+		
+		$button_content .= elgg_view('output/url', $options);
+	}
+	
+	echo elgg_format_element('div', ['class' => 'mbs'], $button_content);
+}
 
 if (elgg_is_xhr() && $help_enabled) {
-	if (!empty($contextual_help_object)) {
-		$contextual_help = elgg_view_entity($contextual_help_object, array(
-			"title" => false,
-			"full_view" => false
-		));
+	if ($contextual_help_object instanceof UserSupportHelp) {
+		$contextual_help = elgg_view_entity($contextual_help_object, [
+			'title' => false,
+			'full_view' => false,
+		]);
 		
-		echo elgg_view_module("info", elgg_echo("user_support:help_center:help:title"), $contextual_help, array("id" => "user_support_help_center_help", "class" => "mts"));
+		echo elgg_view_module('info', elgg_echo('user_support:help_center:help:title'), $contextual_help, [
+			'id' => 'user_support_help_center_help',
+			'class' => 'mbs',
+		]);
 	}
 	
 	if (elgg_is_admin_logged_in()) {
-		$form = elgg_view_form("user_support/help/edit", null, $vars);
+		$help_vars = user_support_prepare_help_form_vars([
+			'entity' => $contextual_help_object,
+		]);
+		$form = elgg_view_form('user_support/help/edit', null, $help_vars);
 		
-		echo elgg_view_module("info", elgg_echo("user_support:forms:help:title"), $form, array("id" => "user_support_help_edit_form_wrapper", "class" => "hidden mts"));
+		echo elgg_view_module('info', elgg_echo('user_support:forms:help:title'), $form, [
+			'id' => 'user_support_help_edit_form_wrapper',
+			'class' => 'hidden mbs',
+		]);
 	}
 }
 
 if (!empty($faq)) {
-	echo elgg_view_module("info", elgg_echo("user_support:help_center:faq:title"), $faq, array("class" => "mts"));
+	echo elgg_view_module('info', elgg_echo('user_support:help_center:faq:title'), $faq, ['class' => 'mbs']);
 }
 
 if (elgg_is_logged_in()) {
-	$form = elgg_view_form("user_support/support_ticket/edit", null, $vars);
+	$support_vars = user_support_prepare_ticket_form_vars($vars);
+	$form = elgg_view_form('user_support/support_ticket/edit', null, $support_vars);
 	
-	echo elgg_view_module("info", elgg_echo("user_support:help_center:ask"), $form, array("id" => "user_support_ticket_edit_form_wrapper", "class" => "hidden mts"));
+	echo elgg_view_module('info', elgg_echo('user_support:help_center:ask'), $form, [
+		'id' => 'user_support_ticket_edit_form_wrapper',
+		'class' => 'hidden mbs',
+	]);
 }
 
-echo "<div id='user_support_help_search_result_wrapper' class='hidden'></div>";
+echo elgg_format_element('div', [
+	'id' => 'user_support_help_search_result_wrapper',
+	'class' => 'hidden',
+]);

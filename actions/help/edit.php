@@ -10,8 +10,8 @@ if (empty($desc) || empty($help_context)) {
 }
 
 if (!empty($guid)) {
-	$entity = get_entity($guid);
 	
+	$entity = get_entity($guid);
 	if (!$entity instanceof UserSupportHelp || !$entity->canEdit()) {
 		return elgg_error_response(elgg_echo('actionunauthorized'));
 	}
@@ -27,11 +27,11 @@ if (empty($entity)) {
 	return elgg_error_response(elgg_echo('save:fail'));
 }
 
-$help->description = $desc;
-$help->tags = $tags;
-$help->help_context = $help_context;
+$entity->description = $desc;
+$entity->tags = $tags;
+$entity->help_context = $help_context;
 
-if (!$help->save()) {
+if (!$entity->save()) {
 	return elgg_error_response(elgg_echo('user_support:action:help:edit:error:save'));
 }
 
