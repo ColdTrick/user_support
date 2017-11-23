@@ -1,37 +1,39 @@
 <?php
 
 // get the page owner
+$group_guid = (int) elgg_extract('guid', $vars);
+elgg_set_page_owner_guid($group_guid);
+
 $page_owner = elgg_get_page_owner_entity();
 
-if (!elgg_instanceof($page_owner, "group")) {
-	register_error(elgg_echo("user_support:page_owner:not_group"));
+if (!$page_owner instanceof ElggGroup) {
+	register_error(elgg_echo('user_support:page_owner:not_group'));
 	forward(REFERER);
 }
 
-elgg_push_context("faq");
+elgg_group_gatekeeper();
+
+elgg_push_context('faq');
 
 // build breadcrumb
-elgg_push_breadcrumb($page_owner->name);
+elgg_push_breadcrumb($page_owner->getDisplayName());
 
 // build page elements
-$title_text = elgg_echo("user_support:faq:group:title", array($page_owner->name));
+$title_text = elgg_echo('user_support:faq:group:title', [$page_owner->getDisplayName()]);
 
-$list_options = array(
-	"type" => "object",
-	"subtype" => UserSupportFAQ::SUBTYPE,
-	"container_guid" => $page_owner->getGUID(),
-	"full_view" => false,
-	"no_results" => elgg_echo("user_support:faq:not_found")
-);
-
-$content = elgg_list_entities($list_options);
+$content = elgg_list_entities([
+	'type' => 'object',
+	'subtype' => UserSupportFAQ::SUBTYPE,
+	'container_guid' => $page_owner->guid,
+	'no_results' => elgg_echo('user_support:faq:not_found'),
+]);
 
 // build page
-$page_data = elgg_view_layout("content", array(
-	"title" => $title_text,
-	"content" => $content,
-	"filter" => ""
-));
+$page_data = elgg_view_layout('content', [
+	'title' => $title_text,
+	'content' => $content,
+	'filter' => '',
+]);
 
 elgg_pop_context();
 
