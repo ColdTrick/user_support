@@ -26,6 +26,15 @@ class Comments {
 			return;
 		}
 		
+		if ($object->description === elgg_echo('user_support:support_ticket:closed')) {
+			// ticket was closed, using the action, do nothing
+			return;
+		}
+		if ($object->description === elgg_echo('user_support:support_ticket:reopened')) {
+			// ticket was reopend, using the action, do nothing
+			return;
+		}
+		
 		$comment_close = get_input('support_ticket_comment_close');
 		
 		if (!empty($comment_close)) {

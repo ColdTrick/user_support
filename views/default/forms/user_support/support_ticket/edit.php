@@ -1,59 +1,66 @@
 <?php
 
-$types_values = array(
-	"question" => elgg_echo("user_support:support_type:question"),
-	"bug" => elgg_echo("user_support:support_type:bug"),
-	"request" => elgg_echo("user_support:support_type:request"),
-);
+$submit_text = elgg_echo('save');
 
-$entity = elgg_extract("entity", $vars);
-
-if (!empty($entity)) {
-	$title = $entity->description;
-	$tags = $entity->tags;
-	$help_url = $entity->help_url;
-	$support_type = $entity->support_type;
+$entity = elgg_extract('entity', $vars);
+if ($entity instanceof UserSupportTicket) {
+	echo elgg_view_field([
+		'#type' => 'hidden',
+		'name' => 'guid',
+		'value' => $entity->guid,
+	]);
 	
-	$form_body = elgg_view("input/hidden", array("name" => "guid", "value" => $entity->getGUID()));
-	$form_body .= elgg_view("input/hidden", array("name" => "help_context", "value" => $entity->help_context));
-} else {
-	$title = "";
-	$tags = array();
-	$help_url = elgg_extract("help_url", $vars);
-	$support_type = "";
-	$help_context = elgg_extract("help_context", $vars);
-	
-	if (!empty($help_context)) {
-		$form_body = elgg_view("input/hidden", array("name" => "help_context", "value" => $help_context));
-	} else {
-		$form_body = elgg_view("input/hidden", array("name" => "help_context", "value" => user_support_get_help_context()));
-	}
+	$submit_text = elgg_echo('edit');
 }
 
-$form_body .= "<div>";
-$form_body .= "<label>" . elgg_echo("user_support:question") . "</label>";
-$form_body .= elgg_view("input/plaintext", array("name" => "title", "value" => $title));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'help_context',
+	'value' => elgg_extract('help_context', $vars),
+]);
 
-$form_body .= "<div>";
-$form_body .= "<label>" . elgg_echo("user_support:support_type") . "</label>";
-$form_body .= "&nbsp;" . elgg_view("input/dropdown", array("name" => "support_type", "options_values" => $types_values, "value" => $support_type));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'longtext',
+	'#label' => elgg_echo('user_support:question'),
+	'name' => 'description',
+	'value' => elgg_extract('description', $vars),
+	'required' => true,
+]);
 
-$form_body .= "<div>";
-$form_body .= "<label>" . elgg_echo("tags") . "</label>";
-$form_body .= elgg_view("input/tags", array("name" => "tags", "value" => $tags));
-$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('user_support:support_type'),
+	'name' => 'support_type',
+	'value' => elgg_extract('support_type', $vars),
+	'required' => true,
+	'options_values' => [
+		'question' => elgg_echo('user_support:support_type:question'),
+		'bug' => elgg_echo('user_support:support_type:bug'),
+		'request' => elgg_echo('user_support:support_type:request'),
+	],
+]);
 
-if ($help_url) {
-	$form_body .= "<div>";
-	$form_body .= "<label>" . elgg_echo("user_support:url") . "</label>";
-	$form_body .= elgg_view("input/url", array("name" => "help_url", "value" => $help_url));
-	$form_body .= "</div>";
+echo elgg_view_field([
+	'#type' => 'tags',
+	'#label' => elgg_echo('tags'),
+	'name' => 'tags',
+	'value' => elgg_extract('tags', $vars),
+]);
+
+$help_url = elgg_extract('help_url', $vars);
+if (!empty($help_url)) {
+	echo elgg_view_field([
+		'#type' => 'url',
+		'#label' => elgg_echo('user_support:url'),
+		'name' => 'help_url',
+		'value' => $help_url,
+	]);
 }
 
-$form_body .= "<div class='elgg-foot'>";
-$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
-$form_body .= "</div>";
+// footer
+$footer = elgg_view_field([
+	'#type' => 'submit',
+	'value' => $submit_text,
+]);
 
-echo $form_body;
+elgg_set_form_footer($footer);

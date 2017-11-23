@@ -12,7 +12,7 @@ if (empty($guid)) {
 }
 
 $entity = get_entity($guid);
-if (!$entity instanceof UserSupportTicket || !$entity->canDelete()) {
+if (!$entity instanceof UserSupportTicket || !$entity->canEdit()) {
 	return elgg_error_response(elgg_echo('actionunauthorized'));
 }
 

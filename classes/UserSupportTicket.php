@@ -26,13 +26,20 @@ class UserSupportTicket extends ElggObject {
 	 * {@inheritDoc}
 	 */
 	public function getURL() {
-		$title = $this->getDisplayName();
-		if (strlen($title) > 50) {
-			$title = elgg_get_excerpt($title, 50);
+		return elgg_normalize_url('user_support/support_ticket/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDisplayName() {
+		$title = $this->title;
+		if (empty($title)) {
+			$title = $this->description;
 		}
-		$title = str_replace('...', '', $title);
 		
-		return elgg_normalize_url('user_support/support_ticket/view/' . $this->guid . '/' . elgg_get_friendly_title($title));
+		$title = elgg_get_excerpt($title, 50);
+		return rtrim($title, '.');
 	}
 	
 	/**

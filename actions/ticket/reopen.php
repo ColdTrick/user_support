@@ -12,7 +12,7 @@ if (empty($guid)) {
 }
 
 $entity = get_entity($guid);
-if (!$entity instanceof UserSupportTicket || !$entity->canDelete()) {
+if (!$entity instanceof UserSupportTicket || !$entity->canEdit()) {
 	return elgg_error_response(elgg_echo('actionunauthorized'));
 }
 
@@ -35,7 +35,7 @@ notify_user($entity->owner_guid,
 	elgg_echo('generic_comment:email:body', [
 		$entity->getDisplayName(),
 		$user->getDisplayName(),
-		elgg_echo('user_support:support_ticket:closed'),
+		elgg_echo('user_support:support_ticket:reopened'),
 		$entity->getURL(),
 		$user->getDisplayName(),
 		$user->getURL(),

@@ -322,3 +322,46 @@ function user_support_prepare_faq_form_vars(array $params = []) {
 	
 	return $result;
 }
+
+/**
+ * Prepare form vars for create/edit support ticket
+ *
+ * @param array $params params to prefill parts of the form
+ * 	- entity 			UserSupportTicket when editing an ticket
+ * 	- url				to fill the help context (default: current URL)
+ *
+ * @return array
+ */
+function user_support_prepare_ticket_form_vars(array $params = []) {
+	
+	// defaults
+	$result = [
+		'description' => '',
+		'tags' => [],
+		'help_url' => '',
+		'support_type' => '',
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+	];
+	
+	// edit ticket
+	$entity = elgg_extract('entity', $params);
+	if ($entity instanceof UserSupportTicket) {
+		foreach ($result as $key => $value) {
+			$result[$key] = $entity->$key;
+		}
+		
+		$result['entity'] = $entity;
+	}
+	
+	// sticky form
+	$sticky_form = elgg_get_sticky_values('user_support_ticket');
+	if (!empty($sticky_form)) {
+		foreach ($sticky_form as $key => $value) {
+			$result[$key] = $value;
+		}
+		
+		elgg_clear_sticky_form('user_support_ticket');
+	}
+	
+	return $result;
+}

@@ -172,7 +172,7 @@ class Notifications {
 		$return_value = [];
 		
 		// get all the admins to notify
-		$users = user_support_get_admin_notify_users($entity);
+		$users = user_support_get_admin_notify_users($object);
 		if (empty($users) || !is_array($users)) {
 			return $return_value;
 		}

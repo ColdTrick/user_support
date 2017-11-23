@@ -16,12 +16,15 @@ echo elgg_view('input/submit', [
 	'name' => 'support_ticket_comment_close',
 	'value' => elgg_echo('user_support:comment_close'),
 	'id' => 'user-support-ticket-comment-close',
-	'class' => 'elgg-button-submit mhs',
+	'class' => 'elgg-button-submit mhs hidden',
 ]);
 ?>
 <script type='text/javascript'>
-	var $button = $('#user-support-ticket-comment-close');
-	var $form = $button.parents('.elgg-form-comment-save');
-
-	$form.find('div.elgg-foot input[type=submit]').after($button);
+	require(['jquery'], function($) {
+		var $button = $('#user-support-ticket-comment-close');
+		var $form = $button.closest('.elgg-form-comment-save');
+	
+		$form.find('div.elgg-foot input[type=submit]').after($button);
+		$button.removeClass('hidden');
+	});
 </script>

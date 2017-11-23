@@ -1,97 +1,124 @@
 <?php
 
-$entity = elgg_extract("entity", $vars);
-$full_view = elgg_extract("full_view", $vars);
-
-// entity menu
-$entity_menu = "";
-if (!elgg_in_context("widgets")) {
-	$entity_menu = elgg_view_menu("entity", array(
-		"entity" => $entity,
-		"handler" => "user_support/support_ticket",
-		"sort_by" => "priority",
-		"class" => "elgg-menu-hz"
-	));
+$entity = elgg_extract('entity', $vars);
+if (!$entity instanceof UserSupportTicket) {
+	return;
 }
 
-$loggedin_user = elgg_get_logged_in_user_entity();
+$full_view = (bool) elgg_extract('full_view', $vars);
+
+// entity menu
+$entity_menu = '';
+if (!elgg_in_context('widgets')) {
+	$entity_menu = elgg_view_menu('entity', [
+		'entity' => $entity,
+		'handler' => 'user_support/support_ticket',
+		'sort_by' => 'priority',
+		'class' => 'elgg-menu-hz',
+	]);
+}
+
 $owner = $entity->getOwnerEntity();
 
 if (!$full_view) {
+	// summary (listing) view
 	// icon
-	$icon = elgg_view_entity_icon($entity, "small");
-	$info = "";
+	$icon = elgg_view_entity_icon($entity, 'small');
 	
 	// title
-	$title = "";
+	$title = '';
 	if (!empty($entity->support_type)) {
-		$title = elgg_echo("user_support:support_type:" . $entity->support_type) . ": ";
+		$title = elgg_echo("user_support:support_type:{$entity->support_type}") . ': ';
 	}
-	$title_text = $entity->title;
+	$title_text = $entity->getDisplayName();
 	if (strlen($title_text) > 50) {
 		$title_text = elgg_get_excerpt($title_text, 50);
 	}
-	$title .= elgg_view("output/url", array("href" => $entity->getURL(), "text" => $title_text));
+	$title .= elgg_view('output/url', [
+		'href' => $entity->getURL(),
+		'text' => $title_text,
+		'is_trusted' => true,
+	]);
 	
 	// strapline
-	$subtitle = user_support_time_created_string($entity);
-	$subtitle .= " " . elgg_echo("by");
-	$subtitle .= " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
+	$subtitle = elgg_view('page/elements/by_line', $vars);
 	
 	// last comment by
-	if ($ann = $entity->getAnnotations("generic_comment", 1, 0, "desc")) {
-		$ann_owner = get_user($ann[0]->owner_guid);
-		$url = elgg_view("output/url", array("href" => $ann_owner->getURL(), "text" => $ann_owner->name));
-		$info = elgg_echo("user_support:last_comment", array($url));
+	$info = '';
+	if ($entity->countComments()) {
+		$comments = elgg_get_entities([
+			'type' => 'object',
+			'subtype' => 'comment',
+			'limit' => 1,
+			'container_guid' => $entity->guid,
+		]);
+		/* @var $comment ElggComment */
+		$comment = elgg_extract(0, $comments);
+		
+		$comment_owner = $comment->getOwnerEntity();
+		$url = elgg_view('output/url', [
+			'href' => $comment->getURL(),
+			'text' => $comment_owner->getDisplayName(),
+		]);
+		
+		$info = elgg_echo('user_support:last_comment', [$url]);
 	}
 	
-	$params = array(
-		"entity" => $entity,
-		"metadata" => $entity_menu,
-		"content" => $info,
-		"subtitle" => $subtitle,
-		"tags" => elgg_view("output/tags", array("value" => $entity->tags)),
-		"title" => $title
-	);
+	$params = [
+		'entity' => $entity,
+		'metadata' => $entity_menu,
+		'content' => $info,
+		'subtitle' => $subtitle,
+		'title' => $title,
+	];
 	$params = $params + $vars;
-	$list_body = elgg_view("object/elements/summary", $params);
+	$list_body = elgg_view('object/elements/summary', $params);
 	
 	echo elgg_view_image_block($icon, $list_body);
 } else {
+	// full view
 	// icon
-	$icon = elgg_view_entity_icon($entity, "tiny");
+	$icon = elgg_view_entity_icon($entity, 'tiny');
 	
-	$subtitle = user_support_time_created_string($entity);
-	$subtitle .= " " . elgg_echo("by");
-	$subtitle .= " " . elgg_view("output/url", array("href" => $owner->getURL(), "text" => $owner->name));
+	// strapline
+	$subtitle = elgg_view('page/elements/by_line', $vars);
 	
 	// summary
-	$params = array(
-		"entity" => $entity,
-		"metadata" => $entity_menu,
-		"tags" => elgg_view("output/tags", array("value" => $entity->tags)),
-		"subtitle" => $subtitle,
-		"title" => false
-	);
+	$params = [
+		'entity' => $entity,
+		'metadata' => $entity_menu,
+		'subtitle' => $subtitle,
+		'title' => false,
+	];
 	$params = $params + $vars;
-	$summary = elgg_view("object/elements/summary", $params);
+	$summary = elgg_view('object/elements/summary', $params);
 	
 	// body
-	$body = "";
+	$body = '';
 	if (!empty($entity->help_url)) {
-		$body .= elgg_echo("user_support:url") . ": " . elgg_view("output/url", array("href" => $entity->help_url)) . "<br />";
+		$help_url = elgg_echo('user_support:url') . ': ';
+		$help_url .= elgg_view('output/url', [
+			'href' => $entity->help_url,
+		]);
+		
+		$body .= elgg_format_element('div', [], $help_url);
 	}
 	
 	if (!empty($entity->description)) {
-		$body .= elgg_view("output/longtext", array("value" => $entity->description));
+		$body .= elgg_view('output/longtext', [
+			'value' => $entity->description,
+		]);
 	} elseif (strlen($entity->title) > 50) {
-		$body .= elgg_view("output/longtext", array("value" => $entity->title));
+		$body .= elgg_view('output/longtext', [
+			'value' => $entity->getDisplayName(),
+		]);
 	}
 	
-	// blog
-	echo elgg_view('object/elements/full', array(
+	// ticket
+	echo elgg_view('object/elements/full', [
+		'entity' => $entity,
 		'summary' => $summary,
 		'icon' => $icon,
 		'body' => $body,
-	));
+	]);
 }

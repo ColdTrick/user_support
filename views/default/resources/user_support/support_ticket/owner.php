@@ -2,70 +2,82 @@
 
 elgg_gatekeeper();
 
-$user = elgg_get_page_owner_entity();
-
-if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
-	register_error(elgg_echo("user_support:staff_gatekeeper"));
+$username = elgg_extract('username', $vars);
+$user = get_user_by_username($username);
+if (!$user instanceof ElggUser) {
+	register_error(elgg_echo('noaccess'));
 	forward(REFERER);
 }
 
-$status = get_input("status", UserSupportTicket::OPEN);
-if (!in_array($status, array(UserSupportTicket::OPEN, UserSupportTicket::CLOSED))) {
+if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
+	register_error(elgg_echo('user_support:staff_gatekeeper'));
+	forward(REFERER);
+}
+
+elgg_set_page_owner_guid($user->guid);
+
+$status = elgg_extract('status', $vars, UserSupportTicket::OPEN);
+if (!in_array($status, [UserSupportTicket::OPEN, UserSupportTicket::CLOSED])) {
 	$status = UserSupportTicket::OPEN;
 }
 
-$q = get_input("q");
+$q = get_input('q');
 
-$options = array(
-	"type" => "object",
-	"subtype" => UserSupportTicket::SUBTYPE,
-	"owner_guid" => $user->getGUID(),
-	"full_view" => false,
-	"metadata_name_value_pairs" => array("status" => $status),
-	"order_by" => "e.time_updated desc",
-	"no_results" => elgg_echo("notfound")
-);
+$options = [
+	'type' => 'object',
+	'subtype' => UserSupportTicket::SUBTYPE,
+	'owner_guid' => $user->guid,
+	'metadata_name_value_pairs' => [
+		'status' => $status,
+	],
+	'order_by' => 'e.time_updated desc',
+	'no_results' => elgg_echo('notfound'),
+];
 
 if (!empty($q)) {
-	$options["joins"] = array("JOIN " . elgg_get_config("dbprefix") . "objects_entity oe ON e.guid = oe.guid");
-	$options["wheres"] = array("oe.description LIKE '%" . sanitise_string($q) . "%'");
+	$options['joins'] = [
+		'JOIN ' . elgg_get_config('dbprefix') . 'objects_entity oe ON e.guid = oe.guid',
+	];
+	$options['wheres'] = [
+		'oe.description LIKE "%' . sanitise_string($q) . '%"',
+	];
 }
 
-$search_action = "user_support/support_ticket/owner/" . $user->username;
+$search_action = 'user_support/support_ticket/owner/' . $user->username;
 
-elgg_push_context("support_ticket_title");
+elgg_push_context('support_ticket_title');
 
 // build page elements
 if ($status == UserSupportTicket::CLOSED) {
-	$search_action .= "/archive";
-	if ($user->getGUID() == elgg_get_logged_in_user_guid()) {
-		$title_text = elgg_echo("user_support:tickets:mine:archive:title");
+	$search_action .= '/archive';
+	if ($user->guid === elgg_get_logged_in_user_guid()) {
+		$title_text = elgg_echo('user_support:tickets:mine:archive:title');
 	} else {
-		$title_text = elgg_echo("user_support:tickets:owner:archive:title", array($user->name));
+		$title_text = elgg_echo('user_support:tickets:owner:archive:title', [$user->getDisplayName()]);
 	}
 } else {
-	if ($user->getGUID() == elgg_get_logged_in_user_guid()) {
-		$title_text = elgg_echo("user_support:tickets:mine:title");
+	if ($user->guid === elgg_get_logged_in_user_guid()) {
+		$title_text = elgg_echo('user_support:tickets:mine:title');
 	} else {
-		$title_text = elgg_echo("user_support:tickets:owner:title", array($user->name));
+		$title_text = elgg_echo('user_support:tickets:owner:title', [$user->getDisplayName()]);
 	}
 }
 
-$form_vars = array(
-	"method" => "GET",
-	"disable_security" => true,
-	"action" => $search_action
-);
-$search = elgg_view_form("user_support/support_ticket/search", $form_vars);
+$form_vars = [
+	'method' => 'GET',
+	'disable_security' => true,
+	'action' => $search_action,
+];
+$search = elgg_view_form('user_support/support_ticket/search', $form_vars);
 
 $body = elgg_list_entities_from_metadata($options);
 
 // build page
-$page_data = elgg_view_layout("content", array(
-	"title" => $title_text,
-	"content" => $search . $body,
-	"filter" => elgg_view_menu("user_support", array("class" => "elgg-tabs"))
-));
+$page_data = elgg_view_layout('content', [
+	'title' => $title_text,
+	'content' => $search . $body,
+	'filter' => elgg_view_menu('user_support', ['class' => 'elgg-tabs']),
+]);
 
 elgg_pop_context();
 
