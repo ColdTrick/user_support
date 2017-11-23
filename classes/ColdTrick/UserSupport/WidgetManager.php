@@ -37,7 +37,7 @@ class WidgetManager {
 				return elgg_normalize_url($link);
 				break;
 			case 'support_ticket':
-				$link = "user_support/support_ticket/{$owner->username}";
+				$link = "user_support/support_ticket/owner/{$owner->username}";
 				if ($entity->filter === \UserSupportTicket::CLOSED) {
 					$link .= '/archive';
 				}
