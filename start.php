@@ -56,6 +56,8 @@ function user_support_init() {
 	elgg_register_plugin_hook_handler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportTicket');
 	elgg_register_plugin_hook_handler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportStaff');
 	
+	elgg_register_plugin_hook_handler('likes:is_likable', 'object:' . UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
+	
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerTicket');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerHelp');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::promoteCommentToFAQ');
