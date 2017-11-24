@@ -10,7 +10,7 @@
     line-height: 16px;
     text-align: center;
     
-    z-index: 10000;
+    z-index: 1000;
 }
 
 #user-support-button a {
