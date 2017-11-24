@@ -74,8 +74,14 @@ function user_support_init() {
 	
 	elgg_register_plugin_hook_handler('entity:url', 'object', '\ColdTrick\UserSupport\WidgetManager::widgetURL');
 	
+	// permissions
 	elgg_register_plugin_hook_handler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
+	
 	elgg_register_plugin_hook_handler('permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::staffSupportTicket');
+	
+	elgg_register_plugin_hook_handler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteSupportTicket');
+	elgg_register_plugin_hook_handler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteHelp');
+	elgg_register_plugin_hook_handler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteFAQ');
 	
 	// register actions
 	elgg_register_action('user_support/help/edit', dirname(__FILE__) . '/actions/help/edit.php', 'admin');
