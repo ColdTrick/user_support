@@ -14,7 +14,7 @@ class Permissions {
 	 *
 	 * @return void|bool
 	 */
-	public static function staffSupportTicket($hook, $type, $return_value, $params) {
+	public static function editSupportTicket($hook, $type, $return_value, $params) {
 		
 		if ($return_value) {
 			// already have permission

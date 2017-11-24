@@ -77,7 +77,7 @@ function user_support_init() {
 	// permissions
 	elgg_register_plugin_hook_handler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
 	
-	elgg_register_plugin_hook_handler('permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::staffSupportTicket');
+	elgg_register_plugin_hook_handler('permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::editSupportTicket');
 	
 	elgg_register_plugin_hook_handler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteSupportTicket');
 	elgg_register_plugin_hook_handler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteHelp');
