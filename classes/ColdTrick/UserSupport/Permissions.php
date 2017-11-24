@@ -29,4 +29,29 @@ class Permissions {
 				
 		return user_support_staff_gatekeeper(false, $user->guid);
 	}
+	
+	/**
+	 * Prevent FAQ from being created in groups which haven't enabled the feature
+	 *
+	 * @param string $hook         the name of the hook
+	 * @param string $type         the type of the hook
+	 * @param bool   $return_value current return value
+	 * @param array  $params       supplied params
+	 *
+	 * @return void|bool
+	 */
+	public static function faqLogicCheck($hook, $type, $return_value, $params) {
+		
+		$container = elgg_extract('container', $params);
+		$subtype = elgg_extract('subtype', $params);
+		if (!$container instanceof \ElggGroup || $subtype !== \UserSupportFAQ::SUBTYPE) {
+			return;
+		}
+		
+		if ($container->faq_enable === 'yes') {
+			return;
+		}
+		
+		return false;
+	}
 }

@@ -74,6 +74,7 @@ function user_support_init() {
 	
 	elgg_register_plugin_hook_handler('entity:url', 'object', '\ColdTrick\UserSupport\WidgetManager::widgetURL');
 	
+	elgg_register_plugin_hook_handler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
 	elgg_register_plugin_hook_handler('permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::staffSupportTicket');
 	
 	// register actions
