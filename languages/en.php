@@ -96,8 +96,11 @@ To view the Ticket click on this link:
 	'user_support:menu:faq:group' => "Group FAQ",
 	'user_support:menu:faq:create' => "Create FAQ",
 	
-	'user_support:menu_user_hover:make_staff' => "Add to the support staff",
-	'user_support:menu_user_hover:remove_staff' => "Remove from the support staff",
+	'user_support:menu:user_hover:make_staff' => "Add to the support staff",
+	'user_support:menu:user_hover:remove_staff' => "Remove from the support staff",
+	
+	'user_support:menu:entity:comment_promote' => "Make FAQ",
+	'user_support:menu:entity:comment_promote:title' => "Make this comment into an FAQ",
 	
 	// button
 	'user_support:button:text' => "Support",
