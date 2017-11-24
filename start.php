@@ -44,13 +44,6 @@ function user_support_init() {
 	add_group_tool_option('faq', elgg_echo('user_support:group:tool_option'), false);
 	elgg_extend_view('groups/tool_latest', 'user_support/faq/group_module');
 	
-	// register widgets
-	elgg_register_widget_type('faq', elgg_echo('user_support:widgets:faq:title'), elgg_echo('user_support:widgets:faq:description'), array('groups'));
-	elgg_register_widget_type('support_ticket', elgg_echo('user_support:widgets:support_ticket:title'), elgg_echo('user_support:widgets:support_ticket:description'), array('dashboard'), true);
-	if (user_support_staff_gatekeeper(false)) {
-		elgg_register_widget_type('support_staff', elgg_echo('user_support:widgets:support_staff:title'), elgg_echo('user_support:widgets:support_staff:description'), array('dashboard', 'admin'));
-	}
-	
 	// register events
 	elgg_register_event_handler('create', 'object', '\ColdTrick\UserSupport\Comments::supportTicketStatus');
 	
@@ -59,6 +52,10 @@ function user_support_init() {
 	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\UserSupport\Upgrade::setTicketClass');
 	
 	// plugin hooks
+	elgg_register_plugin_hook_handler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerFAQ');
+	elgg_register_plugin_hook_handler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportTicket');
+	elgg_register_plugin_hook_handler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportStaff');
+	
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerTicket');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerHelp');
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', '\ColdTrick\UserSupport\Menus\OwnerBlock::registerUserSupportTickets');
