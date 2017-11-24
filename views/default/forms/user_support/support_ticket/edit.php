@@ -58,9 +58,25 @@ if (!empty($help_url)) {
 }
 
 // footer
-$footer = elgg_view_field([
+$footer_fields = [];
+$footer_fields[] = [
 	'#type' => 'submit',
-	'value' => $submit_text,
-]);
+	'value' => elgg_echo('save'),
+];
+if (elgg_is_xhr()) {
+	$footer_fields[] = [
+		'#type' => 'button',
+		'id' => 'user-support-edit-ticket-cancel',
+		'value' => elgg_echo('cancel'),
+		'class' => [
+			'elgg-button-cancel',
+		],
+	];
+}
 
+$footer = elgg_view_field([
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => $footer_fields,
+]);
 elgg_set_form_footer($footer);
