@@ -30,7 +30,7 @@ class UserHover {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_make',
-			'text' => elgg_echo('user_support:menu_user_hover:make_staff'),
+			'text' => elgg_echo('user_support:menu:user_hover:make_staff'),
 			'href' => elgg_http_add_url_query_elements('action/user_support/support_staff', [
 				'guid' =>  $entity->guid,
 			]),
@@ -42,7 +42,7 @@ class UserHover {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_remove',
-			'text' => elgg_echo('user_support:menu_user_hover:remove_staff'),
+			'text' => elgg_echo('user_support:menu:user_hover:remove_staff'),
 			'href' => elgg_http_add_url_query_elements('action/user_support/support_staff', [
 				'guid' => $entity->guid,
 			]),
