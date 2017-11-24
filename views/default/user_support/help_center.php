@@ -12,7 +12,11 @@ if (elgg_get_plugin_setting('help_enabled', 'user_support') != 'no') {
 	$help_enabled = true;
 }
 
-echo elgg_view_form('user_support/help_center/search', ['class' => 'mbs']);
+echo elgg_format_element('script', [], 'require(["user_support/help_center/search"]);');
+echo elgg_view_form('user_support/help_center/search', [
+	'action' => 'user_support/search',
+	'class' => 'mbs',
+]);
 
 // action buttons
 $buttons = [];
@@ -63,6 +67,11 @@ if (!empty($buttons)) {
 }
 
 // content sections
+echo elgg_format_element('div', [
+	'id' => 'user-support-help-search-result-wrapper',
+	'class' => 'hidden',
+]);
+
 if (elgg_is_xhr() && $help_enabled) {
 	if ($contextual_help_object instanceof UserSupportHelp) {
 		$contextual_help = elgg_view_entity($contextual_help_object, [
@@ -120,8 +129,3 @@ if ($user instanceof ElggUser) {
 		'class' => 'hidden mbs',
 	]);
 }
-
-echo elgg_format_element('div', [
-	'id' => 'user_support_help_search_result_wrapper',
-	'class' => 'hidden',
-]);
