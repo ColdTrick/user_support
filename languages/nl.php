@@ -1,10 +1,16 @@
 <?php
 /**
- * This file was created by Translation Editor v2.0
- * On 2014-12-05 15:33
+ * This file was created by Translation Editor v6.0
+ * On 2017-11-24 12:31
  */
 
 return array (
+  'user_support:settings:help_center:float_button_offset:help' => 'Offset in pixels',
+  'user_support:menu:user_hover:make_staff' => 'Toevoegen aan de support staf',
+  'user_support:menu:user_hover:remove_staff' => 'Verwijderen van de support staf',
+  'user_support:menu:entity:comment_promote' => 'Maak FAQ',
+  'user_support:menu:entity:comment_promote:title' => 'Verander deze reactie in een FAQ',
+  'user_support:action:faq:edit:error:save' => 'Een onbekend probleem is opgetreden tijdens het opslaan van de FAQ',
   'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket %s is gemeld',
   'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket %s is bijgewerkt',
   'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket %s is gemeld',
@@ -30,13 +36,9 @@ return array (
   'user_support:settings:faq:title' => 'FAQ instellingen',
   'user_support:settings:faq:add_faq_site_menu_item' => 'Voeg een site menu items toe voor de FAQ',
   'user_support:settings:faq:add_faq_footer_menu_item' => 'Voeg een footer menu item toe voor de FAQ',
-  'user_support:settings:other:title' => 'Overige',
-  'user_support:settings:other:ignore_site_guid' => 'Negeer site_guid bij het ophalen van helpteksten en FAQ\'s. Kan gebruikt worden op multisite installaties om help en FAQ te delen tussen sites.',
   'river:create:object:support_ticket' => '%s reageerde op %s',
   'user_support:support_ticket:promote' => 'Maak FAQ',
   'user_support:menu:faq:group' => 'Groep FAQ',
-  'user_support:menu_user_hover:make_staff' => 'Voeg toe als support medewerker',
-  'user_support:menu_user_hover:remove_staff' => 'Verwijder als support medewerker',
   'user_support:faq:create:title' => 'Maak een FAQ item',
   'user_support:tickets:owner:title' => '%s Support Tickets',
   'user_support:tickets:owner:archive:title' => '%s gesloten Support Tickets',
@@ -78,9 +80,7 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:support_type:bug' => 'Bug',
   'user_support:support_type:request' => 'Functionele Wens',
   'user_support:anwser' => 'Antwoord',
-  'user_support:anwser:short' => 'A',
   'user_support:question' => 'Vraag',
-  'user_support:question:short' => 'V',
   'user_support:url' => 'URL',
   'user_support:allow_comments' => 'Commentaar toegestaan',
   'user_support:read_more' => 'Lees meer',
@@ -110,20 +110,16 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:tickets:archive:title' => 'Support Tickets archief',
   'user_support:faq:list:title' => 'Toon alle FAQ items',
   'user_support:faq:not_found' => 'Geen FAQ items beschikbaar',
-  'user_support:action:help:edit:error:input' => 'Ongeldige invoer om de help pagina toe te voegen / te bewerken',
   'user_support:action:help:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van de help pagina',
   'user_support:action:help:edit:success' => 'De help pagina is succesvol opgeslagen',
   'user_support:action:help:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van de help pagina',
   'user_support:action:help:delete:success' => 'De help pagina is succesvol verwijderd',
-  'user_support:action:ticket:edit:error:input' => 'Ongeldige invoer om een support ticket toe te voegen / te bewerken',
   'user_support:action:ticket:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van het support ticket',
   'user_support:action:ticket:edit:success' => 'Het support ticket is succesvol opgeslagen',
   'user_support:action:ticket:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van het support ticket',
   'user_support:action:ticket:delete:success' => 'Het support ticket is succesvol verwijderd',
   'user_support:action:faq:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van het FAQ',
   'user_support:action:faq:delete:success' => 'Het FAQ item is succesvol verwijderd',
-  'user_support:action:faq:edit:error:input' => 'Ongeldige invoer bij het toevoegen / bewerken van het FAQ item, voer zowel een Vraag als een Antwoord in',
-  'user_support:action:faq:edit:error:create' => 'Er is een fout opgetreden tijdens het aanmaken van het FAQ item',
   'user_support:action:faq:edit:success' => 'Het FAQ item is succesvol opgeslagen',
   'user_support:action:ticket:close:error:disable' => 'Een onbekende fout is opgetreden tijdens het sluiten van de Support Tickets',
   'user_support:action:ticket:close:success' => 'De Support Tickets zijn succesvol gesloten',

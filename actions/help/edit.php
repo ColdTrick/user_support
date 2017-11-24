@@ -6,7 +6,7 @@ $help_context = get_input('help_context');
 $tags = string_to_tag_array(get_input('tags'));
 
 if (empty($desc) || empty($help_context)) {
-	return elgg_error_response(elgg_echo('user_support:action:help:edit:error:input'));
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if (!empty($guid)) {

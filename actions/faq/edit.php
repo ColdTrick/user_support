@@ -13,7 +13,7 @@ $comments = get_input('allow_comments');
 $help_context = get_input('help_context');
 
 if (empty($title) || empty($desc)) {
-	return elgg_error_response(elgg_echo('user_support:action:faq:edit:error:input'));
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if (!empty($guid)) {
