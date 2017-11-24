@@ -76,6 +76,8 @@ function user_support_init() {
 	elgg_register_plugin_hook_handler('register', 'menu:user_support', '\ColdTrick\UserSupport\Menus\UserSupport::registerStaff');
 	
 	elgg_register_plugin_hook_handler('entity:url', 'object', '\ColdTrick\UserSupport\WidgetManager::widgetURL');
+	elgg_register_plugin_hook_handler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockHelpReshare');
+	elgg_register_plugin_hook_handler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockHelpLink');
 	
 	// permissions
 	elgg_register_plugin_hook_handler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
