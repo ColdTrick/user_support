@@ -16,12 +16,8 @@ $entity = get_entity($guid);
 elgg_set_page_owner_guid($entity->owner_guid);
 
 // build page elements
-$title_text = '';
-if (!empty($entity->support_type)) {
-	$title_text = elgg_echo("user_support:support_type:{$entity->support_type}") . ': ';
-}
 $title = $entity->getDisplayName();
-$title_text .= $title;
+$title_text = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $title;
 
 // build breadcrumb
 if ($entity->owner_guid === elgg_get_logged_in_user_guid()) {

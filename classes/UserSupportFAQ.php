@@ -28,24 +28,7 @@ class UserSupportFAQ extends ElggObject {
 	public function getURL() {
 		return elgg_normalize_url('user_support/faq/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getIconURL($size = 'medium') {
 		
-		switch ($size) {
-			case 'tiny':
-				$result = 'mod/user_support/_graphics/faq/tiny.png';
-				break;
-			default:
-				$result = 'mod/user_support/_graphics/faq/small.png';
-				break;
-		}
-		
-		return elgg_normalize_url($result);
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */

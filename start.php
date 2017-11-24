@@ -16,7 +16,7 @@ elgg_register_event_handler('init', 'system', 'user_support_init');
  */
 function user_support_init() {
 	// extend css
-	elgg_extend_view('elgg.css', 'css/user_support/site');
+	elgg_extend_view('elgg.css', 'css/user_support/site.css');
 	
 	elgg_extend_view('elgg.js', 'js/user_support/site.js');
 	

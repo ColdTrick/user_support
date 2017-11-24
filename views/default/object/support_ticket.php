@@ -26,17 +26,11 @@ if (!$full_view) {
 	$icon = elgg_view_entity_icon($entity, 'small');
 	
 	// title
-	$title = '';
-	if (!empty($entity->support_type)) {
-		$title = elgg_echo("user_support:support_type:{$entity->support_type}") . ': ';
-	}
-	$title_text = $entity->getDisplayName();
-	if (strlen($title_text) > 50) {
-		$title_text = elgg_get_excerpt($title_text, 50);
-	}
+	$title = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ';
+
 	$title .= elgg_view('output/url', [
 		'href' => $entity->getURL(),
-		'text' => $title_text,
+		'text' => $entity->getDisplayName(),
 		'is_trusted' => true,
 	]);
 	

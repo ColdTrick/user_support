@@ -78,25 +78,12 @@ class UserSupportTicket extends ElggObject {
 		return $result;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getIconURL($size = 'medium') {
-		
+	public function getSupportType() {
 		$support_type = strtolower($this->support_type);
 		if (!in_array($support_type, ['bug', 'request', 'question'])) {
 			$support_type = 'question';
 		}
 		
-		switch ($size) {
-			case 'tiny':
-				$result = "mod/user_support/_graphics/{$support_type}/tiny.png";
-				break;
-			default:
-				$result = "mod/user_support/_graphics/{$support_type}/small.png";
-				break;
-		}
-		
-		return elgg_normalize_url($result);
+		return $support_type;
 	}
 }
