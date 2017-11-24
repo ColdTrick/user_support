@@ -39,7 +39,7 @@ define(function(require){
 		ajax.path($form.prop('action'), {
 			data: ajax.objectify($form),
 			success: function(data) {
-				$help_center = $('.user-support-help-center-popup');
+				var $help_center = $('.user-support-help-center-popup');
 				$help_center.find('#user-support-help-search-result-wrapper').html(data);
 				
 				show_form();
