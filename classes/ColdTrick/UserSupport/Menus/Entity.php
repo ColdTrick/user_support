@@ -67,13 +67,15 @@ class Entity {
 			return;
 		}
 		
-		$return_value[] = \ElggMenuItem::factory([
-			'name' => 'edit',
-			'text' => elgg_echo('edit'),
-			'href' => '#',
-			'id' => 'user-support-help-center-edit-help',
-			'priority' => 200,
-		]);
+		if ($entity->canEdit()) {
+			$return_value[] = \ElggMenuItem::factory([
+				'name' => 'edit',
+				'text' => elgg_echo('edit'),
+				'href' => 'javascript:void(0);',
+				'link_class' => 'user-support-help-center-edit-help',
+				'priority' => 200,
+			]);
+		}
 		
 		return $return_value;
 	}

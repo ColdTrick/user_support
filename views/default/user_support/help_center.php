@@ -46,7 +46,7 @@ if ($group instanceof ElggGroup) {
 if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled && elgg_is_xhr()) {
 	$buttons[] = [
 		'text' => elgg_echo('user_support:help_center:help'),
-		'href' => '#',
+		'href' => 'javascript:void(0);',
 		'id' => 'user-support-help-center-add-help',
 	];
 }
@@ -80,6 +80,8 @@ if (elgg_is_xhr() && $help_enabled) {
 	}
 	
 	if (elgg_is_admin_logged_in()) {
+		echo elgg_format_element('script', [], 'require(["user_support/help_center/help"]);');
+		
 		$help_vars = user_support_prepare_help_form_vars([
 			'entity' => $contextual_help_object,
 			'url' => elgg_is_xhr() ? elgg_extract('HTTP_REFERER', $_SERVER) : '',
@@ -91,7 +93,7 @@ if (elgg_is_xhr() && $help_enabled) {
 			$title = elgg_echo('user_support:forms:help:title:edit');
 		}
 		echo elgg_view_module('info', $title, $form, [
-			'id' => 'user_support_help_edit_form_wrapper',
+			'id' => 'user-support-help-edit-form-wrapper',
 			'class' => [
 				'hidden',
 				'mbs',
