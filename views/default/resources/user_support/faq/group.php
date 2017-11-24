@@ -7,7 +7,6 @@ elgg_set_page_owner_guid($group_guid);
 $page_owner = elgg_get_page_owner_entity();
 
 if (!$page_owner instanceof ElggGroup) {
-	register_error(elgg_echo('user_support:page_owner:not_group'));
 	forward(REFERER);
 }
 

@@ -19,9 +19,7 @@ return array(
 	'user_support:support_type:status:closed' => "Closed",
 	
 	'user_support:anwser' => "Answer",
-	'user_support:anwser:short' => "A",
 	'user_support:question' => "Question",
-	'user_support:question:short' => "Q",
 	'user_support:url' => "URL",
 	'user_support:allow_comments' => "Allow comments",
 	'user_support:read_more' => "Read more",
@@ -152,7 +150,6 @@ To view the Ticket click on this link:
 	
 	// actions
 	// help - edit
-	'user_support:action:help:edit:error:input' => "Invalid input to create/edit this contextual help",
 	'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",
 	'user_support:action:help:edit:success' => "The contextual help was saved successfully",
 	
@@ -161,7 +158,6 @@ To view the Ticket click on this link:
 	'user_support:action:help:delete:success' => "The contextual help was delete successfully",
 
 	// ticket - edit
-	'user_support:action:ticket:edit:error:input' => "Invalid input to create/edit a support ticket",
 	'user_support:action:ticket:edit:error:save' => "An unknown error occured while saving the support ticket",
 	'user_support:action:ticket:edit:success' => "The support ticket was saved successfully",
 
@@ -174,8 +170,7 @@ To view the Ticket click on this link:
 	'user_support:action:faq:delete:success' => "The FAQ was deleted successfully",
 	
 	// faq - edit
-	'user_support:action:faq:edit:error:input' => "Incorrect input to create/edit the FAQ, please provide a Question and an Anwser",
-	'user_support:action:faq:edit:error:create' => "An error occured while creating the FAQ",
+	'user_support:action:faq:edit:error:save' => "An unknown error occured while saving the FAQ",
 	'user_support:action:faq:edit:success' => "The FAQ was created/edited successfully",
 	
 	// ticket = close
