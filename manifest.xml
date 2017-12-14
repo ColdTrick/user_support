@@ -3,7 +3,7 @@
 	<name>User Support</name>
 	<id>user_support</id>
 	<author>ColdTrick IT Solutions</author>
-	<version>3.0-beta</version>
+	<version>3.0.0-beta.1</version>
 	<description>Offers user support / faq / help</description>
 	<website>http://www.coldtrick.com/</website>
 	<repository>https://github.com/ColdTrick/user_support</repository>
