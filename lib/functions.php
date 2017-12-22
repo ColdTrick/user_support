@@ -48,9 +48,9 @@ function user_support_get_help_context($url = '') {
 		return false;
 	}
 	
-	$path = parse_url($url, PHP_URL_PATH);
+	$path = rtrim(parse_url($url, PHP_URL_PATH), '/');
 	if (empty($path)) {
-		return false;
+		return '_index';
 	}
 	
 	$parts = explode('/', $path);
