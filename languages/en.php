@@ -24,6 +24,7 @@ return array(
 	'user_support:allow_comments' => "Allow comments",
 	'user_support:read_more' => "Read more",
 	'user_support:help_context' => "Contextual help",
+	'user_support:help_context:help' => "Select a help context where this FAQ applies, when selected this FAQ will be shown in the Help center on that page.",
 	'user_support:reopen' => "Reopen",
 	'user_support:last_comment' => "Last comment by: %s",
 	'user_support:comment_close' => "Comment and close",

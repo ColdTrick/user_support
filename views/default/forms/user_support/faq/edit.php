@@ -49,6 +49,7 @@ if (elgg_is_admin_logged_in() && !empty($help_contexts)) {
 	echo elgg_view_field([
 		'#type' => 'select',
 		'#label' => elgg_echo('user_support:help_context'),
+		'#help' => elgg_echo('user_support:help_context:help'),
 		'name' => 'help_context',
 		'value' => elgg_extract('help_context', $vars),
 		'options' => $help_contexts,
