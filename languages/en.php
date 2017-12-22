@@ -114,6 +114,7 @@ To view the Ticket click on this link:
 	// forms
 	'user_support:forms:help:title' => "Create Contextual Help",
 	'user_support:forms:help:title:edit' => "Edit Contextual Help",
+	'user_support:forms:help:no_context' => "The system was unable to detect a help context on this page, creating a help here is not possible",
 	'user_support:faq:edit:title:edit' => "Edit a FAQ item",
 	'user_support:faq:create:title' => "Create a FAQ item",
 

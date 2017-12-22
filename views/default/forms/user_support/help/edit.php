@@ -1,5 +1,13 @@
 <?php
 
+$help_context = elgg_extract('help_context', $vars);
+if (empty($help_context)) {
+	echo elgg_view('output/longtext', [
+		'value' => elgg_echo('user_support:forms:help:no_context'),
+	]);
+	return;
+}
+
 $entity = elgg_extract('entity', $vars);
 if ($entity instanceof UserSupportHelp) {
 	
@@ -13,7 +21,7 @@ if ($entity instanceof UserSupportHelp) {
 echo elgg_view_field([
 	'#type' => 'hidden',
 	'name' => 'help_context',
-	'value' => elgg_extract('help_context', $vars),
+	'value' => $help_context,
 ]);
 
 echo elgg_view_field([
