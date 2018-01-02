@@ -41,23 +41,22 @@ class Notifications {
 		
 		// get the entity the comment was made on
 		$entity = $object->getContainerEntity();
-		if (!$entity instanceof \UserSupportTicket) {
-			elgg_set_ignore_access($ia);
-			
-			return;
-		}
 		
 		// restore access
 		elgg_set_ignore_access($ia);
 		
-		// by default notify nobody
-		$return_value = [];
+		if (!$entity instanceof \UserSupportTicket) {
+			return;
+		}
 		
 		// did the user comment or some other admin/staff
 		if ($entity->owner_guid !== $actor->guid) {
-			// admin or staff
-			return $return_value;
+			// admin or staff, this will notify ticket owner
+			return;
 		}
+		
+		// by default notify nobody
+		$return_value = [];
 		
 		// get all the admins to notify
 		$users = user_support_get_admin_notify_users($entity);
