@@ -30,6 +30,7 @@ function user_support_init() {
 	// register subtypes for search
 	elgg_register_entity_type('object', UserSupportFAQ::SUBTYPE);
 	elgg_register_entity_type('object', UserSupportHelp::SUBTYPE);
+	elgg_register_entity_type('object', UserSupportTicket::SUBTYPE);
 	
 	// register notifications
 	elgg_register_notification_event('object', 'comment');
@@ -77,7 +78,9 @@ function user_support_init() {
 	
 	elgg_register_plugin_hook_handler('entity:url', 'object', '\ColdTrick\UserSupport\WidgetManager::widgetURL');
 	elgg_register_plugin_hook_handler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockHelpReshare');
+	elgg_register_plugin_hook_handler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockTicketReshare');
 	elgg_register_plugin_hook_handler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockHelpLink');
+	elgg_register_plugin_hook_handler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockTicketLink');
 	
 	// permissions
 	elgg_register_plugin_hook_handler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
