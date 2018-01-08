@@ -38,8 +38,7 @@ class UserSupportTicket extends ElggObject {
 			$title = $this->description;
 		}
 		
-		$title = elgg_get_excerpt($title, 50);
-		return rtrim($title, '.');
+		return elgg_get_excerpt($title, 50);
 	}
 	
 	/**
