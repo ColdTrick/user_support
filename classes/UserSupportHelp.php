@@ -30,4 +30,10 @@ class UserSupportHelp extends ElggObject {
 		return elgg_normalize_url('user_support/help/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function canComment($user_guid = 0, $default = null) {
+		return false;
+	}
 }
