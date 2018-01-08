@@ -86,7 +86,6 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:read_more' => 'Lees meer',
   'user_support:help_context' => 'Help',
   'user_support:reopen' => 'Heropenen',
-  'user_support:last_comment' => 'Laatste commentaar door: %s',
   'river:comment:object:support_ticket' => '%s plaatste een commentaar op %s',
   'user_support:support_ticket:closed' => 'Uw Support Ticket is gesloten',
   'user_support:support_ticket:reopened' => 'Uw Support Ticket is heropend',

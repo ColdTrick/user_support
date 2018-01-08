@@ -21,8 +21,18 @@ class Entity {
 			return;
 		}
 		
+		if ($entity->canComment()) {
+			$return_value[] = \ElggMenuItem::factory([
+				'name' => 'comments',
+				'text' => elgg_view_icon('comment'),
+				'href' => $entity->getURL() . '#comments',
+				'title' => elgg_echo('comments'),
+				'is_trusted' => true,
+			]);
+		}
+		
 		if (!user_support_staff_gatekeeper(false)) {
-			return;
+			return $return_value;
 		}
 		
 		if ($entity->getStatus() === \UserSupportTicket::OPEN) {

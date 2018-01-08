@@ -50,12 +50,19 @@ if (!$full_view) {
 		$comment = elgg_extract(0, $comments);
 		
 		$comment_owner = $comment->getOwnerEntity();
-		$url = elgg_view('output/url', [
-			'href' => $comment->getURL(),
+		$comment_owner_link = elgg_view('output/url', [
 			'text' => $comment_owner->getDisplayName(),
+			'href' => $comment_owner->getURL(),
+			'is_trusted' => true,
 		]);
 		
-		$info = elgg_echo('user_support:last_comment', [$url]);
+		$comment_link = elgg_view('output/url', [
+			'text' => elgg_echo('user_support:last_comment'),
+			'href' => $comment->getURL(),
+			'is_trusted' => true,
+		]);
+		
+		$subtitle .= ' ' . elgg_echo('user_support:support_ticket:by_line:last_comment', [$comment_link, $comment_owner_link]);
 	}
 	
 	$params = [

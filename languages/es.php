@@ -24,7 +24,6 @@ return array (
   'user_support:read_more' => 'Leer más',
   'user_support:help_context' => 'Ayuda contextual',
   'user_support:reopen' => 'Reabrir',
-  'user_support:last_comment' => 'Último comentario por: %s',
   'user_support:comment_close' => 'Comentar y cerrar',
   'user_support:staff_gatekeeper' => 'Esta página sólo está disponible para el personal de soporte',
   'user_support:settings:support_tickets:title' => 'Preferencias de los Tickets de Soporte',
