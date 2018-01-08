@@ -1,10 +1,15 @@
 <?php
 /**
  * This file was created by Translation Editor v6.0
- * On 2017-11-24 12:31
+ * On 2018-01-08 17:09
  */
 
 return array (
+  'user_support:help_context:help' => 'Selecteer een help context waarop deze FAQ van toepassing is, indien geselecteerd zal deze FAQ in het Help Center worden getoond op deze pagina.',
+  'user_support:last_comment' => 'Laatste reactie',
+  'user_support:support_ticket:by_line:last_comment' => '%s door %s',
+  'user_support:forms:help:title:edit' => 'Bewerk Contextuele Help',
+  'user_support:forms:help:no_context' => 'Het systeem was niet in staan een help context te detecteren voor deze pagina, het is niet mogelijk hier een help pagina aan te maken',
   'user_support:settings:help_center:float_button_offset:help' => 'Offset in pixels',
   'user_support:menu:user_hover:make_staff' => 'Toevoegen aan de support staf',
   'user_support:menu:user_hover:remove_staff' => 'Verwijderen van de support staf',
