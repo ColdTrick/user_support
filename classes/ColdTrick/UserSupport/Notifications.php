@@ -240,4 +240,51 @@ class Notifications {
 		
 		return $return_value;
 	}
+	
+	/**
+	 * Allow the enqueue of notification event of private support ticket
+	 * (eg prvented by advanced_notifications)
+	 *
+	 * @param string $hook         the name of the hook
+	 * @param string $type         the type of the hook
+	 * @param bool   $return_value current return value
+	 * @param array  $params       supplied params
+	 *
+	 * @return void|true
+	 */
+	public static function allowTicketEnqueue($hook, $type, $return_value, $params) {
+		
+		$object = elgg_extract('object', $params);
+		if (!$object instanceof \UserSupportTicket) {
+			return;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Allow the enqueue of notification event of private comment on support ticket
+	 * (eg prvented by advanced_notifications)
+	 *
+	 * @param string $hook         the name of the hook
+	 * @param string $type         the type of the hook
+	 * @param bool   $return_value current return value
+	 * @param array  $params       supplied params
+	 *
+	 * @return void|true
+	 */
+	public static function allowTicketCommentEnqueue($hook, $type, $return_value, $params) {
+		
+		$object = elgg_extract('object', $params);
+		if (!$object instanceof \ElggComment) {
+			return;
+		}
+		
+		$container = $object->getContainerEntity();
+		if (!$container instanceof \UserSupportTicket) {
+			return;
+		}
+		
+		return true;
+	}
 }

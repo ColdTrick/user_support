@@ -41,6 +41,9 @@ function user_support_init() {
 	elgg_register_plugin_hook_handler('get', 'subscriptions', '\ColdTrick\UserSupport\Notifications::getSupportTicketSubscribers');
 	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:' . UserSupportTicket::SUBTYPE, '\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage');
 	
+	elgg_register_plugin_hook_handler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketEnqueue', 9999);
+	elgg_register_plugin_hook_handler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketCommentEnqueue', 9999);
+	
 	// add a group tool option for FAQ
 	add_group_tool_option('faq', elgg_echo('user_support:group:tool_option'), false);
 	elgg_extend_view('groups/tool_latest', 'user_support/faq/group_module');
