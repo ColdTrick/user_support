@@ -56,6 +56,33 @@ class Permissions {
 	}
 	
 	/**
+	 * Can a user create an FAQ
+	 *
+	 * @param string $hook         the name of the hook
+	 * @param string $type         the type of the hook
+	 * @param bool   $return_value current return value
+	 * @param array  $params       supplied params
+	 *
+	 * @return void|bool
+	 */
+	public static function faqContainerWriteCheck($hook, $type, $return_value, $params) {
+		
+		$user = elgg_extract('user', $params);
+		$subtype = elgg_extract('subtype', $params);
+		if ($subtype !== \UserSupportFAQ::SUBTYPE || empty($user)) {
+			return;
+		}
+		
+		/* @var $container \ElggEntity */
+		$container = elgg_extract('container', $params);
+		if ($container instanceof \ElggGroup) {
+			return $container->canEdit($user->guid);
+		}
+		
+		return user_support_staff_gatekeeper(false, $user->guid);
+	}
+	
+	/**
 	 * Check delete permissions for Support tickets
 	 *
 	 * @param string $hook         the name of the hook

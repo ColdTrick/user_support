@@ -103,7 +103,17 @@ class Entity {
 		}
 		
 		$site = elgg_get_site_entity();
-		if (!$site->canWriteToContainer(0, 'object', \UserSupportFAQ::SUBTYPE)) {
+		
+		// because comments on tickets are rendered with elgg_set_ignore_access(true)
+		// write permissions are wrong
+		$ia = elgg_set_ignore_access(false);
+		
+		$can_write_faq = $site->canWriteToContainer(0, 'object', \UserSupportFAQ::SUBTYPE);
+		
+		// restore access
+		elgg_set_ignore_access($ia);
+		
+		if (!$can_write_faq) {
 			return;
 		}
 		
