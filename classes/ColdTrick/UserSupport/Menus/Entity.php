@@ -51,6 +51,38 @@ class Entity {
 	}
 	
 	/**
+	 * Cleanup menu items from the entity menu of a Ticket
+	 *
+	 * @param string          $hook         the name of the hook
+	 * @param string          $type         the type of the hook
+	 * @param \ElggMenuItem[] $return_value current return value
+	 * @param array           $params       supplied params
+	 *
+	 * @return void|\ElggMenuItem[]
+	 */
+	public static function cleanupTicket($hook, $type, $return_value, $params) {
+		
+		$entity = elgg_extract('entity', $params);
+		if (!$entity instanceof \UserSupportTicket) {
+			return;
+		}
+		
+		$remove_items = [
+			'access',
+		];
+		
+		foreach ($return_value as $index => $menu_item) {
+			if (!in_array($menu_item->getName(), $remove_items)) {
+				continue;
+			}
+			
+			unset($return_value[$index]);
+		}
+		
+		return $return_value;
+	}
+	
+	/**
 	 * Add menu items to the entity menu of a Help
 	 *
 	 * @param string          $hook         the name of the hook
