@@ -1,6 +1,14 @@
 Version history
 ===============
 
+3.0.0-beta.2 (2018-01-11):
+
+- added: support tickets are now searchable
+- fixed: FAQ container permissions
+- fixed: no comments on contextual help
+- fixed: no notifications about tickets due to advanced_notifications
+- fixed: unable to create help on index
+
 3.0.0-beta.1 (2017-12-14):
 
 - changed: increased Elgg version requirement to 2.3
