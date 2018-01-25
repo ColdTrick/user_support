@@ -138,6 +138,7 @@ To view the Ticket click on this link:
 	'user_support:tickets:archive:title' => "Support tickets archive",
 
 	// faq - list
+	'user_support:faq:sidebar:filter' => "Filter FAQ on tag",
 	'user_support:faq:list:title' => "View all FAQ items",
 	'user_support:faq:not_found' => "No FAQ items available",
 	
