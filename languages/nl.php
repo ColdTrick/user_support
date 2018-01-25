@@ -1,10 +1,14 @@
 <?php
 /**
  * This file was created by Translation Editor v6.0
- * On 2018-01-08 17:09
+ * On 2018-01-25 16:46
  */
 
 return array (
+  'admin:upgrades:user_support:support_ticket_access' => 'Repareer support ticket toegang',
+  'admin:upgrades:user_support:support_ticket_access:description' => 'Voor een beter gebruik van de Support tickets, moet de toegang van de eerder aangemaakte tickets worden bijgewerkt.',
+  'user_support:help_center:search' => 'Zoek in het Helpcenter en de FAQ',
+  'user_support:faq:sidebar:filter' => 'Filter FAQ op tag',
   'user_support:help_context:help' => 'Selecteer een help context waarop deze FAQ van toepassing is, indien geselecteerd zal deze FAQ in het Help Center worden getoond op deze pagina.',
   'user_support:last_comment' => 'Laatste reactie',
   'user_support:support_ticket:by_line:last_comment' => '%s door %s',
