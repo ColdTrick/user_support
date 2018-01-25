@@ -53,6 +53,10 @@
 	margin: 0px;
 }
 
+form.elgg-form-user-support-help-center-search .user-support-help-center-search-input {
+	width: 300px;
+}
+
 #user_support_help_center_help {
 	max-height: 250px;
 	overflow-x: hidden;

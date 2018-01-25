@@ -117,6 +117,8 @@ To view the Ticket click on this link:
 	'user_support:help_center:help:title' => "Contextual help",
 	'user_support:help_center:faq:title' => "FAQ",
 	'user_support:help_center:help_group' => "Help group",
+	
+	'user_support:help_center:search' => "Search in the help and FAQ",
 
 	// forms
 	'user_support:forms:help:title' => "Create Contextual Help",

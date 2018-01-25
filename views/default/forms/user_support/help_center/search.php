@@ -4,7 +4,8 @@ $fields = [];
 $fields[] = [
 	'#type' => 'text',
 	'name' => 'q',
-	'placeholder' => elgg_echo('search'),
+	'placeholder' => elgg_echo('user_support:help_center:search'),
+	'class' => 'user-support-help-center-search-input',
 ];
 $fields[] = [
 	'#type' => 'submit',
