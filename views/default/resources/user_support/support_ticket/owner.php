@@ -76,7 +76,10 @@ $body = elgg_list_entities_from_metadata($options);
 $page_data = elgg_view_layout('content', [
 	'title' => $title_text,
 	'content' => $search . $body,
-	'filter' => elgg_view_menu('user_support', ['class' => 'elgg-tabs']),
+	'filter' => elgg_view_menu('user_support', [
+		'class' => 'elgg-tabs',
+		'sort_by' => 'priority',
+	]),
 ]);
 
 elgg_pop_context();

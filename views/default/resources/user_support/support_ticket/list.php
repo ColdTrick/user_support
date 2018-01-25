@@ -47,6 +47,7 @@ $page_data = elgg_view_layout('content', [
 	'content' => $search . $body,
 	'filter' => elgg_view_menu('user_support', [
 		'class' => 'elgg-tabs',
+		'sort_by' => 'priority',
 	]),
 ]);
 

@@ -29,6 +29,7 @@ class UserSupport {
 			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}", [
 				'q' => $query,
 			]),
+			'priority' => 100,
 		]);
 	
 		$return_value[] = \ElggMenuItem::factory([
@@ -37,6 +38,7 @@ class UserSupport {
 			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}/archive", [
 				'q' => $query,
 			]),
+			'priority' => 200,
 		]);
 		
 		return $return_value;
@@ -66,6 +68,7 @@ class UserSupport {
 			'href' => elgg_http_add_url_query_elements('user_support/support_ticket', [
 				'q' => $query,
 			]),
+			'priority' => 300,
 		]);
 		
 		$return_value[] = \ElggMenuItem::factory([
@@ -74,6 +77,7 @@ class UserSupport {
 			'href' => elgg_http_add_url_query_elements('user_support/support_ticket/archive', [
 				'q' => $query,
 			]),
+			'priority' => 400,
 		]);
 		
 		return $return_value;
