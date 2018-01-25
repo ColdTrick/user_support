@@ -27,7 +27,7 @@ if ($entity->allow_comments === 'yes') {
 
 // build page
 $page_data = elgg_view_layout('content', [
-	'title' => elgg_echo('user_support:question') . ': ' . $title_text,
+	'title' => $title_text,
 	'content' => $body . $comments,
 	'filter' => '',
 ]);

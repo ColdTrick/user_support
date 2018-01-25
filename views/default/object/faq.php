@@ -77,8 +77,7 @@ if (!$full_view) {
 	$summary = elgg_view('object/elements/summary', $params);
 	
 	// body
-	$body = elgg_echo('user_support:anwser') . ': ';
-	$body .= elgg_view('output/longtext', [
+	$body = elgg_view('output/longtext', [
 		'value' => $entity->description,
 	]);
 	
