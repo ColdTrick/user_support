@@ -3,7 +3,7 @@
 	"description": "Offers different community master features to support your users",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "faq", "support"],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"support": {
 		"source": "https://github.com/ColdTrick/user_support",
 		"issues": "https://github.com/ColdTrick/user_support/issues"
