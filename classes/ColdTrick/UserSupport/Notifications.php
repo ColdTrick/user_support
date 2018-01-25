@@ -36,15 +36,8 @@ class Notifications {
 			return;
 		}
 		
-		// ignore access
-		$ia = elgg_set_ignore_access(true);
-		
 		// get the entity the comment was made on
 		$entity = $object->getContainerEntity();
-		
-		// restore access
-		elgg_set_ignore_access($ia);
-		
 		if (!$entity instanceof \UserSupportTicket) {
 			return;
 		}
@@ -116,19 +109,11 @@ class Notifications {
 			return;
 		}
 		
-		// ignore access
-		$ia = elgg_set_ignore_access(true);
-		
 		// get the entity the comment was made on
 		$entity = $object->getContainerEntity();
 		if (!$entity instanceof \UserSupportTicket) {
-			elgg_set_ignore_access($ia);
-			
 			return;
 		}
-		
-		// restore access
-		elgg_set_ignore_access($ia);
 		
 		$language = elgg_extract('language', $params);
 		
@@ -239,52 +224,5 @@ class Notifications {
 		], $language);
 		
 		return $return_value;
-	}
-	
-	/**
-	 * Allow the enqueue of notification event of private support ticket
-	 * (eg prvented by advanced_notifications)
-	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
-	 *
-	 * @return void|true
-	 */
-	public static function allowTicketEnqueue($hook, $type, $return_value, $params) {
-		
-		$object = elgg_extract('object', $params);
-		if (!$object instanceof \UserSupportTicket) {
-			return;
-		}
-		
-		return true;
-	}
-	
-	/**
-	 * Allow the enqueue of notification event of private comment on support ticket
-	 * (eg prvented by advanced_notifications)
-	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
-	 *
-	 * @return void|true
-	 */
-	public static function allowTicketCommentEnqueue($hook, $type, $return_value, $params) {
-		
-		$object = elgg_extract('object', $params);
-		if (!$object instanceof \ElggComment) {
-			return;
-		}
-		
-		$container = $object->getContainerEntity();
-		if (!$container instanceof \UserSupportTicket) {
-			return;
-		}
-		
-		return true;
 	}
 }

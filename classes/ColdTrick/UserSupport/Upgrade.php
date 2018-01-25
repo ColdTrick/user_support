@@ -57,4 +57,30 @@ class Upgrade {
 			update_subtype('object', \UserSupportTicket::SUBTYPE, \UserSupportTicket::class);
 		}
 	}
+	
+	/**
+	 * Register the async upgrade to migrate Support Ticket access to an acl
+	 *
+	 * @param string $event  the name of the event
+	 * @param string $type   the type of the event
+	 * @param mixed  $object supplied params
+	 *
+	 * @return void
+	 */
+	public static function registerSupportTicketAccessUpgrade($event, $type, $object) {
+		
+		$ia = elgg_set_ignore_access(true);
+		
+		$path = 'admin/upgrades/user_support/support_ticket_access';
+		$upgrade = new \ElggUpgrade();
+		if (!$upgrade->getUpgradeFromPath($path)) {
+			$upgrade->setPath($path);
+			$upgrade->title = elgg_echo('admin:upgrades:user_support:support_ticket_access');
+			$upgrade->description = elgg_echo('admin:upgrades:user_support:support_ticket_access:description');
+				
+			$upgrade->save();
+		}
+		
+		elgg_set_ignore_access($ia);
+	}
 }

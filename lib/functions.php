@@ -396,3 +396,61 @@ function user_support_prepare_help_form_vars(array $params = []) {
 	
 	return $result;
 }
+
+/**
+ * Get an ACL to use for storing Support tickets so only the user can access them.
+ * The ACL will be created if not already present
+ *
+ * @param int $user_guid the GUID of the user to get the ACL for (default: current user)
+ *
+ * @return false|int
+ */
+function user_support_get_support_ticket_acl($user_guid = 0) {
+	static $cache = [];
+	
+	$user_guid = (int) $user_guid;
+	if ($user_guid < 1) {
+		$user_guid = elgg_get_logged_in_user_guid();
+	}
+	
+	if (empty($user_guid)) {
+		return false;
+	}
+	
+	if (isset($cache[$user_guid])) {
+		return $cache[$user_guid];
+	}
+	
+	// check if ACL is present
+	$acl_id = (int) elgg_get_plugin_user_setting('support_ticket_acl', $user_guid, 'user_support');
+	if (!empty($acl_id)) {
+		$cache[$user_guid] = $acl_id;
+		return $cache[$user_guid];
+	}
+	
+	$plugin = elgg_get_plugin_from_id('user_support');
+	
+	// create acl this user
+	$acl_id = create_access_collection("support_ticket_acl_{$user_guid}", $plugin->guid);
+	if (empty($acl_id)) {
+		return false;
+	}
+	
+	$failure = function() use ($acl_id) {
+		// storing ACL-id failed, cleanup
+		delete_access_collection($acl_id);
+		return false;
+	};
+	
+	// add user to acl
+	if (!add_user_to_access_collection($user_guid, $acl_id)) {
+		return $failure();
+	}
+	
+	if (!elgg_set_plugin_user_setting('support_ticket_acl', $acl_id, $user_guid, 'user_support')) {
+		return $failure();
+	}
+	
+	$cache[$user_guid] = $acl_id;
+	return $cache[$user_guid];
+}

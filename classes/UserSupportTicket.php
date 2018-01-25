@@ -42,6 +42,23 @@ class UserSupportTicket extends ElggObject {
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 */
+	public function save() {
+		
+		// make sure the ticket has the correct access_id
+		if ($this->access_id === ACCESS_PRIVATE) {
+			$acl = user_support_get_support_ticket_acl($this->owner_guid);
+			if (empty($acl)) {
+				throw new InvalidArgumentException("Unable to set correct access level for support ticket");
+			}
+			$this->access_id = $acl;
+		}
+		
+		return parent::save();
+	}
+	
+	/**
 	 * Get the status of the ticket
 	 *
 	 * @return string
@@ -77,6 +94,11 @@ class UserSupportTicket extends ElggObject {
 		return $result;
 	}
 	
+	/**
+	 * Get the type of the support ticket
+	 *
+	 * @return string
+	 */
 	public function getSupportType() {
 		$support_type = strtolower($this->support_type);
 		if (!in_array($support_type, ['bug', 'request', 'question'])) {

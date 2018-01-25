@@ -9,6 +9,10 @@ return array(
 	'item:object:help' => "User support Contextual help",
 	'item:object:support_ticket' => "User support Ticket",
 	
+	// upgrades
+	'admin:upgrades:user_support:support_ticket_access' => "Repair support ticket access",
+	'admin:upgrades:user_support:support_ticket_access:description' => "For consistent use of Support tickets previously created tickets need their access updated.",
+	
 	// general
 	'user_support:support_type' => "Category",
 	'user_support:support_type:question' => "Question",

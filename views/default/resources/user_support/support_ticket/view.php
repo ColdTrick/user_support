@@ -31,11 +31,7 @@ elgg_push_breadcrumb($title);
 $content = elgg_view_entity($entity);
 
 // add comments
-$comments_ia = elgg_set_ignore_access(true);
-
 $content .= elgg_view_comments($entity);
-
-elgg_set_ignore_access($comments_ia);
 
 // build page
 $page_data = elgg_view_layout('content', [
