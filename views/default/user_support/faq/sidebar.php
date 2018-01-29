@@ -72,7 +72,7 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 	];
 	
 	if (!empty($filter)) {
-		$tag_options['wheres'][] = '(msv.string NOT IN ("' . implode('", ', $filter) . '"))';
+		$tag_options['wheres'][] = '(msv.string NOT IN ("' . implode('", "', $filter) . '"))';
 	}
 	
 	if (!empty($guids)) {

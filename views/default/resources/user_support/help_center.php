@@ -20,18 +20,32 @@ if (elgg_is_active_plugin('groups')) {
 	}
 }
 
+$faq = '';
+$faq_limit = 3;
 $faq_options = [
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
-	'limit' => 5,
+	'limit' => $faq_limit,
 	'metadata_name_value_pairs' => [
 		'name' => 'help_context',
 		'value' => $help_context,
 	],
 	'pagination' => false,
+	'count' => true,
 ];
 
-$faq = elgg_list_entities_from_metadata($faq_options);
+$faq_count = elgg_get_entities_from_metadata($faq_options);
+
+if ($faq_count) {
+	$faq = elgg_list_entities_from_metadata($faq_options);
+	if ($faq_count > $faq_limit) {
+		$faq .= elgg_view('output/url', [
+			'text' => elgg_echo('user_support:faq:read_more', [($faq_count - $faq_limit)]),
+			'href' => 'user_support/faq/context?help_context=' . $help_context,
+			'class' => 'float-alt',
+		]);
+	}
+}
 
 $help_center = elgg_view('user_support/help_center', [
 	'group' => $group,

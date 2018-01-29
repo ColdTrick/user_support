@@ -52,6 +52,12 @@ class PageHandler {
 						return true;
 						
 						break;
+					case 'context':
+						$vars['help_context'] = get_input('help_context');
+						echo elgg_view_resource('user_support/faq/context', $vars);
+						return true;
+						
+						break;
 					default:
 						if (!empty($page[1]) && is_numeric($page[1])) {
 							register_error(elgg_echo('changebookmark'));

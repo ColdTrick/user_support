@@ -63,7 +63,7 @@ if (!empty($buttons)) {
 		$button_content .= elgg_view('output/url', $options);
 	}
 	
-	echo elgg_format_element('div', ['class' => 'mbs'], $button_content);
+	echo elgg_format_element('div', ['class' => 'mbm'], $button_content);
 }
 
 // content sections
@@ -82,7 +82,7 @@ if (elgg_is_xhr() && $help_enabled) {
 		echo elgg_view_module('info', elgg_echo('user_support:help_center:help:title'), $contextual_help, [
 			'id' => 'user_support_help_center_help',
 			'class' => [
-				'mbs',
+				'mbm',
 				'user-support-help-center-section',
 			],
 		]);

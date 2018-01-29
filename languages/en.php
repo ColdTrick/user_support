@@ -143,6 +143,8 @@ To view the Ticket click on this link:
 	'user_support:faq:sidebar:filter' => "Filter FAQ on tag",
 	'user_support:faq:list:title' => "View all FAQ items",
 	'user_support:faq:not_found' => "No FAQ items available",
+	'user_support:faq:context' => "Related FAQs",
+	'user_support:faq:read_more' => "Read %s more FAQs",
 	
 	// group faq
 	'user_support:group:tool_option' => "Enable support for group FAQs",
