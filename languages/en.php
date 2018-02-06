@@ -25,6 +25,7 @@ return array(
 	'user_support:anwser' => "Answer",
 	'user_support:question' => "Question",
 	'user_support:url' => "URL",
+	'user_support:url:info' => "This ticket has been created %shere%s.",
 	'user_support:allow_comments' => "Allow comments",
 	'user_support:read_more' => "Read more",
 	'user_support:help_context' => "Contextual help",

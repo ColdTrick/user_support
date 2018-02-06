@@ -97,10 +97,8 @@ if (!$full_view) {
 	// body
 	$body = '';
 	if (!empty($entity->help_url)) {
-		$help_url = elgg_echo('user_support:url') . ': ';
-		$help_url .= elgg_view('output/url', [
-			'href' => $entity->help_url,
-		]);
+		$help_url = elgg_echo('user_support:url:info', ["<a href='{$entity->help_url}'>", '</a>']);
+		
 		
 		$body .= elgg_format_element('div', [], $help_url);
 	}

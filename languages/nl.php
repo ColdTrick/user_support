@@ -91,6 +91,7 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:anwser' => 'Antwoord',
   'user_support:question' => 'Vraag',
   'user_support:url' => 'URL',
+  'user_support:url:info' => "Dit ticket is %shier%s gemaakt.",
   'user_support:allow_comments' => 'Commentaar toegestaan',
   'user_support:read_more' => 'Lees meer',
   'user_support:help_context' => 'Help',
