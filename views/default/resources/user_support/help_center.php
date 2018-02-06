@@ -21,7 +21,7 @@ if (elgg_is_active_plugin('groups')) {
 }
 
 $faq = '';
-$faq_limit = 3;
+$faq_limit = 5;
 $faq_options = [
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
