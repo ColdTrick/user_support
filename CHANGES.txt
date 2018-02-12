@@ -1,6 +1,18 @@
 Version history
 ===============
 
+3.0 (2018-02-12):
+
+- added: view more link from helpcenter faq listing
+- changed: clarified URL on ticket info
+- changed: dropped unneeded title/description prefix in FAQ detail view
+- changed: FAQ sidebar filter title
+- changed: listing of FAQs in helpcenter are sorted by likes
+- changed: no longer use ACCESS_PRIVATE for Support tickets
+- changed: set custom placeholder on helpcenter search input
+- changed: support ticket tabs ordered by priority
+- fixed: help URL not set on ticket form
+
 3.0.0-beta.2 (2018-01-11):
 
 - added: support tickets are now searchable
