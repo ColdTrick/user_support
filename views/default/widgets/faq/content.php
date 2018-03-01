@@ -11,7 +11,7 @@ if ($num_display < 1) {
 	$num_display = 4;
 }
 
-$options = [
+$list_options = [
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
 	'limit' => $num_display,
@@ -19,12 +19,26 @@ $options = [
 ];
 
 if ($owner instanceof ElggGroup) {
-	$options['container_guid'] = $owner->guid;
+	$list_options['container_guid'] = $owner->guid;
 	
 	$more_link .= "/group/{$owner->guid}/all";
 }
 
-$content = elgg_list_entities($options);
+if (elgg_is_active_plugin('likes')) {
+	$dbprefix = elgg_get_config('dbprefix');
+	
+	$likes_name_id = elgg_get_metastring_id('likes');
+	$list_options['selects'][] = "IFNULL(likes.likes_count, 0) as likes_count";
+	$list_options['joins'][] = "LEFT OUTER JOIN (SELECT entity_guid, count(*) as likes_count
+			FROM " . $dbprefix . "annotations
+			WHERE name_id = " . $likes_name_id . "
+			GROUP BY entity_guid
+			ORDER BY likes_count DESC
+		) likes ON likes.entity_guid = e.guid";
+	$list_options['order_by'] = "likes_count DESC, e.time_created DESC";
+}
+
+$content = elgg_list_entities($list_options);
 if (empty($content)) {
 	echo elgg_view('output/longtext', [
 		'value' => elgg_echo('user_support:faq:not_found'),

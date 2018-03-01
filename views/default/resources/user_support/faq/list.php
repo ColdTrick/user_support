@@ -27,16 +27,26 @@ foreach ($filter as $index => $tag) {
 	];
 }
 
+$dbprefix = elgg_get_config('dbprefix');
+
 // text search
 if (!empty($faq_query)) {
 	$faq_query = sanitise_string($faq_query);
 	
-	$list_options['joins'] = [
-		'JOIN ' . elgg_get_config('dbprefix') . 'objects_entity oe ON e.guid = oe.guid',
-	];
-	$list_options['wheres'] = [
-		"(oe.title LIKE '%{$faq_query}%' OR oe.description LIKE '%{$faq_query}%')",
-	];
+	$list_options['joins'][] = "JOIN {$dbprefix}objects_entity oe ON e.guid = oe.guid";
+	$list_options['wheres'][] = "(oe.title LIKE '%{$faq_query}%' OR oe.description LIKE '%{$faq_query}%')";
+}
+
+if (elgg_is_active_plugin('likes')) {
+	$likes_name_id = elgg_get_metastring_id('likes');
+	$list_options['selects'][] = "IFNULL(likes.likes_count, 0) as likes_count";
+	$list_options['joins'][] = "LEFT OUTER JOIN (SELECT entity_guid, count(*) as likes_count
+			FROM " . $dbprefix . "annotations
+			WHERE name_id = " . $likes_name_id . "
+			GROUP BY entity_guid
+			ORDER BY likes_count DESC
+		) likes ON likes.entity_guid = e.guid";
+	$list_options['order_by'] = "likes_count DESC, e.time_created DESC";
 }
 
 $list = elgg_list_entities_from_metadata($list_options);
