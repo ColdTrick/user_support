@@ -1,6 +1,10 @@
 Version history
 ===============
 
+3.0.1 (2018-03-08):
+
+- changed: faq listings now all are sorted by likes
+
 3.0 (2018-02-12):
 
 - added: view more link from helpcenter faq listing
