@@ -10,16 +10,24 @@ if ($show_floating_button === 'no') {
 }
 
 $help_context = user_support_get_help_context();
-$contextual_help_object = user_support_get_help_for_context($help_context);
-
-$faq_count = elgg_get_entities_from_metadata([
-	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
-	'count' => true,
-	'metadata_name_value_pairs' => [
-		'help_context' => $help_context,
-	],
-]);
+$content_count = 0;
+if ($help_context !== false) {
+	$subtypes = [
+		UserSupportFAQ::SUBTYPE,
+	];
+	if (elgg_get_plugin_setting('help_enabled', 'user_support') !== 'no') {
+		$subtypes[] = UserSupportHelp::SUBTYPE;
+	}
+	
+	$content_count = elgg_get_entities_from_metadata([
+		'type' => 'object',
+		'subtypes' => $subtypes,
+		'count' => true,
+		'metadata_name_value_pairs' => [
+			'help_context' => $help_context,
+		],
+	]);
+}
 
 $link_text = '';
 foreach (str_split(elgg_echo('user_support:button:text')) as $char) {
@@ -34,7 +42,7 @@ $link_options = [
 	],
 ];
 
-if ((!empty($contextual_help_object) && (elgg_get_plugin_setting('help_enabled', 'user_support') != 'no')) || ($help_context !== false && !empty($faq_count))) {
+if ($content_count > 0) {
 	$link_options['class'][] = 'elgg-state-active';
 }
 

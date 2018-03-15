@@ -19,7 +19,7 @@ function user_support_get_help_for_context($help_context) {
 	$help = elgg_get_entities_from_metadata([
 		'type' => 'object',
 		'subtype' => UserSupportHelp::SUBTYPE,
-		'limit' => false,
+		'limit' => 1,
 		'metadata_name_value_pairs' => [
 			'help_context' => $help_context,
 		],
