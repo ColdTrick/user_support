@@ -67,6 +67,11 @@ class Widgets {
 	 */
 	public static function registerSupportStaff($hook, $type, $return_value, $params) {
 		
+		$context = elgg_extract('context', $params);
+		if (!in_array($context, ['dashboard', 'admin'])) {
+			return;
+		}
+		
 		if (!user_support_staff_gatekeeper(false)) {
 			return;
 		}
