@@ -1,10 +1,15 @@
 <?php
 /**
- * This file was created by Translation Editor v6.0
- * On 2018-01-25 16:46
+ * This file was created by Translation Editor v6.1
+ * On 2018-03-19 11:14
  */
 
 return array (
+  'user_support:settings:faq:group_faq' => 'Schakel FAQ in groepen in',
+  'user_support:settings:faq:group_faq:yes_off' => 'Ja, standaard uitgeschakeld',
+  'user_support:settings:faq:group_faq:yes' => 'Ja, standaard ingeschakeld',
+  'user_support:faq:context' => 'Gerelateerde FAQ\'s',
+  'user_support:faq:read_more' => 'Lees %s meer FAQ\'s',
   'admin:upgrades:user_support:support_ticket_access' => 'Repareer support ticket toegang',
   'admin:upgrades:user_support:support_ticket_access:description' => 'Voor een beter gebruik van de Support tickets, moet de toegang van de eerder aangemaakte tickets worden bijgewerkt.',
   'user_support:help_center:search' => 'Zoek in het Helpcenter en de FAQ',
@@ -91,7 +96,7 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:anwser' => 'Antwoord',
   'user_support:question' => 'Vraag',
   'user_support:url' => 'URL',
-  'user_support:url:info' => "Dit ticket is %shier%s gemaakt.",
+  'user_support:url:info' => 'Dit ticket is %shier%s gemaakt.',
   'user_support:allow_comments' => 'Commentaar toegestaan',
   'user_support:read_more' => 'Lees meer',
   'user_support:help_context' => 'Help',
