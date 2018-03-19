@@ -61,6 +61,10 @@ return array(
 	'user_support:settings:faq:add_faq_site_menu_item' => "Add a site menu item to the FAQ",
 	'user_support:settings:faq:add_faq_footer_menu_item' => "Add a footer menu item to the FAQ",
 	
+	'user_support:settings:faq:group_faq' => "Enable FAQ in groups",
+	'user_support:settings:faq:group_faq:yes_off' => "Yes, default disabled",
+	'user_support:settings:faq:group_faq:yes' => "Yes, default enabled",
+	
 	// user settings
 	'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",
 	

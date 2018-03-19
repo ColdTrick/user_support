@@ -48,11 +48,7 @@ class Permissions {
 			return;
 		}
 		
-		if ($container->faq_enable === 'yes') {
-			return;
-		}
-		
-		return false;
+		return user_support_is_group_faq_enabled($container);
 	}
 	
 	/**

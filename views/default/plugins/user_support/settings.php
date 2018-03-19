@@ -87,6 +87,18 @@ $faq .= elgg_view_field([
 	'options_values' => $noyes_options,
 ]);
 
+$faq .= elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('user_support:settings:faq:group_faq'),
+	'name' => 'params[group_faq]',
+	'value' => $plugin->group_faq ?: 'yes',
+	'options_values' => [
+		'no' => elgg_echo('option:no'),
+		'yes_off' => elgg_echo('user_support:settings:faq:group_faq:yes_off'),
+		'yes' => elgg_echo('user_support:settings:faq:group_faq:yes'),
+	],
+]);
+
 echo elgg_view_module('inline', elgg_echo('user_support:settings:faq:title'), $faq);
 
 // support tickets

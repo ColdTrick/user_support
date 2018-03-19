@@ -43,7 +43,7 @@ class OwnerBlock {
 	public static function registerGroupFAQ($hook, $type, $return_value, $params) {
 		
 		$entity = elgg_extract('entity', $params);
-		if (!$entity instanceof \ElggGroup || $entity->faq_enable !== 'yes') {
+		if (!$entity instanceof \ElggGroup || !user_support_is_group_faq_enabled($entity)) {
 			return;
 		}
 		

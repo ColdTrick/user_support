@@ -4,12 +4,12 @@
  */
 
 $group = elgg_get_page_owner_entity();
-if (!$group instanceof ElggGroup || $group->faq_enable != 'yes') {
+if (!$group instanceof ElggGroup || !user_support_is_group_faq_enabled($group)) {
 	return;
 }
 
 $all_link = elgg_view('output/url', [
-	'href' => 'user_support/faq/group/{$group->guid}/all',
+	'href' => "user_support/faq/group/{$group->guid}/all",
 	'text' => elgg_echo('link:view:all'),
 	'is_trusted' => true,
 ]);
