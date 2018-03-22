@@ -1,6 +1,12 @@
 Version history
 ===============
 
+3.1 (2018-03-22):
+
+- added: plugin settings to enable/disable group FAQ
+- fixed: combined check for FAQ and Help in FAB
+- fixed: prevent unneeded staff check in widget registration
+
 3.0.1 (2018-03-08):
 
 - changed: faq listings now all are sorted by likes
