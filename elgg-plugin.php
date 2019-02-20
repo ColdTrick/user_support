@@ -11,19 +11,19 @@ return [
 	'entities' => [
 		[
 			'type' => 'object',
-			'subtype' => \UserSupportFAQ::SUBTYPE,
+			'subtype' => 'faq',
 			'class' => \UserSupportFAQ::class,
 			'searchable' => true,
 		],
 		[
 			'type' => 'object',
-			'subtype' => \UserSupportHelp::SUBTYPE,
+			'subtype' => 'help',
 			'class' => \UserSupportHelp::class,
 			'searchable' => true,
 		],
 		[
 			'type' => 'object',
-			'subtype' => \UserSupportTicket::SUBTYPE,
+			'subtype' => 'support_ticket',
 			'class' => \UserSupportTicket::class,
 			'searchable' => true,
 		],

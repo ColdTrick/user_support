@@ -12,7 +12,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	public function init() {
 		
 		elgg_register_notification_event('object', 'comment');
-		elgg_register_notification_event('object', UserSupportTicket::SUBTYPE);
+		elgg_register_notification_event('object', \UserSupportTicket::SUBTYPE);
 		
 		elgg_register_page_handler('user_support', '\ColdTrick\UserSupport\PageHandler::userSupport');
 		
@@ -63,7 +63,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('prepare', 'notification:create:object:comment', '\ColdTrick\UserSupport\Notifications::prepareSupportTicketCommentMessage');
 		
 		$hooks->registerHandler('get', 'subscriptions', '\ColdTrick\UserSupport\Notifications::getSupportTicketSubscribers');
-		$hooks->registerHandler('prepare', 'notification:create:object:' . UserSupportTicket::SUBTYPE, '\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage');
+		$hooks->registerHandler('prepare', 'notification:create:object:' . \UserSupportTicket::SUBTYPE, '\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage');
 		
 		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketEnqueue', 9999);
 		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketCommentEnqueue', 9999);
@@ -73,7 +73,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportTicket');
 		$hooks->registerHandler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportStaff');
 		
-		$hooks->registerHandler('likes:is_likable', 'object:' . UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
+		$hooks->registerHandler('likes:is_likable', 'object:' . \UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
 		
 		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerTicket');
 		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::cleanupTicket', 9999);
