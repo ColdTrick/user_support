@@ -1,9 +1,11 @@
 <?php
 
+use Elgg\Database\QueryBuilder;
+
 $filter = (array) get_input('filter');
 $query_params = ['filter' => $filter];
 $faq_query = get_input('faq_query');
-$menu = '';
+$menu_items = [];
 $guids = null;
 
 if (!empty($faq_query)) {
@@ -14,7 +16,7 @@ if (!empty($filter) || !empty($faq_query)) {
 	// get entity guids for filtering elgg_get_tags
 	$guid_options = [
 		'type' => 'object',
-		'subtype' => UserSupportFAQ::SUBTYPE,
+		'subtype' => \UserSupportFAQ::SUBTYPE,
 		'limit' => false,
 		'metadata_name_value_pairs' => [],
 		'callback' => function($row) {
@@ -34,18 +36,14 @@ if (!empty($filter) || !empty($faq_query)) {
 	}
 	
 	// text search
-	if (!empty($faq_query)) {
-		$faq_query = sanitise_string($faq_query);
-		
-		$guid_options['joins'] = [
-			'JOIN ' . elgg_get_config('dbprefix') . 'objects_entity oe ON e.guid = oe.guid',
-		];
-		$guid_options['wheres'] = [
-			"(oe.title LIKE '%{$faq_query}%' OR oe.description LIKE '%{$faq_query}%')",
-		];
-	}
+	$getter = 'elgg_get_entities';
 	
-	$guids = elgg_get_entities_from_metadata($guid_options);
+	if (!empty($faq_query)) {
+		$options['query'] = $faq_query;
+		$getter = 'elgg_search';
+	}
+		
+	$guids = elgg_get_entities($guid_options, $getter);
 	
 	foreach ($filter as $index => $filter_tag) {
 		if ($index > 2) {
@@ -58,10 +56,12 @@ if (!empty($filter) || !empty($faq_query)) {
 		// selected items can be deselected
 		unset($tag_query_params['filter'][$pos]);
 		
-		$menu .= elgg_format_element('li', ['class' => 'elgg-state-selected'], elgg_view('output/url', [
+		$menu_items[] = [
+			'name' => $filter_tag,
+			'text' => $filter_tag,
+			'icon' => 'checkmark',
 			'href' => elgg_http_add_url_query_elements('user_support/faq', $tag_query_params),
-			'text' => elgg_view_icon('checkmark', 'float') . $filter_tag,
-		]));
+		];
 	}
 }
 
@@ -74,11 +74,15 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 	];
 	
 	if (!empty($filter)) {
-		$tag_options['wheres'][] = '(msv.string NOT IN ("' . implode('", "', $filter) . '"))';
+		$tag_options['wheres'][] = function (QueryBuilder $qb) {
+			return $qb->compare('msv.string', 'NOT IN', $filter, ELGG_VALUE_STRING);
+		};
 	}
 	
 	if (!empty($guids)) {
-		$tag_options['wheres'][] = '(e.guid IN (' . implode(',', $guids) . '))';
+		$tag_options['wheres'][] = function (QueryBuilder $qb) {
+			return $qb->compare('e.guid', 'IN', $guids, ELGG_VALUE_GUID);
+		};
 	}
 	
 	$tags = elgg_get_tags($tag_options);
@@ -90,17 +94,22 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 			
 			// add the extra tag to the filter
 			$tag_query_params['filter'][]  = $tag_text;
-						
-			$menu .= elgg_format_element('li', [], elgg_view('output/url', [
+			
+			$menu_items[] = [
+				'name' => $tag_text,
+				'text' => $tag_text,
+				'icon' => 'checkmark',
 				'href' => elgg_http_add_url_query_elements('user_support/faq', $tag_query_params),
-				'text' => elgg_view_icon('checkmark', 'float') . $tag_text,
-			]));
+			];
 		}
 	}
 }
 
-if ($menu) {
-	$body = elgg_format_element('ul', ['class' => ['elgg-menu', 'elgg-menu-page', 'elgg-menu-faq']], $menu);
+if (!empty($menu_items)) {
+	$body = elgg_view_menu('faq_filter', [
+		'items' => $menu_items,
+		'class' => ['elgg-menu-page'],
+	]);
 	
 	echo elgg_view_module('aside', elgg_echo('user_support:faq:sidebar:filter'), $body);
 }

@@ -35,7 +35,7 @@ class UserSupport {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'my_archive',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine:archive'),
-			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}/archive", [
+			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}/" . \UserSupportTicket::CLOSED, [
 				'q' => $query,
 			]),
 			'priority' => 200,

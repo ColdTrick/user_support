@@ -8,7 +8,11 @@ return array(
 	'item:object:faq' => "User support FAQ",
 	'item:object:help' => "User support Contextual help",
 	'item:object:support_ticket' => "User support Ticket",
-	
+
+	'collection:object:faq' => "User support FAQs",
+	'collection:object:help' => "User support Contextual help",
+	'collection:object:support_ticket' => "User support Tickets",
+
 	// general
 	'user_support:support_type' => "Category",
 	'user_support:support_type:question' => "Question",
@@ -100,7 +104,7 @@ To view the Ticket click on this link:
 	
 	'user_support:menu:faq' => "FAQ",
 	'user_support:menu:faq:group' => "Group FAQ",
-	'user_support:menu:faq:create' => "Create FAQ",
+	'add:object:faq' => "Create FAQ",
 	
 	'user_support:menu:user_hover:make_staff' => "Add to the support staff",
 	'user_support:menu:user_hover:remove_staff' => "Remove from the support staff",
@@ -152,16 +156,16 @@ To view the Ticket click on this link:
 	'user_support:faq:group:title' => "%s FAQ",
 
 	// widgets
-	'user_support:widgets:faq:title' => "FAQ",
-	'user_support:widgets:faq:description' => "Show a list of the most recently added FAQ items",
+	'widgets:faq:name' => "FAQ",
+	'widgets:faq:description' => "Show a list of the most recently added FAQ items",
 	
-	'user_support:widgets:support_ticket:title' => "Support tickets",
-	'user_support:widgets:support_ticket:description' => "Shows you a list of your support tickets",
+	'widgets:support_ticket:name' => "Support tickets",
+	'widgets:support_ticket:description' => "Shows you a list of your support tickets",
 	'user_support:widgets:support_ticket:filter' => "Which tickets do you wish to see",
 	'user_support:widgets:support_ticket:filter:all' => "All",
 	
-	'user_support:widgets:support_staff:title' => "Support staff",
-	'user_support:widgets:support_staff:description' => "Shows you a list of the open support tickets",
+	'widgets:support_staff:name' => "Support staff",
+	'widgets:support_staff:description' => "Shows you a list of the open support tickets",
 	
 	// actions
 	// help - edit

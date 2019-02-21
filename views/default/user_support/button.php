@@ -19,7 +19,7 @@ if ($help_context !== false) {
 		$subtypes[] = UserSupportHelp::SUBTYPE;
 	}
 	
-	$content_count = elgg_get_entities_from_metadata([
+	$content_count = elgg_get_entities([
 		'type' => 'object',
 		'subtypes' => $subtypes,
 		'count' => true,

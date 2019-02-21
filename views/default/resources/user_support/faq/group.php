@@ -2,27 +2,23 @@
 
 // get the page owner
 $group_guid = (int) elgg_extract('guid', $vars);
-elgg_set_page_owner_guid($group_guid);
+
+elgg_group_gatekeeper();
+elgg_group_tool_gatekeeper('faq');
 
 $page_owner = elgg_get_page_owner_entity();
 
-if (!$page_owner instanceof ElggGroup) {
-	forward(REFERER);
-}
-
-elgg_group_gatekeeper();
-
-elgg_push_context('faq');
-
 // build breadcrumb
-elgg_push_breadcrumb($page_owner->getDisplayName());
+elgg_push_collection_breadcrumbs('ojbect', 'faq', $page_owner);
+
+elgg_register_title_button('user_support', 'add', 'object', 'faq');
 
 // build page elements
 $title_text = elgg_echo('user_support:faq:group:title', [$page_owner->getDisplayName()]);
 
 $list_options = [
 	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
+	'subtype' => \UserSupportFAQ::SUBTYPE,
 	'container_guid' => $page_owner->guid,
 	'no_results' => elgg_echo('user_support:faq:not_found'),
 ];
@@ -44,13 +40,11 @@ if (elgg_is_active_plugin('likes')) {
 $content = elgg_list_entities($list_options);
 
 // build page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $content,
-	'filter' => '',
+	'filter' => false,
 ]);
-
-elgg_pop_context();
 
 // draw page
 echo elgg_view_page($title_text, $page_data);

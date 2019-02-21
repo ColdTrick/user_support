@@ -23,12 +23,9 @@ if (!empty($metadata)) {
 	}
 }
 
-$submit_text = elgg_echo('save');
-
 $entity = elgg_extract('entity', $vars);
 if ($entity instanceof UserSupportFAQ) {
 	
-	$submit_text = elgg_echo('edit');
 	
 	echo elgg_view_field([
 		'#type' => 'hidden',
@@ -92,20 +89,19 @@ echo elgg_view_field([
 ]);
 
 echo elgg_view_field([
-	'#type' => 'select',
+	'#type' => 'checkbox',
 	'#label' => elgg_echo('user_support:allow_comments'),
 	'name' => 'allow_comments',
-	'value' => elgg_extract('allow_comments', $vars),
-	'options_values' => [
-		'no' => elgg_echo('option:no'),
-		'yes' => elgg_echo('option:yes'),
-	],
+	'default' => 'no',
+	'value' => 'yes',
+	'checked' => elgg_extract('allow_comments', $vars) === 'yes',
+	'switch' => true,
 ]);
 
 // form footer
 $footer = elgg_view_field([
 	'#type' => 'submit',
-	'value' => $submit_text,
+	'value' => elgg_echo('save'),
 ]);
 
 elgg_set_form_footer($footer);

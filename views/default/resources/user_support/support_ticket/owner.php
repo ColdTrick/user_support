@@ -1,20 +1,15 @@
 <?php
 
-elgg_gatekeeper();
+use Elgg\Database\Clauses\OrderByClause;
 
-$username = elgg_extract('username', $vars);
-$user = get_user_by_username($username);
+$user = elgg_get_page_owner_entity();
 if (!$user instanceof ElggUser) {
-	register_error(elgg_echo('noaccess'));
-	forward(REFERER);
+	throw new \Elgg\EntityNotFoundException();
 }
 
 if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
-	register_error(elgg_echo('user_support:staff_gatekeeper'));
-	forward(REFERER);
+	throw new \Elgg\EntityPermissionsException();
 }
-
-elgg_set_page_owner_guid($user->guid);
 
 $status = elgg_extract('status', $vars, UserSupportTicket::OPEN);
 if (!in_array($status, [UserSupportTicket::OPEN, UserSupportTicket::CLOSED])) {
@@ -30,26 +25,22 @@ $options = [
 	'metadata_name_value_pairs' => [
 		'status' => $status,
 	],
-	'order_by' => 'e.time_updated desc',
-	'no_results' => elgg_echo('notfound'),
+	'order_by' => new OrderByClause('e.time_updated', 'desc'),
+	'no_results' => true,
 ];
 
+$getter = 'elgg_get_entities';
+
 if (!empty($q)) {
-	$options['joins'] = [
-		'JOIN ' . elgg_get_config('dbprefix') . 'objects_entity oe ON e.guid = oe.guid',
-	];
-	$options['wheres'] = [
-		'oe.description LIKE "%' . sanitise_string($q) . '%"',
-	];
+	$options['query'] = $q;
+	$getter = 'elgg_search';
 }
 
 $search_action = 'user_support/support_ticket/owner/' . $user->username;
 
-elgg_push_context('support_ticket_title');
-
 // build page elements
-if ($status == UserSupportTicket::CLOSED) {
-	$search_action .= '/archive';
+if ($status === \UserSupportTicket::CLOSED) {
+	$search_action .= '/' . \UserSupportTicket::CLOSED;
 	if ($user->guid === elgg_get_logged_in_user_guid()) {
 		$title_text = elgg_echo('user_support:tickets:mine:archive:title');
 	} else {
@@ -63,6 +54,8 @@ if ($status == UserSupportTicket::CLOSED) {
 	}
 }
 
+elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
+
 $form_vars = [
 	'method' => 'GET',
 	'disable_security' => true,
@@ -70,10 +63,10 @@ $form_vars = [
 ];
 $search = elgg_view_form('user_support/support_ticket/search', $form_vars);
 
-$body = elgg_list_entities_from_metadata($options);
+$body = elgg_list_entities($options, $getter);
 
 // build page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $search . $body,
 	'filter' => elgg_view_menu('user_support', [
@@ -81,8 +74,6 @@ $page_data = elgg_view_layout('content', [
 		'sort_by' => 'priority',
 	]),
 ]);
-
-elgg_pop_context();
 
 // draw page
 echo elgg_view_page($title_text, $page_data);

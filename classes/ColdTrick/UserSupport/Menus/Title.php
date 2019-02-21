@@ -17,9 +17,7 @@ class Title {
 	public static function registerFAQ($hook, $type, $return_value, $params) {
 		
 		$user = elgg_get_logged_in_user_entity();
-		if (empty($user) || !elgg_in_context('faq')) {
-			return;
-		}
+		
 		
 		$page_owner = elgg_get_page_owner_entity();
 		if (!$user->isAdmin() && !($page_owner instanceof \ElggGroup && $page_owner->canEdit())) {
@@ -33,7 +31,7 @@ class Title {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'add',
-			'text' => elgg_echo('user_support:menu:faq:create'),
+			'text' => elgg_echo('add:object:faq'),
 			'href' => "user_support/faq/add/{$container_guid}",
 			'link_class' => 'elgg-button elgg-button-action',
 		]);

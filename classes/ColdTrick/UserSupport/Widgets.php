@@ -2,90 +2,51 @@
 
 namespace ColdTrick\UserSupport;
 
-use Elgg\WidgetDefinition;
-
 class Widgets {
 	
 	/**
-	 * Register FAQ widget
+	 * Return the widget title url
 	 *
-	 * @param string             $hook         the name of the hook
-	 * @param string             $type         the type of the hook
-	 * @param WidgetDefinition[] $return_value current return value
-	 * @param array              $params       supplied params
+	 * @param string $hook         the name of the hook
+	 * @param string $type         the type of the hook
+	 * @param string $return_value current return value
+	 * @param array  $params       supplied params
 	 *
-	 * @return WidgetDefinition[]
+	 * @return void|string
 	 */
-	public static function registerFAQ($hook, $type, $return_value, $params) {
+	public static function widgetURL($hook, $type, $return_value, $params) {
 		
-		$return_value[] = WidgetDefinition::factory([
-			'id' => 'faq',
-			'name' => elgg_echo('user_support:widgets:faq:title'),
-			'description' => elgg_echo('user_support:widgets:faq:description'),
-			'context' => [
-				'groups',
-			],
-		]);
-		
-		return $return_value;
-	}
-	
-	/**
-	 * Register support ticket widget, shows your support tickets (open, closed or all)
-	 *
-	 * @param string             $hook         the name of the hook
-	 * @param string             $type         the type of the hook
-	 * @param WidgetDefinition[] $return_value current return value
-	 * @param array              $params       supplied params
-	 *
-	 * @return WidgetDefinition[]
-	 */
-	public static function registerSupportTicket($hook, $type, $return_value, $params) {
-		
-		$return_value[] = WidgetDefinition::factory([
-			'id' => 'support_ticket',
-			'name' => elgg_echo('user_support:widgets:support_ticket:title'),
-			'description' => elgg_echo('user_support:widgets:support_ticket:description'),
-			'context' => [
-				'dashboard',
-			],
-			'multiple' => true,
-		]);
-		
-		return $return_value;
-	}
-	
-	/**
-	 * Register support ticket widget for staff, shows all open tickets
-	 *
-	 * @param string             $hook         the name of the hook
-	 * @param string             $type         the type of the hook
-	 * @param WidgetDefinition[] $return_value current return value
-	 * @param array              $params       supplied params
-	 *
-	 * @return void|WidgetDefinition[]
-	 */
-	public static function registerSupportStaff($hook, $type, $return_value, $params) {
-		
-		$context = elgg_extract('context', $params);
-		if (!in_array($context, ['dashboard', 'admin'])) {
+		if (!empty($return_value)) {
 			return;
 		}
 		
-		if (!user_support_staff_gatekeeper(false)) {
+		$entity = elgg_extract('entity', $params);
+		if (!$entity instanceof \ElggWidget) {
 			return;
 		}
 		
-		$return_value[] = WidgetDefinition::factory([
-			'id' => 'support_staff',
-			'name' => elgg_echo('user_support:widgets:support_staff:title'),
-			'description' => elgg_echo('user_support:widgets:support_staff:description'),
-			'context' => [
-				'dashboard',
-				'admin',
-			],
-		]);
+		$owner = $entity->getOwnerEntity();
 		
-		return $return_value;
+		switch ($entity->handler) {
+			case 'faq':
+				$link = 'user_support/faq';
+				if ($owner instanceof \ElggGroup) {
+					$link .= "/group/{$owner->guid}/all";
+				}
+				
+				return elgg_normalize_url($link);
+				break;
+			case 'support_ticket':
+				$link = "user_support/support_ticket/owner/{$owner->username}";
+				if ($entity->filter === \UserSupportTicket::CLOSED) {
+					$link .= '/' . \UserSupportTicket::CLOSED;
+				}
+				
+				return elgg_normalize_url($link);
+				break;
+			case 'support_staff':
+				return elgg_normalize_url('user_support/support_ticket');
+				break;
+		}
 	}
 }

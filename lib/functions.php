@@ -70,7 +70,7 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 	$dbprefix = elgg_get_config('dbprefix');
 	$support_staff_id = elgg_get_metastring_id('support_staff');
 	
-	$users = elgg_get_entities_from_relationship([
+	$users = elgg_get_entities([
 		'type' => 'user',
 		'limit' => false,
 		'joins' => [
@@ -131,7 +131,7 @@ function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
 			
 			$options = elgg_trigger_plugin_hook('staff_gatekeeper:options', 'user_support', $options, $options);
 			if (!empty($options) && is_array($options)) {
-				$staff_cache = elgg_get_entities_from_metadata($options);
+				$staff_cache = elgg_get_entities($options);
 			}
 		}
 		

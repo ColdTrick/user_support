@@ -1,14 +1,16 @@
 <?php
 
-elgg_push_context('faq');
+use Elgg\BadRequestException;
 
 $help_context = elgg_extract('help_context', $vars);
 if (empty($help_context)) {
-	forward();
+	throw new BadRequestException();
 }
 
 // build page elements
 $title_text = elgg_echo('user_support:faq:context');
+
+elgg_push_collection_breadcrumbs('object', 'faq');
 
 $faq_options = [
 	'type' => 'object',
@@ -35,16 +37,14 @@ if (elgg_is_active_plugin('likes')) {
 	$faq_options['order_by'] = "likes_count DESC, e.time_created DESC";
 }
 	
-$content = elgg_list_entities_from_metadata($faq_options);
+$content = elgg_list_entities($faq_options);
 
 // build page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $content,
-	'filter' => '',
+	'filter' => false,
 ]);
-
-elgg_pop_context();
 
 // draw page
 echo elgg_view_page($title_text, $page_data);

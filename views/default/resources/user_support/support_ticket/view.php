@@ -1,7 +1,5 @@
 <?php
 
-elgg_gatekeeper();
-
 $guid = (int) elgg_extract('guid', $vars);
 
 // ignore access for support staff
@@ -13,31 +11,19 @@ elgg_entity_gatekeeper($guid, 'object', UserSupportTicket::SUBTYPE);
 
 $entity = get_entity($guid);
 
-elgg_set_page_owner_guid($entity->owner_guid);
-
 // build page elements
-$title = $entity->getDisplayName();
-$title_text = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $title;
+$title_text = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $entity->getDisplayName();
 
-// build breadcrumb
-if ($entity->owner_guid === elgg_get_logged_in_user_guid()) {
-	elgg_push_breadcrumb(elgg_echo('user_support:menu:support_tickets:mine'), 'user_support/support_ticket/owner/' . $entity->getOwnerEntity()->username);
-} else {
-	elgg_push_breadcrumb(elgg_echo('user_support:menu:support_tickets'), 'user_support/support_ticket');
-}
-elgg_push_breadcrumb($title);
+elgg_push_entity_breadcrumbs($entity);
 
 // show entity
 $content = elgg_view_entity($entity);
 
-// add comments
-$content .= elgg_view_comments($entity);
-
 // build page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $content,
-	'filter' => '',
+	'filter' => false,
 ]);
 
 // restore access

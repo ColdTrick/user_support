@@ -1,5 +1,7 @@
 <?php
 
+use Elgg\Database\Clauses\OrderByClause;
+
 /* @var $widget ElggWidget */
 $widget = elgg_extract('entity', $vars);
 
@@ -16,13 +18,13 @@ $options = [
 		'status' => UserSupportTicket::OPEN,
 	],
 	'pagination' => false,
-	'order_by' => 'e.time_updated desc',
+	'order_by' => new OrderByClause('e.time_updated', 'desc'),
 ];
 
-$content = elgg_list_entities_from_metadata($options);
+$content = elgg_list_entities($options);
 if (empty($content)) {
-	echo elgg_view('output/longtext', [
-		'value' => elgg_echo('notfound'),
+	echo elgg_view('page/components/no_results', [
+		'no_results' => elgg_echo('notfound'),
 	]);
 	return;
 }
@@ -33,6 +35,5 @@ echo $content;
 $more_link = elgg_view('output/url', [
 	'text' => elgg_echo('user_support:read_more'),
 	'href' => 'user_support/support_ticket',
-	'class' => 'float-alt',
 ]);
-echo elgg_format_element('div', ['class' => ['elgg-widget-more', 'clearfix']], $more_link);
+echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);

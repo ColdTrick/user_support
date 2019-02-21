@@ -16,7 +16,7 @@ $all_link = elgg_view('output/url', [
 
 elgg_push_context('widgets');
 
-$content = elgg_list_entities_from_metadata([
+$content = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
 	'container_guid' => $group->guid,
@@ -32,7 +32,7 @@ $new_link = '';
 if ($group->canEdit()) {
 	$new_link = elgg_view('output/url', [
 		'href' => "user_support/faq/add/{$group->guid}",
-		'text' => elgg_echo('user_support:menu:faq:create'),
+		'text' => elgg_echo('add:object:faq'),
 		'is_trusted' => true,
 	]);
 }

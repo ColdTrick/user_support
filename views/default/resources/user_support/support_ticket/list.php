@@ -1,5 +1,7 @@
 <?php
 
+use Elgg\Database\Clauses\OrderByClause;
+
 user_support_staff_gatekeeper();
 
 $q = get_input('q');
@@ -10,24 +12,21 @@ $options = [
 	'metadata_name_value_pairs' => [
 		'status' => UserSupportTicket::OPEN,
 	],
-	'order_by' => 'e.time_updated DESC',
-	'no_results' => elgg_echo('notfound'),
+	'order_by' => new OrderByClause('e.time_updated', 'desc'),
+	'no_results' => true,
 ];
 
+$getter = 'elgg_get_entities';
+
 if (!empty($q)) {
-	$options['joins'] = [
-		'JOIN ' . elgg_get_config('dbprefix') . 'objects_entity oe ON e.guid = oe.guid',
-	];
-	$options['wheres'] = [
-		'oe.description LIKE "%' . sanitise_string($q) . '%"',
-	];
+	$options['query'] = $q;
+	$getter = 'elgg_search';
 }
 
 // build page elements
 $title_text = elgg_echo('user_support:tickets:list:title');
 
-// ignore access for support staff
-$ia = elgg_set_ignore_access(true);
+elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
 
 $form_vars = [
 	'method' => 'GET',
@@ -36,10 +35,9 @@ $form_vars = [
 ];
 $search = elgg_view_form('user_support/support_ticket/search', $form_vars);
 
-$body = elgg_list_entities_from_metadata($options);
-
-// restore access
-elgg_set_ignore_access($ia);
+$body = elgg_call(ELGG_IGNORE_ACCESS, function() use ($options, $getter) {
+	return elgg_list_entities($options, $getter);
+});
 
 // build page
 $page_data = elgg_view_layout('content', [

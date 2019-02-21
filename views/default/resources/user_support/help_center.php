@@ -45,7 +45,7 @@ $faq_options = [
 	'count' => true,
 ];
 
-$faq_count = elgg_get_entities_from_metadata($faq_options);
+$faq_count = elgg_get_entities($faq_options);
 if ($faq_count) {
 	if (elgg_is_active_plugin('likes')) {
 		$dbprefix = elgg_get_config('dbprefix');
@@ -59,7 +59,7 @@ if ($faq_count) {
 			) likes ON likes.entity_guid = e.guid";
 		$faq_options['order_by'] = "likes_count DESC, e.time_created DESC";
 	}
-	$faq = elgg_list_entities_from_metadata($faq_options);
+	$faq = elgg_list_entities($faq_options);
 	if ($faq_count > $faq_limit) {
 		$faq .= elgg_view('output/url', [
 			'text' => elgg_echo('user_support:faq:read_more', [($faq_count - $faq_limit)]),

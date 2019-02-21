@@ -3,7 +3,8 @@
 $filter = (array) get_input('filter');
 $faq_query = get_input('faq_query');
 $filter = array_values($filter); // indexing could be messed up
-elgg_push_context('faq');
+
+elgg_register_title_button('user_support', 'add', 'object', 'faq');
 
 // build page elements
 $title_text = elgg_echo('user_support:faq:list:title');
@@ -12,7 +13,7 @@ $list_options = [
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
 	'metadata_name_value_pairs' => [],
-	'no_results' => elgg_echo('notfound'),
+	'no_results' => true,
 ];
 
 // add tag filter
@@ -27,17 +28,17 @@ foreach ($filter as $index => $tag) {
 	];
 }
 
-$dbprefix = elgg_get_config('dbprefix');
-
 // text search
-if (!empty($faq_query)) {
-	$faq_query = sanitise_string($faq_query);
-	
-	$list_options['joins'][] = "JOIN {$dbprefix}objects_entity oe ON e.guid = oe.guid";
-	$list_options['wheres'][] = "(oe.title LIKE '%{$faq_query}%' OR oe.description LIKE '%{$faq_query}%')";
+$getter = 'elgg_get_entities';
+
+if (!empty($q)) {
+	$options['query'] = $faq_query;
+	$getter = 'elgg_search';
 }
 
 if (elgg_is_active_plugin('likes')) {
+	$dbprefix = elgg_get_config('dbprefix');
+	
 	$likes_name_id = elgg_get_metastring_id('likes');
 	$list_options['selects'][] = "IFNULL(likes.likes_count, 0) as likes_count";
 	$list_options['joins'][] = "LEFT OUTER JOIN (SELECT entity_guid, count(*) as likes_count
@@ -49,7 +50,7 @@ if (elgg_is_active_plugin('likes')) {
 	$list_options['order_by'] = "likes_count DESC, e.time_created DESC";
 }
 
-$list = elgg_list_entities_from_metadata($list_options);
+$list = elgg_list_entities($list_options, $getter);
 
 $form_vars = [
 	'action' => 'user_support/faq',
@@ -66,10 +67,8 @@ $page_data = elgg_view_layout('content', [
 	'title' => $title_text,
 	'content' => $search . $list,
 	'sidebar' => elgg_view('user_support/faq/sidebar'),
-	'filter' => '',
+	'filter' => false,
 ]);
-
-elgg_pop_context();
 
 // draw page
 echo elgg_view_page($title_text, $page_data);

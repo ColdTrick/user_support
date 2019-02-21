@@ -1,32 +1,18 @@
 <?php
 
-elgg_gatekeeper();
-
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', UserSupportTicket::SUBTYPE);
 
 /* @var $entity UserSupportTicket */
 $entity = get_entity($guid);
 if (!$entity->canEdit()) {
-	register_error(elgg_echo('limited_access'));
-	forward(REFERER);
+	throw new \Elgg\EntityPermissionsException();
 }
-
-$owner = $entity->getOwnerEntity();
-
-elgg_set_page_owner_guid($owner->guid);
 
 $title_text = $entity->getDisplayName();
 
 // breadcrumb
-if ($owner->getGUID() == elgg_get_logged_in_user_guid()) {
-	elgg_push_breadcrumb(elgg_echo('user_support:tickets:mine:title'), 'user_support/support_ticket/owner/' . $owner->username);
-} else {
-	elgg_push_breadcrumb(elgg_echo('user_support:tickets:owner:title', [$owner->getDisplayName()]), 'user_support/support_ticket/owner/' . $owner->username);
-}
-
-elgg_push_breadcrumb($title_text, $entity->getURL());
-elgg_push_breadcrumb(elgg_echo('edit'));
+elgg_push_entity_breadcrumbs($entity, true);
 
 // build page elements
 $body_vars = user_support_prepare_ticket_form_vars([
@@ -35,10 +21,10 @@ $body_vars = user_support_prepare_ticket_form_vars([
 $content = elgg_view_form('user_support/support_ticket/edit', [], $body_vars);
 
 // build page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $content,
-	'filter' => '',
+	'filter' => false,
 ]);
 
 // draw page

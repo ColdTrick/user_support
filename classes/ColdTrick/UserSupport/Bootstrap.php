@@ -11,10 +11,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 */
 	public function init() {
 		
-		elgg_register_notification_event('object', 'comment');
 		elgg_register_notification_event('object', \UserSupportTicket::SUBTYPE);
-		
-		elgg_register_page_handler('user_support', '\ColdTrick\UserSupport\PageHandler::userSupport');
 		
 		// add a group tool option for FAQ
 		$group_faq = elgg_get_plugin_setting('group_faq', 'user_support');
@@ -72,11 +69,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketEnqueue', 9999);
 		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketCommentEnqueue', 9999);
 		
-		
-		$hooks->registerHandler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerFAQ');
-		$hooks->registerHandler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportTicket');
-		$hooks->registerHandler('handlers', 'widgets', '\ColdTrick\UserSupport\Widgets::registerSupportStaff');
-		
 		$hooks->registerHandler('likes:is_likable', 'object:' . \UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
 		
 		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerTicket');
@@ -85,7 +77,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::promoteCommentToFAQ');
 		$hooks->registerHandler('register', 'menu:owner_block', '\ColdTrick\UserSupport\Menus\OwnerBlock::registerUserSupportTickets');
 		$hooks->registerHandler('register', 'menu:owner_block', '\ColdTrick\UserSupport\Menus\OwnerBlock::registerGroupFAQ');
-		$hooks->registerHandler('register', 'menu:title', '\ColdTrick\UserSupport\Menus\Title::registerFAQ');
+// 		$hooks->registerHandler('register', 'menu:title', '\ColdTrick\UserSupport\Menus\Title::registerFAQ');
 		$hooks->registerHandler('register', 'menu:title', '\ColdTrick\UserSupport\Menus\Title::registerSupportTicket');
 		$hooks->registerHandler('register', 'menu:site', '\ColdTrick\UserSupport\Menus\Site::registerFAQ');
 		$hooks->registerHandler('register', 'menu:site', '\ColdTrick\UserSupport\Menus\Site::registerHelpCenter');
@@ -97,7 +89,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('register', 'menu:user_support', '\ColdTrick\UserSupport\Menus\UserSupport::registerUserSupportTickets');
 		$hooks->registerHandler('register', 'menu:user_support', '\ColdTrick\UserSupport\Menus\UserSupport::registerStaff');
 		
-		$hooks->registerHandler('entity:url', 'object', '\ColdTrick\UserSupport\WidgetManager::widgetURL');
+		$hooks->registerHandler('entity:url', 'object', '\ColdTrick\UserSupport\Widgets::widgetURL');
 		$hooks->registerHandler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockHelpReshare');
 		$hooks->registerHandler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockTicketReshare');
 		$hooks->registerHandler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockHelpLink');

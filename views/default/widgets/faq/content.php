@@ -40,8 +40,8 @@ if (elgg_is_active_plugin('likes')) {
 
 $content = elgg_list_entities($list_options);
 if (empty($content)) {
-	echo elgg_view('output/longtext', [
-		'value' => elgg_echo('user_support:faq:not_found'),
+	echo elgg_view('page/components/no_results', [
+		'no_results' => elgg_echo('notfound'),
 	]);
 	return;
 }
@@ -52,6 +52,5 @@ echo $content;
 $more_link = elgg_view('output/url', [
 	'text' => elgg_echo('user_support:read_more'),
 	'href' => $more_link,
-	'class' => 'float-alt',
 ]);
-echo elgg_format_element('div', ['class' => ['elgg-widget-more', 'clearfix']], $more_link);
+echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);
