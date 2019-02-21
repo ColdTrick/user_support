@@ -7,7 +7,7 @@ if (empty($help_context)) {
 }
 
 $contextual_help_object = false;
-if (elgg_get_plugin_setting('help_enabled', 'user_support') != 'no') {
+if (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') {
 	$contextual_help_object = user_support_get_help_for_context($help_context);
 }
 

@@ -16,12 +16,13 @@ class Footer {
 	 */
 	public static function registerFAQ($hook, $type, $return_value, $params) {
 		
-		if (elgg_get_plugin_setting('add_faq_footer_menu_item', 'user_support') !== 'yes') {
+		if (elgg_get_plugin_setting('add_faq_footer_menu_item', 'user_support') === 'no') {
 			return;
 		}
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
+			'icon' => 'question-circle',
 			'text' => elgg_echo('user_support:menu:faq'),
 			'href' => 'user_support/faq',
 		]);

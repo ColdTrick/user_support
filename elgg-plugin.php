@@ -7,6 +7,11 @@ require_once(dirname(__FILE__) . '/lib/functions.php');
 return [
 	'bootstrap' => Bootstrap::class,
 	'settings' => [
+		'help_enabled' => 'yes',
+		'show_as_popup' => 'yes',
+		'add_faq_site_menu_item' => 'yes',
+		'add_help_center_site_menu_item' => 'no',
+		'add_faq_footer_menu_item' => 'no',
 	],
 	'entities' => [
 		[

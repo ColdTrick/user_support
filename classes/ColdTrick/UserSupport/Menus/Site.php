@@ -22,6 +22,7 @@ class Site {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
+			'icon' => 'question-circle',
 			'text' => elgg_echo('user_support:menu:faq'),
 			'href' => 'user_support/faq',
 		]);
@@ -41,17 +42,18 @@ class Site {
 	 */
 	public static function registerHelpCenter($hook, $type, $return_value, $params) {
 		
-		if (elgg_get_plugin_setting('add_help_center_site_menu_item', 'user_support') !== 'yes') {
+		if (elgg_get_plugin_setting('add_help_center_site_menu_item', 'user_support') === 'no') {
 			return;
 		}
 		
 		$options = [
 			'name' => 'help_center',
+			'icon' => 'life-ring-regular',
 			'text' => elgg_echo('user_support:button:text'),
 			'href' => 'user_support/help_center',
 		];
 		
-		if (elgg_get_plugin_setting('show_as_popup', 'user_support') !== 'no') {
+		if (elgg_get_plugin_setting('show_as_popup', 'user_support') === 'yes') {
 			$options['link_class'] = 'elgg-lightbox';
 		}
 		
@@ -79,6 +81,7 @@ class Site {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'support_ticket_mine',
+			'icon' => 'hands-helping',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
 			'href' => "user_support/support_ticket/owner/{$user->username}",
 		]);

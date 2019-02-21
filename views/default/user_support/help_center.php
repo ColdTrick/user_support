@@ -7,10 +7,7 @@ $faq = elgg_extract('faq', $vars);
 
 $user = elgg_get_logged_in_user_entity();
 
-$help_enabled = false;
-if (elgg_get_plugin_setting('help_enabled', 'user_support') != 'no') {
-	$help_enabled = true;
-}
+$help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes');
 
 echo elgg_format_element('script', [], 'require(["user_support/help_center/search"]);');
 echo elgg_view_form('user_support/help_center/search', [

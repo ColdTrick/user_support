@@ -17,9 +17,13 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_page_handler('user_support', '\ColdTrick\UserSupport\PageHandler::userSupport');
 		
 		// add a group tool option for FAQ
-		$group_faq = user_support_get_group_faq_setting();
+		$group_faq = elgg_get_plugin_setting('group_faq', 'user_support');
 		if ($group_faq !== 'no') {
-			add_group_tool_option('faq', elgg_echo('user_support:group:tool_option'), $group_faq === 'yes');
+			elgg()->group_tools->register('faq', [
+				'label' => elgg_echo('user_support:group:tool_option'),
+				'default_on' => $group_faq === 'yes',
+			]);
+			
 			elgg_extend_view('groups/tool_latest', 'user_support/faq/group_module');
 		}
 				

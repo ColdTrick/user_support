@@ -4,7 +4,7 @@ if (elgg_in_context('admin')) {
 	return;
 }
 
-$show_floating_button = elgg_get_plugin_setting('show_floating_button', 'user_support', 'no');
+$show_floating_button = elgg_get_plugin_setting('show_floating_button', 'user_support');
 if ($show_floating_button === 'no') {
 	return;
 }
@@ -15,7 +15,7 @@ if ($help_context !== false) {
 	$subtypes = [
 		UserSupportFAQ::SUBTYPE,
 	];
-	if (elgg_get_plugin_setting('help_enabled', 'user_support') !== 'no') {
+	if (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') {
 		$subtypes[] = UserSupportHelp::SUBTYPE;
 	}
 	
@@ -46,7 +46,7 @@ if ($content_count > 0) {
 	$link_options['class'][] = 'elgg-state-active';
 }
 
-if (elgg_get_plugin_setting('show_as_popup', 'user_support') != 'no') {
+if (elgg_get_plugin_setting('show_as_popup', 'user_support') === 'yes') {
 	$link_options['class'][] = 'elgg-lightbox';
 }
 
