@@ -70,7 +70,6 @@ if (!$full_view) {
 		'tags' => elgg_view('output/tags', [
 			'value' => $entity->tags,
 		]),
-		'subtitle' => user_support_time_created_string($entity),
 		'title' => false,
 	];
 	$params = $params + $vars;

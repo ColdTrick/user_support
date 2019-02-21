@@ -4,34 +4,6 @@
  */
 
 /**
- * Get the help for a context
- *
- * @param string $help_context the context to get help for
- *
- * @return false|UserSupportHelp
- */
-function user_support_get_help_for_context($help_context) {
-	
-	if (empty($help_context)) {
-		return false;
-	}
-	
-	$help = elgg_get_entities_from_metadata([
-		'type' => 'object',
-		'subtype' => UserSupportHelp::SUBTYPE,
-		'limit' => 1,
-		'metadata_name_value_pairs' => [
-			'help_context' => $help_context,
-		],
-	]);
-	if (empty($help)) {
-		return false;
-	}
-	
-	return $help[0];
-}
-
-/**
  * Get the context for a page, for the help system
  *
  * @param string $url the (optional) url to get the context for
@@ -80,69 +52,6 @@ function user_support_get_help_context($url = '') {
 	}
 	
 	return implode('/', $new_parts);
-}
-
-/**
- * Helper function to build a better time string
- *
- * @param ElggObject $entity the object to build the string for
- *
- * @return false|string
- */
-function user_support_time_created_string(ElggObject $entity) {
-	
-	if (!$entity instanceof ElggObject) {
-		return false;
-	}
-	
-	$date_array = getdate($entity->time_created);
-	if (empty($date_array)) {
-		return false;
-	}
-	
-	return elgg_echo('date:month:' . str_pad($date_array['mon'], 2, '0', STR_PAD_LEFT), [$date_array['mday']]) . ' ' . $date_array['year'];
-}
-
-/**
- * Get a list of all the unique help contexts
- *
- * @return false|array
- */
-function user_support_find_unique_help_context() {
-	static $result;
-	
-	if (isset($result)) {
-		return $result;
-	}
-	
-	$result = false;
-	
-	// get all metadata values of help_context
-	$metadata = elgg_get_metadata([
-		'metadata_name' => 'help_context',
-		'type' => 'object',
-		'subtypes' => [
-			UserSupportFAQ::SUBTYPE,
-			UserSupportHelp::SUBTYPE,
-			UserSupportTicket::SUBTYPE,
-		],
-		'limit' => false,
-	]);
-	if (empty($metadata)) {
-		return $result;
-	}
-	
-	// make it into an array
-	$filtered = metadata_array_to_values($metadata);
-	if (empty($filtered)) {
-		return $result;
-	}
-	
-	//get unique values
-	$result = array_unique($filtered);
-	natcasesort($result);
-	
-	return $result;
 }
 
 /**
@@ -242,17 +151,6 @@ function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
 	}
 	
 	return $result;
-}
-
-/**
- * Helper function to return only the GUID of a DB row
- *
- * @param stdClass $row the database row
- *
- * @return int
- */
-function user_support_row_to_guid($row) {
-	return (int) $row->guid;
 }
 
 /**

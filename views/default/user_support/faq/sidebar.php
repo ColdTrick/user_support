@@ -17,7 +17,9 @@ if (!empty($filter) || !empty($faq_query)) {
 		'subtype' => UserSupportFAQ::SUBTYPE,
 		'limit' => false,
 		'metadata_name_value_pairs' => [],
-		'callback' => 'user_support_row_to_guid',
+		'callback' => function($row) {
+			return (int) $row->guid;
+		},
 	];
 	
 	foreach ($filter as $index => $tag) {

@@ -7,8 +7,19 @@ if (empty($help_context)) {
 }
 
 $contextual_help_object = false;
-if (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') {
-	$contextual_help_object = user_support_get_help_for_context($help_context);
+if ((elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') && !empty($help_context)) {
+	$help = elgg_get_entities([
+		'type' => 'object',
+		'subtype' => \UserSupportHelp::SUBTYPE,
+		'limit' => 1,
+		'metadata_name_value_pairs' => [
+			'help_context' => $help_context,
+		],
+	]);
+	
+	if (!empty($help)) {
+		$contextual_help_object = $help[0];
+	}
 }
 
 $group = null;
@@ -24,7 +35,7 @@ $faq = '';
 $faq_limit = 5;
 $faq_options = [
 	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
+	'subtype' => \UserSupportFAQ::SUBTYPE,
 	'limit' => $faq_limit,
 	'metadata_name_value_pairs' => [
 		'name' => 'help_context',

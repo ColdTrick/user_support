@@ -1,6 +1,28 @@
 <?php
 
-$help_contexts = user_support_find_unique_help_context();
+$help_contexts = false;
+
+$metadata = elgg_get_metadata([
+	'metadata_name' => 'help_context',
+	'type' => 'object',
+	'subtypes' => [
+		UserSupportFAQ::SUBTYPE,
+		UserSupportHelp::SUBTYPE,
+		UserSupportTicket::SUBTYPE,
+	],
+	'limit' => false,
+]);
+
+if (!empty($metadata)) {
+	// make it into an array
+	$filtered = metadata_array_to_values($metadata);
+	if (!empty($filtered)) {
+		//get unique values
+		$help_contexts = array_unique($filtered);
+		natcasesort($help_contexts);
+	}
+}
+
 $submit_text = elgg_echo('save');
 
 $entity = elgg_extract('entity', $vars);
