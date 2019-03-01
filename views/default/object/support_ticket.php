@@ -7,23 +7,12 @@ if (!$entity instanceof UserSupportTicket) {
 
 $full_view = (bool) elgg_extract('full_view', $vars);
 
-// entity menu
-$entity_menu = '';
-if (!elgg_in_context('widgets')) {
-	$entity_menu = elgg_view_menu('entity', [
-		'entity' => $entity,
-		'handler' => 'user_support/support_ticket',
-		'sort_by' => 'priority',
-		'class' => 'elgg-menu-hz',
-	]);
-}
-
 $owner = $entity->getOwnerEntity();
+
+$vars['access'] = false;
 
 if (!$full_view) {
 	// summary (listing) view
-	// icon
-	$icon = elgg_view_entity_icon($entity, 'small');
 	
 	// title
 	$title = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ';
@@ -33,62 +22,20 @@ if (!$full_view) {
 		'text' => $entity->getDisplayName(),
 		'is_trusted' => true,
 	]);
-	
-	// strapline
-	$subtitle = elgg_view('page/elements/by_line', $vars);
-	
-	// last comment by
-	$info = '';
-	if ($entity->countComments()) {
-		$comments = elgg_get_entities([
-			'type' => 'object',
-			'subtype' => 'comment',
-			'limit' => 1,
-			'container_guid' => $entity->guid,
-		]);
-		/* @var $comment ElggComment */
-		$comment = elgg_extract(0, $comments);
 		
-		$comment_owner = $comment->getOwnerEntity();
-		$comment_owner_link = elgg_view('output/url', [
-			'text' => $comment_owner->getDisplayName(),
-			'href' => $comment_owner->getURL(),
-			'is_trusted' => true,
-		]);
-		
-		$comment_link = elgg_view('output/url', [
-			'text' => elgg_echo('user_support:last_comment'),
-			'href' => $comment->getURL(),
-			'is_trusted' => true,
-		]);
-		
-		$subtitle .= ' ' . elgg_echo('user_support:support_ticket:by_line:last_comment', [$comment_link, $comment_owner_link]);
-	}
-	
 	$params = [
 		'entity' => $entity,
-		'metadata' => $entity_menu,
 		'content' => $info,
-		'subtitle' => $subtitle,
 		'title' => $title,
 	];
 	$params = $params + $vars;
-	$list_body = elgg_view('object/elements/summary', $params);
-	
-	echo elgg_view_image_block($icon, $list_body);
+	echo elgg_view('object/elements/summary', $params);
 } else {
 	// full view
-	// icon
-	$icon = elgg_view_entity_icon($entity, 'tiny');
-	
-	// strapline
-	$subtitle = elgg_view('page/elements/by_line', $vars);
 	
 	// summary
 	$params = [
 		'entity' => $entity,
-		'metadata' => $entity_menu,
-		'subtitle' => $subtitle,
 		'title' => false,
 	];
 	$params = $params + $vars;

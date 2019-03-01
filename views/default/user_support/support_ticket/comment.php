@@ -24,7 +24,7 @@ echo elgg_view('input/submit', [
 		var $button = $('#user-support-ticket-comment-close');
 		var $form = $button.closest('.elgg-form-comment-save');
 	
-		$form.find('div.elgg-foot input[type=submit]').after($button);
+		$form.find('.elgg-form-footer').append($button);
 		$button.removeClass('hidden');
 	});
 </script>

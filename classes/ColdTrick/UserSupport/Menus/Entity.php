@@ -28,21 +28,21 @@ class Entity {
 		if ($entity->getStatus() === \UserSupportTicket::OPEN) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'status',
+				'icon' => 'lock',
 				'text' => elgg_echo('close'),
-				'href' => elgg_http_add_url_query_elements('action/user_support/support_ticket/close', [
+				'href' => elgg_generate_action_url('user_support/support_ticket/close', [
 					'guid' => $entity->guid,
 				]),
-				'is_action' => true,
 				'priority' => 200,
 			]);
 		} else {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'status',
+				'icon' => 'undo',
 				'text' => elgg_echo('user_support:reopen'),
-				'href' => elgg_http_add_url_query_elements('action/user_support/support_ticket/reopen', [
+				'href' => elgg_generate_action_url('user_support/support_ticket/reopen', [
 					'guid' => $entity->guid,
 				]),
-				'is_action' => true,
 				'priority' => 200,
 			]);
 		}
