@@ -8,6 +8,7 @@ if (!$entity instanceof UserSupportHelp) {
 $params = [
 	'title' => elgg_echo('user_support:help_center:help:title'),
 	'content' => elgg_view('output/longtext', ['value' => $entity->description]),
+	'subtitle' => false,
 ];
 $params = array_merge($params, $vars);
 
