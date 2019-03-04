@@ -25,7 +25,6 @@ if (!$full_view) {
 		
 	$params = [
 		'entity' => $entity,
-		'content' => $info,
 		'title' => $title,
 	];
 	$params = $params + $vars;
