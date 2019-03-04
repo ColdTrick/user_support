@@ -71,7 +71,7 @@ class Entity {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'edit',
 				'text' => elgg_echo('edit'),
-				'href' => 'javascript:void(0);',
+				'href' => false,
 				'link_class' => 'user-support-help-center-edit-help',
 				'priority' => 200,
 			]);
@@ -109,6 +109,7 @@ class Entity {
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'promote',
+			'icon' => 'level-up-alt',
 			'text' => elgg_echo('user_support:menu:entity:comment_promote'),
 			'title' => elgg_echo('user_support:menu:entity:comment_promote:title'),
 			'href' => elgg_http_add_url_query_elements("user_support/faq/add/{$site->guid}", [
