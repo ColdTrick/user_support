@@ -1,4 +1,6 @@
 <?php
+use Elgg\Database\Clauses\WhereClause;
+
 /**
  * All helper functions are bundled here
  */
@@ -67,21 +69,25 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 		return false;
 	}
 	
-	$dbprefix = elgg_get_config('dbprefix');
-	$support_staff_id = elgg_get_metastring_id('support_staff');
-	
 	$users = elgg_get_entities([
 		'type' => 'user',
 		'limit' => false,
-		'joins' => [
-			"JOIN {$dbprefix}private_settings ps ON e.guid = ps.entity_guid",
-			"JOIN {$dbprefix}users_entity ue ON e.guid = ue.guid",
-			"JOIN {$dbprefix}metadata md ON e.guid = md.entity_guid",
-		],
 		'wheres' => [
-			'(ps.name = "' . ELGG_PLUGIN_USER_SETTING_PREFIX . 'user_support:admin_notify" AND ps.value = "yes")',
-			"(ue.admin = 'yes' OR md.name_id = '{$support_staff_id}')",
-			"(e.guid <> {$ticket->owner_guid})",
+			new WhereClause("e.guid <> {$ticket->owner_guid}"),
+		],
+		'private_setting_name_value_pairs' => [
+			[
+				'name' => ELGG_PLUGIN_USER_SETTING_PREFIX . 'user_support:admin_notify',
+				'value' => 'yes',
+			],
+		],
+		'metadata_name_value_pairs' => [
+			[
+				'admin' => 'yes',
+			],
+			[
+				'name' => 'support_staff',
+			],
 		],
 	]);
 		
