@@ -47,13 +47,9 @@
 }
 
 /* Help Center */
-.user-support-help-center-popup {
-	width: 650px;
-	margin: 0px;
-}
 
 form.elgg-form-user-support-help-center-search .user-support-help-center-search-input {
-	width: 300px;
+	min-width: 500px;
 }
 
 #user_support_help_center_help {
