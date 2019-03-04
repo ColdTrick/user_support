@@ -122,18 +122,13 @@ return [
 		'user_support/help/edit' => [
 			'access' => 'admin',
 		],
-		'user_support/help/delete' => [
-			'access' => 'admin',
-		],
 		'user_support/support_staff' => [
 			'access' => 'admin',
 		],
 		'user_support/support_ticket/edit' => [],
-		'user_support/support_ticket/delete' => [],
 		'user_support/support_ticket/close' => [],
 		'user_support/support_ticket/reopen' => [],
 		'user_support/faq/edit' => [],
-		'user_support/faq/delete' => [],
 	],
 	'widgets' => [
 		'faq' => [
