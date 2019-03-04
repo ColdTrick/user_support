@@ -2,7 +2,7 @@
 #user-support-button {
 	position: fixed;
     
-	background: #60B8F7;
+	background: $(topbar-background-color);
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	
 	font-size: 16px;
@@ -11,40 +11,39 @@
     text-align: center;
     
     z-index: 1000;
-}
-
-#user-support-button a {
-	padding: 8px 4px;
-	color: white;
-	text-decoration: none;
-	display: block;
-	width: 16px;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-#user-support-button:hover {
-	background: #4787B8;
-}
-
-#user-support-button .elgg-icon {
-	margin: 0;
-	padding: 5px 0 0;
-	color: white;
-}
-
-#user-support-button .user-support-button-help-center.elgg-state-active .elgg-icon {
-	color: #D63006;
-}
-
-#user-support-button.position-horizontal-left {
-	left: 0;
-	border-radius: 0 3px 3px 0;
-}
-
-#user-support-button.position-horizontal-right {
-	right: 0;
-	border-radius: 3px 0 0 3px;
+    
+    &:hover {
+		background: #4787B8;
+	}
+	
+	&.position-horizontal-left {
+		left: 0;
+		border-radius: 0 3px 3px 0;
+	}
+	
+	&.position-horizontal-right {
+		right: 0;
+		border-radius: 3px 0 0 3px;
+	}
+	
+    a {
+		padding: .5rem .25rem;
+		color: white;
+		text-decoration: none;
+		display: block;
+		text-align: center;
+		text-transform: uppercase;
+	}
+	
+	.elgg-anchor-icon-alt {
+		margin: 0;
+		padding: 0;
+		color: white;
+	}
+	
+	.user-support-button-help-center.elgg-state-active .elgg-icon {
+		color: #D63006;
+	}
 }
 
 /* Help Center */
