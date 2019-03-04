@@ -70,6 +70,7 @@ class Entity {
 		if ($entity->canEdit()) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'edit',
+				'icon' => 'edit',
 				'text' => elgg_echo('edit'),
 				'href' => false,
 				'link_class' => 'user-support-help-center-edit-help',
