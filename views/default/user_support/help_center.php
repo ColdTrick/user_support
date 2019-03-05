@@ -8,59 +8,54 @@ $faq = elgg_extract('faq', $vars);
 $user = elgg_get_logged_in_user_entity();
 
 $help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes');
-
-echo elgg_format_element('script', [], 'require(["user_support/help_center/search"]);');
-echo elgg_view_form('user_support/help_center/search', [
-	'action' => 'user_support/search',
-	'class' => 'mbs',
-]);
-
-// action buttons
-$buttons = [];
-if ($user instanceof ElggUser) {
+if (elgg_is_xhr()) {
 	
-	echo elgg_format_element('script', [], 'require(["user_support/help_center/ticket"]);');
-	
-	$buttons[] = [
-		'text' => elgg_echo('user_support:help_center:ask'),
-		'href' => 'javascript:void(0);',
-		'id' => 'user-support-help-center-ask',
-	];
-	$buttons[] = [
-		'text' => elgg_echo('user_support:menu:support_tickets:mine'),
-		'href' => 'user_support/support_ticket/owner/' . $user->username,
-	];
-}
+	echo elgg_view_form('user_support/help_center/search', [
+		'action' => 'user_support/search',
+		'class' => 'mbs',
+	]);
 
-$buttons[] = [
-	'text' => elgg_echo('user_support:menu:faq'),
-	'href' => 'user_support/faq',
-];
-
-if ($group instanceof ElggGroup) {
-	$buttons[] = [
-		'text' => elgg_echo('user_support:help_center:help_group'),
-		'href' => $group->getURL(),
-	];
-}
-
-if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled && elgg_is_xhr()) {
-	$buttons[] = [
-		'text' => elgg_echo('user_support:help_center:help'),
-		'href' => 'javascript:void(0);',
-		'id' => 'user-support-help-center-add-help',
-	];
-}
-
-if (!empty($buttons)) {
-	$button_content = '';
-	foreach ($buttons as $options) {
-		$options['class'] = elgg_extract_class($options, ['elgg-button', 'elgg-button-action', 'mrs']);
-		
-		$button_content .= elgg_view('output/url', $options);
+	// action buttons
+	$buttons = [];
+	if ($user instanceof ElggUser) {
+		$buttons[] = [
+			'name' => 'ticket:add',
+			'text' => elgg_echo('user_support:help_center:ask'),
+			'href' => 'javascript:void(0);',
+			'id' => 'user-support-help-center-ask',
+			'link_class' => ['elgg-button', 'elgg-button-action'],
+			'deps' => [
+				'user_support/help_center/ticket',
+			],
+		];
+		$buttons[] = [
+			'name' => 'ticket:mine',
+			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
+			'href' => 'user_support/support_ticket/owner/' . $user->username,
+			'link_class' => ['elgg-button', 'elgg-button-action'],
+		];
 	}
 	
-	echo elgg_format_element('div', ['class' => 'mbm'], $button_content);
+	$buttons[] = [
+		'name' => 'faq',
+		'text' => elgg_echo('user_support:menu:faq'),
+		'href' => 'user_support/faq',
+		'link_class' => ['elgg-button', 'elgg-button-action'],
+	];
+	
+	if ($group instanceof ElggGroup) {
+		$buttons[] = [
+			'name' => 'group',
+			'text' => elgg_echo('user_support:help_center:help_group'),
+			'href' => $group->getURL(),
+			'link_class' => ['elgg-button', 'elgg-button-action'],
+		];
+	}
+	
+	echo elgg_view_menu('help_center', [
+		'class' => 'elgg-menu-hz',
+		'items' => $buttons,
+	]);
 }
 
 // content sections

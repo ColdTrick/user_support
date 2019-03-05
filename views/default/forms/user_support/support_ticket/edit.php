@@ -1,7 +1,5 @@
 <?php
 
-$submit_text = elgg_echo('save');
-
 $entity = elgg_extract('entity', $vars);
 if ($entity instanceof UserSupportTicket) {
 	echo elgg_view_field([
@@ -9,8 +7,6 @@ if ($entity instanceof UserSupportTicket) {
 		'name' => 'guid',
 		'value' => $entity->guid,
 	]);
-	
-	$submit_text = elgg_echo('edit');
 }
 
 echo elgg_view_field([

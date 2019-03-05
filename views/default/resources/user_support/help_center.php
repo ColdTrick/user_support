@@ -79,15 +79,32 @@ $help_center = elgg_view('user_support/help_center', [
 
 // check if this is popup or not
 if (elgg_is_xhr()) {
-	echo elgg_view_module('info', elgg_echo('user_support:help_center:title'), $help_center, ['class' => 'user-support-help-center-popup']);
+	
+	$help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes');
+
+	$menu = '';
+	if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled) {
+		$menu = elgg_view('output/url', [
+			'text' => elgg_echo('user_support:help_center:help'),
+			'href' => 'javascript:void(0);',
+			'icon' => 'plus',
+			'id' => 'user-support-help-center-add-help',
+			'class' => ['elgg-button', 'elgg-button-action'],
+		]);
+	}
+
+	echo elgg_view_module('info', elgg_echo('user_support:help_center:title'), $help_center, [
+		'class' => 'user-support-help-center-popup',
+		'menu' => $menu,
+	]);
 	return;
 }
 
 // normal page
-$page_data = elgg_view_layout('content', [
+$page_data = elgg_view_layout('default', [
 	'title' => elgg_echo('user_support:help_center:title'),
 	'content' => $help_center,
-	'filter' => '',
+	'filter' => false,
 ]);
 
 // draw page
