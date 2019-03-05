@@ -14,19 +14,19 @@ $metadata = elgg_get_metadata([
 ]);
 
 if (!empty($metadata)) {
+	
 	// make it into an array
-	$filtered = metadata_array_to_values($metadata);
-	if (!empty($filtered)) {
-		//get unique values
-		$help_contexts = array_unique($filtered);
-		natcasesort($help_contexts);
+	$help_contexts = [];
+	foreach ($metadata as $md) {
+		$help_contexts[$md->value] = true;
 	}
+	
+	$help_contexts = array_values($help_contexts);
+	natcasesort($help_contexts);
 }
 
 $entity = elgg_extract('entity', $vars);
 if ($entity instanceof UserSupportFAQ) {
-	
-	
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',
