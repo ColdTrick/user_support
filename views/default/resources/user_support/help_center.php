@@ -47,18 +47,6 @@ $faq_options = [
 
 $faq_count = elgg_get_entities($faq_options);
 if ($faq_count) {
-	if (elgg_is_active_plugin('likes')) {
-		$dbprefix = elgg_get_config('dbprefix');
-		$likes_name_id = elgg_get_metastring_id('likes');
-		$faq_options['selects'][] = "IFNULL(likes.likes_count, 0) as likes_count";
-		$faq_options['joins'][] = "LEFT OUTER JOIN (SELECT entity_guid, count(*) as likes_count
-				FROM " . $dbprefix . "annotations
-				WHERE name_id = " . $likes_name_id . "
-				GROUP BY entity_guid
-				ORDER BY likes_count DESC
-			) likes ON likes.entity_guid = e.guid";
-		$faq_options['order_by'] = "likes_count DESC, e.time_created DESC";
-	}
 	$faq = elgg_list_entities($faq_options);
 	if ($faq_count > $faq_limit) {
 		$faq .= elgg_view('output/url', [
