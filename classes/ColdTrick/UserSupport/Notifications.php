@@ -2,8 +2,8 @@
 
 namespace ColdTrick\UserSupport;
 
-use Elgg\Notifications\NotificationEvent;
 use Elgg\Notifications\Notification;
+use Elgg\Notifications\SubscriptionNotificationEvent;
 
 class Notifications {
 	
@@ -20,7 +20,11 @@ class Notifications {
 	public static function getSupportTicketCommentSubscribers($hook, $type, $return_value, $params) {
 		
 		$event = elgg_extract('event', $params);
-		if (!$event instanceof NotificationEvent) {
+		if (!$event instanceof SubscriptionNotificationEvent) {
+			return;
+		}
+		
+		if ($event->getAction() !== 'create') {
 			return;
 		}
 		
@@ -93,7 +97,11 @@ class Notifications {
 	public static function prepareSupportTicketCommentMessage($hook, $type, $return_value, $params) {
 		
 		$event = elgg_extract('event', $params);
-		if (!$event instanceof NotificationEvent) {
+		if (!$event instanceof SubscriptionNotificationEvent) {
+			return;
+		}
+		
+		if ($event->getAction() !== 'create') {
 			return;
 		}
 		
@@ -142,7 +150,11 @@ class Notifications {
 	public static function getSupportTicketSubscribers($hook, $type, $return_value, $params) {
 		
 		$event = elgg_extract('event', $params);
-		if (!$event instanceof NotificationEvent) {
+		if (!$event instanceof SubscriptionNotificationEvent) {
+			return;
+		}
+		
+		if ($event->getAction() !== 'create') {
 			return;
 		}
 		
@@ -197,7 +209,11 @@ class Notifications {
 	public static function prepareSupportTicketMessage($hook, $type, $return_value, $params) {
 		
 		$event = elgg_extract('event', $params);
-		if (!$event instanceof NotificationEvent) {
+		if (!$event instanceof SubscriptionNotificationEvent) {
+			return;
+		}
+		
+		if ($event->getAction() !== 'create') {
 			return;
 		}
 		
