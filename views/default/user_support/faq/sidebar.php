@@ -74,19 +74,17 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 	];
 	
 	if (!empty($filter)) {
-		$tag_options['wheres'][] = function (QueryBuilder $qb) {
+		$tag_options['wheres'][] = function (QueryBuilder $qb) use ($filter) {
 			return $qb->compare('msv.string', 'NOT IN', $filter, ELGG_VALUE_STRING);
 		};
 	}
 	
 	if (!empty($guids)) {
-		$tag_options['wheres'][] = function (QueryBuilder $qb) {
-			return $qb->compare('e.guid', 'IN', $guids, ELGG_VALUE_GUID);
-		};
+		$tag_options['guids'] = $guids;
 	}
 	
 	$tags = elgg_get_tags($tag_options);
-	if ($tags) {
+	if (!empty($tags)) {
 		foreach ($tags as $tag) {
 			$tag_text = $tag->tag;
 			
