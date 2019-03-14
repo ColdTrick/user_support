@@ -43,7 +43,7 @@ if (!empty($filter) || !empty($faq_query)) {
 		$getter = 'elgg_search';
 	}
 		
-	$guids = elgg_get_entities($guid_options, $getter);
+	$guids = $getter($guid_options);
 	
 	foreach ($filter as $index => $filter_tag) {
 		if ($index > 2) {
