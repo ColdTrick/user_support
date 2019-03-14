@@ -21,7 +21,7 @@ if (!empty($metadata)) {
 		$help_contexts[$md->value] = true;
 	}
 	
-	$help_contexts = array_values($help_contexts);
+	$help_contexts = array_keys($help_contexts);
 	natcasesort($help_contexts);
 }
 
