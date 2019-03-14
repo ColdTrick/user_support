@@ -11,7 +11,7 @@ $help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') 
 if (elgg_is_xhr()) {
 	
 	echo elgg_view_form('user_support/help_center/search', [
-		'action' => 'user_support/search',
+		'action' => elgg_generate_url('default:user_support:search'),
 		'class' => 'mbs',
 	]);
 
@@ -21,7 +21,7 @@ if (elgg_is_xhr()) {
 		$buttons[] = [
 			'name' => 'ticket:add',
 			'text' => elgg_echo('user_support:help_center:ask'),
-			'href' => 'javascript:void(0);',
+			'href' => false,
 			'id' => 'user-support-help-center-ask',
 			'link_class' => ['elgg-button', 'elgg-button-action'],
 			'deps' => [
@@ -31,7 +31,9 @@ if (elgg_is_xhr()) {
 		$buttons[] = [
 			'name' => 'ticket:mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
-			'href' => 'user_support/support_ticket/owner/' . $user->username,
+			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+				'username' => $user->username,
+			]),
 			'link_class' => ['elgg-button', 'elgg-button-action'],
 		];
 	}
@@ -39,7 +41,7 @@ if (elgg_is_xhr()) {
 	$buttons[] = [
 		'name' => 'faq',
 		'text' => elgg_echo('user_support:menu:faq'),
-		'href' => 'user_support/faq',
+		'href' => elgg_generate_url('collection:object:faq:all'),
 		'link_class' => ['elgg-button', 'elgg-button-action'],
 	];
 	

@@ -51,7 +51,9 @@ if ($faq_count) {
 	if ($faq_count > $faq_limit) {
 		$faq .= elgg_view('output/url', [
 			'text' => elgg_echo('user_support:faq:read_more', [($faq_count - $faq_limit)]),
-			'href' => 'user_support/faq/context?help_context=' . $help_context,
+			'href' => elgg_generate_url('collection:object:faq:context', [
+				'help_context' => $help_context,
+			]),
 			'class' => 'float-alt',
 		]);
 	}
@@ -74,7 +76,7 @@ if (elgg_is_xhr()) {
 	if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled) {
 		$menu = elgg_view('output/url', [
 			'text' => elgg_echo('user_support:help_center:help'),
-			'href' => 'javascript:void(0);',
+			'href' => false,
 			'icon' => 'plus',
 			'id' => 'user-support-help-center-add-help',
 			'class' => ['elgg-button', 'elgg-button-action'],

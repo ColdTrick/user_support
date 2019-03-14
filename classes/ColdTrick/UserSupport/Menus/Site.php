@@ -24,7 +24,7 @@ class Site {
 			'name' => 'faq',
 			'icon' => 'question-circle',
 			'text' => elgg_echo('user_support:menu:faq'),
-			'href' => 'user_support/faq',
+			'href' => elgg_generate_url('default:object:faq'),
 		]);
 		
 		return $return_value;
@@ -50,7 +50,7 @@ class Site {
 			'name' => 'help_center',
 			'icon' => 'life-ring-regular',
 			'text' => elgg_echo('user_support:button:text'),
-			'href' => 'user_support/help_center',
+			'href' => elgg_generate_url('default:user_support:help_center'),
 		];
 		
 		if (elgg_get_plugin_setting('show_as_popup', 'user_support') === 'yes') {

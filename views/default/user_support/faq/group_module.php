@@ -9,8 +9,10 @@ if (!$group instanceof ElggGroup || !user_support_is_group_faq_enabled($group)) 
 }
 
 $all_link = elgg_view('output/url', [
-	'href' => "user_support/faq/group/{$group->guid}/all",
 	'text' => elgg_echo('link:view:all'),
+	'href' => elgg_generate_url('collection:object:faq:group', [
+		'guid' => $group->guid,
+	]),
 	'is_trusted' => true,
 ]);
 
@@ -31,8 +33,10 @@ elgg_pop_context();
 $new_link = '';
 if ($group->canEdit()) {
 	$new_link = elgg_view('output/url', [
-		'href' => "user_support/faq/add/{$group->guid}",
 		'text' => elgg_echo('add:object:faq'),
+		'href' => elgg_generate_url('add:object:faq', [
+			'guid' => $group->guid,
+		]),
 		'is_trusted' => true,
 	]);
 }

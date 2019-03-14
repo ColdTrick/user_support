@@ -25,7 +25,9 @@ class Topbar {
 			'name' => 'support_ticket_mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
 			'icon' => 'question',
-			'href' => "user_support/support_ticket/owner/{$user->username}",
+			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+				'username' => $user->username,
+			]),
 			'section' => 'alt',
 			'parent_name' => 'account',
 		]);

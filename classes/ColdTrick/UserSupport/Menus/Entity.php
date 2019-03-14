@@ -113,7 +113,8 @@ class Entity {
 			'icon' => 'level-up-alt',
 			'text' => elgg_echo('user_support:menu:entity:comment_promote'),
 			'title' => elgg_echo('user_support:menu:entity:comment_promote:title'),
-			'href' => elgg_http_add_url_query_elements("user_support/faq/add/{$site->guid}", [
+			'href' => elgg_generate_url('add:object:faq', [
+				'guid' => $site->guid,
 				'comment_guid' => $entity->guid,
 			]),
 		]);

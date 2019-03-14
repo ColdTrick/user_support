@@ -60,7 +60,7 @@ if (!empty($filter) || !empty($faq_query)) {
 			'name' => $filter_tag,
 			'text' => $filter_tag,
 			'icon' => 'checkmark',
-			'href' => elgg_http_add_url_query_elements('user_support/faq', $tag_query_params),
+			'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 		];
 	}
 }
@@ -99,7 +99,7 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 				'name' => $tag_text,
 				'text' => $tag_text,
 				'icon' => 'checkmark',
-				'href' => elgg_http_add_url_query_elements('user_support/faq', $tag_query_params),
+				'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 			];
 		}
 	}

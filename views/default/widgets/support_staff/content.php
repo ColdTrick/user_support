@@ -34,6 +34,6 @@ echo $content;
 // read more link
 $more_link = elgg_view('output/url', [
 	'text' => elgg_echo('user_support:read_more'),
-	'href' => 'user_support/support_ticket',
+	'href' => elgg_generate_url('collection:object:support_ticket:all'),
 ]);
 echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);

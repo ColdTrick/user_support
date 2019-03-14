@@ -24,7 +24,9 @@ class OwnerBlock {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'text' => elgg_echo('user_support:menu:faq:group'),
-			'href' => "user_support/faq/group/{$entity->guid}/all",
+			'href' => elgg_generate_url('collection:object:faq:group', [
+				'guid' => $entity->guid,
+			]),
 		]);
 		
 		return $return_value;

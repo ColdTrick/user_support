@@ -31,11 +31,10 @@ class UserHover {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_make',
 			'text' => elgg_echo('user_support:menu:user_hover:make_staff'),
-			'href' => elgg_http_add_url_query_elements('action/user_support/support_staff', [
+			'href' => elgg_generate_action_url('user_support/support_staff', [
 				'guid' =>  $entity->guid,
 			]),
 			'confirm' => elgg_echo('question:areyousure'),
-			'is_action' => true,
 			'section' => 'admin',
 			'item_class' => $is_staff ? 'hidden' : '',
 		]);
@@ -43,11 +42,10 @@ class UserHover {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_remove',
 			'text' => elgg_echo('user_support:menu:user_hover:remove_staff'),
-			'href' => elgg_http_add_url_query_elements('action/user_support/support_staff', [
+			'href' => elgg_generate_action_url('user_support/support_staff', [
 				'guid' => $entity->guid,
 			]),
 			'confirm' => elgg_echo('question:areyousure'),
-			'is_action' => true,
 			'section' => 'admin',
 			'item_class' => $is_staff ?: 'hidden',
 		]);

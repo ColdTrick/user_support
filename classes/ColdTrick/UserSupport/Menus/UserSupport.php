@@ -26,16 +26,19 @@ class UserSupport {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
-			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}", [
+			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+				'username' => $user->username,
 				'q' => $query,
 			]),
 			'priority' => 100,
 		]);
-	
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'my_archive',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine:archive'),
-			'href' => elgg_http_add_url_query_elements("user_support/support_ticket/owner/{$user->username}/" . \UserSupportTicket::CLOSED, [
+			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+				'username' => $user->username,
+				'status' => \UserSupportTicket::CLOSED,
 				'q' => $query,
 			]),
 			'priority' => 200,
@@ -65,7 +68,7 @@ class UserSupport {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'all',
 			'text' => elgg_echo('user_support:menu:support_tickets'),
-			'href' => elgg_http_add_url_query_elements('user_support/support_ticket', [
+			'href' => elgg_generate_url('collection:object:support_ticket:all', [
 				'q' => $query,
 			]),
 			'priority' => 300,
@@ -74,7 +77,7 @@ class UserSupport {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'archive',
 			'text' => elgg_echo('user_support:menu:support_tickets:archive'),
-			'href' => elgg_http_add_url_query_elements('user_support/support_ticket/archive', [
+			'href' => elgg_generate_url('collection:object:support_ticket:archive', [
 				'q' => $query,
 			]),
 			'priority' => 400,

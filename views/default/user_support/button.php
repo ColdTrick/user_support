@@ -35,8 +35,8 @@ foreach (str_split(elgg_echo('user_support:button:text')) as $char) {
 }
 
 $link_options = [
-	'href' => 'user_support/help_center',
 	'text' => $link_text,
+	'href' => elgg_generate_url('default:user_support:help_center'),
 	'icon_alt' => 'life-ring',
 	'class' => [
 		'user-support-button-help-center',

@@ -16,7 +16,10 @@ if ($num_display < 1) {
 	$num_display = 4;
 }
 
-$more_link = 'user_support/support_ticket/owner/' . $owner->username;
+$more_link = 'collection:object:support_ticket:owner';
+$more_link_params = [
+	'username' => $owner->username,
+];
 
 $options = [
 	'type' => 'object',
@@ -33,7 +36,7 @@ if ($filter != 'all') {
 	];
 	
 	if ($filter === \UserSupportTicket::CLOSED) {
-		$more_link .= '/' . \UserSupportTicket::CLOSED;
+		$more_link_params['status'] = \UserSupportTicket::CLOSED;
 	}
 }
 
@@ -50,6 +53,6 @@ echo $content;
 // read more link
 $more_link = elgg_view('output/url', [
 	'text' => elgg_echo('user_support:read_more'),
-	'href' => $more_link,
+	'href' => elgg_generate_url($more_link, $more_link_params),
 ]);
 echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);

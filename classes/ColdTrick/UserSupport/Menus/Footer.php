@@ -24,7 +24,7 @@ class Footer {
 			'name' => 'faq',
 			'icon' => 'question-circle',
 			'text' => elgg_echo('user_support:menu:faq'),
-			'href' => 'user_support/faq',
+			'href' => elgg_generate_url('default:object:faq'),
 		]);
 		
 		return $return_value;

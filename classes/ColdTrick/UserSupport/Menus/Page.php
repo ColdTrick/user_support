@@ -23,7 +23,7 @@ class Page {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'text' => elgg_echo('user_support:menu:faq'),
-			'href' => 'user_support/faq',
+			'href' => elgg_generate_url('collection:object:faq:all'),
 		]);
 		
 		return $return_value;
@@ -49,7 +49,9 @@ class Page {
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'support_ticket_mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
-			'href' => "user_support/support_ticket/owner/{$user->username}",
+			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+				'username' => $user->username,
+			]),
 		]);
 		
 		return $return_value;
