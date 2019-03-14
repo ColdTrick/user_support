@@ -9,6 +9,7 @@ if (user_support_staff_gatekeeper(false)) {
 
 elgg_entity_gatekeeper($guid, 'object', UserSupportTicket::SUBTYPE);
 
+/* @var $entity \UserSupportTicket */
 $entity = get_entity($guid);
 
 // build page elements
@@ -24,6 +25,7 @@ $page_data = elgg_view_layout('default', [
 	'title' => $title_text,
 	'content' => $content,
 	'filter' => false,
+	'entity' => $entity,
 ]);
 
 // restore access
