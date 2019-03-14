@@ -32,7 +32,7 @@ foreach ($filter as $index => $tag) {
 $getter = 'elgg_get_entities';
 
 if (!empty($q)) {
-	$options['query'] = $faq_query;
+	$list_options['query'] = $faq_query;
 	$getter = 'elgg_search';
 }
 
