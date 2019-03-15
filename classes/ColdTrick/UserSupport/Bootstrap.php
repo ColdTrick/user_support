@@ -66,9 +66,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('get', 'subscriptions', __NAMESPACE__ . '\Notifications::getSupportTicketSubscribers');
 		$hooks->registerHandler('prepare', 'notification:create:object:' . \UserSupportTicket::SUBTYPE, __NAMESPACE__ . '\Notifications::prepareSupportTicketMessage');
 		
-		$hooks->registerHandler('enqueue', 'notification', __NAMESPACE__ . '\Notifications::allowTicketEnqueue', 9999);
-		$hooks->registerHandler('enqueue', 'notification', __NAMESPACE__ . '\Notifications::allowTicketCommentEnqueue', 9999);
-		
 		$hooks->registerHandler('likes:is_likable', 'object:' . \UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
 		
 		$hooks->registerHandler('register', 'menu:entity', __NAMESPACE__ . '\Menus\Entity::registerTicket');
