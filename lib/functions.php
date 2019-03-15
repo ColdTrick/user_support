@@ -1,9 +1,9 @@
 <?php
-use Elgg\Database\Clauses\WhereClause;
-
 /**
  * All helper functions are bundled here
  */
+
+use Elgg\Database\QueryBuilder;
 
 /**
  * Get the context for a page, for the help system
@@ -65,32 +65,36 @@ function user_support_get_help_context($url = '') {
  */
 function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 	
-	if (!$ticket instanceof UserSupportTicket) {
-		return false;
-	}
-	
-	$users = elgg_get_entities([
+	$users = elgg_get_entities_from_plugin_user_settings([
 		'type' => 'user',
 		'limit' => false,
 		'wheres' => [
-			new WhereClause("e.guid <> {$ticket->owner_guid}"),
+			function (QueryBuilder $qb, $main_alias) use ($ticket) {
+				return $qb->compare("{$main_alias}.guid", '!=', $ticket->owner_guid, ELGG_VALUE_GUID);
+			},
 		],
-		'private_setting_name_value_pairs' => [
+		'plugin_id' => 'user_support',
+		'plugin_user_setting_name_value_pairs' => [
 			[
-				'name' => ELGG_PLUGIN_USER_SETTING_PREFIX . 'user_support:admin_notify',
+				'name' => 'admin_notify',
 				'value' => 'yes',
 			],
 		],
 		'metadata_name_value_pairs' => [
 			[
-				'admin' => 'yes',
+				'name' => 'admin',
+				'value' => 'yes',
 			],
 			[
 				'name' => 'support_staff',
+				'value' => 0,
+				'operand' => '>=',
+				'as' => 'integer',
 			],
 		],
+		'metadata_name_value_pairs_operator' => 'OR',
 	]);
-		
+	
 	// trigger hook to get more/less users
 	$users = elgg_trigger_plugin_hook('admin_notify', 'user_support', ['users' => $users, 'entity' => $ticket], $users);
 	if (empty($users)) {
