@@ -87,6 +87,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('reshare', 'object', __NAMESPACE__ . '\TheWireTools::blockTicketReshare');
 		$hooks->registerHandler('type_subtypes', 'quicklinks', __NAMESPACE__ . '\QuickLinks::blockHelpLink');
 		$hooks->registerHandler('type_subtypes', 'quicklinks', __NAMESPACE__ . '\QuickLinks::blockTicketLink');
+		$hooks->registerHandler('notification_type_subtype', 'tag_tools', __NAMESPACE__ . '\TagTools::preventTagNotifications');
 		
 		// permissions
 		$hooks->registerHandler('container_logic_check', 'object', __NAMESPACE__ . '\Permissions::faqLogicCheck');
