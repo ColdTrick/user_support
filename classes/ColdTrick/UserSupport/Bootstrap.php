@@ -49,7 +49,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	protected function initRegisterEvents() {
 		$events = $this->elgg()->events;
 		
-		$events->registerHandler('create', 'object', '\ColdTrick\UserSupport\Comments::supportTicketStatus');
+		$events->registerHandler('create', 'object', __NAMESPACE__ . '\Comments::supportTicketStatus');
 	}
 	
 	/**
@@ -60,46 +60,46 @@ class Bootstrap extends DefaultPluginBootstrap {
 	protected function initRegisterHooks() {
 		$hooks = $this->elgg()->hooks;
 		
-		$hooks->registerHandler('get', 'subscriptions', '\ColdTrick\UserSupport\Notifications::getSupportTicketCommentSubscribers');
-		$hooks->registerHandler('prepare', 'notification:create:object:comment', '\ColdTrick\UserSupport\Notifications::prepareSupportTicketCommentMessage');
+		$hooks->registerHandler('get', 'subscriptions', __NAMESPACE__ . '\Notifications::getSupportTicketCommentSubscribers');
+		$hooks->registerHandler('prepare', 'notification:create:object:comment', __NAMESPACE__ . '\Notifications::prepareSupportTicketCommentMessage');
 		
-		$hooks->registerHandler('get', 'subscriptions', '\ColdTrick\UserSupport\Notifications::getSupportTicketSubscribers');
-		$hooks->registerHandler('prepare', 'notification:create:object:' . \UserSupportTicket::SUBTYPE, '\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage');
+		$hooks->registerHandler('get', 'subscriptions', __NAMESPACE__ . '\Notifications::getSupportTicketSubscribers');
+		$hooks->registerHandler('prepare', 'notification:create:object:' . \UserSupportTicket::SUBTYPE, __NAMESPACE__ . '\Notifications::prepareSupportTicketMessage');
 		
-		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketEnqueue', 9999);
-		$hooks->registerHandler('enqueue', 'notification', '\ColdTrick\UserSupport\Notifications::allowTicketCommentEnqueue', 9999);
+		$hooks->registerHandler('enqueue', 'notification', __NAMESPACE__ . '\Notifications::allowTicketEnqueue', 9999);
+		$hooks->registerHandler('enqueue', 'notification', __NAMESPACE__ . '\Notifications::allowTicketCommentEnqueue', 9999);
 		
 		$hooks->registerHandler('likes:is_likable', 'object:' . \UserSupportFAQ::SUBTYPE, '\Elgg\Values::getTrue');
 		
-		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerTicket');
-		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::registerHelp');
-		$hooks->registerHandler('register', 'menu:entity', '\ColdTrick\UserSupport\Menus\Entity::promoteCommentToFAQ');
-		$hooks->registerHandler('register', 'menu:topbar', '\ColdTrick\UserSupport\Menus\Topbar::registerUserSupportTickets');
-		$hooks->registerHandler('register', 'menu:owner_block', '\ColdTrick\UserSupport\Menus\OwnerBlock::registerGroupFAQ');
-		$hooks->registerHandler('register', 'menu:site', '\ColdTrick\UserSupport\Menus\Site::registerFAQ');
-		$hooks->registerHandler('register', 'menu:site', '\ColdTrick\UserSupport\Menus\Site::registerHelpCenter');
-		$hooks->registerHandler('register', 'menu:page', '\ColdTrick\UserSupport\Menus\Page::registerFAQ');
-		$hooks->registerHandler('register', 'menu:page', '\ColdTrick\UserSupport\Menus\Page::registerUserSupportTickets');
-		$hooks->registerHandler('register', 'menu:footer', '\ColdTrick\UserSupport\Menus\Footer::registerFAQ');
-		$hooks->registerHandler('register', 'menu:user_hover', '\ColdTrick\UserSupport\Menus\UserHover::registerStaff');
-		$hooks->registerHandler('register', 'menu:user_support', '\ColdTrick\UserSupport\Menus\UserSupport::registerUserSupportTickets');
-		$hooks->registerHandler('register', 'menu:user_support', '\ColdTrick\UserSupport\Menus\UserSupport::registerStaff');
+		$hooks->registerHandler('register', 'menu:entity', __NAMESPACE__ . '\Menus\Entity::registerTicket');
+		$hooks->registerHandler('register', 'menu:entity', __NAMESPACE__ . '\Menus\Entity::registerHelp');
+		$hooks->registerHandler('register', 'menu:entity', __NAMESPACE__ . '\Menus\Entity::promoteCommentToFAQ');
+		$hooks->registerHandler('register', 'menu:topbar', __NAMESPACE__ . '\Menus\Topbar::registerUserSupportTickets');
+		$hooks->registerHandler('register', 'menu:owner_block', __NAMESPACE__ . '\Menus\OwnerBlock::registerGroupFAQ');
+		$hooks->registerHandler('register', 'menu:site', __NAMESPACE__ . '\Menus\Site::registerFAQ');
+		$hooks->registerHandler('register', 'menu:site', __NAMESPACE__ . '\Menus\Site::registerHelpCenter');
+		$hooks->registerHandler('register', 'menu:page', __NAMESPACE__ . '\Menus\Page::registerFAQ');
+		$hooks->registerHandler('register', 'menu:page', __NAMESPACE__ . '\Menus\Page::registerUserSupportTickets');
+		$hooks->registerHandler('register', 'menu:footer', __NAMESPACE__ . '\Menus\Footer::registerFAQ');
+		$hooks->registerHandler('register', 'menu:user_hover', __NAMESPACE__ . '\Menus\UserHover::registerStaff');
+		$hooks->registerHandler('register', 'menu:user_support', __NAMESPACE__ . '\Menus\UserSupport::registerUserSupportTickets');
+		$hooks->registerHandler('register', 'menu:user_support', __NAMESPACE__ . '\Menus\UserSupport::registerStaff');
 		
-		$hooks->registerHandler('entity:url', 'object', '\ColdTrick\UserSupport\Widgets::widgetURL');
-		$hooks->registerHandler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockHelpReshare');
-		$hooks->registerHandler('reshare', 'object', '\ColdTrick\UserSupport\TheWireTools::blockTicketReshare');
-		$hooks->registerHandler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockHelpLink');
-		$hooks->registerHandler('type_subtypes', 'quicklinks', '\ColdTrick\UserSupport\QuickLinks::blockTicketLink');
+		$hooks->registerHandler('entity:url', 'object', __NAMESPACE__ . '\Widgets::widgetURL');
+		$hooks->registerHandler('reshare', 'object', __NAMESPACE__ . '\TheWireTools::blockHelpReshare');
+		$hooks->registerHandler('reshare', 'object', __NAMESPACE__ . '\TheWireTools::blockTicketReshare');
+		$hooks->registerHandler('type_subtypes', 'quicklinks', __NAMESPACE__ . '\QuickLinks::blockHelpLink');
+		$hooks->registerHandler('type_subtypes', 'quicklinks', __NAMESPACE__ . '\QuickLinks::blockTicketLink');
 		
 		// permissions
-		$hooks->registerHandler('container_logic_check', 'object', '\ColdTrick\UserSupport\Permissions::faqLogicCheck');
-		$hooks->registerHandler('container_permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::faqContainerWriteCheck');
+		$hooks->registerHandler('container_logic_check', 'object', __NAMESPACE__ . '\Permissions::faqLogicCheck');
+		$hooks->registerHandler('container_permissions_check', 'object', __NAMESPACE__ . '\Permissions::faqContainerWriteCheck');
 		
-		$hooks->registerHandler('permissions_check', 'object', '\ColdTrick\UserSupport\Permissions::editSupportTicket');
+		$hooks->registerHandler('permissions_check', 'object', __NAMESPACE__ . '\Permissions::editSupportTicket');
 		
-		$hooks->registerHandler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteSupportTicket');
-		$hooks->registerHandler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteHelp');
-		$hooks->registerHandler('permissions_check:delete', 'object', '\ColdTrick\UserSupport\Permissions::deleteFAQ');
+		$hooks->registerHandler('permissions_check:delete', 'object', __NAMESPACE__ . '\Permissions::deleteSupportTicket');
+		$hooks->registerHandler('permissions_check:delete', 'object', __NAMESPACE__ . '\Permissions::deleteHelp');
+		$hooks->registerHandler('permissions_check:delete', 'object', __NAMESPACE__ . '\Permissions::deleteFAQ');
 		
 	}
 }
