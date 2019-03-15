@@ -36,11 +36,15 @@ if (!empty($q)) {
 	$getter = 'elgg_search';
 }
 
-$search_action = 'user_support/support_ticket/owner/' . $user->username;
+$search_route = 'collection:object:support_ticket:owner';
+$search_route_params = [
+	'username' => $user->username,
+];
 
 // build page elements
 if ($status === \UserSupportTicket::CLOSED) {
-	$search_action .= '/' . \UserSupportTicket::CLOSED;
+	$search_route_params['status'] = \UserSupportTicket::CLOSED;
+	
 	if ($user->guid === elgg_get_logged_in_user_guid()) {
 		$title_text = elgg_echo('user_support:tickets:mine:archive:title');
 	} else {
@@ -59,7 +63,7 @@ elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
 $form_vars = [
 	'method' => 'GET',
 	'disable_security' => true,
-	'action' => $search_action,
+	'action' => elgg_generate_url($search_route, $search_route_params),
 ];
 $search = elgg_view_form('user_support/support_ticket/search', $form_vars);
 

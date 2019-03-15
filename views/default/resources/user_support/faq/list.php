@@ -31,8 +31,9 @@ foreach ($filter as $index => $tag) {
 // text search
 $getter = 'elgg_get_entities';
 
-if (!empty($q)) {
+if (!empty($faq_query)) {
 	$list_options['query'] = $faq_query;
+	
 	$getter = 'elgg_search';
 }
 
