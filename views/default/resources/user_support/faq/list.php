@@ -1,5 +1,8 @@
 <?php
 
+use Elgg\Database\QueryBuilder;
+use ColdTrick\UserSupport\Database\TagFilter;
+
 $filter = (array) get_input('filter');
 $faq_query = get_input('faq_query');
 $filter = array_values($filter); // indexing could be messed up
@@ -12,20 +15,17 @@ $title_text = elgg_echo('user_support:faq:list:title');
 $list_options = [
 	'type' => 'object',
 	'subtype' => UserSupportFAQ::SUBTYPE,
-	'metadata_name_value_pairs' => [],
+	'wheres' => [],
 	'no_results' => true,
 ];
 
-// add tag filter
-foreach ($filter as $index => $tag) {
-	if ($index > 2) {
-		// prevent filtering on too much tags
-		break;
-	}
-	$list_options['metadata_name_value_pairs'][] = [
-		'name' => 'tags',
-		'value' => $tag,
-	];
+if (!empty($filter)) {
+	$list_options['wheres'][] = function (QueryBuilder $qb, $main_alias) use ($filter) {
+		// add tag filter
+		$filter = new TagFilter($filter);
+		
+		return $filter($qb, $main_alias);
+	};
 }
 
 // text search

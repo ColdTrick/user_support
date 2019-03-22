@@ -1,6 +1,7 @@
 <?php
 
 use Elgg\Database\QueryBuilder;
+use ColdTrick\UserSupport\Database\TagFilter;
 
 $filter = (array) get_input('filter');
 $query_params = ['filter' => $filter];
@@ -18,22 +19,18 @@ if (!empty($filter) || !empty($faq_query)) {
 		'type' => 'object',
 		'subtype' => \UserSupportFAQ::SUBTYPE,
 		'limit' => false,
-		'metadata_name_value_pairs' => [],
+		'wheres' => [
+			function (QueryBuilder $qb, $main_alias) use ($filter) {
+				// add tag filter
+				$filter = new TagFilter($filter);
+				
+				return $filter($qb, $main_alias);
+			}
+		],
 		'callback' => function($row) {
 			return (int) $row->guid;
 		},
 	];
-	
-	foreach ($filter as $index => $tag) {
-		if ($index > 2) {
-			// prevent filtering on too much tags
-			break;
-		}
-		$guid_options['metadata_name_value_pairs'][] = [
-			'name' => 'tags',
-			'value' => $tag,
-		];
-	}
 	
 	// text search
 	$getter = 'elgg_get_entities';
