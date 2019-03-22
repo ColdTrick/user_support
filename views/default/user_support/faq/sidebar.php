@@ -71,6 +71,7 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 		'subtype' => UserSupportFAQ::SUBTYPE,
 		'tag_names' => ['tags'],
 		'wheres' => [],
+		'limit' => 5,
 	];
 	
 	if (!empty($filter)) {
