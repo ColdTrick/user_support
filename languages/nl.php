@@ -1,10 +1,13 @@
 <?php
 /**
- * This file was created by Translation Editor v6.1
- * On 2018-03-19 11:14
+ * This file was created by Translation Editor v7.0-beta
+ * On 2019-03-27 13:40
  */
 
 return array (
+  'collection:object:faq' => 'User Support FAQs',
+  'collection:object:help' => 'User Support Contextuele Help',
+  'collection:object:support_ticket' => 'User Support Tickets',
   'user_support:settings:faq:group_faq' => 'Schakel FAQ in groepen in',
   'user_support:settings:faq:group_faq:yes_off' => 'Ja, standaard uitgeschakeld',
   'user_support:settings:faq:group_faq:yes' => 'Ja, standaard ingeschakeld',
