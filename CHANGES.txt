@@ -1,6 +1,25 @@
 Version history
 ===============
 
+4.0 (2019-03-27):
+
+- changed: don't remember query in support ticket tabs
+- changed: minimal requirement set to Elgg 3
+- changed: moved my support tickets menu item to account in topbar
+- changed: moved plugin init to bootstrap class and elgg-plugin.php
+- fixed: comment and close support ticket
+- fixed: faq search
+- fixed: faq tag filter not working with multiple tags
+- fixed: limit number of tag suggestions in faq sidebar
+- fixed: no tag notifications
+- fixed: notification event handling
+- fixed: search
+- fixed: show correct help contexts
+- fixed: support ticket notifications
+- fixed: use correct getter in sidebar
+- removed: faqs no longer sorted by likes count
+- removed: replaced custom delete actions with a generic one
+
 3.1 (2018-03-22):
 
 - added: plugin settings to enable/disable group FAQ
