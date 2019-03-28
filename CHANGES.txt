@@ -1,6 +1,10 @@
 Version history
 ===============
 
+4.0.1 (2019-03-28):
+
+- several small chores/fixes
+
 4.0 (2019-03-27):
 
 - changed: don't remember query in support ticket tabs
