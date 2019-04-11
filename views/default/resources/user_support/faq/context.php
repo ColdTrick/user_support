@@ -2,7 +2,7 @@
 
 use Elgg\BadRequestException;
 
-$help_context = elgg_extract('help_context', $vars);
+$help_context = get_input('help_context');
 if (empty($help_context)) {
 	throw new BadRequestException();
 }
