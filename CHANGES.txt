@@ -1,6 +1,10 @@
 Version history
 ===============
 
+4.0.2 (2019-04-17):
+
+- fixed: show context related faqs
+
 4.0.1 (2019-03-28):
 
 - several small chores/fixes
