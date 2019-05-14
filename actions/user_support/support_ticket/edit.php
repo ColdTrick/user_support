@@ -10,8 +10,6 @@ $help_context = get_input('help_context');
 $tags = string_to_tag_array(get_input('tags'));
 $support_type = get_input('support_type');
 
-$loggedin_user = elgg_get_logged_in_user_entity();
-
 if (empty($description) || empty($support_type)) {
 	return elgg_error_response(elgg_echo('error:missing_data'));
 }
@@ -23,10 +21,6 @@ if (!empty($guid)) {
 	}
 } else {
 	$entity = new UserSupportTicket();
-	
-	$entity->title = elgg_get_excerpt($title, 50);
-	$entity->description = $title;
-	
 	if (!$entity->save()) {
 		return elgg_error_response(elgg_echo('save:fail'));
 	}
