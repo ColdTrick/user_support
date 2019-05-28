@@ -5,13 +5,9 @@ if (!$entity instanceof UserSupportTicket) {
 	return;
 }
 
-$full_view = (bool) elgg_extract('full_view', $vars);
-
-$owner = $entity->getOwnerEntity();
-
 $vars['access'] = false;
 
-if (!$full_view) {
+if (!(bool) elgg_extract('full_view', $vars)) {
 	// summary (listing) view
 	
 	// title
@@ -63,7 +59,6 @@ if (!$full_view) {
 	echo elgg_view('object/elements/full', [
 		'entity' => $entity,
 		'summary' => $summary,
-		'icon' => $icon,
 		'body' => $body,
 	]);
 }
