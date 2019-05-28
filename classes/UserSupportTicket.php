@@ -25,13 +25,6 @@ class UserSupportTicket extends ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getURL() {
-		return elgg_normalize_url('user_support/support_ticket/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getDisplayName() {
 		$title = $this->title;
 		if (empty($title)) {

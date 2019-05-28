@@ -25,13 +25,6 @@ class UserSupportFAQ extends ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getURL() {
-		return elgg_normalize_url('user_support/faq/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
-	}
-		
-	/**
-	 * {@inheritDoc}
-	 */
 	public function canComment($user_guid = 0, $default = null) {
 		
 		if ($this->allow_comments !== 'yes') {
