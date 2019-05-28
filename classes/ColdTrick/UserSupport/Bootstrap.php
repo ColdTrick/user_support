@@ -89,6 +89,8 @@ class Bootstrap extends DefaultPluginBootstrap {
 		$hooks->registerHandler('type_subtypes', 'quicklinks', __NAMESPACE__ . '\QuickLinks::blockTicketLink');
 		$hooks->registerHandler('notification_type_subtype', 'tag_tools', __NAMESPACE__ . '\TagTools::preventTagNotifications');
 		
+		$hooks->registerHandler('validate:acl_membership', 'advanced_notifications', __NAMESPACE__ . '\Plugins\AdvancedNotifications::disableAclMembershipValidation');
+		
 		// permissions
 		$hooks->registerHandler('container_logic_check', 'object', __NAMESPACE__ . '\Permissions::faqLogicCheck');
 		$hooks->registerHandler('container_permissions_check', 'object', __NAMESPACE__ . '\Permissions::faqContainerWriteCheck');
