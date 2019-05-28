@@ -76,8 +76,8 @@ return array(
 	'user_support:support_ticket:promote' => "Promote to FAQ",
 	
 	// admin notify
-	'user_support:notify:admin:create:subject' => "A new Support Ticket %s was reported",
-	'user_support:notify:admin:create:summary' => "A new Support Ticket %s was reported",
+	'user_support:notify:admin:create:subject' => "A new Support Ticket '%s' was reported",
+	'user_support:notify:admin:create:summary' => "A new Support Ticket '%s' was reported",
 	'user_support:notify:admin:create:message' => "Hi,
 
 %s reported a new Support Ticket:
@@ -86,11 +86,11 @@ return array(
 To view the Ticket click on this link:
 %s",
 	
-	'user_support:notify:admin:updated:subject' => "The Support Ticket %s was updated",
-	'user_support:notify:admin:updated:summary' => "The Support Ticket %s was updated",
+	'user_support:notify:admin:updated:subject' => "The Support Ticket '%s' was updated",
+	'user_support:notify:admin:updated:summary' => "The Support Ticket '%s' was updated",
 	'user_support:notify:admin:updated:message' => "Hi,
 
-%s updated the Support Ticket %s:
+%s updated the Support Ticket '%s':
 %s
 
 To view the Ticket click on this link:
@@ -203,5 +203,4 @@ To view the Ticket click on this link:
 	// support staff
 	'user_support:action:support_staff:added' => "The user is added to the support staff",
 	'user_support:action:support_staff:removed' => "The user was removed from the support staff",
-	
 );

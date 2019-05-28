@@ -85,7 +85,7 @@ class Notifications {
 	}
 	
 	/**
-	 * Prepare the message that needs to go to the admins for a comment on a support ticket
+	 * Prepare the message when a comment is made on a support ticket
 	 *
 	 * @param string       $hook         the name of the hook
 	 * @param string       $type         the type of the hook

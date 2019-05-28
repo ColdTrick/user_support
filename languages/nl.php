@@ -26,10 +26,10 @@ return array (
   'user_support:menu:entity:comment_promote' => 'Maak FAQ',
   'user_support:menu:entity:comment_promote:title' => 'Verander deze reactie in een FAQ',
   'user_support:action:faq:edit:error:save' => 'Een onbekend probleem is opgetreden tijdens het opslaan van de FAQ',
-  'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket %s is gemeld',
-  'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket %s is bijgewerkt',
-  'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket %s is gemeld',
-  'user_support:notify:admin:updated:summary' => 'De Helpdesk ticket %s is bijgewerkt',
+  'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
+  'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket \'%s\' is bijgewerkt',
+  'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
+  'user_support:notify:admin:updated:summary' => 'De Helpdesk ticket \'%s\' is bijgewerkt',
   'user_support:support_type:status:open' => 'Open',
   'user_support:support_type:status:closed' => 'Gesloten',
   'user_support:comment_close' => 'Reageer en sluit',
@@ -81,7 +81,7 @@ Om de ticket te bekijken klik op de volgende link:
 %s',
   'user_support:notify:admin:updated:message' => 'Hallo,
 
-%s heeft de Helpdesk ticket %s bijgewerkt:
+%s heeft de Helpdesk ticket \'%s\' bijgewerkt:
 %s
 
 Om de ticket te bekijken klik op de volgende link:
@@ -102,7 +102,7 @@ Om de ticket te bekijken klik op de volgende link:
   'user_support:read_more' => 'Lees meer',
   'user_support:help_context' => 'Help',
   'user_support:reopen' => 'Heropenen',
-  'river:comment:object:support_ticket' => '%s plaatste een commentaar op %s',
+  'river:comment:object:support_ticket' => '%s plaatste een reactie op %s',
   'user_support:support_ticket:closed' => 'Uw Support Ticket is gesloten',
   'user_support:support_ticket:reopened' => 'Uw Support Ticket is heropend',
   'user_support:menu:support_tickets' => 'Support Tickets',
