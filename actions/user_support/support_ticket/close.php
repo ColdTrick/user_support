@@ -28,22 +28,4 @@ $comment->access_id = $entity->access_id;
 $comment->description = elgg_echo('user_support:support_ticket:closed');
 $comment->save();
 
-// notify owner
-notify_user($entity->owner_guid,
-	$user->guid,
-	elgg_echo('generic_comment:email:subject'),
-	elgg_echo('generic_comment:email:body', [
-		$entity->getDisplayName(),
-		$user->getDisplayName(),
-		elgg_echo('user_support:support_ticket:closed'),
-		$entity->getURL(),
-		$user->getDisplayName(),
-		$user->getURL(),
-	]),
-	[
-		'action' => 'create',
-		'object' => $comment,
-	]
-);
-
 return elgg_ok_response('', elgg_echo('user_support:action:ticket:close:success'));
