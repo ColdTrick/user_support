@@ -1,6 +1,11 @@
 Version history
 ===============
 
+4.0.3 (2019-05-29):
+
+- fixed: duplicate notification on close/reopen ticket
+- fixed: no notifications about new support tickets or comments
+
 4.0.2 (2019-04-17):
 
 - fixed: show context related faqs
