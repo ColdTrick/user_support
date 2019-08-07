@@ -7,19 +7,17 @@ class Page {
 	/**
 	 * Add menu items to the page menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:page'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerFAQ($hook, $type, $return_value, $params) {
+	public static function registerFAQ(\Elgg\Hook $hook) {
 		
 		if (!elgg_in_context('user_support')) {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'text' => elgg_echo('user_support:menu:faq'),
@@ -32,20 +30,18 @@ class Page {
 	/**
 	 * Add menu items to the page menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:page'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerUserSupportTickets($hook, $type, $return_value, $params) {
+	public static function registerUserSupportTickets(\Elgg\Hook $hook) {
 		
 		$user = elgg_get_logged_in_user_entity();
 		if (empty($user) || !elgg_in_context('user_support')) {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'support_ticket_mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),

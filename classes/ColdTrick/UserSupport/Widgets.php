@@ -7,20 +7,17 @@ class Widgets {
 	/**
 	 * Return the widget title url
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param string $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'entity:url', 'object'
 	 *
 	 * @return void|string
 	 */
-	public static function widgetURL($hook, $type, $return_value, $params) {
+	public static function widgetURL(\Elgg\Hook $hook) {
 		
-		if (!empty($return_value)) {
+		if (!empty($hook->getValue())) {
 			return;
 		}
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \ElggWidget) {
 			return;
 		}

@@ -7,24 +7,22 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Ticket
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerTicket($hook, $type, $return_value, $params) {
+	public static function registerTicket(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \UserSupportTicket) {
 			return;
 		}
 		
 		if (!user_support_staff_gatekeeper(false)) {
-			return $return_value;
+			return;
 		}
 		
+		$return_value = $hook->getValue();
 		if ($entity->getStatus() === \UserSupportTicket::OPEN) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'status',
@@ -53,20 +51,18 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Help
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerHelp($hook, $type, $return_value, $params) {
+	public static function registerHelp(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \UserSupportHelp) {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		if ($entity->canEdit()) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'edit',
@@ -84,16 +80,13 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Comment
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function promoteCommentToFAQ($hook, $type, $return_value, $params) {
+	public static function promoteCommentToFAQ(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \ElggComment) {
 			return;
 		}
@@ -108,6 +101,7 @@ class Entity {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'promote',
 			'icon' => 'level-up-alt',

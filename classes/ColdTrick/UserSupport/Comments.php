@@ -7,14 +7,13 @@ class Comments {
 	/**
 	 * Listen to the creation of a comment, to check if a SupportTicket should be closed
 	 *
-	 * @param string       $event  the name of the event
-	 * @param string       $type   the type of the event
-	 * @param \ElggComment $object supplied comment
+	 * @param \Elgg\Event $event 'create', 'object'
 	 *
 	 * @return void
 	 */
-	public static function supportTicketStatus($event, $type, $object) {
+	public static function supportTicketStatus(\Elgg\Event $event) {
 		
+		$object = $event->getObject();
 		// is it a comment
 		if (!$object instanceof \ElggComment) {
 			return;

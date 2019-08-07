@@ -10,16 +10,13 @@ class Notifications {
 	/**
 	 * Add users to the subscribers of a comment notification on a support ticket
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param array  $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'get', 'subscriptions'
 	 *
 	 * @return void|array
 	 */
-	public static function getSupportTicketCommentSubscribers($hook, $type, $return_value, $params) {
+	public static function getSupportTicketCommentSubscribers(\Elgg\Hook $hook) {
 		
-		$event = elgg_extract('event', $params);
+		$event = $hook->getParam('event');
 		if (!$event instanceof SubscriptionNotificationEvent) {
 			return;
 		}
@@ -87,16 +84,13 @@ class Notifications {
 	/**
 	 * Prepare the message when a comment is made on a support ticket
 	 *
-	 * @param string       $hook         the name of the hook
-	 * @param string       $type         the type of the hook
-	 * @param Notification $return_value current return value
-	 * @param array        $params       supplied params
+	 * @param \Elgg\Hook $hook 'prepare', 'notification:create:object:comment'
 	 *
 	 * @return void|Notification
 	 */
-	public static function prepareSupportTicketCommentMessage($hook, $type, $return_value, $params) {
+	public static function prepareSupportTicketCommentMessage(\Elgg\Hook $hook) {
 		
-		$event = elgg_extract('event', $params);
+		$event = $hook->getParam('event');
 		if (!$event instanceof SubscriptionNotificationEvent) {
 			return;
 		}
@@ -123,8 +117,9 @@ class Notifications {
 			return;
 		}
 		
-		$language = elgg_extract('language', $params);
+		$language = $hook->getParam('language');
 		
+		$return_value = $hook->getValue();
 		$return_value->subject = elgg_echo('user_support:notify:admin:updated:subject', [$entity->getDisplayName()], $language);
 		$return_value->summary = elgg_echo('user_support:notify:admin:updated:summary', [$entity->getDisplayName()], $language);
 		$return_value->body = elgg_echo('user_support:notify:admin:updated:message', [
@@ -140,16 +135,13 @@ class Notifications {
 	/**
 	 * Add users to the subscribers of a creation notification for a support ticket
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param array  $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'get', 'subscriptions'
 	 *
 	 * @return void|array
 	 */
-	public static function getSupportTicketSubscribers($hook, $type, $return_value, $params) {
+	public static function getSupportTicketSubscribers(\Elgg\Hook $hook) {
 		
-		$event = elgg_extract('event', $params);
+		$event = $hook->getParam('event');
 		if (!$event instanceof SubscriptionNotificationEvent) {
 			return;
 		}
@@ -199,16 +191,13 @@ class Notifications {
 	/**
 	 * Prepare the message that needs to go to the admins for a support ticket
 	 *
-	 * @param string       $hook         the name of the hook
-	 * @param string       $type         the type of the hook
-	 * @param Notification $return_value current return value
-	 * @param array        $params       supplied params
+	 * @param \Elgg\Hook $hook 'prepare', 'notification:create:object:support_ticket'
 	 *
 	 * @return void|Notification
 	 */
-	public static function prepareSupportTicketMessage($hook, $type, $return_value, $params) {
+	public static function prepareSupportTicketMessage(\Elgg\Hook $hook) {
 		
-		$event = elgg_extract('event', $params);
+		$event = $hook->getParam('event');
 		if (!$event instanceof SubscriptionNotificationEvent) {
 			return;
 		}
@@ -229,8 +218,9 @@ class Notifications {
 			return;
 		}
 		
-		$language = elgg_extract('language', $params);
+		$language = $hook->getParam('language');
 		
+		$return_value = $hook->getValue();
 		$return_value->subject = elgg_echo('user_support:notify:admin:create:subject', [$object->getDisplayName()], $language);
 		$return_value->summary = elgg_echo('user_support:notify:admin:create:summary', [$object->getDisplayName()], $language);
 		$return_value->body = elgg_echo('user_support:notify:admin:create:message', [

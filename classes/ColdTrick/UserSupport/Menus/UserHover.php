@@ -7,21 +7,18 @@ class UserHover {
 	/**
 	 * Add menu items to the user_hover menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:user_hover'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerStaff($hook, $type, $return_value, $params) {
+	public static function registerStaff(\Elgg\Hook $hook) {
 		
 		$user = elgg_get_logged_in_user_entity();
 		if (empty($user) || !$user->isAdmin()) {
 			return;
 		}
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \ElggUser || ($entity->guid === $user->guid)) {
 			return;
 		}
@@ -33,6 +30,7 @@ class UserHover {
 		
 		$is_staff = user_support_staff_gatekeeper(false, $entity->guid);
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_make',
 			'icon' => 'level-up-alt',

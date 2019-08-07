@@ -7,43 +7,37 @@ class Permissions {
 	/**
 	 * Add permissions to support staff
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'permissions_check', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function editSupportTicket($hook, $type, $return_value, $params) {
+	public static function editSupportTicket(\Elgg\Hook $hook) {
 		
-		if ($return_value) {
+		if ($hook->getValue()) {
 			// already have permission
 			return;
 		}
 		
-		$entity = elgg_extract('entity', $params);
-		$user = elgg_extract('user', $params);
+		$entity = $hook->getEntityParam();
+		$user = $hook->getUserParam();
 		if (!$entity instanceof \UserSupportTicket || !$user instanceof \ElggUser) {
 			return;
 		}
-				
+
 		return user_support_staff_gatekeeper(false, $user->guid);
 	}
 	
 	/**
 	 * Prevent FAQ from being created in groups which haven't enabled the feature
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'container_logic_check', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function faqLogicCheck($hook, $type, $return_value, $params) {
+	public static function faqLogicCheck(\Elgg\Hook $hook) {
 		
-		$container = elgg_extract('container', $params);
-		$subtype = elgg_extract('subtype', $params);
+		$container = $hook->getParam('container');
+		$subtype = $hook->getParam('subtype');
 		if (!$container instanceof \ElggGroup || $subtype !== \UserSupportFAQ::SUBTYPE) {
 			return;
 		}
@@ -54,23 +48,20 @@ class Permissions {
 	/**
 	 * Can a user create an FAQ
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'container_permissions_check', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function faqContainerWriteCheck($hook, $type, $return_value, $params) {
+	public static function faqContainerWriteCheck(\Elgg\Hook $hook) {
 		
-		$user = elgg_extract('user', $params);
-		$subtype = elgg_extract('subtype', $params);
+		$user = $hook->getUserParam();
+		$subtype = $hook->getParam('subtype');
 		if ($subtype !== \UserSupportFAQ::SUBTYPE || empty($user)) {
 			return;
 		}
 		
 		/* @var $container \ElggEntity */
-		$container = elgg_extract('container', $params);
+		$container = $hook->getParam('container');
 		if ($container instanceof \ElggGroup) {
 			return $container->canEdit($user->guid);
 		}
@@ -81,17 +72,14 @@ class Permissions {
 	/**
 	 * Check delete permissions for Support tickets
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'permissions_check:delete', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function deleteSupportTicket($hook, $type, $return_value, $params) {
+	public static function deleteSupportTicket(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
-		$user = elgg_extract('user', $params);
+		$entity = $hook->getEntityParam();
+		$user = $hook->getUserParam();
 		if (!$entity instanceof \UserSupportTicket || !$user instanceof \ElggUser) {
 			return;
 		}
@@ -102,17 +90,14 @@ class Permissions {
 	/**
 	 * Check delete permissions for Help
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'permissions_check:delete', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function deleteHelp($hook, $type, $return_value, $params) {
+	public static function deleteHelp(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
-		$user = elgg_extract('user', $params);
+		$entity = $hook->getEntityParam();
+		$user = $hook->getUserParam();
 		if (!$entity instanceof \UserSupportHelp || !$user instanceof \ElggUser) {
 			return;
 		}
@@ -123,17 +108,14 @@ class Permissions {
 	/**
 	 * Check delete permissions for FAQ
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'permissions_check:delete', 'object'
 	 *
 	 * @return void|bool
 	 */
-	public static function deleteFAQ($hook, $type, $return_value, $params) {
+	public static function deleteFAQ(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
-		$user = elgg_extract('user', $params);
+		$entity = $hook->getEntityParam();
+		$user = $hook->getUserParam();
 		if (!$entity instanceof \UserSupportFAQ || !$user instanceof \ElggUser) {
 			return;
 		}

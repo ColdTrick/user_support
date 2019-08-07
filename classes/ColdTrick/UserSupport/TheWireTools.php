@@ -7,16 +7,13 @@ class TheWireTools {
 	/**
 	 * Prevent Help objects from being shared
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'reshare', 'object'
 	 *
 	 * @return void|false
 	 */
-	public static function blockHelpReshare($hook, $type, $return_value, $params) {
+	public static function blockHelpReshare(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \UserSupportHelp) {
 			return;
 		}
@@ -27,16 +24,13 @@ class TheWireTools {
 	/**
 	 * Prevent Support Ticket objects from being shared
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param bool   $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'reshare', 'object'
 	 *
 	 * @return void|false
 	 */
-	public static function blockTicketReshare($hook, $type, $return_value, $params) {
+	public static function blockTicketReshare(\Elgg\Hook $hook) {
 		
-		$entity = elgg_extract('entity', $params);
+		$entity = $hook->getEntityParam();
 		if (!$entity instanceof \UserSupportTicket) {
 			return;
 		}

@@ -7,15 +7,13 @@ class QuickLinks {
 	/**
 	 * Prevent Help objects from being linked
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param array  $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'type_subtypes', 'quicklinks'
 	 *
 	 * @return void|array
 	 */
-	public static function blockHelpLink($hook, $type, $return_value, $params) {
+	public static function blockHelpLink(\Elgg\Hook $hook) {
 		
+		$return_value = $hook->getValue();
 		$object_subtypes = elgg_extract('object', $return_value);
 		if (empty($object_subtypes)) {
 			return;
@@ -35,15 +33,13 @@ class QuickLinks {
 	/**
 	 * Prevent Support Ticket objects from being linked
 	 *
-	 * @param string $hook         the name of the hook
-	 * @param string $type         the type of the hook
-	 * @param array  $return_value current return value
-	 * @param array  $params       supplied params
+	 * @param \Elgg\Hook $hook 'type_subtypes', 'quicklinks'
 	 *
 	 * @return void|array
 	 */
-	public static function blockTicketLink($hook, $type, $return_value, $params) {
+	public static function blockTicketLink(\Elgg\Hook $hook) {
 		
+		$return_value = $hook->getValue();
 		$object_subtypes = elgg_extract('object', $return_value);
 		if (empty($object_subtypes)) {
 			return;

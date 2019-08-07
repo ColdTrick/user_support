@@ -7,20 +7,18 @@ class UserSupport {
 	/**
 	 * Add menu items to the user_support menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:user_support'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerUserSupportTickets($hook, $type, $return_value, $params) {
+	public static function registerUserSupportTickets(\Elgg\Hook $hook) {
 		
 		$user = elgg_get_logged_in_user_entity();
 		if (empty($user)) {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
@@ -46,19 +44,17 @@ class UserSupport {
 	/**
 	 * Add menu items to the user_support menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:user_support'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerStaff($hook, $type, $return_value, $params) {
+	public static function registerStaff(\Elgg\Hook $hook) {
 		
 		if (!user_support_staff_gatekeeper(false)) {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'all',
 			'text' => elgg_echo('user_support:menu:support_tickets'),

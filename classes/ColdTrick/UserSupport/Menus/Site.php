@@ -7,19 +7,17 @@ class Site {
 	/**
 	 * Add menu items to the site menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:site'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerFAQ($hook, $type, $return_value, $params) {
+	public static function registerFAQ(\Elgg\Hook $hook) {
 		
 		if (elgg_get_plugin_setting('add_faq_site_menu_item', 'user_support') === 'no') {
 			return;
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'icon' => 'question-circle',
@@ -33,14 +31,11 @@ class Site {
 	/**
 	 * Add menu items to the site menu
 	 *
-	 * @param string          $hook         the name of the hook
-	 * @param string          $type         the type of the hook
-	 * @param \ElggMenuItem[] $return_value current return value
-	 * @param array           $params       supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:site'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerHelpCenter($hook, $type, $return_value, $params) {
+	public static function registerHelpCenter(\Elgg\Hook $hook) {
 		
 		if (elgg_get_plugin_setting('add_help_center_site_menu_item', 'user_support') === 'no') {
 			return;
@@ -57,6 +52,7 @@ class Site {
 			$options['link_class'] = 'elgg-lightbox';
 		}
 		
+		$return_value = $hook->getValue();
 		$return_value[] = \ElggMenuItem::factory($options);
 		
 		return $return_value;
