@@ -1,6 +1,10 @@
 Version history
 ===============
 
+4.0.4 (2019-08-22):
+
+- several small chores/fixes
+
 4.0.3 (2019-05-29):
 
 - fixed: duplicate notification on close/reopen ticket
