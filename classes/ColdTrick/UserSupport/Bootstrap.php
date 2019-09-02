@@ -36,7 +36,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 */
 	protected function initViews() {
 		elgg_extend_view('elgg.css', 'css/user_support/site.css');
-		elgg_extend_view('elgg.js', 'js/user_support/site.js');
 		elgg_extend_view('page/elements/footer', 'user_support/button');
 		elgg_extend_view('forms/comment/save', 'user_support/support_ticket/comment');
 	}
