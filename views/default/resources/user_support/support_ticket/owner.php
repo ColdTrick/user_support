@@ -69,15 +69,10 @@ $search = elgg_view_form('user_support/support_ticket/search', $form_vars);
 
 $body = elgg_list_entities($options, $getter);
 
-// build page
-$page_data = elgg_view_layout('default', [
-	'title' => $title_text,
+echo elgg_view_page($title_text, [
 	'content' => $search . $body,
 	'filter' => elgg_view_menu('user_support', [
 		'class' => 'elgg-tabs',
 		'sort_by' => 'priority',
 	]),
 ]);
-
-// draw page
-echo elgg_view_page($title_text, $page_data);

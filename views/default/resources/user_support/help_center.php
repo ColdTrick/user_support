@@ -90,12 +90,4 @@ if (elgg_is_xhr()) {
 	return;
 }
 
-// normal page
-$page_data = elgg_view_layout('default', [
-	'title' => elgg_echo('user_support:help_center:title'),
-	'content' => $help_center,
-	'filter' => false,
-]);
-
-// draw page
-echo elgg_view_page(elgg_echo('user_support:help_center:title'), $page_data);
+echo elgg_view_page(elgg_echo('user_support:help_center:title'), ['content' => $help_center]);

@@ -8,22 +8,13 @@ elgg_entity_gatekeeper($guid, 'object', UserSupportFAQ::SUBTYPE);
 $entity = get_entity($guid);
 $container = $entity->getContainerEntity();
 
-// build page elements
-$title_text = $entity->getDisplayName();
-
 elgg_push_entity_breadcrumbs($entity);
 
 $body = elgg_view_entity($entity, [
 	'show_responses' => ($entity->allow_comments === 'yes'),
 ]);
 
-// build page
-$page_data = elgg_view_layout('default', [
-	'title' => $title_text,
+echo elgg_view_page($entity->getDisplayName(), [
 	'content' => $body,
 	'entity' => $entity,
-	'filter' => false,
 ]);
-
-// draw page
-echo elgg_view_page($title_text, $page_data);

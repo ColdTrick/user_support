@@ -24,7 +24,6 @@ $page_data = elgg_call($flag, function() use ($guid, &$title_text) {
 	return elgg_view_layout('default', [
 		'title' => $title_text,
 		'content' => $content,
-		'filter' => false,
 		'entity' => $entity,
 	]);
 });

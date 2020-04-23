@@ -26,20 +26,9 @@ if (elgg_is_admin_logged_in()) {
 	$comment_guid = (int) get_input('comment_guid');
 }
 
-// page elements
-$title_text = elgg_echo('user_support:faq:create:title');
-
 $body_vars = user_support_prepare_faq_form_vars([
 	'comment_guid' => $comment_guid,
 ]);
 $content = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
-// build page
-$page_data = elgg_view_layout('default', [
-	'title' => $title_text,
-	'content' => $content,
-	'filter' => false,
-]);
-
-// draw page
-echo elgg_view_page($title_text, $page_data);
+echo elgg_view_page(elgg_echo('user_support:faq:create:title'), ['content' => $content]);

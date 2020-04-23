@@ -9,8 +9,6 @@ if (!$entity->canEdit()) {
 	throw new \Elgg\EntityPermissionsException();
 }
 
-$title_text = $entity->getDisplayName();
-
 // breadcrumb
 elgg_push_entity_breadcrumbs($entity, true);
 
@@ -20,12 +18,4 @@ $body_vars = user_support_prepare_ticket_form_vars([
 ]);
 $content = elgg_view_form('user_support/support_ticket/edit', [], $body_vars);
 
-// build page
-$page_data = elgg_view_layout('default', [
-	'title' => $title_text,
-	'content' => $content,
-	'filter' => false,
-]);
-
-// draw page
-echo elgg_view_page($title_text, $page_data);
+echo elgg_view_page($entity->getDisplayName(), ['content' => $content]);

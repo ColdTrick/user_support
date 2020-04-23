@@ -23,9 +23,6 @@ if (!empty($q)) {
 	$getter = 'elgg_search';
 }
 
-// build page elements
-$title_text = elgg_echo('user_support:tickets:list:title');
-
 elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
 
 $form_vars = [
@@ -39,15 +36,10 @@ $body = elgg_call(ELGG_IGNORE_ACCESS, function() use ($options, $getter) {
 	return elgg_list_entities($options, $getter);
 });
 
-// build page
-$page_data = elgg_view_layout('content', [
-	'title' => $title_text,
+echo elgg_view_page(elgg_echo('user_support:tickets:list:title'), [
 	'content' => $search . $body,
 	'filter' => elgg_view_menu('user_support', [
 		'class' => 'elgg-tabs',
 		'sort_by' => 'priority',
 	]),
 ]);
-
-// draw page
-echo elgg_view_page($title_text, $page_data);
