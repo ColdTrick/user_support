@@ -12,7 +12,7 @@ class TagFilter {
 	protected $filter;
 	
 	public function __construct(array $filter) {
-		$this->filter = $filter;
+		$this->filter = array_values($filter); // this way we always have correct integer keys
 	}
 	
 	public function __invoke(QueryBuilder $qb, $main_alias) {

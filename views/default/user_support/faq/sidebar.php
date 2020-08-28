@@ -4,6 +4,8 @@ use Elgg\Database\QueryBuilder;
 use ColdTrick\UserSupport\Database\TagFilter;
 
 $filter = (array) get_input('filter');
+$filter = array_values($filter); // this way we can trust we always have integer keys
+
 $query_params = ['filter' => $filter];
 $faq_query = get_input('faq_query');
 $menu_items = [];
