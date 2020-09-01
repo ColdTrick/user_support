@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.0.1 (2020-09-01):
+
+- fixed: make sure filter array keys are always integers
+
 5.0 (2020-05-26):
 
 - changed: all resources now use the default layout
