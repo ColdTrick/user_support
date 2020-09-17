@@ -49,13 +49,13 @@ $faq_count = elgg_get_entities($faq_options);
 if ($faq_count) {
 	$faq = elgg_list_entities($faq_options);
 	if ($faq_count > $faq_limit) {
-		$faq .= elgg_view('output/url', [
+		$faq .= elgg_format_element('div', ['class' => 'clearfix'], elgg_view('output/url', [
 			'text' => elgg_echo('user_support:faq:read_more', [($faq_count - $faq_limit)]),
 			'href' => elgg_generate_url('collection:object:faq:context', [
 				'help_context' => $help_context,
 			]),
 			'class' => 'float-alt',
-		]);
+		]));
 	}
 }
 
