@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.0.2 (2020-09-30):
+
+- fixed: make sure more faqs link in helpcenter does not overflow
+
 5.0.1 (2020-09-01):
 
 - fixed: make sure filter array keys are always integers
