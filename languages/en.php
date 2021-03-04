@@ -74,6 +74,11 @@ return array(
 	'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
 	'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
 	'user_support:support_ticket:promote' => "Promote to FAQ",
+
+	'user_support:notify:user:create:message' => "Thank you for reporting a new Support Ticket. We will try to help you as soon as possible.
+
+To view the Ticket click on this link:
+%s",
 	
 	// admin notify
 	'user_support:notify:admin:create:subject' => "A new Support Ticket '%s' was reported",

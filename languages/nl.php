@@ -26,6 +26,10 @@ return array (
   'user_support:menu:entity:comment_promote' => 'Maak FAQ',
   'user_support:menu:entity:comment_promote:title' => 'Verander deze reactie in een FAQ',
   'user_support:action:faq:edit:error:save' => 'Een onbekend probleem is opgetreden tijdens het opslaan van de FAQ',
+  'user_support:notify:user:create:message' => "Bedankt voor het melden van een nieuw Helpdesk ticket. We gaan hier zo snel mogelijk mee aan de slag.
+
+Klik op de volgende link om het ticket te bekijken:
+%s",
   'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
   'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket \'%s\' is bijgewerkt',
   'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
@@ -77,14 +81,14 @@ return array (
 %s heeft een nieuwe Helpdesk ticket gemeld:
 %s
 
-Om de ticket te bekijken klik op de volgende link:
+Klik op de volgende link om het ticket te bekijken:
 %s',
   'user_support:notify:admin:updated:message' => 'Hallo,
 
 %s heeft de Helpdesk ticket \'%s\' bijgewerkt:
 %s
 
-Om de ticket te bekijken klik op de volgende link:
+Klik op de volgende link om het ticket te bekijken:
 %s',
   'user_support:help_center:help_group' => 'Help groep',
   'item:object:faq' => 'User Support FAQ',

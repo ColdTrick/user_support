@@ -42,6 +42,19 @@ if (!$entity->save()) {
 	return elgg_error_response(elgg_echo('user_support:action:ticket:edit:error:save'));
 }
 
+if (empty($guid)) {
+	// a new ticket was created, so notify user
+	$subject = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $entity->getDisplayName();;
+	$message = elgg_echo("user_support:notify:user:create:message", [$entity->getURL()]);
+	
+	$params = [
+		'action' => 'create',
+		'object' => $entity,
+	];
+	
+	notify_user($entity->owner_guid, elgg_get_site_entity(), $subject, $message, $params, ['email']);
+}
+
 elgg_clear_sticky_form('user_support_ticket');
 
 return elgg_ok_response('', elgg_echo('user_support:action:ticket:edit:success'), $entity->getURL());
