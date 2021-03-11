@@ -29,6 +29,9 @@ return array (
   'user_support:notify:user:create:message' => "Bedankt voor het melden van een nieuw Helpdesk ticket. We gaan hier zo snel mogelijk mee aan de slag.
 
 Klik op de volgende link om het ticket te bekijken:
+%s
+
+Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
 %s",
   'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
   'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket \'%s\' is bijgewerkt',

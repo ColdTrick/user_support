@@ -78,7 +78,11 @@ return array(
 	'user_support:notify:user:create:message' => "Thank you for reporting a new Support Ticket. We will try to help you as soon as possible.
 
 To view the Ticket click on this link:
-%s",
+%s
+
+Go to the next link to list all your reported tickets.
+%s
+",
 	
 	// admin notify
 	'user_support:notify:admin:create:subject' => "A new Support Ticket '%s' was reported",
