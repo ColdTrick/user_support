@@ -45,7 +45,7 @@ if (!$entity->save()) {
 if (empty($guid)) {
 	// a new ticket was created, so notify user
 	$subject = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $entity->getDisplayName();;
-	$message = elgg_echo("user_support:notify:user:create:message", [$entity->getURL(), elgg_generate_url('collection:object:support_ticket:owner', [$entity->getOwnerEntity()->username])]);
+	$message = elgg_echo("user_support:notify:user:create:message", [$entity->getURL(), elgg_generate_url('collection:object:support_ticket:owner', ['username' => $entity->getOwnerEntity()->username])]);
 	
 	$params = [
 		'action' => 'create',
