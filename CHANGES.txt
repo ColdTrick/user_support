@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.1 (2021-03-16):
+
+- added: notify reporter when a new ticket has been created
+
 5.0.2 (2020-09-30):
 
 - fixed: make sure more faqs link in helpcenter does not overflow
