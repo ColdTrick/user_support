@@ -52,7 +52,7 @@ if (empty($guid)) {
 		'object' => $entity,
 	];
 	
-	notify_user($entity->owner_guid, elgg_get_site_entity(), $subject, $message, $params, ['email']);
+	notify_user($entity->owner_guid, elgg_get_site_entity()->guid, $subject, $message, $params, ['email']);
 }
 
 elgg_clear_sticky_form('user_support_ticket');
