@@ -12,7 +12,7 @@ use Elgg\Database\QueryBuilder;
  *
  * @return false|string
  */
-function user_support_get_help_context($url = '') {
+function user_support_get_help_context(string $url = '') {
 	
 	if (empty($url)) {
 		$url = current_page_url();
@@ -65,7 +65,7 @@ function user_support_get_help_context($url = '') {
  */
 function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 	
-	$users = elgg_get_entities_from_plugin_user_settings([
+	$users = elgg_get_entities([
 		'type' => 'user',
 		'limit' => false,
 		'wheres' => [
@@ -73,10 +73,9 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 				return $qb->compare("{$main_alias}.guid", '!=', $ticket->owner_guid, ELGG_VALUE_GUID);
 			},
 		],
-		'plugin_id' => 'user_support',
-		'plugin_user_setting_name_value_pairs' => [
+		'private_setting_name_value_pairs' => [
 			[
-				'name' => 'admin_notify',
+				'name' => 'plugin:user_setting:admin_notify',
 				'value' => 'yes',
 			],
 		],
@@ -116,12 +115,11 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
  *
  * @return bool
  */
-function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
+function user_support_staff_gatekeeper(bool $forward = true, int $user_guid = 0): bool {
 	static $staff_cache;
 	
 	$result = false;
 	
-	$user_guid = sanitise_int($user_guid, false);
 	if (empty($user_guid)) {
 		$user_guid = elgg_get_logged_in_user_guid();
 	}
@@ -174,14 +172,14 @@ function user_support_staff_gatekeeper($forward = true, $user_guid = 0) {
  *
  * @return array
  */
-function user_support_prepare_faq_form_vars(array $params = []) {
+function user_support_prepare_faq_form_vars(array $params = []): array {
 	
 	// defaults
 	$result = [
 		'title' => '',
 		'description' => '',
 		'tags' => [],
-		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params, '')),
 		'access_id' => get_default_access(null, [
 			'entity_type' => 'object',
 			'entity_subtype' => UserSupportFAQ::SUBTYPE,
@@ -240,7 +238,7 @@ function user_support_prepare_faq_form_vars(array $params = []) {
  *
  * @return array
  */
-function user_support_prepare_ticket_form_vars(array $params = []) {
+function user_support_prepare_ticket_form_vars(array $params = []): array {
 	
 	// defaults
 	$result = [
@@ -248,7 +246,7 @@ function user_support_prepare_ticket_form_vars(array $params = []) {
 		'tags' => [],
 		'help_url' => elgg_extract('help_url', $params, ''),
 		'support_type' => '',
-		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params, '')),
 	];
 	
 	// edit ticket
@@ -283,13 +281,13 @@ function user_support_prepare_ticket_form_vars(array $params = []) {
  *
  * @return array
  */
-function user_support_prepare_help_form_vars(array $params = []) {
+function user_support_prepare_help_form_vars(array $params = []): array {
 	
 	// defaults
 	$result = [
 		'description' => '',
 		'tags' => [],
-		'help_context' => user_support_get_help_context(elgg_extract('url', $params)),
+		'help_context' => user_support_get_help_context(elgg_extract('url', $params, '')),
 	];
 	
 	// edit help
@@ -313,10 +311,9 @@ function user_support_prepare_help_form_vars(array $params = []) {
  *
  * @return false|int
  */
-function user_support_get_support_ticket_acl($user_guid = 0) {
+function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	static $cache = [];
 	
-	$user_guid = (int) $user_guid;
 	if ($user_guid < 1) {
 		$user_guid = elgg_get_logged_in_user_guid();
 	}
@@ -324,11 +321,16 @@ function user_support_get_support_ticket_acl($user_guid = 0) {
 	if (empty($user_guid)) {
 		return false;
 	}
-	
+		
 	if (isset($cache[$user_guid])) {
 		return $cache[$user_guid];
 	}
 	
+	$user = get_user($user_guid);
+	if (!$user instanceof \ElggUser) {
+		return false;
+	}
+		
 	// check if ACL is present
 	$acl_id = (int) elgg_get_plugin_user_setting('support_ticket_acl', $user_guid, 'user_support');
 	if (!empty($acl_id)) {
@@ -355,9 +357,7 @@ function user_support_get_support_ticket_acl($user_guid = 0) {
 		return $failure();
 	}
 	
-	if (!elgg_set_plugin_user_setting('support_ticket_acl', $acl_id, $user_guid, 'user_support')) {
-		return $failure();
-	}
+	$user->setPluginSetting('user_support', 'support_ticket_acl', $acl_id);
 	
 	$cache[$user_guid] = $acl_id;
 	return $cache[$user_guid];
@@ -370,7 +370,7 @@ function user_support_get_support_ticket_acl($user_guid = 0) {
  *
  * @return bool
  */
-function user_support_is_group_faq_enabled(ElggGroup $entity) {
+function user_support_is_group_faq_enabled(ElggGroup $entity): bool {
 	
 	$setting = elgg_get_plugin_setting('group_faq', 'user_support');
 	if (!$entity instanceof ElggGroup || $setting === 'no') {

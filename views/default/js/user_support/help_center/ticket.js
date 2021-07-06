@@ -1,8 +1,4 @@
-define(function(require){
-	
-	var $ = require('jquery');
-	var Ajax = require('elgg/Ajax');
-	var lightbox = require('elgg/lightbox');
+define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 	
 	var toggle_ticket_form = function() {
 		var $help_center = $('.user-support-help-center-popup');
@@ -32,11 +28,7 @@ define(function(require){
 		});
 	};
 	
-	var init = function() {
-		$(document).on('click', '#user-support-help-center-ask', toggle_ticket_form);
-		$(document).on('click', '#user-support-edit-ticket-cancel', toggle_ticket_form);
-		$(document).on('submit', '#user-support-ticket-edit-form-wrapper form.elgg-form-user-support-support-ticket-edit', submit_ticket_form);
-	};
-	
-	init();
+	$(document).on('click', '#user-support-help-center-ask', toggle_ticket_form);
+	$(document).on('click', '#user-support-edit-ticket-cancel', toggle_ticket_form);
+	$(document).on('submit', '#user-support-ticket-edit-form-wrapper form.elgg-form-user-support-support-ticket-edit', submit_ticket_form);
 });

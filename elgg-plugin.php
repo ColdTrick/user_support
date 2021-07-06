@@ -6,6 +6,9 @@ use Elgg\Router\Middleware\Gatekeeper;
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
 return [
+	'plugin' => [
+		'version' => '5.1',
+	],
 	'bootstrap' => Bootstrap::class,
 	'settings' => [
 		'help_enabled' => 'yes',
@@ -129,6 +132,13 @@ return [
 		'user_support/support_ticket/close' => [],
 		'user_support/support_ticket/reopen' => [],
 		'user_support/faq/edit' => [],
+	],
+	'hooks' => [
+		'setting' => [
+			'plugin' => [
+				'\ColdTrick\UserSupport\PluginSettings::saveGroup' => [],
+			],
+		],
 	],
 	'widgets' => [
 		'faq' => [

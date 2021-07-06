@@ -1,10 +1,8 @@
 <?php
 
 $q = get_input('q');
-$content = '';
 
-// search params
-$params = [
+$content = elgg_list_entities([
 	'query' => $q,
 	'type' => 'object',
 	'subtype' => [
@@ -17,8 +15,6 @@ $params = [
 	'order' => 'desc',
 	'pagination' => false,
 	'no_results' => true,
-];
-
-$content = elgg_list_entities($params, 'elgg_search');
+], 'elgg_search');
 
 echo elgg_view_module('info', elgg_echo('search:results', ['\'' . $q . '\'']), $content, ['class' => 'mts']);

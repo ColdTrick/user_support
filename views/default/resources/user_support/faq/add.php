@@ -1,7 +1,7 @@
 <?php
 
-use Elgg\BadRequestException;
-use Elgg\EntityPermissionsException;
+use Elgg\Exceptions\Http\BadRequestException;
+use Elgg\Exceptions\Http\EntityPermissionsException;
 
 $page_owner = elgg_get_page_owner_entity();
 if (!$page_owner instanceof \ElggGroup) {
@@ -31,4 +31,7 @@ $body_vars = user_support_prepare_faq_form_vars([
 ]);
 $content = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
-echo elgg_view_page(elgg_echo('user_support:faq:create:title'), ['content' => $content]);
+echo elgg_view_page(elgg_echo('user_support:faq:create:title'), [
+	'content' => $content,
+	'filter' => false,
+]);

@@ -1,12 +1,14 @@
 <?php
 
+use Elgg\Exceptions\Http\EntityPermissionsException;
+
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', UserSupportTicket::SUBTYPE);
 
 /* @var $entity UserSupportTicket */
 $entity = get_entity($guid);
 if (!$entity->canEdit()) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new EntityPermissionsException();
 }
 
 // breadcrumb
@@ -18,4 +20,7 @@ $body_vars = user_support_prepare_ticket_form_vars([
 ]);
 $content = elgg_view_form('user_support/support_ticket/edit', [], $body_vars);
 
-echo elgg_view_page($entity->getDisplayName(), ['content' => $content]);
+echo elgg_view_page($entity->getDisplayName(), [
+	'content' => $content,
+	'filter' => false,
+]);

@@ -79,16 +79,12 @@ Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
   'user_support:help_center:help:title' => 'Contextuele help',
   'user_support' => 'Helpdesk',
   'user_support:usersettings:admin_notify' => 'Wil je een bericht ontvangen als een Helpdesk ticket wordt aangemaakt/bijgewerkt',
-  'user_support:notify:admin:create:message' => 'Hallo,
-
-%s heeft een nieuwe Helpdesk ticket gemeld:
+  'user_support:notify:admin:create:message' => '%s heeft een nieuwe Helpdesk ticket gemeld:
 %s
 
 Klik op de volgende link om het ticket te bekijken:
 %s',
-  'user_support:notify:admin:updated:message' => 'Hallo,
-
-%s heeft de Helpdesk ticket \'%s\' bijgewerkt:
+  'user_support:notify:admin:updated:message' => '%s heeft de Helpdesk ticket \'%s\' bijgewerkt:
 %s
 
 Klik op de volgende link om het ticket te bekijken:

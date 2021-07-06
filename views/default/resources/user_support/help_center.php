@@ -1,6 +1,6 @@
 <?php
 
-$help_url = elgg_extract('HTTP_REFERER', $_SERVER);
+$help_url = elgg_extract('HTTP_REFERER', $_SERVER, '');
 $help_context = user_support_get_help_context($help_url);
 if (empty($help_context)) {
 	$help_context = user_support_get_help_context();
@@ -90,4 +90,7 @@ if (elgg_is_xhr()) {
 	return;
 }
 
-echo elgg_view_page(elgg_echo('user_support:help_center:title'), ['content' => $help_center]);
+echo elgg_view_page(elgg_echo('user_support:help_center:title'), [
+	'content' => $help_center,
+	'filter' => false,
+]);

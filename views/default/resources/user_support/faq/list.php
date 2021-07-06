@@ -49,4 +49,5 @@ $search = elgg_view_form('user_support/faq/search', $form_vars, $body_vars);
 echo elgg_view_page(elgg_echo('user_support:faq:list:title'), [
 	'content' => $search . $list,
 	'sidebar' => elgg_view('user_support/faq/sidebar'),
+	'filter_id' => 'fag/list',
 ]);

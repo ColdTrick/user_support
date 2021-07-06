@@ -1,12 +1,14 @@
 <?php
 
+use Elgg\Exceptions\Http\EntityPermissionsException;
+
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', UserSupportFAQ::SUBTYPE);
 
 /* @var $entity UserSupportFAQ */
 $entity = get_entity($guid);
 if (!$entity->canEdit()) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new EntityPermissionsException();
 }
 
 // check for group container
@@ -18,4 +20,7 @@ $body_vars = user_support_prepare_faq_form_vars([
 ]);
 $form = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
-echo elgg_view_page(elgg_echo('user_support:faq:edit:title:edit'), ['content' => $form]);
+echo elgg_view_page(elgg_echo('user_support:faq:edit:title:edit'), [
+	'content' => $form,
+	'filter' => false,
+]);

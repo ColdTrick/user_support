@@ -1,8 +1,4 @@
-define(function(require){
-	
-	var $ = require('jquery');
-	var Ajax = require('elgg/Ajax');
-	var lightbox = require('elgg/lightbox');
+define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 	
 	var toggle_help_form = function() {
 		var $help_center = $('.user-support-help-center-popup');
@@ -32,15 +28,11 @@ define(function(require){
 		});
 	};
 	
-	var init = function() {
-		// edit link .user-support-help-center-edit-help
-		// add button #user-support-help-center-add-help
-		
-		$(document).on('click', '#user-support-help-center-add-help', toggle_help_form);
-		$(document).on('click', '.user-support-help-center-edit-help', toggle_help_form);
-		$(document).on('click', '#user-support-edit-help-cancel', toggle_help_form);
-		$(document).on('submit', '#user-support-help-edit-form-wrapper form.elgg-form-user-support-help-edit', submit_help_form);
-	};
+	// edit link .user-support-help-center-edit-help
+	// add button #user-support-help-center-add-help
 	
-	init();
+	$(document).on('click', '#user-support-help-center-add-help', toggle_help_form);
+	$(document).on('click', '.user-support-help-center-edit-help', toggle_help_form);
+	$(document).on('click', '#user-support-edit-help-cancel', toggle_help_form);
+	$(document).on('submit', '#user-support-help-edit-form-wrapper form.elgg-form-user-support-help-edit', submit_help_form);
 });

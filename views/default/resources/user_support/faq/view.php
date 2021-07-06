@@ -16,4 +16,5 @@ $body = elgg_view_entity($entity, [
 echo elgg_view_page($entity->getDisplayName(), [
 	'content' => $body,
 	'entity' => $entity,
+	'filter' => false,
 ]);

@@ -1,6 +1,6 @@
 <?php
 
-use Elgg\BadRequestException;
+use Elgg\Exceptions\Http\BadRequestException;
 
 $help_context = get_input('help_context');
 if (empty($help_context)) {
@@ -21,4 +21,7 @@ $content = elgg_list_entities([
 	'no_results' => elgg_echo('user_support:faq:not_found'),
 ]);
 
-echo elgg_view_page(elgg_echo('user_support:faq:context'), ['content' => $content]);
+echo elgg_view_page(elgg_echo('user_support:faq:context'), [
+	'content' => $content,
+	'filter' => false,
+]);

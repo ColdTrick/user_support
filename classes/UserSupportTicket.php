@@ -1,5 +1,7 @@
 <?php
 
+use Elgg\Exceptions\InvalidArgumentException;
+
 /**
  * The helper class to support tickets
  */
@@ -37,7 +39,7 @@ class UserSupportTicket extends ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function save() {
+	public function save(): bool {
 		
 		// make sure the ticket has the correct access_id
 		if ($this->access_id === ACCESS_PRIVATE) {

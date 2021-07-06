@@ -87,9 +87,7 @@ Go to the next link to list all your reported tickets.
 	// admin notify
 	'user_support:notify:admin:create:subject' => "A new Support Ticket '%s' was reported",
 	'user_support:notify:admin:create:summary' => "A new Support Ticket '%s' was reported",
-	'user_support:notify:admin:create:message' => "Hi,
-
-%s reported a new Support Ticket:
+	'user_support:notify:admin:create:message' => "%s reported a new Support Ticket:
 %s
 
 To view the Ticket click on this link:
@@ -97,9 +95,7 @@ To view the Ticket click on this link:
 	
 	'user_support:notify:admin:updated:subject' => "The Support Ticket '%s' was updated",
 	'user_support:notify:admin:updated:summary' => "The Support Ticket '%s' was updated",
-	'user_support:notify:admin:updated:message' => "Hi,
-
-%s updated the Support Ticket '%s':
+	'user_support:notify:admin:updated:message' => "%s updated the Support Ticket '%s':
 %s
 
 To view the Ticket click on this link:

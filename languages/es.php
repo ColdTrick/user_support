@@ -49,16 +49,12 @@ return array (
   'user_support:support_ticket:closed' => 'Se ha cerrado tu ticket de soporte',
   'user_support:support_ticket:reopened' => 'Se ha abierto de nuevo tu ticket de soporte',
   'user_support:support_ticket:promote' => 'Promover al FAQ',
-  'user_support:notify:admin:create:message' => 'Hola,
-
-%s ha reportado un nuevo ticket de soporte:
+  'user_support:notify:admin:create:message' => '%s ha reportado un nuevo ticket de soporte:
 %s
 
 Sigue el enlace para ver erl ticket:
 %s',
-  'user_support:notify:admin:updated:message' => 'Ho,
-
-%s actualizó el ticket de soporte %s:
+  'user_support:notify:admin:updated:message' => '%s actualizó el ticket de soporte %s:
 %s
 
 Sigue el enlace para ver el ticket:

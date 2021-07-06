@@ -1,14 +1,16 @@
 <?php
 
 use Elgg\Database\Clauses\OrderByClause;
+use Elgg\Exceptions\Http\EntityNotFoundException;
+use Elgg\Exceptions\Http\EntityPermissionsException;
 
 $user = elgg_get_page_owner_entity();
 if (!$user instanceof ElggUser) {
-	throw new \Elgg\EntityNotFoundException();
+	throw new EntityNotFoundException();
 }
 
 if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new EntityPermissionsException();
 }
 
 $status = elgg_extract('status', $vars, UserSupportTicket::OPEN);
