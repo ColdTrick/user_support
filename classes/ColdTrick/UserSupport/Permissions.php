@@ -42,7 +42,7 @@ class Permissions {
 			return;
 		}
 		
-		return user_support_is_group_faq_enabled($container);
+		return $container->isToolEnabled('faq');
 	}
 	
 	/**

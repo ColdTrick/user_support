@@ -1,6 +1,5 @@
 <?php
 
-use ColdTrick\UserSupport\Bootstrap;
 use Elgg\Router\Middleware\Gatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
@@ -9,7 +8,6 @@ return [
 	'plugin' => [
 		'version' => '5.1',
 	],
-	'bootstrap' => Bootstrap::class,
 	'settings' => [
 		'help_enabled' => 'yes',
 		'show_as_popup' => 'yes',
@@ -134,9 +132,138 @@ return [
 		'user_support/faq/edit' => [],
 	],
 	'hooks' => [
+		'container_logic_check' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Permissions::faqLogicCheck' => [],
+			],
+		],
+		'container_permissions_check' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Permissions::faqContainerWriteCheck' => [],
+			],
+		],
+		'entity:url' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Widgets::widgetURL' => [],
+			],
+		],
+		'get' => [
+			'subscriptions' => [
+				'\ColdTrick\UserSupport\Notifications::getSupportTicketCommentSubscribers' => [],
+				'\ColdTrick\UserSupport\Notifications::getSupportTicketSubscribers' => [],
+			],
+		],
+		'likes:is_likable' => [
+			'object:' . \UserSupportFAQ::SUBTYPE => [
+				'\Elgg\Values::getTrue' => [],
+			],
+		],
+		'notification_type_subtype' => [
+			'tag_tools' => [
+				'\ColdTrick\UserSupport\TagTools::preventTagNotifications' => [],
+			],
+		],
+		'permissions_check' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Permissions::editSupportTicket' => [],
+			],
+		],
+		'permissions_check:delete' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Permissions::deleteFAQ' => [],
+				'\ColdTrick\UserSupport\Permissions::deleteHelp' => [],
+				'\ColdTrick\UserSupport\Permissions::deleteSupportTicket' => [],
+			],
+		],
+		'prepare' => [
+			'notification:create:object:comment' => [
+				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketCommentMessage' => [],
+			],
+			'notification:create:object:' . \UserSupportTicket::SUBTYPE => [
+				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage' => [],
+			],
+		],
+		'register' => [
+			'menu:entity' => [
+				'\ColdTrick\UserSupport\Menus\Entity::promoteCommentToFAQ' => [],
+				'\ColdTrick\UserSupport\Menus\Entity::registerHelp' => [],
+				'\ColdTrick\UserSupport\Menus\Entity::registerTicket' => [],
+			],
+			'menu:footer' => [
+				'\ColdTrick\UserSupport\Menus\Footer::registerFAQ' => [],
+			],
+			'menu:owner_block' => [
+				'\ColdTrick\UserSupport\Menus\OwnerBlock::registerGroupFAQ' => [],
+			],
+			'menu:page' => [
+				'\ColdTrick\UserSupport\Menus\Page::registerFAQ' => [],
+				'\ColdTrick\UserSupport\Menus\Page::registerUserSupportTickets' => [],
+			],
+			'menu:site' => [
+				'\ColdTrick\UserSupport\Menus\Site::registerHelpCenter' => [],
+				'\ColdTrick\UserSupport\Menus\Site::registerFAQ' => [],
+			],
+			'menu:topbar' => [
+				'\ColdTrick\UserSupport\Menus\Topbar::registerUserSupportTickets' => [],
+			],
+			'menu:user_hover' => [
+				'\ColdTrick\UserSupport\Menus\UserHover::registerStaff' => [],
+			],
+			'menu:user_support' => [
+				'\ColdTrick\UserSupport\Menus\UserSupport::registerStaff' => [],
+				'\ColdTrick\UserSupport\Menus\UserSupport::registerUserSupportTickets' => [],
+			],
+		],
+		'reshare' => [
+			'object' => [
+				'\ColdTrick\UserSupport\TheWireTools::blockTicketReshare' => [],
+				'\ColdTrick\UserSupport\TheWireTools::blockHelpReshare' => [],
+			],
+		],
 		'setting' => [
 			'plugin' => [
 				'\ColdTrick\UserSupport\PluginSettings::saveGroup' => [],
+			],
+		],
+		'tool_options' => [
+			'group' => [
+				'\ColdTrick\UserSupport\Plugins\Groups::registerToolOption' => [],
+			],
+		],
+		'type_subtypes' => [
+			'quicklinks' => [
+				'\ColdTrick\UserSupport\QuickLinks::blockHelpLink' => [],
+				'\ColdTrick\UserSupport\QuickLinks::blockTicketLink' => [],
+			],
+		],
+		'validate:acl_membership' => [
+			'advanced_notifications' => [
+				'\ColdTrick\UserSupport\Plugins\AdvancedNotifications::disableAclMembershipValidation' => [],
+			],
+		],
+	],
+	'events' => [
+		'create' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Comments::supportTicketStatus' => [],
+			],
+		],
+	],
+	'view_extensions' => [
+		'elgg.css' => [
+			'css/user_support/site.css' => [],
+		],
+		'page/elements/footer' => [
+			'user_support/button' => [],
+		],
+		'forms/comment/save' => [
+			'user_support/support_ticket/comment' => [],
+		],
+	],
+	'notifications' => [
+		'object' => [
+			\UserSupportTicket::SUBTYPE => [
+				'create' => true,
 			],
 		],
 	],

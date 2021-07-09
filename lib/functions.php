@@ -362,30 +362,3 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	$cache[$user_guid] = $acl_id;
 	return $cache[$user_guid];
 }
-
-/**
- * Is the group FAQ enabled for the given group
- *
- * @param ElggGroup $entity the group to check
- *
- * @return bool
- */
-function user_support_is_group_faq_enabled(ElggGroup $entity): bool {
-	
-	$setting = elgg_get_plugin_setting('group_faq', 'user_support');
-	if (!$entity instanceof ElggGroup || $setting === 'no') {
-		return false;
-	}
-	
-	$group_setting = $entity->faq_enable;
-	switch ($setting) {
-		case 'yes_off':
-			// enabled, but default disabled for group
-			return ($group_setting === 'yes');
-		case 'yes':
-			// enabled, default enabled for group
-			return ($group_setting !== 'no');
-	}
-	
-	return false;
-}
