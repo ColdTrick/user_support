@@ -9,15 +9,12 @@ if (!user_support_staff_gatekeeper(false, $page_owner->guid)) {
 	return;
 }
 
-/* @var $plugin ElggPlugin */
-$plugin = elgg_extract('entity', $vars);
-
 echo elgg_view_field([
 	'#type' => 'checkbox',
 	'#label' => elgg_echo('user_support:usersettings:admin_notify'),
 	'name' => 'params[admin_notify]',
 	'default' => 'no',
 	'value' => 'yes',
-	'checked' => $plugin->getUserSetting('admin_notify', $page_owner->guid) === 'yes',
+	'checked' => $page_owner->getPluginSetting('user_support', 'admin_notify') === 'yes',
 	'switch' => true,
 ]);
