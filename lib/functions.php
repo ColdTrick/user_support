@@ -4,6 +4,7 @@
  */
 
 use Elgg\Database\QueryBuilder;
+use Elgg\Exceptions\Http\GatekeeperException;
 
 /**
  * Get the context for a page, for the help system
@@ -154,8 +155,7 @@ function user_support_staff_gatekeeper(bool $forward = true, int $user_guid = 0)
 	}
 	
 	if (!$result && $forward) {
-		register_error(elgg_echo('user_support:staff_gatekeeper'));
-		forward(REFERER);
+		throw new GatekeeperException(elgg_echo('user_support:staff_gatekeeper'));
 	}
 	
 	return $result;
