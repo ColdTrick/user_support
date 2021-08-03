@@ -154,7 +154,7 @@ return [
 			],
 		],
 		'likes:is_likable' => [
-			'object:' . \UserSupportFAQ::SUBTYPE => [
+			'object:faq' => [
 				'\Elgg\Values::getTrue' => [],
 			],
 		],
@@ -179,7 +179,7 @@ return [
 			'notification:create:object:comment' => [
 				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketCommentMessage' => [],
 			],
-			'notification:create:object:' . \UserSupportTicket::SUBTYPE => [
+			'notification:create:object:support_ticket' => [
 				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage' => [],
 			],
 		],
@@ -262,7 +262,7 @@ return [
 	],
 	'notifications' => [
 		'object' => [
-			\UserSupportTicket::SUBTYPE => [
+			'support_ticket' => [
 				'create' => true,
 			],
 		],
