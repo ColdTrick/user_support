@@ -150,7 +150,6 @@ return [
 		'get' => [
 			'subscriptions' => [
 				'\ColdTrick\UserSupport\Notifications::getSupportTicketCommentSubscribers' => [],
-				'\ColdTrick\UserSupport\Notifications::getSupportTicketSubscribers' => [],
 			],
 		],
 		'likes:is_likable' => [
@@ -178,9 +177,6 @@ return [
 		'prepare' => [
 			'notification:create:object:comment' => [
 				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketCommentMessage' => [],
-			],
-			'notification:create:object:support_ticket' => [
-				'\ColdTrick\UserSupport\Notifications::prepareSupportTicketMessage' => [],
 			],
 		],
 		'register' => [
@@ -263,7 +259,7 @@ return [
 	'notifications' => [
 		'object' => [
 			'support_ticket' => [
-				'create' => true,
+				'create' => \ColdTrick\UserSupport\Notifications\CreateSupportTicketEventHandler::class,
 			],
 		],
 	],
