@@ -62,9 +62,9 @@ function user_support_get_help_context(string $url = '') {
  *
  * @param UserSupportTicket $ticket the ticket to get the admins for
  *
- * @return false|ElggUser[]
+ * @return ElggUser[]
  */
-function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
+function user_support_get_admin_notify_users(UserSupportTicket $ticket): array {
 	
 	$users = elgg_get_entities([
 		'type' => 'user',
@@ -76,7 +76,7 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 		],
 		'private_setting_name_value_pairs' => [
 			[
-				'name' => 'plugin:user_setting:admin_notify',
+				'name' => 'plugin:user_setting:user_support:admin_notify',
 				'value' => 'yes',
 			],
 		],
@@ -98,7 +98,7 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket) {
 	// trigger hook to get more/less users
 	$users = elgg_trigger_plugin_hook('admin_notify', 'user_support', ['users' => $users, 'entity' => $ticket], $users);
 	if (empty($users)) {
-		return false;
+		return [];
 	}
 	
 	if (!is_array($users)) {

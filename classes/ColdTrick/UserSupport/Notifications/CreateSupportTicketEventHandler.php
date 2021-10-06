@@ -50,7 +50,7 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 		
 		// get all the admins to notify
 		$users = user_support_get_admin_notify_users($this->event->getObject());
-		if (empty($users) || !is_array($users)) {
+		if (empty($users)) {
 			return $result;
 		}
 		

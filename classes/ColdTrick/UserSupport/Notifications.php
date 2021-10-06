@@ -54,7 +54,7 @@ class Notifications {
 		
 		// get all the admins to notify
 		$users = user_support_get_admin_notify_users($entity);
-		if (empty($users) || !is_array($users)) {
+		if (empty($users)) {
 			return $return_value;
 		}
 		
