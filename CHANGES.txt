@@ -1,6 +1,11 @@
 Version history
 ===============
 
+6.0.1 (2021-10-12):
+
+- fixed: admins didn't receive notification about new support ticket
+- fixed: notification handler uses correct object
+
 6.0 (2021-09-27):
 
 - changed: updated for Elgg 4
