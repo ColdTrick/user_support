@@ -26,23 +26,25 @@ class Widgets {
 		
 		switch ($entity->handler) {
 			case 'faq':
-				$link = 'user_support/faq';
+				$route_name = 'collection:object:faq:all';
+				$route_params = [];
 				if ($owner instanceof \ElggGroup) {
-					$link .= "/group/{$owner->guid}/all";
+					$route_name = 'collection:object:faq:group';
+					$route_params['guid'] = $owner->guid;
 				}
 				
-				return elgg_normalize_url($link);
+				return elgg_generate_url($route_name, $route_params);
 				break;
 			case 'support_ticket':
-				$link = "user_support/support_ticket/owner/{$owner->username}";
+				$route_params = [];
 				if ($entity->filter === \UserSupportTicket::CLOSED) {
-					$link .= '/' . \UserSupportTicket::CLOSED;
+					$route_params['status'] = \UserSupportTicket::CLOSED;
 				}
 				
-				return elgg_normalize_url($link);
+				return elgg_generate_url('collection:object:support_ticket:owner', $route_params);
 				break;
 			case 'support_staff':
-				return elgg_normalize_url('user_support/support_ticket');
+				return elgg_generate_url('collection:object:support_ticket:all');
 				break;
 		}
 	}
