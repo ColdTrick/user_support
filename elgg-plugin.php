@@ -67,7 +67,7 @@ return [
 			'resource' => 'user_support/faq/list',
 		],
 		'add:object:support_ticket' => [
-			'path' => '/user_support/support_ticket/add/{guid}',
+			'path' => '/user_support/support_ticket/add/{guid?}',
 			'resource' => 'user_support/support_ticket/add',
 			'middleware' => [
 				Gatekeeper::class,
