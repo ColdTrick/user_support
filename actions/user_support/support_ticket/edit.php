@@ -30,7 +30,13 @@ if (empty($entity)) {
 	return elgg_error_response(elgg_echo('save:fail'));
 }
 
-$entity->title = elgg_get_excerpt($description, 50);
+// make a cleaner title
+$title = strip_tags($description);
+$title = preg_replace('/(&nbsp;)+/', ' ', $title);
+$title = trim($title);
+$title = elgg_get_excerpt($title, 50);
+
+$entity->title = $title;
 $entity->description = $description;
 
 $entity->help_url = $help_url;
