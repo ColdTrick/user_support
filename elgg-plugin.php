@@ -20,19 +20,29 @@ return [
 			'type' => 'object',
 			'subtype' => 'faq',
 			'class' => \UserSupportFAQ::class,
-			'searchable' => true,
+			'capabilities' => [
+				'commentable' => true,
+				'searchable' => true,
+				'likable' => true,
+			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'help',
 			'class' => \UserSupportHelp::class,
-			'searchable' => true,
+			'capabilities' => [
+				'commentable' => false,
+				'searchable' => true,
+			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'support_ticket',
 			'class' => \UserSupportTicket::class,
-			'searchable' => true,
+			'capabilities' => [
+				'commentable' => true,
+				'searchable' => true,
+			],
 		],
 	],
 	'routes' => [
@@ -150,11 +160,6 @@ return [
 		'get' => [
 			'subscriptions' => [
 				'\ColdTrick\UserSupport\Notifications::getSupportTicketCommentSubscribers' => [],
-			],
-		],
-		'likes:is_likable' => [
-			'object:faq' => [
-				'\Elgg\Values::getTrue' => [],
 			],
 		],
 		'notification_type_subtype' => [
