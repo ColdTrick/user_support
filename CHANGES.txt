@@ -1,6 +1,10 @@
 Version history
 ===============
 
+6.0.4 (2022-01-11):
+
+- fixed: cleaner title for support tickets
+
 6.0.3 (2021-12-16):
 
 - added: support_ticket/add route defaults to logged in user
