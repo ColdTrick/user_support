@@ -2,18 +2,18 @@
 #user-support-button {
 	position: fixed;
     
-	background: $(topbar-background-color);
+	background: $(button-action-background-color);
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	
 	font-size: 16px;
-    font-weight: bold;
-    line-height: 16px;
-    text-align: center;
-    
-    z-index: 1000;
-    
-    &:hover {
-		background: #4787B8;
+	font-weight: bold;
+	line-height: 16px;
+	text-align: center;
+	
+	z-index: 1000;
+	
+	&:hover {
+		background: $(button-action-background-color-hover);
 	}
 	
 	&.position-horizontal-left {
