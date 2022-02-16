@@ -1,6 +1,11 @@
 Version history
 ===============
 
+7.0 (2022-02-16):
+
+- changed: updated entity configuration for new capabilities
+- fixed: use css variables
+
 6.0.4 (2022-01-11):
 
 - fixed: cleaner title for support tickets
