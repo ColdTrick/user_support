@@ -35,12 +35,6 @@ if ($entity instanceof UserSupportFAQ) {
 }
 
 echo elgg_view_field([
-	'#type' => 'hidden',
-	'name' => 'container_guid',
-	'value' => (int) elgg_extract('container_guid', $vars),
-]);
-
-echo elgg_view_field([
 	'#type' => 'text',
 	'#label' => elgg_echo('user_support:question'),
 	'name' => 'title',
@@ -78,6 +72,16 @@ if (elgg_is_admin_logged_in() && !empty($help_contexts)) {
 }
 
 echo elgg_view_field([
+	'#type' => 'checkbox',
+	'#label' => elgg_echo('user_support:allow_comments'),
+	'name' => 'allow_comments',
+	'default' => 'no',
+	'value' => 'yes',
+	'checked' => elgg_extract('allow_comments', $vars) === 'yes',
+	'switch' => true,
+]);
+
+echo elgg_view_field([
 	'#type' => 'access',
 	'#label' => elgg_echo('access'),
 	'name' => 'access_id',
@@ -89,13 +93,10 @@ echo elgg_view_field([
 ]);
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
-	'#label' => elgg_echo('user_support:allow_comments'),
-	'name' => 'allow_comments',
-	'default' => 'no',
-	'value' => 'yes',
-	'checked' => elgg_extract('allow_comments', $vars) === 'yes',
-	'switch' => true,
+	'#type' => 'container_guid',
+	'entity_type' => 'object',
+	'entity_subtype' => \UserSupportFAQ::SUBTYPE,
+	'value' => (int) elgg_extract('container_guid', $vars),
 ]);
 
 // form footer

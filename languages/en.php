@@ -13,6 +13,8 @@ return array(
 	'collection:object:help' => "User support Contextual help",
 	'collection:object:support_ticket' => "User support Tickets",
 
+	'input:container_guid:object:faq:info' => "This User support FAQ will be posted in %s",
+	
 	// general
 	'user_support:support_type' => "Category",
 	'user_support:support_type:question' => "Question",
