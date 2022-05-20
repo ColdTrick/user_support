@@ -11,8 +11,6 @@ $content = elgg_list_entities([
 	],
 	'limit' => 5,
 	'offset' => 0,
-	'sort' => 'relevance',
-	'order' => 'desc',
 	'pagination' => false,
 	'no_results' => true,
 ], 'elgg_search');
