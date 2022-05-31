@@ -1,10 +1,11 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0
- * On 2019-03-27 20:34
+ * This file was created by Translation Editor v9.0.2
+ * On 2022-05-31 13:51
  */
 
 return array (
+  'input:container_guid:object:faq:info' => 'Deze User Support FAQ zal worden geplaatst in %s',
   'collection:object:faq' => 'User Support FAQ\'s',
   'collection:object:support_ticket' => 'User Support Ticket',
   'collection:object:help' => 'User Support Contextuele Help',
@@ -26,13 +27,13 @@ return array (
   'user_support:menu:entity:comment_promote' => 'Maak FAQ',
   'user_support:menu:entity:comment_promote:title' => 'Verander deze reactie in een FAQ',
   'user_support:action:faq:edit:error:save' => 'Een onbekend probleem is opgetreden tijdens het opslaan van de FAQ',
-  'user_support:notify:user:create:message' => "Bedankt voor het melden van een nieuw Helpdesk ticket. We gaan hier zo snel mogelijk mee aan de slag.
+  'user_support:notify:user:create:message' => 'Bedankt voor het melden van een nieuw Helpdesk ticket. We gaan hier zo snel mogelijk mee aan de slag.
 
 Klik op de volgende link om het ticket te bekijken:
 %s
 
 Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
-%s",
+%s',
   'user_support:notify:admin:create:subject' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
   'user_support:notify:admin:updated:subject' => 'De Helpdesk ticket \'%s\' is bijgewerkt',
   'user_support:notify:admin:create:summary' => 'Een nieuwe Helpdesk ticket \'%s\' is gemeld',
