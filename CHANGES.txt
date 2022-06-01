@@ -1,6 +1,10 @@
 Version history
 ===============
 
+7.1 (2022-06-01):
+
+- added: container info on FAQ edit form
+
 7.0 (2022-02-16):
 
 - changed: updated entity configuration for new capabilities
