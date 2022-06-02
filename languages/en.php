@@ -67,8 +67,8 @@ return array(
 	'user_support:settings:faq:group_faq:yes_off' => "Yes, default disabled",
 	'user_support:settings:faq:group_faq:yes' => "Yes, default enabled",
 	
-	// user settings
-	'user_support:usersettings:admin_notify' => "Do you wish to receive a notification when a Support Ticket is created/updated",
+	// notification settings
+	'user_support:notifications:support_ticket' => "Receive a notification when a Support Ticket is created/updated",
 	
 	// annotations
 	'river:comment:object:support_ticket' => "%s posted a comment on %s",

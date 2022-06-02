@@ -3,6 +3,7 @@
 namespace ColdTrick\UserSupport\Notifications;
 
 use Elgg\Notifications\NotificationEventHandler;
+use Elgg\Database\QueryBuilder;
 
 /**
  * Notification Event Handler for 'object' 'support_ticket' 'create' action
@@ -57,12 +58,13 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 		// pass all the guids of the admins/staff
 		/* @var $user \ElggUser */
 		foreach ($users as $user) {
-			$methods = array_keys(array_filter($user->getNotificationSettings()));
-			if (empty($methods)) {
+			$settings = $user->getNotificationSettings('user_support_ticket');
+			$settings = array_keys(array_filter($settings));
+			if (empty($settings)) {
 				continue;
 			}
 			
-			$result[$user->guid] = $methods;
+			$result[$user->guid] = $settings;
 		}
 		
 		return $result;

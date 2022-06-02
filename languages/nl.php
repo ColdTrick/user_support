@@ -1,10 +1,11 @@
 <?php
 /**
- * This file was created by Translation Editor v9.0.2
- * On 2022-05-31 13:51
+ * This file was created by Translation Editor v10.0
+ * On 2022-06-02 14:25
  */
 
 return array (
+  'user_support:notifications:support_ticket' => 'Ontvang een notificatie als er een Support Ticket wordt aangemaakt/bijgewerkt',
   'input:container_guid:object:faq:info' => 'Deze User Support FAQ zal worden geplaatst in %s',
   'collection:object:faq' => 'User Support FAQ\'s',
   'collection:object:support_ticket' => 'User Support Ticket',
@@ -79,7 +80,6 @@ Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
   'user_support:action:support_staff:removed' => 'De gebruiker is geen support medewerker meer',
   'user_support:help_center:help:title' => 'Contextuele help',
   'user_support' => 'Helpdesk',
-  'user_support:usersettings:admin_notify' => 'Wil je een bericht ontvangen als een Helpdesk ticket wordt aangemaakt/bijgewerkt',
   'user_support:notify:admin:create:message' => '%s heeft een nieuwe Helpdesk ticket gemeld:
 %s
 

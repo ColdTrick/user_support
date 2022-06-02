@@ -43,7 +43,6 @@ return array (
   'user_support:settings:faq:title' => 'Preferencias del FAQ',
   'user_support:settings:faq:add_faq_site_menu_item' => 'Añadir un enlace al FAQ en el menú del sitio',
   'user_support:settings:faq:add_faq_footer_menu_item' => 'Añadir un enlace al FAQ en pié de página',
-  'user_support:usersettings:admin_notify' => 'Quieres recibir una notificación cuando se crea/actualiza un ticket de soporte?',
   'river:comment:object:support_ticket' => '%s posteó un comentario a las %s',
   'river:create:object:support_ticket' => '%s posteó un comentario a las %s',
   'user_support:support_ticket:closed' => 'Se ha cerrado tu ticket de soporte',

@@ -254,6 +254,9 @@ return [
 		'elgg.css' => [
 			'css/user_support/site.css' => [],
 		],
+		'notifications/settings/records' => [
+			'user_support/notifications/settings' => [],
+		],
 		'page/elements/footer' => [
 			'user_support/button' => [],
 		],

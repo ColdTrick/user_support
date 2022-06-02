@@ -61,21 +61,13 @@ class Notifications {
 		// pass all the guids of the admins/staff
 		/* @var $user \ElggUser */
 		foreach ($users as $user) {
-			$notification_settings = $user->getNotificationSettings();
-			if (empty($notification_settings)) {
+			$settings = $user->getNotificationSettings('user_support_ticket');
+			$settings = array_keys(array_filter($settings));
+			if (empty($settings)) {
 				continue;
 			}
 			
-			$methods = array();
-			foreach ($notification_settings as $method => $subbed) {
-				if ($subbed) {
-					$methods[] = $method;
-				}
-			}
-			
-			if (!empty($methods)) {
-				$return_value[$user->guid] = $methods;
-			}
+			$return_value[$user->guid] = $settings;
 		}
 		
 		return $return_value;

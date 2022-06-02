@@ -74,12 +74,6 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket): array {
 				return $qb->compare("{$main_alias}.guid", '!=', $ticket->owner_guid, ELGG_VALUE_GUID);
 			},
 		],
-		'private_setting_name_value_pairs' => [
-			[
-				'name' => 'plugin:user_setting:user_support:admin_notify',
-				'value' => 'yes',
-			],
-		],
 		'metadata_name_value_pairs' => [
 			[
 				'name' => 'admin',
@@ -96,7 +90,11 @@ function user_support_get_admin_notify_users(UserSupportTicket $ticket): array {
 	]);
 	
 	// trigger hook to get more/less users
-	$users = elgg_trigger_plugin_hook('admin_notify', 'user_support', ['users' => $users, 'entity' => $ticket], $users);
+	$params = [
+		'users' => $users,
+		'entity' => $ticket,
+	];
+	$users = elgg_trigger_plugin_hook('admin_notify', 'user_support', $params, $users);
 	if (empty($users)) {
 		return [];
 	}
