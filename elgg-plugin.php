@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . '/lib/functions.php');
 
 return [
 	'plugin' => [
-		'version' => '7.1',
+		'version' => '7.2',
 	],
 	'settings' => [
 		'help_enabled' => 'yes',
