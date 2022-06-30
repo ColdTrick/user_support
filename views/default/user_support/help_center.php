@@ -13,6 +13,7 @@ if (elgg_is_xhr()) {
 	echo elgg_view_form('user_support/help_center/search', [
 		'action' => elgg_generate_url('default:user_support:search'),
 		'class' => 'mbs',
+		'prevent_double_submit' => false,
 	]);
 
 	// action buttons
