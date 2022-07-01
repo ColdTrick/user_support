@@ -244,9 +244,9 @@ function user_support_prepare_ticket_form_vars(array $params = []): array {
 		'tags' => [],
 		'help_url' => elgg_extract('help_url', $params, ''),
 		'support_type' => '',
-		'help_context' => user_support_get_help_context(elgg_extract('url', $params, '')),
+		'help_context' => user_support_get_help_context(elgg_extract('help_url', $params, '')),
 	];
-	
+		
 	// edit ticket
 	$entity = elgg_extract('entity', $params);
 	if ($entity instanceof UserSupportTicket) {
