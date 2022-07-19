@@ -37,8 +37,7 @@ function user_support_get_help_context(string $url = '') {
 	
 	$new_parts = [];
 	
-	foreach ($parts as $index => $part) {
-		
+	foreach ($parts as $part) {
 		if (empty($part)) {
 			continue;
 		}
@@ -319,7 +318,7 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	if (empty($user_guid)) {
 		return false;
 	}
-		
+	
 	if (isset($cache[$user_guid])) {
 		return $cache[$user_guid];
 	}
@@ -328,7 +327,7 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	if (!$user instanceof \ElggUser) {
 		return false;
 	}
-		
+	
 	// check if ACL is present
 	$acl_id = (int) elgg_get_plugin_user_setting('support_ticket_acl', $user_guid, 'user_support');
 	if (!empty($acl_id)) {
