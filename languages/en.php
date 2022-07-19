@@ -174,6 +174,10 @@ To view the Ticket click on this link:
 	'widgets:support_staff:name' => "Support staff",
 	'widgets:support_staff:description' => "Shows you a list of the open support tickets",
 	
+	// upgrades
+	'user_support:upgrade:2022071901:title' => "Set support ticket ACL subtype",
+	'user_support:upgrade:2022071901:description' => "Access to support ticket should have a subtype in the database.",
+	
 	// actions
 	// help - edit
 	'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",

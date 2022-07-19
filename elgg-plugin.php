@@ -1,5 +1,6 @@
 <?php
 
+use ColdTrick\UserSupport\Upgrades\SetSupportTicketACLSubtype;
 use Elgg\Router\Middleware\Gatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
@@ -282,5 +283,8 @@ return [
 		'support_staff' => [
 			'context' => ['dashboard', 'admin'],
 		],
+	],
+	'upgrades' => [
+		SetSupportTicketACLSubtype::class,
 	],
 ];
