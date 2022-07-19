@@ -163,6 +163,11 @@ return [
 				'\ColdTrick\UserSupport\Notifications::getSupportTicketCommentSubscribers' => [],
 			],
 		],
+		'get_sql' => [
+			'access' => [
+				'\ColdTrick\UserSupport\Database\Access::addSupportStaffACL' => [],
+			],
+		],
 		'notification_type_subtype' => [
 			'tag_tools' => [
 				'\ColdTrick\UserSupport\TagTools::preventTagNotifications' => [],
