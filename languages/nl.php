@@ -1,10 +1,12 @@
 <?php
 /**
- * This file was created by Translation Editor v10.0
- * On 2022-06-02 14:25
+ * This file was created by Translation Editor v10.1.1
+ * On 2022-07-19 11:29
  */
 
 return array (
+  'user_support:upgrade:2022071901:title' => 'Voeg een subtype to aan de support ticket ACL',
+  'user_support:upgrade:2022071901:description' => 'Toegang voor support ticket moet een subtype in de database hebben.',
   'user_support:notifications:support_ticket' => 'Ontvang een notificatie als er een Support Ticket wordt aangemaakt/bijgewerkt',
   'input:container_guid:object:faq:info' => 'Deze User Support FAQ zal worden geplaatst in %s',
   'collection:object:faq' => 'User Support FAQ\'s',
