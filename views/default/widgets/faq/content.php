@@ -1,6 +1,6 @@
 <?php
 
-/* @var $widget ElggWidget */
+/* @var $widget \ElggWidget */
 $widget = elgg_extract('entity', $vars);
 $owner = $widget->getOwnerEntity();
 
@@ -17,6 +17,7 @@ $list_options = [
 	'subtype' => UserSupportFAQ::SUBTYPE,
 	'limit' => $num_display,
 	'pagination' => false,
+	'no_results' => true,
 ];
 
 if ($owner instanceof ElggGroup) {
@@ -26,19 +27,6 @@ if ($owner instanceof ElggGroup) {
 	$more_link_params['guid'] = $owner->guid;
 }
 
-$content = elgg_list_entities($list_options);
-if (empty($content)) {
-	echo elgg_view('page/components/no_results', [
-		'no_results' => elgg_echo('notfound'),
-	]);
-	return;
-}
+$list_options['widget_more'] = elgg_view_url(elgg_generate_url($more_link, $more_link_params), elgg_echo('user_support:read_more'));
 
-echo $content;
-
-// read more link
-$more_link = elgg_view('output/url', [
-	'text' => elgg_echo('user_support:read_more'),
-	'href' => elgg_generate_url($more_link, $more_link_params),
-]);
-echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);
+echo elgg_list_entities($list_options);

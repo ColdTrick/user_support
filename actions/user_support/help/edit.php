@@ -3,7 +3,7 @@
 $guid = (int) get_input('guid');
 $desc = get_input('description');
 $help_context = get_input('help_context');
-$tags = string_to_tag_array(get_input('tags'));
+$tags = elgg_string_to_array((string) get_input('tags', ''));
 
 if (empty($desc) || empty($help_context)) {
 	return elgg_error_response(elgg_echo('error:missing_data'));

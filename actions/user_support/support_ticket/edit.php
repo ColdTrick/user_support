@@ -7,7 +7,7 @@ $guid = (int) get_input('guid');
 $description = get_input('description');
 $help_url = get_input('help_url');
 $help_context = get_input('help_context');
-$tags = string_to_tag_array(get_input('tags'));
+$tags = elgg_string_to_array((string) get_input('tags', ''));
 $support_type = get_input('support_type');
 
 if (empty($description) || empty($support_type)) {

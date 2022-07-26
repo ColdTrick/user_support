@@ -16,7 +16,7 @@ use Elgg\Exceptions\Http\GatekeeperException;
 function user_support_get_help_context(string $url = '') {
 	
 	if (empty($url)) {
-		$url = current_page_url();
+		$url = elgg_get_current_url();
 	}
 	
 	if (empty($url)) {
@@ -177,7 +177,7 @@ function user_support_prepare_faq_form_vars(array $params = []): array {
 		'description' => '',
 		'tags' => [],
 		'help_context' => user_support_get_help_context(elgg_extract('url', $params, '')),
-		'access_id' => get_default_access(null, [
+		'access_id' => elgg_get_default_access(null, [
 			'entity_type' => 'object',
 			'entity_subtype' => UserSupportFAQ::SUBTYPE,
 			'container_guid' => elgg_extract('container_guid', $params, elgg_get_page_owner_guid()),
@@ -338,15 +338,20 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	$plugin = elgg_get_plugin_from_id('user_support');
 	
 	// create acl this user
-	$acl_id = create_access_collection("support_ticket_acl_{$user_guid}", $plugin->guid, 'support_ticket');
+	$acl_id = elgg_create_access_collection("support_ticket_acl_{$user_guid}", $plugin->guid, 'support_ticket');
 	if (empty($acl_id)) {
 		return false;
 	}
 	
+	$acl = elgg_get_access_collection($acl_id);
+	if (!$acl instanceof \ElggAccessCollection) {
+		return false;
+	}
+	
 	// add user to acl
-	if (!add_user_to_access_collection($user_guid, $acl_id)) {
+	if (!$acl->addMember($user_guid)) {
 		// storing ACL-id failed, cleanup
-		delete_access_collection($acl_id);
+		$acl->delete();
 		return false;
 	}
 	

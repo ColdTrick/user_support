@@ -1,8 +1,6 @@
 <?php
 
-use Elgg\Database\Clauses\OrderByClause;
-
-/* @var $widget ElggWidget */
+/* @var $widget \ElggWidget */
 $widget = elgg_extract('entity', $vars);
 $owner = $widget->getOwnerEntity();
 
@@ -27,7 +25,12 @@ $options = [
 	'owner_guid' => $widget->owner_guid,
 	'limit' => $num_display,
 	'pagination' => false,
-	'order_by' => new OrderByClause('e.time_updated', 'desc'),
+	'sort_by' => [
+		'property' => 'time_updated',
+		'direction' => 'desc',
+		'signed' => true,
+	],
+	'no_results' => true,
 ];
 
 if ($filter != 'all') {
@@ -40,19 +43,6 @@ if ($filter != 'all') {
 	}
 }
 
-$content = elgg_list_entities($options);
-if (empty($content)) {
-	echo elgg_view('page/components/no_results', [
-		'no_results' => elgg_echo('notfound'),
-	]);
-	return;
-}
+$options['widget_more'] = elgg_view_url(elgg_generate_url($more_link, $more_link_params), elgg_echo('user_support:read_more'));
 
-echo $content;
-
-// read more link
-$more_link = elgg_view('output/url', [
-	'text' => elgg_echo('user_support:read_more'),
-	'href' => elgg_generate_url($more_link, $more_link_params),
-]);
-echo elgg_format_element('div', ['class' => ['elgg-widget-more']], $more_link);
+echo elgg_list_entities($options);

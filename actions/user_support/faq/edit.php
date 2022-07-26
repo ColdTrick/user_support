@@ -8,7 +8,7 @@ $container_guid = (int) get_input('container_guid', 0);
 $title = get_input('title');
 $desc = get_input('description');
 $access_id = (int) get_input('access_id', ACCESS_PRIVATE);
-$tags = string_to_tag_array(get_input('tags'));
+$tags = elgg_string_to_array((string) get_input('tags', ''));
 $comments = get_input('allow_comments');
 $help_context = get_input('help_context');
 
