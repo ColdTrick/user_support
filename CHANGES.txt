@@ -1,6 +1,12 @@
 Version history
 ===============
 
+8.0 (2022-08-24):
+
+- added: upgrade to set support ticket acl subtype
+- changed: updated for Elgg 4.3
+- fixed: support staff can access support tickets
+
 7.2.1 (2022-07-12):
 
 - fixed: detect correct section for help_context
