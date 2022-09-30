@@ -338,12 +338,7 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 	$plugin = elgg_get_plugin_from_id('user_support');
 	
 	// create acl this user
-	$acl_id = elgg_create_access_collection("support_ticket_acl_{$user_guid}", $plugin->guid, 'support_ticket');
-	if (empty($acl_id)) {
-		return false;
-	}
-	
-	$acl = elgg_get_access_collection($acl_id);
+	$acl = elgg_create_access_collection("support_ticket_acl_{$user_guid}", $plugin->guid, 'support_ticket');
 	if (!$acl instanceof \ElggAccessCollection) {
 		return false;
 	}
