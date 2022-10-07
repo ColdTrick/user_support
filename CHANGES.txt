@@ -1,6 +1,10 @@
 Version history
 ===============
 
+8.0.1 (2022-10-07):
+
+- fixed: correctly create support ticket ACL
+
 8.0 (2022-08-24):
 
 - added: upgrade to set support ticket acl subtype
