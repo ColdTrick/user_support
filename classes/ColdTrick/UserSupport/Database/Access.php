@@ -32,6 +32,7 @@ class Access {
 		$qb = $hook->getParam('query_builder');
 		$access_column = $hook->getParam('access_column');
 		$table_alias = $hook->getParam('table_alias');
+		$table_alias = $table_alias ? "{$table_alias}." : '';
 		
 		$plugin = elgg_get_plugin_from_id('user_support');
 		
@@ -41,7 +42,7 @@ class Access {
 			->andWhere($qb->compare('owner_guid', '=', $plugin->guid, ELGG_VALUE_GUID))
 			->andWhere($qb->compare('subtype', '=', 'support_ticket', ELGG_VALUE_STRING));
 		
-		$access_wheres['ors']['support_staff'] = $qb->compare("{$table_alias}.{$access_column}", 'in', $sub->getSQL());
+		$access_wheres['ors']['support_staff'] = $qb->compare("{$table_alias}{$access_column}", 'in', $sub->getSQL());
 		
 		return $access_wheres;
 	}
