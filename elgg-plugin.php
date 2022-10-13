@@ -106,6 +106,10 @@ return [
 			'path' => '/user_support/support_ticket/archive',
 			'resource' => 'user_support/support_ticket/archive',
 		],
+		'collection:user:user:support_staff' => [
+			'path' => '/user_support/support_ticket/staff',
+			'resource' => 'user_support/support_ticket/staff',
+		],
 		'collection:object:support_ticket:owner' => [
 			'path' => '/user_support/support_ticket/owner/{username}/{status?}',
 			'resource' => 'user_support/support_ticket/owner',

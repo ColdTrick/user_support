@@ -108,6 +108,7 @@ To view the Ticket click on this link:
 	'user_support:menu:support_tickets:archive' => "Support tickets archive",
 	'user_support:menu:support_tickets:mine' => "My Support tickets",
 	'user_support:menu:support_tickets:mine:archive' => "My closed Support tickets",
+	'user_support:menu:support_tickets:staff' => "Support staff",
 	
 	'user_support:menu:faq' => "FAQ",
 	'user_support:menu:faq:group' => "Group FAQ",
@@ -150,6 +151,10 @@ To view the Ticket click on this link:
 	
 	// ticket - archive
 	'user_support:tickets:archive:title' => "Support tickets archive",
+	
+	// ticket - staff
+	'user_support:tickets:staff:title' => "Support staff",
+	'user_support:tickets:staff:no_results' => "No users assigned as support staff. Site administrators always are support staff.",
 
 	// faq - list
 	'user_support:faq:sidebar:filter' => "Filter FAQ on tag",

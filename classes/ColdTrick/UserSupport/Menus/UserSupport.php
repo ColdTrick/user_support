@@ -69,6 +69,13 @@ class UserSupport {
 			'priority' => 400,
 		]);
 		
+		$return_value[] = \ElggMenuItem::factory([
+			'name' => 'staff',
+			'text' => elgg_echo('user_support:menu:support_tickets:staff'),
+			'href' => elgg_generate_url('collection:user:user:support_staff'),
+			'priority' => 500,
+		]);
+		
 		return $return_value;
 	}
 }
