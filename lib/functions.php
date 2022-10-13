@@ -350,8 +350,8 @@ function user_support_get_support_ticket_acl(int $user_guid = 0) {
 		return false;
 	}
 	
-	$user->setPluginSetting('user_support', 'support_ticket_acl', $acl_id);
+	$user->setPluginSetting('user_support', 'support_ticket_acl', $acl->id);
 	
-	$cache[$user_guid] = $acl_id;
+	$cache[$user_guid] = $acl->id;
 	return $cache[$user_guid];
 }

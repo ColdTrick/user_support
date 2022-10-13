@@ -44,7 +44,7 @@ class UserSupportTicket extends ElggObject {
 		// make sure the ticket has the correct access_id
 		if ($this->access_id === ACCESS_PRIVATE) {
 			$acl = user_support_get_support_ticket_acl($this->owner_guid);
-			if (empty($acl)) {
+			if ($acl === false) {
 				throw new InvalidArgumentException("Unable to set correct access level for support ticket");
 			}
 			$this->access_id = $acl;
