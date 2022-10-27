@@ -1,6 +1,12 @@
 Version history
 ===============
 
+8.1 (2022-10-27):
+
+- added: support staff page
+- fixed: support staff sql error
+- fixed: unable to create new support tickets for new users
+
 8.0.1 (2022-10-07):
 
 - fixed: correctly create support ticket ACL
