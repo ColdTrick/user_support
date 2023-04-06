@@ -1,7 +1,5 @@
 <?php
 
-elgg_make_sticky_form('user_support_faq');
-
 $guid = (int) get_input('guid', 0);
 $container_guid = (int) get_input('container_guid', 0);
 
@@ -18,16 +16,16 @@ if (empty($title) || empty($desc)) {
 
 if (!empty($guid)) {
 	$entity = get_entity($guid);
-	if (!$entity instanceof UserSupportFAQ || !$entity->canEdit()) {
+	if (!$entity instanceof \UserSupportFAQ || !$entity->canEdit()) {
 		return elgg_error_response(elgg_echo('actionunauthorized'));
 	}
 } else {
 	$container = get_entity($container_guid);
 	
-	$entity = new UserSupportFAQ();
+	$entity = new \UserSupportFAQ();
 	$entity->container_guid = $container_guid;
 	
-	if ($container instanceof ElggGroup) {
+	if ($container instanceof \ElggGroup) {
 		$entity->owner_guid = elgg_get_logged_in_user_guid();
 	}
 	
@@ -54,7 +52,5 @@ if (elgg_is_admin_logged_in()) {
 if (!$entity->save()) {
 	return elgg_error_response(elgg_echo('user_support:action:faq:edit:error:save'));
 }
-
-elgg_clear_sticky_form('user_support_faq');
 
 return elgg_ok_response('', elgg_echo('user_support:action:faq:edit:success'), $entity->getURL());

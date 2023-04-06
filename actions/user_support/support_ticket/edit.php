@@ -1,7 +1,5 @@
 <?php
 
-elgg_make_sticky_form('user_support_ticket');
-
 $guid = (int) get_input('guid');
 
 $description = get_input('description');
@@ -16,11 +14,11 @@ if (empty($description) || empty($support_type)) {
 
 if (!empty($guid)) {
 	$entity = get_entity($guid);
-	if (!$entity instanceof UserSupportTicket || !$entity->canEdit()) {
+	if (!$entity instanceof \UserSupportTicket || !$entity->canEdit()) {
 		return elgg_error_response(elgg_echo('actionunauthorized'));
 	}
 } else {
-	$entity = new UserSupportTicket();
+	$entity = new \UserSupportTicket();
 	if (!$entity->save()) {
 		return elgg_error_response(elgg_echo('save:fail'));
 	}
@@ -50,8 +48,13 @@ if (!$entity->save()) {
 
 if (empty($guid)) {
 	// a new ticket was created, so notify user
-	$subject = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $entity->getDisplayName();;
-	$message = elgg_echo("user_support:notify:user:create:message", [$entity->getURL(), elgg_generate_url('collection:object:support_ticket:owner', ['username' => $entity->getOwnerEntity()->username])]);
+	$subject = elgg_echo("user_support:support_type:{$entity->getSupportType()}") . ': ' . $entity->getDisplayName();
+	$message = elgg_echo('user_support:notify:user:create:message', [
+		$entity->getURL(),
+		elgg_generate_url('collection:object:support_ticket:owner', [
+			'username' => $entity->getOwnerEntity()->username,
+		]),
+	]);
 	
 	$params = [
 		'action' => 'create',
@@ -60,7 +63,5 @@ if (empty($guid)) {
 	
 	notify_user($entity->owner_guid, elgg_get_site_entity()->guid, $subject, $message, $params, ['email']);
 }
-
-elgg_clear_sticky_form('user_support_ticket');
 
 return elgg_ok_response('', elgg_echo('user_support:action:ticket:edit:success'), $entity->getURL());

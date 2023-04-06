@@ -10,13 +10,12 @@ if (empty($desc) || empty($help_context)) {
 }
 
 if (!empty($guid)) {
-	
 	$entity = get_entity($guid);
-	if (!$entity instanceof UserSupportHelp || !$entity->canEdit()) {
+	if (!$entity instanceof \UserSupportHelp || !$entity->canEdit()) {
 		return elgg_error_response(elgg_echo('actionunauthorized'));
 	}
 } else {
-	$entity = new UserSupportHelp();
+	$entity = new \UserSupportHelp();
 	
 	if (!$entity->save()) {
 		return elgg_error_response(elgg_echo('save:fail'));

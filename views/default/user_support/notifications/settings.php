@@ -11,7 +11,7 @@ if (!$user instanceof \ElggUser) {
 }
 
 // allowed for Admins and support staff
-if (!user_support_staff_gatekeeper(false, $user->guid)) {
+if (!user_support_is_support_staff($user->guid)) {
 	return;
 }
 

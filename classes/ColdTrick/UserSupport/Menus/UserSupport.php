@@ -2,23 +2,29 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the user_support menu
+ */
 class UserSupport {
 	
 	/**
 	 * Add menu items to the user_support menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:user_support'
+	 * @param \Elgg\Event $event 'register', 'menu:user_support'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerUserSupportTickets(\Elgg\Hook $hook) {
-		
+	public static function registerUserSupportTickets(\Elgg\Event $event): ?MenuItems {
 		$user = elgg_get_logged_in_user_entity();
 		if (empty($user)) {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'mine',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine'),
@@ -44,17 +50,18 @@ class UserSupport {
 	/**
 	 * Add menu items to the user_support menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:user_support'
+	 * @param \Elgg\Event $event 'register', 'menu:user_support'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerStaff(\Elgg\Hook $hook) {
-		
-		if (!user_support_staff_gatekeeper(false)) {
-			return;
+	public static function registerStaff(\Elgg\Event $event): ?MenuItems {
+		if (!user_support_is_support_staff()) {
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'all',
 			'text' => elgg_echo('user_support:menu:support_tickets'),

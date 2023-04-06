@@ -21,7 +21,7 @@ $more_link_params = [
 
 $options = [
 	'type' => 'object',
-	'subtype' => UserSupportTicket::SUBTYPE,
+	'subtype' => \UserSupportTicket::SUBTYPE,
 	'owner_guid' => $widget->owner_guid,
 	'limit' => $num_display,
 	'pagination' => false,

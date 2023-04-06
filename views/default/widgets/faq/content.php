@@ -14,13 +14,13 @@ if ($num_display < 1) {
 
 $list_options = [
 	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
+	'subtype' => \UserSupportFAQ::SUBTYPE,
 	'limit' => $num_display,
 	'pagination' => false,
 	'no_results' => true,
 ];
 
-if ($owner instanceof ElggGroup) {
+if ($owner instanceof \ElggGroup) {
 	$list_options['container_guid'] = $owner->guid;
 	
 	$more_link = 'collection:object:faq:group';

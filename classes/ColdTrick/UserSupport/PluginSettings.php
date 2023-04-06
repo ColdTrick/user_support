@@ -2,24 +2,27 @@
 
 namespace ColdTrick\UserSupport;
 
+/**
+ * Change plugin settings
+ */
 class PluginSettings {
 
 	/**
 	 * Save the group config
 	 *
-	 * @param \Elgg\Hook $hook 'setting', 'plugin'
+	 * @param \Elgg\Event $event 'setting', 'plugin'
 	 *
-	 * @return void|string
+	 * @return null|string
 	 */
-	public static function saveGroup(\Elgg\Hook $hook) {
-		if ($hook->getParam('plugin_id') !== 'user_support') {
-			return;
+	public static function saveGroup(\Elgg\Event $event): ?string {
+		if ($event->getParam('plugin_id') !== 'user_support') {
+			return null;
 		}
 		
-		if ($hook->getParam('name') !== 'help_group_guid') {
-			return;
+		if ($event->getParam('name') !== 'help_group_guid') {
+			return null;
 		}
 		
-		return $hook->getParam('value')[0];
+		return $event->getParam('value')[0];
 	}
 }

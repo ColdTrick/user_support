@@ -8,8 +8,6 @@ return array (
   'user_support:menu:support_tickets:staff' => 'Support medewerkers',
   'user_support:tickets:staff:title' => 'Support medewerkers',
   'user_support:tickets:staff:no_results' => 'Er zijn geen gebruikers toegewezen als support medewerkers. Site beheerders zijn altijd support medewerkers.',
-  'user_support:upgrade:2022071901:title' => 'Voeg een subtype to aan de support ticket ACL',
-  'user_support:upgrade:2022071901:description' => 'Toegang voor support ticket moet een subtype in de database hebben.',
   'user_support:notifications:support_ticket' => 'Ontvang een notificatie als er een Support Ticket wordt aangemaakt/bijgewerkt',
   'input:container_guid:object:faq:info' => 'Deze User Support FAQ zal worden geplaatst in %s',
   'collection:object:faq' => 'User Support FAQ\'s',

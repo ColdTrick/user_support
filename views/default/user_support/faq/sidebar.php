@@ -38,10 +38,10 @@ if (!empty($filter) || !empty($faq_query)) {
 	$getter = 'elgg_get_entities';
 	
 	if (!empty($faq_query)) {
-		$options['query'] = $faq_query;
+		$guid_options['query'] = $faq_query;
 		$getter = 'elgg_search';
 	}
-		
+	
 	$guids = $getter($guid_options);
 	
 	foreach ($filter as $index => $filter_tag) {
@@ -49,6 +49,7 @@ if (!empty($filter) || !empty($faq_query)) {
 			// prevent filtering on too much tags
 			break;
 		}
+		
 		$tag_query_params = $query_params;
 		
 		$pos = array_search($filter_tag, $tag_query_params['filter']);
@@ -57,17 +58,17 @@ if (!empty($filter) || !empty($faq_query)) {
 		
 		$menu_items[] = [
 			'name' => $filter_tag,
-			'text' => $filter_tag,
 			'icon' => 'checkmark',
+			'text' => $filter_tag,
 			'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 		];
 	}
 }
 
-if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
+if (($guids === null || (count($guids) > 1)) && count($filter) < 3) {
 	$tag_options = [
 		'type' => 'object',
-		'subtype' => UserSupportFAQ::SUBTYPE,
+		'subtype' => \UserSupportFAQ::SUBTYPE,
 		'tag_names' => ['tags'],
 		'wheres' => [],
 		'limit' => 5,
@@ -95,8 +96,8 @@ if (($guids == null || (count($guids) > 1)) && (count($filter) < 3)) {
 			
 			$menu_items[] = [
 				'name' => $tag_text,
-				'text' => $tag_text,
 				'icon' => 'checkmark',
+				'text' => $tag_text,
 				'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 			];
 		}

@@ -12,7 +12,7 @@ $page_owner = elgg_get_page_owner_entity();
 // build breadcrumb
 elgg_push_collection_breadcrumbs('object', \UserSupportFAQ::SUBTYPE, $page_owner);
 
-elgg_register_title_button('user_support', 'add', 'object', \UserSupportFAQ::SUBTYPE);
+elgg_register_title_button('add', 'object', \UserSupportFAQ::SUBTYPE);
 
 // build page elements
 $title_text = elgg_echo('user_support:faq:group:title', [$page_owner->getDisplayName()]);

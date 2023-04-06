@@ -2,15 +2,13 @@
 
 /**
  * The helper class for FAQ objects
- *
- * @package User_Support
  */
-class UserSupportFAQ extends ElggObject {
+class UserSupportFAQ extends \ElggObject {
 	
 	const SUBTYPE = 'faq';
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -23,14 +21,13 @@ class UserSupportFAQ extends ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
-	public function canComment($user_guid = 0, $default = null) {
-		
+	public function canComment(int $user_guid = 0): bool {
 		if ($this->allow_comments !== 'yes') {
 			return false;
 		}
 		
-		return parent::canComment($user_guid, $default);
+		return parent::canComment($user_guid);
 	}
 }

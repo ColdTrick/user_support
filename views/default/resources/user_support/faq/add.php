@@ -26,10 +26,11 @@ if (elgg_is_admin_logged_in()) {
 	$comment_guid = (int) get_input('comment_guid');
 }
 
-$body_vars = user_support_prepare_faq_form_vars([
+$content = elgg_view_form('user_support/faq/edit', [
+	'sticky_enabled' => true,
+], [
 	'comment_guid' => $comment_guid,
 ]);
-$content = elgg_view_form('user_support/faq/edit', [], $body_vars);
 
 echo elgg_view_page(elgg_echo('user_support:faq:create:title'), [
 	'content' => $content,

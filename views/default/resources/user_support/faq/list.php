@@ -7,11 +7,11 @@ $filter = (array) get_input('filter');
 $faq_query = get_input('faq_query');
 $filter = array_values($filter); // indexing could be messed up
 
-elgg_register_title_button('user_support', 'add', 'object', 'faq');
+elgg_register_title_button('add', 'object', \UserSupportFAQ::SUBTYPE);
 
 $list_options = [
 	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
+	'subtype' => \UserSupportFAQ::SUBTYPE,
 	'wheres' => [],
 	'no_results' => true,
 ];

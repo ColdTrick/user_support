@@ -20,8 +20,9 @@ if (!$page_owner->canEdit()) {
 elgg_push_collection_breadcrumbs('object', 'support_ticket', $page_owner);
 
 // page elements
-$body_vars = user_support_prepare_ticket_form_vars();
-$form = elgg_view_form('user_support/support_ticket/edit', [], $body_vars);
+$form = elgg_view_form('user_support/support_ticket/edit', [
+	'sticky_enabled' => true,
+]);
 
 echo elgg_view_page(elgg_echo('user_support:help_center:ask'), [
 	'content' => $form,

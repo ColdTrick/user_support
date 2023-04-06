@@ -180,8 +180,8 @@ To view the Ticket click on this link:
 	'widgets:support_staff:description' => "Shows you a list of the open support tickets",
 	
 	// upgrades
-	'user_support:upgrade:2022071901:title' => "Set support ticket ACL subtype",
-	'user_support:upgrade:2022071901:description' => "Access to support ticket should have a subtype in the database.",
+	'user_support:upgrade:2023040601:title' => "Migrate Support Ticket ACLs",
+	'user_support:upgrade:2023040601:description' => "Allow users to access their support tickets.",
 	
 	// actions
 	// help - edit

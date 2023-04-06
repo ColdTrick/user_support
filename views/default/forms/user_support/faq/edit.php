@@ -14,7 +14,6 @@ $metadata = elgg_get_metadata([
 ]);
 
 if (!empty($metadata)) {
-	
 	// make it into an array
 	$help_contexts = [];
 	foreach ($metadata as $md) {
@@ -26,7 +25,7 @@ if (!empty($metadata)) {
 }
 
 $entity = elgg_extract('entity', $vars);
-if ($entity instanceof UserSupportFAQ) {
+if ($entity instanceof \UserSupportFAQ) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',
@@ -58,7 +57,6 @@ echo elgg_view_field([
 ]);
 
 if (elgg_is_admin_logged_in() && !empty($help_contexts)) {
-	
 	echo elgg_view_field([
 		'#type' => 'select',
 		'#label' => elgg_echo('user_support:help_context'),
@@ -88,7 +86,7 @@ echo elgg_view_field([
 	'value' => (int) elgg_extract('access_id', $vars),
 	'entity' => $entity,
 	'entity_type' => 'object',
-	'entity_subtype' => UserSupportFAQ::SUBTYPE,
+	'entity_subtype' => \UserSupportFAQ::SUBTYPE,
 	'container_guid' => (int) elgg_extract('container_guid', $vars),
 ]);
 

@@ -1,6 +1,5 @@
 define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
-	
-	var toggle_ticket_form = function() {
+	function toggle_ticket_form() {
 		var $help_center = $('.user-support-help-center-popup');
 		
 		if ($help_center.find('#user-support-ticket-edit-form-wrapper').is(':visible')) {
@@ -14,7 +13,7 @@ define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 		lightbox.resize();
 	};
 	
-	var submit_ticket_form = function(event) {
+	function submit_ticket_form(event) {
 		event.preventDefault();
 		
 		var $form = $(this);

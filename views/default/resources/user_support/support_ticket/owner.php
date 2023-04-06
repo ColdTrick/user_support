@@ -5,24 +5,24 @@ use Elgg\Exceptions\Http\EntityNotFoundException;
 use Elgg\Exceptions\Http\EntityPermissionsException;
 
 $user = elgg_get_page_owner_entity();
-if (!$user instanceof ElggUser) {
+if (!$user instanceof \ElggUser) {
 	throw new EntityNotFoundException();
 }
 
-if (!$user->canEdit() && !user_support_staff_gatekeeper(false)) {
+if (!$user->canEdit() && !user_support_is_support_staff()) {
 	throw new EntityPermissionsException();
 }
 
-$status = elgg_extract('status', $vars, UserSupportTicket::OPEN);
-if (!in_array($status, [UserSupportTicket::OPEN, UserSupportTicket::CLOSED])) {
-	$status = UserSupportTicket::OPEN;
+$status = elgg_extract('status', $vars, \UserSupportTicket::OPEN);
+if (!in_array($status, [\UserSupportTicket::OPEN, \UserSupportTicket::CLOSED])) {
+	$status = \UserSupportTicket::OPEN;
 }
 
 $q = get_input('q');
 
 $options = [
 	'type' => 'object',
-	'subtype' => UserSupportTicket::SUBTYPE,
+	'subtype' => \UserSupportTicket::SUBTYPE,
 	'owner_guid' => $user->guid,
 	'metadata_name_value_pairs' => [
 		'status' => $status,
@@ -60,7 +60,7 @@ if ($status === \UserSupportTicket::CLOSED) {
 	}
 }
 
-elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
+elgg_register_title_button('add', 'object', \UserSupportTicket::SUBTYPE);
 
 $form_vars = [
 	'method' => 'GET',

@@ -1,7 +1,5 @@
 <?php
 
-user_support_staff_gatekeeper();
-
 $body = elgg_list_entities([
 	'type' => 'user',
 	'metadata_names' => [

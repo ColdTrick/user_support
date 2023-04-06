@@ -12,7 +12,7 @@ if (!empty($filter)) {
 }
 
 echo elgg_view_field([
-	'#type' => 'text',
+	'#type' => 'search',
 	'name' => 'faq_query',
 	'value' => get_input('faq_query'),
 	'placeholder' => elgg_echo('search'),

@@ -1,27 +1,29 @@
 <?php
 
-namespace ColdTrick\UserSupport;
+namespace ColdTrick\UserSupport\Plugins;
 
+/**
+ * Support for the QuickLinks plugin
+ */
 class QuickLinks {
 	
 	/**
 	 * Prevent Help objects from being linked
 	 *
-	 * @param \Elgg\Hook $hook 'type_subtypes', 'quicklinks'
+	 * @param \Elgg\Event $event 'type_subtypes', 'quicklinks'
 	 *
-	 * @return void|array
+	 * @return null|array
 	 */
-	public static function blockHelpLink(\Elgg\Hook $hook) {
-		
-		$return_value = $hook->getValue();
+	public static function blockHelpLink(\Elgg\Event $event): ?array {
+		$return_value = $event->getValue();
 		$object_subtypes = elgg_extract('object', $return_value);
 		if (empty($object_subtypes)) {
-			return;
+			return null;
 		}
 		
 		$index = array_search(\UserSupportHelp::SUBTYPE, $object_subtypes);
 		if ($index === false) {
-			return;
+			return null;
 		}
 		
 		unset($object_subtypes[$index]);
@@ -33,21 +35,20 @@ class QuickLinks {
 	/**
 	 * Prevent Support Ticket objects from being linked
 	 *
-	 * @param \Elgg\Hook $hook 'type_subtypes', 'quicklinks'
+	 * @param \Elgg\Event $event 'type_subtypes', 'quicklinks'
 	 *
-	 * @return void|array
+	 * @return null|array
 	 */
-	public static function blockTicketLink(\Elgg\Hook $hook) {
-		
-		$return_value = $hook->getValue();
+	public static function blockTicketLink(\Elgg\Event $event): ?array {
+		$return_value = $event->getValue();
 		$object_subtypes = elgg_extract('object', $return_value);
 		if (empty($object_subtypes)) {
-			return;
+			return null;
 		}
 		
 		$index = array_search(\UserSupportTicket::SUBTYPE, $object_subtypes);
 		if ($index === false) {
-			return;
+			return null;
 		}
 		
 		unset($object_subtypes[$index]);

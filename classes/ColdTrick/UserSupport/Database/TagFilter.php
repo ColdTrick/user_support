@@ -4,19 +4,34 @@ namespace ColdTrick\UserSupport\Database;
 
 use Elgg\Database\QueryBuilder;
 
+/**
+ * Tag related database query
+ */
 class TagFilter {
 	
 	/**
 	 * @var string[]
 	 */
-	protected $filter;
+	protected array $filter;
 	
+	/**
+	 * Create a tag filter
+	 *
+	 * @param string[] $filter tags to filter on
+	 */
 	public function __construct(array $filter) {
 		$this->filter = array_values($filter); // this way we always have correct integer keys
 	}
 	
+	/**
+	 * Build the query parts
+	 *
+	 * @param QueryBuilder $qb         Database query builder
+	 * @param string       $main_alias Main database table alias
+	 *
+	 * @return \Doctrine\DBAL\Query\Expression\CompositeExpression|string
+	 */
 	public function __invoke(QueryBuilder $qb, $main_alias) {
-		
 		$wheres = [];
 		
 		foreach ($this->filter as $index => $filter) {

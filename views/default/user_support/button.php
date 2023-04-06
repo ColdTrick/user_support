@@ -13,10 +13,10 @@ $help_context = user_support_get_help_context();
 $content_count = 0;
 if ($help_context !== false) {
 	$subtypes = [
-		UserSupportFAQ::SUBTYPE,
+		\UserSupportFAQ::SUBTYPE,
 	];
 	if (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') {
-		$subtypes[] = UserSupportHelp::SUBTYPE;
+		$subtypes[] = \UserSupportHelp::SUBTYPE;
 	}
 	
 	$content_count = elgg_get_entities([
@@ -35,9 +35,9 @@ foreach (str_split(elgg_echo('user_support:button:text')) as $char) {
 }
 
 $link_options = [
+	'icon_alt' => 'life-ring',
 	'text' => $link_text,
 	'href' => elgg_generate_url('default:user_support:help_center'),
-	'icon_alt' => 'life-ring',
 	'class' => [
 		'user-support-button-help-center',
 	],

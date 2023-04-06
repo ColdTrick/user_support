@@ -6,8 +6,8 @@ $content = elgg_list_entities([
 	'query' => $q,
 	'type' => 'object',
 	'subtype' => [
-		UserSupportHelp::SUBTYPE,
-		UserSupportFAQ::SUBTYPE,
+		\UserSupportHelp::SUBTYPE,
+		\UserSupportFAQ::SUBTYPE,
 	],
 	'limit' => 5,
 	'offset' => 0,

@@ -1,15 +1,14 @@
 <?php
 
 $group = elgg_extract('group', $vars);
-/* @var $contextual_help_object UserSupportHelp */
+/* @var $contextual_help_object \UserSupportHelp */
 $contextual_help_object = elgg_extract('contextual_help_object', $vars);
 $faq = elgg_extract('faq', $vars);
 
 $user = elgg_get_logged_in_user_entity();
 
-$help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes');
+$help_enabled = elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes';
 if (elgg_is_xhr()) {
-	
 	echo elgg_view_form('user_support/help_center/search', [
 		'action' => elgg_generate_url('default:user_support:search'),
 		'class' => 'mbs',
@@ -18,7 +17,7 @@ if (elgg_is_xhr()) {
 
 	// action buttons
 	$buttons = [];
-	if ($user instanceof ElggUser) {
+	if ($user instanceof \ElggUser) {
 		$buttons[] = [
 			'name' => 'ticket:add',
 			'text' => elgg_echo('user_support:help_center:ask'),
@@ -68,7 +67,7 @@ echo elgg_format_element('div', [
 ]);
 
 if (elgg_is_xhr() && $help_enabled) {
-	if ($contextual_help_object instanceof UserSupportHelp) {
+	if ($contextual_help_object instanceof \UserSupportHelp) {
 		$contextual_help = elgg_view_entity($contextual_help_object, [
 			'title' => false,
 			'full_view' => false,
@@ -86,16 +85,17 @@ if (elgg_is_xhr() && $help_enabled) {
 	if (elgg_is_admin_logged_in()) {
 		echo elgg_format_element('script', [], 'require(["user_support/help_center/help"]);');
 		
-		$help_vars = user_support_prepare_help_form_vars([
+		$form = elgg_view_form('user_support/help/edit', [
+			'sticky_enabled' => true,
+		], [
 			'entity' => $contextual_help_object,
-			'url' => elgg_is_xhr() ? elgg_extract('HTTP_REFERER', $_SERVER) : '',
 		]);
-		$form = elgg_view_form('user_support/help/edit', null, $help_vars);
 		
 		$title = elgg_echo('user_support:forms:help:title');
-		if ($contextual_help_object instanceof UserSupportHelp) {
+		if ($contextual_help_object instanceof \UserSupportHelp) {
 			$title = elgg_echo('user_support:forms:help:title:edit');
 		}
+		
 		echo elgg_view_module('info', $title, $form, [
 			'id' => 'user-support-help-edit-form-wrapper',
 			'class' => [
@@ -115,9 +115,10 @@ if (!empty($faq)) {
 	]);
 }
 
-if ($user instanceof ElggUser) {
-	$support_vars = user_support_prepare_ticket_form_vars($vars);
-	$form = elgg_view_form('user_support/support_ticket/edit', [], $support_vars);
+if ($user instanceof \ElggUser) {
+	$form = elgg_view_form('user_support/support_ticket/edit', [
+		'sticky_enabled' => true,
+	]);
 	
 	echo elgg_view_module('info', elgg_echo('user_support:help_center:ask'), $form, [
 		'id' => 'user-support-ticket-edit-form-wrapper',

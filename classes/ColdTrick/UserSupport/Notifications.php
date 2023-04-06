@@ -5,48 +5,50 @@ namespace ColdTrick\UserSupport;
 use Elgg\Notifications\Notification;
 use Elgg\Notifications\SubscriptionNotificationEvent;
 
+/**
+ * Notification event listener
+ */
 class Notifications {
 	
 	/**
 	 * Add users to the subscribers of a comment notification on a support ticket
 	 *
-	 * @param \Elgg\Hook $hook 'get', 'subscriptions'
+	 * @param \Elgg\Event $event 'get', 'subscriptions'
 	 *
-	 * @return void|array
+	 * @return null|array
 	 */
-	public static function getSupportTicketCommentSubscribers(\Elgg\Hook $hook) {
-		
-		$event = $hook->getParam('event');
-		if (!$event instanceof SubscriptionNotificationEvent) {
-			return;
+	public static function getSupportTicketCommentSubscribers(\Elgg\Event $event): ?array {
+		$notification_event = $event->getParam('event');
+		if (!$notification_event instanceof SubscriptionNotificationEvent) {
+			return null;
 		}
 		
-		if ($event->getAction() !== 'create') {
-			return;
+		if ($notification_event->getAction() !== 'create') {
+			return null;
 		}
 		
 		// get object
 		$object = $event->getObject();
 		if (!$object instanceof \ElggComment) {
-			return;
+			return null;
 		}
 		
 		// get actor
 		$actor = $event->getActor();
 		if (!$actor instanceof \ElggUser) {
-			return;
+			return null;
 		}
 		
 		// get the entity the comment was made on
 		$entity = $object->getContainerEntity();
 		if (!$entity instanceof \UserSupportTicket) {
-			return;
+			return null;
 		}
 		
 		// did the user comment or some other admin/staff
 		if ($entity->owner_guid !== $actor->guid) {
 			// admin or staff, this will notify ticket owner
-			return;
+			return null;
 		}
 		
 		// by default notify nobody
@@ -76,42 +78,43 @@ class Notifications {
 	/**
 	 * Prepare the message when a comment is made on a support ticket
 	 *
-	 * @param \Elgg\Hook $hook 'prepare', 'notification:create:object:comment'
+	 * @param \Elgg\Event $event 'prepare', 'notification:create:object:comment'
 	 *
-	 * @return void|Notification
+	 * @return null|Notification
 	 */
-	public static function prepareSupportTicketCommentMessage(\Elgg\Hook $hook) {
-		
-		$event = $hook->getParam('event');
-		if (!$event instanceof SubscriptionNotificationEvent) {
-			return;
+	public static function prepareSupportTicketCommentMessage(\Elgg\Event $event): ?Notification {
+		$notification_event = $event->getParam('event');
+		if (!$notification_event instanceof SubscriptionNotificationEvent) {
+			return null;
 		}
 		
 		if ($event->getAction() !== 'create') {
-			return;
+			return null;
 		}
 		
 		// get object
 		$object = $event->getObject();
 		if (!$object instanceof \ElggComment) {
-			return;
+			return null;
 		}
 		
 		// get actor
 		$actor = $event->getActor();
 		if (!$actor instanceof \ElggUser) {
-			return;
+			return null;
 		}
 		
 		// get the entity the comment was made on
 		$entity = $object->getContainerEntity();
 		if (!$entity instanceof \UserSupportTicket) {
-			return;
+			return null;
 		}
 		
-		$language = $hook->getParam('language');
+		$language = $event->getParam('language');
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value Notification */
+		$return_value = $event->getValue();
+		
 		$return_value->subject = elgg_echo('user_support:notify:admin:updated:subject', [$entity->getDisplayName()], $language);
 		$return_value->summary = elgg_echo('user_support:notify:admin:updated:summary', [$entity->getDisplayName()], $language);
 		$return_value->body = elgg_echo('user_support:notify:admin:updated:message', [

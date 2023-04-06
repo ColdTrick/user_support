@@ -2,15 +2,13 @@
 
 use Elgg\Database\Clauses\OrderByClause;
 
-user_support_staff_gatekeeper();
-
 $q = get_input('q');
 
 $options = [
 	'type' => 'object',
-	'subtype' => UserSupportTicket::SUBTYPE,
+	'subtype' => \UserSupportTicket::SUBTYPE,
 	'metadata_name_value_pairs' => [
-		'status' => UserSupportTicket::OPEN,
+		'status' => \UserSupportTicket::OPEN,
 	],
 	'order_by' => new OrderByClause('e.time_updated', 'desc'),
 	'no_results' => true,
@@ -23,7 +21,7 @@ if (!empty($q)) {
 	$getter = 'elgg_search';
 }
 
-elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
+elgg_register_title_button('add', 'object', \UserSupportTicket::SUBTYPE);
 
 $form_vars = [
 	'method' => 'GET',

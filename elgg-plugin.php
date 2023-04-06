@@ -1,6 +1,6 @@
 <?php
 
-use ColdTrick\UserSupport\Upgrades\SetSupportTicketACLSubtype;
+use ColdTrick\UserSupport\StaffGatekeeper;
 use Elgg\Router\Middleware\Gatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
@@ -45,6 +45,26 @@ return [
 				'searchable' => true,
 			],
 		],
+	],
+	'actions' => [
+		'user_support/help/edit' => [
+			'access' => 'admin',
+		],
+		'user_support/support_staff' => [
+			'access' => 'admin',
+		],
+		'user_support/support_ticket/edit' => [],
+		'user_support/support_ticket/close' => [
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
+		],
+		'user_support/support_ticket/reopen' => [
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
+		],
+		'user_support/faq/edit' => [],
 	],
 	'routes' => [
 		'add:object:faq' => [
@@ -101,14 +121,23 @@ return [
 		'collection:object:support_ticket:all' => [
 			'path' => '/user_support/support_ticket/list',
 			'resource' => 'user_support/support_ticket/list',
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
 		],
 		'collection:object:support_ticket:archive' => [
 			'path' => '/user_support/support_ticket/archive',
 			'resource' => 'user_support/support_ticket/archive',
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
 		],
 		'collection:user:user:support_staff' => [
 			'path' => '/user_support/support_ticket/staff',
 			'resource' => 'user_support/support_ticket/staff',
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
 		],
 		'collection:object:support_ticket:owner' => [
 			'path' => '/user_support/support_ticket/owner/{username}/{status?}',
@@ -134,19 +163,7 @@ return [
 			'resource' => 'user_support/faq/list',
 		],
 	],
-	'actions' => [
-		'user_support/help/edit' => [
-			'access' => 'admin',
-		],
-		'user_support/support_staff' => [
-			'access' => 'admin',
-		],
-		'user_support/support_ticket/edit' => [],
-		'user_support/support_ticket/close' => [],
-		'user_support/support_ticket/reopen' => [],
-		'user_support/faq/edit' => [],
-	],
-	'hooks' => [
+	'events' => [
 		'container_logic_check' => [
 			'object' => [
 				'\ColdTrick\UserSupport\Permissions::faqLogicCheck' => [],
@@ -157,9 +174,25 @@ return [
 				'\ColdTrick\UserSupport\Permissions::faqContainerWriteCheck' => [],
 			],
 		],
+		'create' => [
+			'object' => [
+				'\ColdTrick\UserSupport\Comments::supportTicketStatus' => [],
+			],
+		],
 		'entity:url' => [
 			'object' => [
 				'\ColdTrick\UserSupport\Widgets::widgetURL' => [],
+			],
+		],
+		'form:prepare:fields' => [
+			'user_support/faq/edit' => [
+				\ColdTrick\UserSupport\Forms\PrepareFAQFields::class => [],
+			],
+			'user_support/help/edit' => [
+				\ColdTrick\UserSupport\Forms\PrepareHelpFields::class => [],
+			],
+			'user_support/support_ticket/edit' => [
+				\ColdTrick\UserSupport\Forms\PrepareTicketFields::class => [],
 			],
 		],
 		'get' => [
@@ -174,7 +207,7 @@ return [
 		],
 		'notification_type_subtype' => [
 			'tag_tools' => [
-				'\ColdTrick\UserSupport\TagTools::preventTagNotifications' => [],
+				'\ColdTrick\UserSupport\Plugins\TagTools::preventTagNotifications' => [],
 			],
 		],
 		'permissions_check' => [
@@ -227,8 +260,8 @@ return [
 		],
 		'reshare' => [
 			'object' => [
-				'\ColdTrick\UserSupport\TheWireTools::blockTicketReshare' => [],
-				'\ColdTrick\UserSupport\TheWireTools::blockHelpReshare' => [],
+				'\ColdTrick\UserSupport\Plugins\TheWireTools::blockTicketReshare' => [],
+				'\ColdTrick\UserSupport\Plugins\TheWireTools::blockHelpReshare' => [],
 			],
 		],
 		'setting' => [
@@ -243,8 +276,8 @@ return [
 		],
 		'type_subtypes' => [
 			'quicklinks' => [
-				'\ColdTrick\UserSupport\QuickLinks::blockHelpLink' => [],
-				'\ColdTrick\UserSupport\QuickLinks::blockTicketLink' => [],
+				'\ColdTrick\UserSupport\Plugins\QuickLinks::blockHelpLink' => [],
+				'\ColdTrick\UserSupport\Plugins\QuickLinks::blockTicketLink' => [],
 			],
 		],
 		'validate:acl_membership' => [
@@ -253,16 +286,9 @@ return [
 			],
 		],
 	],
-	'events' => [
-		'create' => [
-			'object' => [
-				'\ColdTrick\UserSupport\Comments::supportTicketStatus' => [],
-			],
-		],
-	],
 	'view_extensions' => [
 		'elgg.css' => [
-			'css/user_support/site.css' => [],
+			'user_support/site.css' => [],
 		],
 		'notifications/settings/records' => [
 			'user_support/notifications/settings' => [],
@@ -281,6 +307,9 @@ return [
 			],
 		],
 	],
+	'upgrades' => [
+		\ColdTrick\UserSupport\Upgrades\MigrateACLOwnership::class,
+	],
 	'widgets' => [
 		'faq' => [
 			'context' => ['groups'],
@@ -292,8 +321,5 @@ return [
 		'support_staff' => [
 			'context' => ['dashboard', 'admin'],
 		],
-	],
-	'upgrades' => [
-		SetSupportTicketACLSubtype::class,
 	],
 ];

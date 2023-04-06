@@ -11,7 +11,7 @@ elgg_push_collection_breadcrumbs('object', 'faq');
 
 $content = elgg_list_entities([
 	'type' => 'object',
-	'subtype' => UserSupportFAQ::SUBTYPE,
+	'subtype' => \UserSupportFAQ::SUBTYPE,
 	'metadata_name_value_pairs' => [
 		[
 			'name' => 'help_context',

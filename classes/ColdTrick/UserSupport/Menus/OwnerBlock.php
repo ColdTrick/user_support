@@ -2,23 +2,29 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the owner_block menu
+ */
 class OwnerBlock {
 	
 	/**
 	 * Add menu items to the owner_block menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:owner_block'
+	 * @param \Elgg\Event $event 'register', 'menu:owner_block'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerGroupFAQ(\Elgg\Hook $hook) {
-		
-		$entity = $hook->getEntityParam();
+	public static function registerGroupFAQ(\Elgg\Event $event): ?MenuItems {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggGroup || !$entity->isToolEnabled('faq')) {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $retur_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'text' => elgg_echo('user_support:menu:faq:group'),

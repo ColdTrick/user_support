@@ -11,7 +11,7 @@ use Elgg\Database\QueryBuilder;
 class CreateSupportTicketEventHandler extends NotificationEventHandler {
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getNotificationSubject(\ElggUser $recipient, string $method): string {
 		return elgg_echo('user_support:notify:admin:create:subject', [
@@ -20,7 +20,7 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getNotificationSummary(\ElggUser $recipient, string $method): string {
 		return elgg_echo('user_support:notify:admin:create:summary', [
@@ -29,7 +29,7 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getNotificationBody(\ElggUser $recipient, string $method): string {
 		$entity = $this->event->getObject();
@@ -43,7 +43,7 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getSubscriptions(): array {
 		// by default notify nobody
@@ -71,7 +71,7 @@ class CreateSupportTicketEventHandler extends NotificationEventHandler {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public static function isConfigurableByUser(): bool {
 		return false;

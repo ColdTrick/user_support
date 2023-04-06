@@ -2,22 +2,28 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the footer menu
+ */
 class Footer {
 	
 	/**
 	 * Add menu items to the footer menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:footer'
+	 * @param \Elgg\Event $event 'register', 'menu:footer'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerFAQ(\Elgg\Hook $hook) {
-		
+	public static function registerFAQ(\Elgg\Event $event): ?MenuItems {
 		if (elgg_get_plugin_setting('add_faq_footer_menu_item', 'user_support') === 'no') {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'icon' => 'question-circle',

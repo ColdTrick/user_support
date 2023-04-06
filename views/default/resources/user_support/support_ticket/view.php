@@ -4,10 +4,10 @@ $guid = (int) elgg_extract('guid', $vars);
 $title_text = '';
 
 // ignore access for support staff
-$flag = user_support_staff_gatekeeper(false) ? ELGG_IGNORE_ACCESS : 0;
+$flag = user_support_is_support_staff() ? ELGG_IGNORE_ACCESS : 0;
 
 $page_data = elgg_call($flag, function() use ($guid, &$title_text) {
-	elgg_entity_gatekeeper($guid, 'object', UserSupportTicket::SUBTYPE);
+	elgg_entity_gatekeeper($guid, 'object', \UserSupportTicket::SUBTYPE);
 	
 	/* @var $entity \UserSupportTicket */
 	$entity = get_entity($guid);

@@ -1,13 +1,13 @@
 <?php
 
-elgg_require_js('user_support/help_center/search');
+elgg_require_js('forms/user_support/help_center/search');
 
 echo elgg_view_field([
 	'#type' => 'fieldset',
 	'align' => 'horizontal',
 	'fields' => [
 		[
-			'#type' => 'text',
+			'#type' => 'search',
 			'name' => 'q',
 			'placeholder' => elgg_echo('user_support:help_center:search'),
 			'class' => 'user-support-help-center-search-input',

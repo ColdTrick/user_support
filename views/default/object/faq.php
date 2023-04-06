@@ -1,7 +1,7 @@
 <?php
 
 $entity = elgg_extract('entity', $vars);
-if (!$entity instanceof UserSupportFAQ) {
+if (!$entity instanceof \UserSupportFAQ) {
 	return;
 }
 
@@ -13,7 +13,7 @@ if ($entity->getContainerEntity() instanceof \ElggSite) {
 
 // entity menu
 if (!$full_view) {
-	// anwser
+	// answer
 	$info = '<div>';
 	$info .= elgg_get_excerpt($entity->description, 150);
 	$info .= elgg_view('output/url', [
@@ -42,6 +42,5 @@ if (!$full_view) {
 		'show_summary' => true,
 	];
 	$params = $params + $vars;
-	
 	echo elgg_view('object/elements/full', $params);
 }

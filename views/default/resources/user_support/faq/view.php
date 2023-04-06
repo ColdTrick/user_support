@@ -2,9 +2,9 @@
 
 // make sure we have the correct entity
 $guid = (int) elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', UserSupportFAQ::SUBTYPE);
+elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE);
 
-/* @var $entity UserSupportFAQ */
+/* @var $entity \UserSupportFAQ */
 $entity = get_entity($guid);
 
 elgg_push_entity_breadcrumbs($entity, false);

@@ -1,6 +1,5 @@
 define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
-	
-	var show_form = function() {
+	function show_form() {
 		var $help_center = $('.user-support-help-center-popup');
 		
 		if ($help_center.find('#user-support-help-search-result-wrapper').not(':visible')) {
@@ -13,7 +12,7 @@ define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 		lightbox.resize();
 	};
 	
-	var reset_form = function() {
+	function reset_form() {
 		var $help_center = $('.user-support-help-center-popup');
 		
 		if ($help_center.find('#user-support-help-search-result-wrapper').is(':visible')) {
@@ -26,7 +25,7 @@ define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 		lightbox.resize();
 	};
 	
-	var submit_form = function(event) {
+	function submit_form(event) {
 		event.preventDefault();
 		
 		var $form = $(this);

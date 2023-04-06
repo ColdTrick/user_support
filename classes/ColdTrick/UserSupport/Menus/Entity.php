@@ -2,27 +2,33 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the entity menu
+ */
 class Entity {
 	
 	/**
 	 * Add menu items to the entity menu of a Ticket
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
+	 * @param \Elgg\Event $event 'register', 'menu:entity'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerTicket(\Elgg\Hook $hook) {
-		
-		$entity = $hook->getEntityParam();
+	public static function registerTicket(\Elgg\Event $event): ?MenuItems {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \UserSupportTicket) {
-			return;
+			return null;
 		}
 		
-		if (!user_support_staff_gatekeeper(false)) {
-			return;
+		if (!user_support_is_support_staff()) {
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		if ($entity->getStatus() === \UserSupportTicket::OPEN) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'status',
@@ -51,18 +57,19 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Help
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
+	 * @param \Elgg\Event $event 'register', 'menu:entity'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerHelp(\Elgg\Hook $hook) {
-		
-		$entity = $hook->getEntityParam();
+	public static function registerHelp(\Elgg\Event $event): ?MenuItems {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \UserSupportHelp) {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		if ($entity->canEdit()) {
 			$return_value[] = \ElggMenuItem::factory([
 				'name' => 'edit',
@@ -80,28 +87,29 @@ class Entity {
 	/**
 	 * Add menu items to the entity menu of a Comment
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
+	 * @param \Elgg\Event $event 'register', 'menu:entity'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function promoteCommentToFAQ(\Elgg\Hook $hook) {
-		
-		$entity = $hook->getEntityParam();
+	public static function promoteCommentToFAQ(\Elgg\Event $event): ?MenuItems {
+		$entity = $event->getEntityParam();
 		if (!$entity instanceof \ElggComment) {
-			return;
+			return null;
 		}
 		
 		$container = $entity->getContainerEntity();
 		if (!$container instanceof \UserSupportTicket) {
-			return;
+			return null;
 		}
 		
 		$site = elgg_get_site_entity();
 		if (!$site->canWriteToContainer(0, 'object', \UserSupportFAQ::SUBTYPE)) {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'promote',
 			'icon' => 'level-up-alt',

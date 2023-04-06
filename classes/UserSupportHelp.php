@@ -2,15 +2,13 @@
 
 /**
  * Helper class for Help objects
- *
- * @package User_Support
  */
-class UserSupportHelp extends ElggObject {
+class UserSupportHelp extends \ElggObject {
 	
 	const SUBTYPE = 'help';
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -21,12 +19,5 @@ class UserSupportHelp extends ElggObject {
 		$this->attributes['access_id'] = ACCESS_PUBLIC;
 		$this->attributes['owner_guid'] = $site->guid;
 		$this->attributes['container_guid'] = $site->guid;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getURL() {
-		return elgg_normalize_url('user_support/help/view/' . $this->guid . '/' . elgg_get_friendly_title($this->getDisplayName()));
 	}
 }

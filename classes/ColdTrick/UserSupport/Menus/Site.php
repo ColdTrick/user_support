@@ -2,22 +2,28 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the site menu
+ */
 class Site {
 	
 	/**
 	 * Add menu items to the site menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:site'
+	 * @param \Elgg\Event $event 'register', 'menu:site'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerFAQ(\Elgg\Hook $hook) {
-		
+	public static function registerFAQ(\Elgg\Event $event): ?MenuItems {
 		if (elgg_get_plugin_setting('add_faq_site_menu_item', 'user_support') === 'no') {
-			return;
+			return null;
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
 			'icon' => 'question-circle',
@@ -31,14 +37,13 @@ class Site {
 	/**
 	 * Add menu items to the site menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:site'
+	 * @param \Elgg\Event $event 'register', 'menu:site'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerHelpCenter(\Elgg\Hook $hook) {
-		
+	public static function registerHelpCenter(\Elgg\Event $event): ?MenuItems {
 		if (elgg_get_plugin_setting('add_help_center_site_menu_item', 'user_support') === 'no') {
-			return;
+			return null;
 		}
 		
 		$options = [
@@ -52,7 +57,9 @@ class Site {
 			$options['link_class'] = 'elgg-lightbox';
 		}
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory($options);
 		
 		return $return_value;

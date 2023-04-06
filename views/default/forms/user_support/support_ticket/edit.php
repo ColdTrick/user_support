@@ -1,7 +1,7 @@
 <?php
 
 $entity = elgg_extract('entity', $vars);
-if ($entity instanceof UserSupportTicket) {
+if ($entity instanceof \UserSupportTicket) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',

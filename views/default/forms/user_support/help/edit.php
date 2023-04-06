@@ -9,8 +9,7 @@ if (empty($help_context)) {
 }
 
 $entity = elgg_extract('entity', $vars);
-if ($entity instanceof UserSupportHelp) {
-	
+if ($entity instanceof \UserSupportHelp) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',

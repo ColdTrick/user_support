@@ -5,7 +5,7 @@ use Elgg\Exceptions\InvalidArgumentException;
 /**
  * The helper class to support tickets
  */
-class UserSupportTicket extends ElggObject {
+class UserSupportTicket extends \ElggObject {
 	
 	const SUBTYPE = 'support_ticket';
 	
@@ -13,7 +13,7 @@ class UserSupportTicket extends ElggObject {
 	const CLOSED = 'closed';
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -25,9 +25,9 @@ class UserSupportTicket extends ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
-	public function getDisplayName() {
+	public function getDisplayName(): string {
 		$title = $this->title;
 		if (empty($title)) {
 			$title = $this->description;
@@ -37,17 +37,17 @@ class UserSupportTicket extends ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function save(): bool {
-		
 		// make sure the ticket has the correct access_id
 		if ($this->access_id === ACCESS_PRIVATE) {
-			$acl = user_support_get_support_ticket_acl($this->owner_guid);
-			if ($acl === false) {
-				throw new InvalidArgumentException("Unable to set correct access level for support ticket");
+			$acl = $this->getAccessCollection();
+			if (!$acl instanceof \ElggAccessCollection) {
+				throw new InvalidArgumentException('Unable to set correct access level for support ticket');
 			}
-			$this->access_id = $acl;
+			
+			$this->access_id = $acl->id;
 		}
 		
 		return parent::save();
@@ -58,14 +58,12 @@ class UserSupportTicket extends ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getStatus() {
-		$result = self::OPEN;
-		
+	public function getStatus(): string {
 		if ($this->status === self::CLOSED) {
-			$result = self::CLOSED;
+			return self::CLOSED;
 		}
 		
-		return $result;
+		return self::OPEN;
 	}
 	
 	/**
@@ -75,7 +73,7 @@ class UserSupportTicket extends ElggObject {
 	 *
 	 * @return bool
 	 */
-	public function setStatus($status) {
+	public function setStatus(string $status): bool {
 		$result = false;
 		
 		switch ($status) {
@@ -94,12 +92,32 @@ class UserSupportTicket extends ElggObject {
 	 *
 	 * @return string
 	 */
-	public function getSupportType() {
+	public function getSupportType(): string {
 		$support_type = strtolower($this->support_type);
 		if (!in_array($support_type, ['bug', 'request', 'question'])) {
 			$support_type = 'question';
 		}
 		
 		return $support_type;
+	}
+	
+	/**
+	 * Get an access collection for this support ticket (created if not already exists)
+	 *
+	 * @return \ElggAccessCollection|null
+	 */
+	protected function getAccessCollection(): ?\ElggAccessCollection {
+		$owner = $this->getOwnerEntity();
+		if (!$owner instanceof \ElggUser) {
+			return null;
+		}
+		
+		$acl = $owner->getOwnedAccessCollection('support_ticket');
+		if ($acl instanceof \ElggAccessCollection) {
+			return $acl;
+		}
+		
+		// create the acl for the user
+		return elgg_create_access_collection('support_ticket', $owner->guid, 'support_ticket');
 	}
 }

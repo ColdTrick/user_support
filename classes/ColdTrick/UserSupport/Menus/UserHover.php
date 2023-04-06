@@ -2,41 +2,47 @@
 
 namespace ColdTrick\UserSupport\Menus;
 
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the user_hover menu
+ */
 class UserHover {
 	
 	/**
 	 * Add menu items to the user_hover menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:user_hover'
+	 * @param \Elgg\Event $event 'register', 'menu:user_hover'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerStaff(\Elgg\Hook $hook) {
-		
+	public static function registerStaff(\Elgg\Event $event): ?MenuItems {
 		$user = elgg_get_logged_in_user_entity();
 		if (empty($user) || !$user->isAdmin()) {
-			return;
+			return null;
 		}
 		
-		$entity = $hook->getEntityParam();
-		if (!$entity instanceof \ElggUser || ($entity->guid === $user->guid)) {
-			return;
+		$entity = $event->getEntityParam();
+		if (!$entity instanceof \ElggUser || $entity->guid === $user->guid) {
+			return null;
 		}
 		
 		if ($entity->isAdmin()) {
 			// admins are always support staff
-			return;
+			return null;
 		}
 		
-		$is_staff = user_support_staff_gatekeeper(false, $entity->guid);
+		$is_staff = user_support_is_support_staff($entity->guid);
 		
-		$return_value = $hook->getValue();
+		/* @var $return_value MenuItems */
+		$return_value = $event->getValue();
+		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'user_support_staff_make',
 			'icon' => 'level-up-alt',
 			'text' => elgg_echo('user_support:menu:user_hover:make_staff'),
 			'href' => elgg_generate_action_url('user_support/support_staff', [
-				'guid' =>  $entity->guid,
+				'guid' => $entity->guid,
 			]),
 			'section' => 'admin',
 			'item_class' => $is_staff ? 'hidden' : '',

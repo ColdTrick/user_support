@@ -2,8 +2,6 @@
 
 use Elgg\Database\Clauses\OrderByClause;
 
-user_support_staff_gatekeeper();
-
 $q = get_input('q');
 
 $options = [
@@ -24,7 +22,7 @@ if (!empty($q)) {
 	$getter = 'elgg_search';
 }
 
-elgg_register_title_button('user_support', 'add', 'object', 'support_ticket');
+elgg_register_title_button('add', 'object', UserSupportTicket::SUBTYPE);
 
 $search = elgg_view_form('user_support/support_ticket/search', [
 	'method' => 'GET',

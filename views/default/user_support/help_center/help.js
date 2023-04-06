@@ -1,6 +1,6 @@
 define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 	
-	var toggle_help_form = function() {
+	function toggle_help_form() {
 		var $help_center = $('.user-support-help-center-popup');
 		
 		if ($help_center.find('#user-support-help-edit-form-wrapper').is(':visible')) {
@@ -14,7 +14,7 @@ define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 		lightbox.resize();
 	};
 	
-	var submit_help_form = function(event) {
+	function submit_help_form(event) {
 		event.preventDefault();
 		
 		var $form = $(this);
@@ -30,7 +30,6 @@ define(['jquery', 'elgg/Ajax', 'elgg/lightbox'], function($, Ajax, lightbox) {
 	
 	// edit link .user-support-help-center-edit-help
 	// add button #user-support-help-center-add-help
-	
 	$(document).on('click', '#user-support-help-center-add-help', toggle_help_form);
 	$(document).on('click', '.user-support-help-center-edit-help', toggle_help_form);
 	$(document).on('click', '#user-support-edit-help-cancel', toggle_help_form);

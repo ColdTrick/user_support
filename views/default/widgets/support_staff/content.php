@@ -1,6 +1,6 @@
 <?php
 
-/* @var $widget ElggWidget */
+/* @var $widget \ElggWidget */
 $widget = elgg_extract('entity', $vars);
 
 $num_display = (int) $widget->num_display;
@@ -10,10 +10,10 @@ if ($num_display < 1) {
 
 $options = [
 	'type' => 'object',
-	'subtype' => UserSupportTicket::SUBTYPE,
+	'subtype' => \UserSupportTicket::SUBTYPE,
 	'limit' => $num_display,
 	'metadata_name_value_pairs' => [
-		'status' => UserSupportTicket::OPEN,
+		'status' => \UserSupportTicket::OPEN,
 	],
 	'pagination' => false,
 	'sort_by' => [

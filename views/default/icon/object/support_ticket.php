@@ -1,14 +1,13 @@
 <?php
 
-
 $entity = elgg_extract('entity', $vars);
-if (!($entity instanceof UserSupportTicket)) {
+if (!$entity instanceof \UserSupportTicket) {
 	return;
 }
 
 $icon_names = [
 	'bug' => 'bug',
-	'request' => 'lightbulb-o',
+	'request' => 'lightbulb',
 	'question' => 'question-circle',
 ];
 

@@ -1,6 +1,6 @@
 <?php
 
-/* @var $plugin ElggPlugin */
+/* @var $plugin \ElggPlugin */
 $plugin = elgg_extract('entity', $vars);
 
 // Help

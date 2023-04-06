@@ -2,6 +2,9 @@
 
 namespace ColdTrick\UserSupport;
 
+/**
+ * Comment event listener
+ */
 class Comments {
 	
 	/**
@@ -11,8 +14,7 @@ class Comments {
 	 *
 	 * @return void
 	 */
-	public static function supportTicketStatus(\Elgg\Event $event) {
-		
+	public static function supportTicketStatus(\Elgg\Event $event): void {
 		$object = $event->getObject();
 		// is it a comment
 		if (!$object instanceof \ElggComment) {
@@ -29,13 +31,13 @@ class Comments {
 			// ticket was closed, using the action, do nothing
 			return;
 		}
+		
 		if ($object->description === elgg_echo('user_support:support_ticket:reopened')) {
 			// ticket was reopend, using the action, do nothing
 			return;
 		}
 		
 		$comment_close = get_input('support_ticket_comment_close');
-		
 		if (!empty($comment_close)) {
 			// comment and close the ticket
 			$entity->setStatus(\UserSupportTicket::CLOSED);

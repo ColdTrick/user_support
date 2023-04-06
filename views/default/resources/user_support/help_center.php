@@ -7,7 +7,7 @@ if (empty($help_context)) {
 }
 
 $contextual_help_object = false;
-if ((elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes') && !empty($help_context)) {
+if (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes' && !empty($help_context)) {
 	$help = elgg_get_entities([
 		'type' => 'object',
 		'subtype' => \UserSupportHelp::SUBTYPE,
@@ -26,7 +26,7 @@ $group = null;
 if (elgg_is_active_plugin('groups')) {
 	$group_guid = (int) elgg_get_plugin_setting('help_group_guid', 'user_support');
 	$group = get_entity($group_guid);
-	if (!$group instanceof ElggGroup) {
+	if (!$group instanceof \ElggGroup) {
 		$group = null;
 	}
 }
@@ -49,12 +49,11 @@ $faq_count = elgg_get_entities($faq_options);
 if ($faq_count) {
 	$faq = elgg_list_entities($faq_options);
 	if ($faq_count > $faq_limit) {
-		$faq .= elgg_format_element('div', ['class' => 'clearfix'], elgg_view('output/url', [
+		$faq .= elgg_format_element('div', ['class' => 'elgg-justify-right'], elgg_view('output/url', [
 			'text' => elgg_echo('user_support:faq:read_more', [($faq_count - $faq_limit)]),
 			'href' => elgg_generate_url('collection:object:faq:context', [
 				'help_context' => $help_context,
 			]),
-			'class' => 'float-alt',
 		]));
 	}
 }
@@ -69,15 +68,14 @@ $help_center = elgg_view('user_support/help_center', [
 
 // check if this is popup or not
 if (elgg_is_xhr()) {
-	
-	$help_enabled = (bool) (elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes');
+	$help_enabled = elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes';
 
 	$menu = '';
 	if (elgg_is_admin_logged_in() && empty($contextual_help_object) && $help_enabled) {
 		$menu = elgg_view('output/url', [
+			'icon' => 'plus',
 			'text' => elgg_echo('user_support:help_center:help'),
 			'href' => false,
-			'icon' => 'plus',
 			'id' => 'user-support-help-center-add-help',
 			'class' => ['elgg-button', 'elgg-button-action'],
 		]);

@@ -4,11 +4,11 @@
  */
 
 $entity = elgg_extract('entity', $vars);
-if (!$entity instanceof UserSupportTicket) {
+if (!$entity instanceof \UserSupportTicket) {
 	return;
 }
 
-if ($entity->getStatus() !== UserSupportTicket::OPEN) {
+if ($entity->getStatus() !== \UserSupportTicket::OPEN) {
 	return;
 }
 
