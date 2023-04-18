@@ -166,7 +166,7 @@ return [
 	'events' => [
 		'container_logic_check' => [
 			'object' => [
-				'\ColdTrick\UserSupport\Permissions::faqLogicCheck' => [],
+				\ColdTrick\UserSupport\GroupToolContainerLogicCheckFAQ::class => [],
 			],
 		],
 		'container_permissions_check' => [

@@ -30,23 +30,6 @@ class Permissions {
 	}
 	
 	/**
-	 * Prevent FAQ from being created in groups which haven't enabled the feature
-	 *
-	 * @param \Elgg\Event $event 'container_logic_check', 'object'
-	 *
-	 * @return null|bool
-	 */
-	public static function faqLogicCheck(\Elgg\Event $event): ?bool {
-		$container = $event->getParam('container');
-		$subtype = $event->getParam('subtype');
-		if (!$container instanceof \ElggGroup || $subtype !== \UserSupportFAQ::SUBTYPE) {
-			return null;
-		}
-		
-		return $container->isToolEnabled('faq');
-	}
-	
-	/**
 	 * Can a user create an FAQ
 	 *
 	 * @param \Elgg\Event $event 'container_permissions_check', 'object'
