@@ -1,12 +1,11 @@
 <?php
 
 $guid = (int) elgg_extract('guid', $vars);
-$title_text = '';
 
 // ignore access for support staff
 $flag = user_support_is_support_staff() ? ELGG_IGNORE_ACCESS : 0;
 
-$page_data = elgg_call($flag, function() use ($guid, &$title_text) {
+echo elgg_call($flag, function() use ($guid) {
 	elgg_entity_gatekeeper($guid, 'object', \UserSupportTicket::SUBTYPE);
 	
 	/* @var $entity \UserSupportTicket */
@@ -21,13 +20,10 @@ $page_data = elgg_call($flag, function() use ($guid, &$title_text) {
 	$content = elgg_view_entity($entity);
 	
 	// build page
-	return elgg_view_layout('default', [
-		'title' => $title_text,
+	return elgg_view_page($title_text, [
 		'content' => $content,
 		'entity' => $entity,
 		'filter' => false,
 	]);
 });
 
-// draw page
-echo elgg_view_page($title_text, $page_data);
