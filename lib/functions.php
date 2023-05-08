@@ -86,7 +86,7 @@ function user_support_get_admin_notify_users(\UserSupportTicket $ticket): array 
 				'name' => 'support_staff',
 				'value' => 0,
 				'operand' => '>=',
-				'as' => 'integer',
+				'type' => ELGG_VALUE_INTEGER,
 			],
 		],
 		'metadata_name_value_pairs_operator' => 'OR',
