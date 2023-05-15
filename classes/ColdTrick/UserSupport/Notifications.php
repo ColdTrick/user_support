@@ -28,13 +28,13 @@ class Notifications {
 		}
 		
 		// get object
-		$object = $event->getObject();
+		$object = $notification_event->getObject();
 		if (!$object instanceof \ElggComment) {
 			return null;
 		}
 		
 		// get actor
-		$actor = $event->getActor();
+		$actor = $notification_event->getActor();
 		if (!$actor instanceof \ElggUser) {
 			return null;
 		}
@@ -88,18 +88,18 @@ class Notifications {
 			return null;
 		}
 		
-		if ($event->getAction() !== 'create') {
+		if ($notification_event->getAction() !== 'create') {
 			return null;
 		}
 		
 		// get object
-		$object = $event->getObject();
+		$object = $notification_event->getObject();
 		if (!$object instanceof \ElggComment) {
 			return null;
 		}
 		
 		// get actor
-		$actor = $event->getActor();
+		$actor = $notification_event->getActor();
 		if (!$actor instanceof \ElggUser) {
 			return null;
 		}
