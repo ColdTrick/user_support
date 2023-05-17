@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v6.0
- * On 2017-11-24 12:34
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:28
  */
 
 return array (
@@ -28,7 +28,6 @@ return array (
   'user_support:staff_gatekeeper' => 'Esta página sólo está disponible para el personal de soporte',
   'user_support:settings:support_tickets:title' => 'Preferencias de los Tickets de Soporte',
   'user_support:settings:support_tickets:help_group' => 'Seleccionar un grupo al que pedir ayuda',
-  'user_support:settings:support_tickets:help_group:none' => 'Sin grupo de soporte',
   'user_support:settings:help:title' => 'Preferencias de la Ayuda Contextual',
   'user_support:settings:help:enabled' => 'Está habilitada la ayuda contextual?',
   'user_support:settings:help_center:title' => 'Preferencias del Centro de Ayuda',
@@ -47,7 +46,6 @@ return array (
   'river:create:object:support_ticket' => '%s posteó un comentario a las %s',
   'user_support:support_ticket:closed' => 'Se ha cerrado tu ticket de soporte',
   'user_support:support_ticket:reopened' => 'Se ha abierto de nuevo tu ticket de soporte',
-  'user_support:support_ticket:promote' => 'Promover al FAQ',
   'user_support:notify:admin:create:message' => '%s ha reportado un nuevo ticket de soporte:
 %s
 
@@ -96,14 +94,8 @@ Sigue el enlace para ver el ticket:
   'widgets:support_staff:description' => 'Muestra una lista de tickets abiertos',
   'user_support:action:help:edit:error:save' => 'Hubo un error desconocido al guardar la ayuda contextual',
   'user_support:action:help:edit:success' => 'La ayuda contextual se guardó correctamente',
-  'user_support:action:help:delete:error:delete' => 'Hubo un error desconocido al eliminar la ayuda contextual',
-  'user_support:action:help:delete:success' => 'Se ha borrado la ayuda contextual correctamente',
   'user_support:action:ticket:edit:error:save' => 'Hubo un error desconocido al guardar el ticket de soporte',
   'user_support:action:ticket:edit:success' => 'El ticket de soporte se guardó correctamente',
-  'user_support:action:ticket:delete:error:delete' => 'Hubo un error desconocido al eliminar el ticket de soporte',
-  'user_support:action:ticket:delete:success' => 'Ticket de soporte borrado correctamente',
-  'user_support:action:faq:delete:error:delete' => 'Hubo un error desconocido al borrar el FAQ, inténtalo de nuevo',
-  'user_support:action:faq:delete:success' => 'El FAQ se ha borrado correctamente',
   'user_support:action:faq:edit:success' => 'FAQ creado/editado correctamente',
   'user_support:action:ticket:close:error:disable' => 'Hubo un error desconocido al cerrar el Ticket de Soporte',
   'user_support:action:ticket:close:success' => 'Ticket de Soporte cerrado correctamente',

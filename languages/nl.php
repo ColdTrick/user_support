@@ -1,10 +1,12 @@
 <?php
 /**
- * This file was created by Translation Editor v11.0
- * On 2022-10-13 09:52
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:27
  */
 
 return array (
+  'user_support:upgrade:2023040601:title' => 'Migreer Support Ticket ACLs',
+  'user_support:upgrade:2023040601:description' => 'Maak het mogelijk dat gebruikers kunnen kijken naar hun support tickets.',
   'user_support:menu:support_tickets:staff' => 'Support medewerkers',
   'user_support:tickets:staff:title' => 'Support medewerkers',
   'user_support:tickets:staff:no_results' => 'Er zijn geen gebruikers toegewezen als support medewerkers. Site beheerders zijn altijd support medewerkers.',
@@ -21,8 +23,6 @@ return array (
   'user_support:help_center:search' => 'Zoek in het Helpcenter en de FAQ',
   'user_support:faq:sidebar:filter' => 'Filter FAQ op tag',
   'user_support:help_context:help' => 'Selecteer een help context waarop deze FAQ van toepassing is, indien geselecteerd zal deze FAQ in het Help Center worden getoond op deze pagina.',
-  'user_support:last_comment' => 'Laatste reactie',
-  'user_support:support_ticket:by_line:last_comment' => '%s door %s',
   'user_support:forms:help:title:edit' => 'Bewerk Contextuele Help',
   'user_support:forms:help:no_context' => 'Het systeem was niet in staan een help context te detecteren voor deze pagina, het is niet mogelijk hier een help pagina aan te maken',
   'user_support:settings:help_center:float_button_offset:help' => 'Offset in pixels',
@@ -48,7 +48,6 @@ Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
   'user_support:staff_gatekeeper' => 'Deze pagina is alleen toegankelijk voor support medewerkers',
   'user_support:settings:support_tickets:title' => 'Support Tickets instellingen',
   'user_support:settings:support_tickets:help_group' => 'Selecteer een groep waar gebruikers vragen kunnen stellen',
-  'user_support:settings:support_tickets:help_group:none' => 'Geen support groep',
   'user_support:settings:help:title' => 'Contextuele help instellingen',
   'user_support:settings:help:enabled' => 'Contextuele help inschakelen?',
   'user_support:settings:help_center:title' => 'Help Center instellingen',
@@ -64,7 +63,6 @@ Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
   'user_support:settings:faq:add_faq_site_menu_item' => 'Voeg een site menu items toe voor de FAQ',
   'user_support:settings:faq:add_faq_footer_menu_item' => 'Voeg een footer menu item toe voor de FAQ',
   'river:create:object:support_ticket' => '%s reageerde op %s',
-  'user_support:support_ticket:promote' => 'Maak FAQ',
   'user_support:menu:faq:group' => 'Groep FAQ',
   'user_support:faq:create:title' => 'Maak een FAQ item',
   'user_support:tickets:owner:title' => '%s Support Tickets',
@@ -134,14 +132,8 @@ Klik op de volgende link om het ticket te bekijken:
   'user_support:faq:not_found' => 'Geen FAQ items beschikbaar',
   'user_support:action:help:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van de help pagina',
   'user_support:action:help:edit:success' => 'De help pagina is succesvol opgeslagen',
-  'user_support:action:help:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van de help pagina',
-  'user_support:action:help:delete:success' => 'De help pagina is succesvol verwijderd',
   'user_support:action:ticket:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van het support ticket',
   'user_support:action:ticket:edit:success' => 'Het support ticket is succesvol opgeslagen',
-  'user_support:action:ticket:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van het support ticket',
-  'user_support:action:ticket:delete:success' => 'Het support ticket is succesvol verwijderd',
-  'user_support:action:faq:delete:error:delete' => 'Een onbekende fout is opgetreden tijdens het verwijderen van het FAQ',
-  'user_support:action:faq:delete:success' => 'Het FAQ item is succesvol verwijderd',
   'user_support:action:faq:edit:success' => 'Het FAQ item is succesvol opgeslagen',
   'user_support:action:ticket:close:error:disable' => 'Een onbekende fout is opgetreden tijdens het sluiten van de Support Tickets',
   'user_support:action:ticket:close:success' => 'De Support Tickets zijn succesvol gesloten',

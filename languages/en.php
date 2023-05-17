@@ -37,13 +37,9 @@ return array(
 
 	'user_support:staff_gatekeeper' => "This page is only available for support staff",
 	
-	'user_support:last_comment' => "Latest comment",
-	'user_support:support_ticket:by_line:last_comment' => "%s by %s",
-	
 	// settings
 	'user_support:settings:support_tickets:title' => "Support Tickets Settings",
 	'user_support:settings:support_tickets:help_group' => "Select a group for users to ask for help",
-	'user_support:settings:support_tickets:help_group:none' => "No support group",
 	
 	'user_support:settings:help:title' => "Contextual Help Settings",
 	'user_support:settings:help:enabled' => "Is contextual help enabled?",
@@ -75,8 +71,7 @@ return array(
 	'river:create:object:support_ticket' => "%s posted a comment on %s",
 	'user_support:support_ticket:closed' => "Your Support Ticket has been closed",
 	'user_support:support_ticket:reopened' => "Your Support Ticket has been reopened",
-	'user_support:support_ticket:promote' => "Promote to FAQ",
-
+	
 	'user_support:notify:user:create:message' => "Thank you for reporting a new Support Ticket. We will try to help you as soon as possible.
 
 To view the Ticket click on this link:
@@ -188,22 +183,10 @@ To view the Ticket click on this link:
 	'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",
 	'user_support:action:help:edit:success' => "The contextual help was saved successfully",
 	
-	// help - delete
-	'user_support:action:help:delete:error:delete' => "An unknown error occured while deleting the contextual help",
-	'user_support:action:help:delete:success' => "The contextual help was delete successfully",
-
 	// ticket - edit
 	'user_support:action:ticket:edit:error:save' => "An unknown error occured while saving the support ticket",
 	'user_support:action:ticket:edit:success' => "The support ticket was saved successfully",
 
-	// ticket - delete
-	'user_support:action:ticket:delete:error:delete' => "An unknown error occured while deleting the support ticket",
-	'user_support:action:ticket:delete:success' => "Support ticket successfully deleted",
-	
-	// faq - delete
-	'user_support:action:faq:delete:error:delete' => "An unknown error occured while deleting the FAQ, please try again",
-	'user_support:action:faq:delete:success' => "The FAQ was deleted successfully",
-	
 	// faq - edit
 	'user_support:action:faq:edit:error:save' => "An unknown error occured while saving the FAQ",
 	'user_support:action:faq:edit:success' => "The FAQ was created/edited successfully",
