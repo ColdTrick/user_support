@@ -89,6 +89,7 @@ if (elgg_is_xhr() && $help_enabled) {
 			'sticky_enabled' => true,
 		], [
 			'entity' => $contextual_help_object,
+			'help_url' => elgg_extract('help_url', $vars),
 		]);
 		
 		$title = elgg_echo('user_support:forms:help:title');
@@ -118,6 +119,8 @@ if (!empty($faq)) {
 if ($user instanceof \ElggUser) {
 	$form = elgg_view_form('user_support/support_ticket/edit', [
 		'sticky_enabled' => true,
+	], [
+		'help_url' => elgg_extract('help_url', $vars),
 	]);
 	
 	echo elgg_view_module('info', elgg_echo('user_support:help_center:ask'), $form, [

@@ -20,7 +20,7 @@ class PrepareHelpFields {
 		$values = [
 			'description' => '',
 			'tags' => [],
-			'help_context' => user_support_get_help_context(elgg_extract('url', $vars, '')),
+			'help_context' => user_support_get_help_context(elgg_extract('help_url', $vars, '')),
 		];
 		
 		// edit
