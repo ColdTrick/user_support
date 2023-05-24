@@ -30,7 +30,7 @@ class UserSupportTicket extends \ElggObject {
 	public function getDisplayName(): string {
 		$title = $this->title;
 		if (empty($title)) {
-			$title = $this->description;
+			$title = (string) $this->description;
 		}
 		
 		return elgg_get_excerpt($title, 50);

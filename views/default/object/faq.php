@@ -15,7 +15,7 @@ if ($entity->getContainerEntity() instanceof \ElggSite) {
 if (!$full_view) {
 	// answer
 	$info = '<div>';
-	$info .= elgg_get_excerpt($entity->description, 150);
+	$info .= elgg_get_excerpt((string) $entity->description, 150);
 	$info .= elgg_view('output/url', [
 		'href' => $entity->getURL(),
 		'text' => elgg_echo('user_support:read_more'),
