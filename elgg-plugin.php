@@ -267,6 +267,7 @@ return [
 		'seeds' => [
 			'database' => [
 				'\ColdTrick\UserSupport\Seeder\FAQs::register' => [],
+				'\ColdTrick\UserSupport\Seeder\Helps::register' => [],
 				'\ColdTrick\UserSupport\Seeder\SupportTickets::register' => [],
 			],
 		],
