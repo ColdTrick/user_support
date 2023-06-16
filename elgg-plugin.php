@@ -264,6 +264,11 @@ return [
 				'\ColdTrick\UserSupport\Plugins\TheWireTools::blockHelpReshare' => [],
 			],
 		],
+		'seeds' => [
+			'database' => [
+				'\ColdTrick\UserSupport\Seeder\SupportTickets::register' => [],
+			],
+		],
 		'setting' => [
 			'plugin' => [
 				'\ColdTrick\UserSupport\PluginSettings::saveGroup' => [],
