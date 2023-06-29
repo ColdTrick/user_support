@@ -4,6 +4,11 @@ use Elgg\Exceptions\InvalidArgumentException;
 
 /**
  * The helper class to support tickets
+ *
+ * @property string $help_context help context where this ticket was logged
+ * @property string $help_url     URL where the ticket was logged
+ * @property string $status       status of the ticket (open|closed)
+ * @property string $support_type type of the ticket
  */
 class UserSupportTicket extends \ElggObject {
 	

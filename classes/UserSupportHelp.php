@@ -2,6 +2,8 @@
 
 /**
  * Helper class for Help objects
+ *
+ * @property string $help_context help context to show the help on
  */
 class UserSupportHelp extends \ElggObject {
 	

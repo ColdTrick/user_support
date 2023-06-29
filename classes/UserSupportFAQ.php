@@ -2,6 +2,9 @@
 
 /**
  * The helper class for FAQ objects
+ *
+ * @property string $allow_comments allow comments on this FAQ (yes|no)
+ * @property string $help_context   help context to show the FAQ on
  */
 class UserSupportFAQ extends \ElggObject {
 	
