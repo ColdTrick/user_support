@@ -14,7 +14,7 @@ echo elgg_view_field([
 		],
 		[
 			'#type' => 'reset',
-			'value' => elgg_echo('reset'),
+			'text' => elgg_echo('reset'),
 			'class' => [
 				'elgg-button-cancel',
 				'hidden',
@@ -22,7 +22,7 @@ echo elgg_view_field([
 		],
 		[
 			'#type' => 'submit',
-			'value' => elgg_echo('search'),
+			'text' => elgg_echo('search'),
 			'class' => 'hidden',
 		],
 	],

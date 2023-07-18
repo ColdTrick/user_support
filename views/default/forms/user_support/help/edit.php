@@ -45,12 +45,12 @@ $footer = elgg_view_field([
 	'fields' => [
 		[
 			'#type' => 'submit',
-			'value' => elgg_echo('save'),
+			'text' => elgg_echo('save'),
 		],
 		[
 			'#type' => 'reset',
 			'id' => 'user-support-edit-help-cancel',
-			'value' => elgg_echo('cancel'),
+			'text' => elgg_echo('cancel'),
 		],
 	],
 ]);

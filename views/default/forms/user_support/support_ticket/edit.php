@@ -57,13 +57,13 @@ if (!empty($help_url)) {
 $footer_fields = [];
 $footer_fields[] = [
 	'#type' => 'submit',
-	'value' => elgg_echo('save'),
+	'text' => elgg_echo('save'),
 ];
 if (elgg_is_xhr()) {
 	$footer_fields[] = [
 		'#type' => 'button',
 		'id' => 'user-support-edit-ticket-cancel',
-		'value' => elgg_echo('cancel'),
+		'text' => elgg_echo('cancel'),
 		'class' => [
 			'elgg-button-cancel',
 		],
