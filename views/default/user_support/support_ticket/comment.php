@@ -20,7 +20,7 @@ echo elgg_view_field([
 ]);
 
 echo elgg_view('input/submit', [
-	'value' => elgg_echo('user_support:comment_close'),
+	'text' => elgg_echo('user_support:comment_close'),
 	'id' => 'user-support-ticket-comment-close',
 	'class' => 'elgg-button-submit mhs hidden',
 ]);
