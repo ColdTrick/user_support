@@ -7,7 +7,7 @@ elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE, true);
 $entity = get_entity($guid);
 
 // check for group container
-elgg_push_entity_breadcrumbs($entity, true);
+elgg_push_entity_breadcrumbs($entity);
 
 // build page elements
 $form = elgg_view_form('user_support/faq/edit', [

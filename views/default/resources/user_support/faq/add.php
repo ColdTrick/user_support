@@ -14,11 +14,11 @@ if (!($page_owner instanceof \ElggSite || $page_owner instanceof \ElggGroup)) {
 	throw new BadRequestException();
 }
 
-if (!$page_owner->canWriteToContainer(0, 'object', UserSupportFAQ::SUBTYPE)) {
+if (!$page_owner->canWriteToContainer(0, 'object', \UserSupportFAQ::SUBTYPE)) {
 	throw new EntityPermissionsException();
 }
 
-elgg_push_collection_breadcrumbs('object', 'faq');
+elgg_push_collection_breadcrumbs('object', \UserSupportFAQ::SUBTYPE);
 
 // allow promotion of comment on UserSupportTicket
 $comment_guid = false;

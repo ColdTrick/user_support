@@ -17,7 +17,7 @@ if (!$page_owner->canEdit()) {
 	throw new EntityPermissionsException();
 }
 
-elgg_push_collection_breadcrumbs('object', 'support_ticket', $page_owner);
+elgg_push_collection_breadcrumbs('object', \UserSupportTicket::SUBTYPE, $page_owner);
 
 // page elements
 $form = elgg_view_form('user_support/support_ticket/edit', [

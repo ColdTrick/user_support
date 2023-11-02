@@ -7,7 +7,7 @@ elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE);
 /* @var $entity \UserSupportFAQ */
 $entity = get_entity($guid);
 
-elgg_push_entity_breadcrumbs($entity, false);
+elgg_push_entity_breadcrumbs($entity);
 
 $body = elgg_view_entity($entity, [
 	'show_responses' => ($entity->allow_comments === 'yes'),

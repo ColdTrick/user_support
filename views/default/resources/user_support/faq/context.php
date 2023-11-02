@@ -7,7 +7,7 @@ if (empty($help_context)) {
 	throw new BadRequestException();
 }
 
-elgg_push_collection_breadcrumbs('object', 'faq');
+elgg_push_collection_breadcrumbs('object', \UserSupportFAQ::SUBTYPE);
 
 $content = elgg_list_entities([
 	'type' => 'object',
