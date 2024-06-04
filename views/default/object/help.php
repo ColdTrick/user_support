@@ -10,6 +10,5 @@ $params = [
 	'content' => elgg_view('output/longtext', ['value' => $entity->description]),
 	'subtitle' => false,
 ];
-$params = array_merge($params, $vars);
-
+$params = $params + $vars;
 echo elgg_view('object/elements/summary', $params);

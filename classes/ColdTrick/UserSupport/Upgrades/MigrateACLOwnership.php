@@ -2,6 +2,7 @@
 
 namespace ColdTrick\UserSupport\Upgrades;
 
+use Elgg\Database\AccessCollections;
 use Elgg\Database\Select;
 use Elgg\Upgrade\Result;
 
@@ -34,7 +35,7 @@ class MigrateACLOwnership extends \Elgg\Upgrade\AsynchronousUpgrade {
 	public function countItems(): int {
 		$plugin = elgg_get_plugin_from_id('user_support');
 		
-		$select = Select::fromTable('access_collections');
+		$select = Select::fromTable(AccessCollections::TABLE_NAME);
 		$select->select('count(*) AS total')
 			->where($select->compare('owner_guid', '=', $plugin->guid, ELGG_VALUE_GUID))
 			->andWhere($select->compare('subtype', '=', 'support_ticket', ELGG_VALUE_STRING));
@@ -53,7 +54,7 @@ class MigrateACLOwnership extends \Elgg\Upgrade\AsynchronousUpgrade {
 	public function run(Result $result, $offset): Result {
 		$plugin = elgg_get_plugin_from_id('user_support');
 		
-		$select = Select::fromTable('access_collections');
+		$select = Select::fromTable(AccessCollections::TABLE_NAME);
 		$select->select('*')
 			->where($select->compare('owner_guid', '=', $plugin->guid, ELGG_VALUE_GUID))
 			->andWhere($select->compare('subtype', '=', 'support_ticket', ELGG_VALUE_STRING))

@@ -42,7 +42,7 @@
 	}
 	
 	.user-support-button-help-center.elgg-state-active .elgg-icon {
-		color: #D63006;
+		color: $(button-delete-background-color-hover);
 	}
 }
 

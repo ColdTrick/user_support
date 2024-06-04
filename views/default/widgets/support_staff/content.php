@@ -22,7 +22,7 @@ $options = [
 		'signed' => true,
 	],
 	'no_results' => true,
-	'widget_more' => elgg_view_url(elgg_generate_url('collection:object:support_ticket:all'), elgg_echo('user_support:read_more')),
+	'widget_more' => elgg_view_url($widget->getURL(), elgg_echo('user_support:read_more')),
 ];
 
 echo elgg_list_entities($options);

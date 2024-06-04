@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('forms/user_support/help_center/search');
+elgg_import_esm('forms/user_support/help_center/search');
 
 echo elgg_view_field([
 	'#type' => 'fieldset',

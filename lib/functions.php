@@ -11,9 +11,9 @@ use Elgg\Exceptions\Http\GatekeeperException;
  *
  * @param string $url the (optional) url to get the context for
  *
- * @return false|string
+ * @return null|string
  */
-function user_support_get_help_context(string $url = '') {
+function user_support_get_help_context(string $url = ''): ?string {
 	if (empty($url)) {
 		if (elgg_is_xhr()) {
 			$referer = _elgg_services()->request->headers->get('referer');
@@ -26,7 +26,7 @@ function user_support_get_help_context(string $url = '') {
 	}
 	
 	if (empty($url)) {
-		return false;
+		return null;
 	}
 	
 	$path = rtrim(parse_url($url, PHP_URL_PATH), '/');
@@ -112,7 +112,7 @@ function user_support_get_admin_notify_users(\UserSupportTicket $ticket): array 
 /**
  * Check if a given user GUID is part of the Support staff
  *
- * @param int $user_guid the user GUID to check (default: logged in user)
+ * @param int $user_guid the user GUID to check (default: logged-in user)
  *
  * @return bool
  */

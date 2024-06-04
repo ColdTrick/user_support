@@ -2,6 +2,8 @@
 
 namespace ColdTrick\UserSupport\Database;
 
+use Elgg\Database\AccessCollections;
+
 /**
  * Change the database access query
  */
@@ -36,7 +38,7 @@ class Access {
 		$table_alias = $event->getParam('table_alias');
 		$table_alias = $table_alias ? "{$table_alias}." : '';
 		
-		$sub = $qb->subquery('access_collections');
+		$sub = $qb->subquery(AccessCollections::TABLE_NAME);
 		$sub->select('id')
 			->where($qb->compare('name', '=', 'support_ticket', ELGG_VALUE_STRING))
 			->andWhere($qb->compare('subtype', '=', 'support_ticket', ELGG_VALUE_STRING));

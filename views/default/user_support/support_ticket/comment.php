@@ -25,16 +25,16 @@ echo elgg_view('input/submit', [
 	'class' => 'elgg-button-submit mhs hidden',
 ]);
 ?>
-<script type='text/javascript'>
-	require(['jquery'], function($) {
-		var $button = $('#user-support-ticket-comment-close');
-		var $form = $button.closest('.elgg-form-comment-save');
+<script type='module'>
+	import 'jquery';
 	
-		$form.find('.elgg-form-footer').append($button);
-		$button.removeClass('hidden');
+	var $button = $('#user-support-ticket-comment-close');
+	var $form = $button.closest('.elgg-form-comment-save');
 
-		$button.on('click', function() {
-			$form.find('input[name="support_ticket_comment_close"]').prop('disabled', false);
-		});
+	$form.find('.elgg-form-footer').append($button);
+	$button.removeClass('hidden');
+
+	$button.on('click', function() {
+		$form.find('input[name="support_ticket_comment_close"]').prop('disabled', false);
 	});
 </script>

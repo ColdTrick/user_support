@@ -4,11 +4,12 @@ namespace ColdTrick\UserSupport;
 
 use Elgg\Exceptions\Http\GatekeeperException;
 use Elgg\Request;
+use Elgg\Router\Middleware\Gatekeeper;
 
 /**
  * Allow access to resources for Support staff
  */
-class StaffGatekeeper extends \Elgg\Router\Middleware\Gatekeeper {
+class StaffGatekeeper extends Gatekeeper {
 	
 	/**
 	 * {@inheritdoc}

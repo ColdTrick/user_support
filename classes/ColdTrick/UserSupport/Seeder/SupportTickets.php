@@ -15,7 +15,7 @@ class SupportTickets extends Seed {
 	protected $support_types = ['bug', 'request', 'question'];
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function seed() {
 		$this->advance($this->getCount());
@@ -56,6 +56,8 @@ class SupportTickets extends Seed {
 			if ($this->faker()->boolean(25)) {
 				$entity->setStatus(\UserSupportTicket::CLOSED);
 			}
+			
+			$this->advance();
 		}
 		
 		if ($logged_in) {
@@ -66,7 +68,7 @@ class SupportTickets extends Seed {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function unseed() {
 		/* @var $entities \ElggBatch */
@@ -94,14 +96,14 @@ class SupportTickets extends Seed {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public static function getType(): string {
 		return \UserSupportTicket::SUBTYPE;
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getCountOptions(): array {
 		return [

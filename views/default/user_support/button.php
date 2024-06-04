@@ -11,7 +11,7 @@ if ($show_floating_button === 'no') {
 
 $help_context = user_support_get_help_context();
 $content_count = 0;
-if ($help_context !== false) {
+if (isset($help_context)) {
 	$subtypes = [
 		\UserSupportFAQ::SUBTYPE,
 	];

@@ -10,21 +10,21 @@ use Elgg\Groups\ToolContainerLogicCheck;
 class GroupToolContainerLogicCheckFAQ extends ToolContainerLogicCheck {
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getContentType(): string {
 		return 'object';
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getContentSubtype(): string {
 		return \UserSupportFAQ::SUBTYPE;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getToolName(): string {
 		return 'faq';

@@ -1,13 +1,9 @@
 <?php
 
-// get the page owner
-$group_guid = (int) elgg_extract('guid', $vars);
-
-elgg_entity_gatekeeper($group_guid, 'group');
-
-elgg_group_tool_gatekeeper('faq', $group_guid);
-
+/* @var $page_owner \ElggGroup */
 $page_owner = elgg_get_page_owner_entity();
+
+elgg_group_tool_gatekeeper('faq', $page_owner->guid);
 
 // build breadcrumb
 elgg_push_collection_breadcrumbs('object', \UserSupportFAQ::SUBTYPE, $page_owner);

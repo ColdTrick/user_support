@@ -1,6 +1,5 @@
 <?php
 
-use Elgg\Database\Clauses\OrderByClause;
 use Elgg\Exceptions\Http\EntityNotFoundException;
 use Elgg\Exceptions\Http\EntityPermissionsException;
 
@@ -27,7 +26,10 @@ $options = [
 	'metadata_name_value_pairs' => [
 		'status' => $status,
 	],
-	'order_by' => new OrderByClause('e.time_updated', 'desc'),
+	'sort_by' => [
+		'property' => 'time_updated',
+		'direction' => 'DESC',
+	],
 	'no_results' => true,
 ];
 

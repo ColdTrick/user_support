@@ -1,7 +1,5 @@
 <?php
 
-use Elgg\Database\Clauses\OrderByClause;
-
 $q = get_input('q');
 
 $options = [
@@ -11,7 +9,10 @@ $options = [
 	'metadata_name_value_pairs' => [
 		'status' => \UserSupportTicket::CLOSED,
 	],
-	'order_by' => new OrderByClause('e.time_updated', 'desc'),
+	'sort_by' => [
+		'property' => 'time_updated',
+		'direction' => 'DESC',
+	],
 	'no_results' => true,
 ];
 

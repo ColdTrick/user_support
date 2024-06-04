@@ -13,7 +13,7 @@ class FAQs extends Seed {
 	use ContextProvider;
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function seed() {
 		$this->advance($this->getCount());
@@ -46,11 +46,12 @@ class FAQs extends Seed {
 			}
 			
 			$this->createLikes($entity);
+			$this->advance();
 		}
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function unseed() {
 		/* @var $entities \ElggBatch */
@@ -78,14 +79,14 @@ class FAQs extends Seed {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public static function getType(): string {
 		return \UserSupportFAQ::SUBTYPE;
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getCountOptions(): array {
 		return [

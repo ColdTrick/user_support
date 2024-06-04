@@ -13,7 +13,7 @@ class Helps extends Seed {
 	use ContextProvider;
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function seed() {
 		$this->advance($this->getCount());
@@ -42,11 +42,12 @@ class Helps extends Seed {
 			
 			// undo some seeded data
 			unset($entity->title);
+			$this->advance();
 		}
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function unseed() {
 		/* @var $entities \ElggBatch */
@@ -74,14 +75,14 @@ class Helps extends Seed {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public static function getType(): string {
 		return \UserSupportHelp::SUBTYPE;
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function getCountOptions(): array {
 		return [

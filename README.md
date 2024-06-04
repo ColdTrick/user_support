@@ -1,7 +1,7 @@
 User Support
 ============
 
-![Elgg 5.1](https://img.shields.io/badge/Elgg-5.1-green.svg)
+![Elgg 6.0](https://img.shields.io/badge/Elgg-6.0-green.svg)
 ![Lint Checks](https://github.com/ColdTrick/user_support/actions/workflows/lint.yml/badge.svg?event=push)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/user_support/v/stable.svg)](https://packagist.org/packages/coldtrick/user_support)
 [![License](https://poser.pugx.org/coldtrick/user_support/license.svg)](https://packagist.org/packages/coldtrick/user_support)

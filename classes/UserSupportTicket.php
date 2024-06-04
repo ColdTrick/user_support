@@ -79,17 +79,15 @@ class UserSupportTicket extends \ElggObject {
 	 * @return bool
 	 */
 	public function setStatus(string $status): bool {
-		$result = false;
-		
 		switch ($status) {
 			case self::OPEN:
 			case self::CLOSED:
 				$this->status = $status;
-				$result = true;
-				break;
+				
+				return true;
 		}
 		
-		return $result;
+		return false;
 	}
 	
 	/**

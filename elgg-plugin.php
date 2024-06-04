@@ -2,6 +2,7 @@
 
 use ColdTrick\UserSupport\StaffGatekeeper;
 use Elgg\Router\Middleware\Gatekeeper;
+use Elgg\Router\Middleware\GroupPageOwnerGatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
@@ -88,6 +89,9 @@ return [
 		'collection:object:faq:group' => [
 			'path' => '/user_support/faq/group/{guid}',
 			'resource' => 'user_support/faq/group',
+			'middleware' => [
+				GroupPageOwnerGatekeeper::class,
+			],
 		],
 		'collection:object:faq:context' => [
 			'path' => '/user_support/faq/context',

@@ -83,7 +83,8 @@ if (elgg_is_xhr() && $help_enabled) {
 	}
 	
 	if (elgg_is_admin_logged_in()) {
-		echo elgg_format_element('script', [], 'require(["user_support/help_center/help"]);');
+		elgg_import_esm('user_support/help_center/help');
+//		echo elgg_format_element('script', [], 'require(["user_support/help_center/help"]);');
 		
 		$form = elgg_view_form('user_support/help/edit', [
 			'sticky_enabled' => true,

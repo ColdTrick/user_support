@@ -58,7 +58,7 @@ if (!empty($filter) || !empty($faq_query)) {
 		
 		$menu_items[] = [
 			'name' => $filter_tag,
-			'icon' => 'checkmark',
+			'icon' => 'check',
 			'text' => $filter_tag,
 			'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 		];
@@ -75,8 +75,8 @@ if (($guids === null || (count($guids) > 1)) && count($filter) < 3) {
 	];
 	
 	if (!empty($filter)) {
-		$tag_options['wheres'][] = function (QueryBuilder $qb) use ($filter) {
-			return $qb->compare('msv.string', 'NOT IN', $filter, ELGG_VALUE_STRING);
+		$tag_options['wheres'][] = function (QueryBuilder $qb, $main_alias) use ($filter) {
+			return $qb->compare("{$main_alias}.value", 'NOT IN', $filter, ELGG_VALUE_STRING);
 		};
 	}
 	
@@ -96,7 +96,6 @@ if (($guids === null || (count($guids) > 1)) && count($filter) < 3) {
 			
 			$menu_items[] = [
 				'name' => $tag_text,
-				'icon' => 'checkmark',
 				'text' => $tag_text,
 				'href' => elgg_generate_url('collection:object:faq:all', $tag_query_params),
 			];
