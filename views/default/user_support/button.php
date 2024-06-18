@@ -49,6 +49,9 @@ if ($content_count > 0) {
 
 if (elgg_get_plugin_setting('show_as_popup', 'user_support') === 'yes') {
 	$link_options['class'][] = 'elgg-lightbox';
+	$link_options['data-colorbox-opts'] = json_encode([
+		'trapFocus' => false,
+	]);
 }
 
 // position settings

@@ -55,6 +55,9 @@ class Site {
 		
 		if (elgg_get_plugin_setting('show_as_popup', 'user_support') === 'yes') {
 			$options['link_class'] = 'elgg-lightbox';
+			$options['data-colorbox-opts'] = json_encode([
+				'trapFocus' => false,
+			]);
 		}
 		
 		/* @var $return_value MenuItems */
