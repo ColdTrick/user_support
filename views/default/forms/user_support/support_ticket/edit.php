@@ -21,6 +21,7 @@ echo elgg_view_field([
 	'name' => 'description',
 	'value' => elgg_extract('description', $vars),
 	'required' => true,
+	'editor_type' => 'simple',
 ]);
 
 echo elgg_view_field([
