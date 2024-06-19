@@ -176,23 +176,23 @@ To view the Ticket click on this link:
 	
 	// actions
 	// help - edit
-	'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",
+	'user_support:action:help:edit:error:save' => "An unknown error occurred while saving the contextual help",
 	'user_support:action:help:edit:success' => "The contextual help was saved successfully",
 	
 	// ticket - edit
-	'user_support:action:ticket:edit:error:save' => "An unknown error occured while saving the support ticket",
+	'user_support:action:ticket:edit:error:save' => "An unknown error occurred while saving the support ticket",
 	'user_support:action:ticket:edit:success' => "The support ticket was saved successfully",
 
 	// faq - edit
-	'user_support:action:faq:edit:error:save' => "An unknown error occured while saving the FAQ",
+	'user_support:action:faq:edit:error:save' => "An unknown error occurred while saving the FAQ",
 	'user_support:action:faq:edit:success' => "The FAQ was created/edited successfully",
 	
 	// ticket = close
-	'user_support:action:ticket:close:error:disable' => "An unknown error occured while closing the Support Ticket",
+	'user_support:action:ticket:close:error:disable' => "An unknown error occurred while closing the Support Ticket",
 	'user_support:action:ticket:close:success' => "The Support Ticket was closed successfully",
 	
 	// ticket - reopen
-	'user_support:action:ticket:reopen:error:enable' => "An unknown error occured while reopening the Support Ticket",
+	'user_support:action:ticket:reopen:error:enable' => "An unknown error occurred while reopening the Support Ticket",
 	'user_support:action:ticket:reopen:success' => "The Support Ticket was reopened successfully",
 	
 	// support staff
