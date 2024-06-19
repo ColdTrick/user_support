@@ -318,9 +318,6 @@ return [
 			],
 		],
 	],
-	'upgrades' => [
-		\ColdTrick\UserSupport\Upgrades\MigrateACLOwnership::class,
-	],
 	'widgets' => [
 		'faq' => [
 			'context' => ['groups'],

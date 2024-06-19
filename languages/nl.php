@@ -5,8 +5,6 @@
  */
 
 return array (
-  'user_support:upgrade:2023040601:title' => 'Migreer Support Ticket ACLs',
-  'user_support:upgrade:2023040601:description' => 'Maak het mogelijk dat gebruikers kunnen kijken naar hun support tickets.',
   'user_support:menu:support_tickets:staff' => 'Support medewerkers',
   'user_support:tickets:staff:title' => 'Support medewerkers',
   'user_support:tickets:staff:no_results' => 'Er zijn geen gebruikers toegewezen als support medewerkers. Site beheerders zijn altijd support medewerkers.',

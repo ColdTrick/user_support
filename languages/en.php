@@ -174,10 +174,6 @@ To view the Ticket click on this link:
 	'widgets:support_staff:name' => "Support staff",
 	'widgets:support_staff:description' => "Shows you a list of the open support tickets",
 	
-	// upgrades
-	'user_support:upgrade:2023040601:title' => "Migrate Support Ticket ACLs",
-	'user_support:upgrade:2023040601:description' => "Allow users to access their support tickets.",
-	
 	// actions
 	// help - edit
 	'user_support:action:help:edit:error:save' => "An unknown error occured while saving the contextual help",
