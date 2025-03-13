@@ -18,10 +18,10 @@ class PrepareTicketFields {
 		$vars = $event->getValue();
 		
 		$values = [
-			'description' => '',
+			'description' => (string) get_input('ticket_description'),
 			'tags' => [],
 			'help_url' => elgg_extract('help_url', $vars, ''),
-			'support_type' => '',
+			'support_type' => (string) get_input('ticket_type'),
 			'help_context' => user_support_get_help_context(elgg_extract('help_url', $vars, '')),
 		];
 		
