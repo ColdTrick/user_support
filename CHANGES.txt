@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.1 (2025-03-27):
+
+- added: option to provide support ticket inputs
+
 11.0 (2024-06-28):
 
 - changed: updated for Elgg 6
