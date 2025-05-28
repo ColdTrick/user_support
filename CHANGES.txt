@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.2 (2025-05-28):
+
+- changed: replaced user_support menu with filter:support_ticket menu
+
 11.1 (2025-03-27):
 
 - added: option to provide support ticket inputs
