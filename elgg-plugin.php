@@ -3,6 +3,7 @@
 use ColdTrick\UserSupport\StaffGatekeeper;
 use Elgg\Router\Middleware\Gatekeeper;
 use Elgg\Router\Middleware\GroupPageOwnerGatekeeper;
+use Elgg\Router\Middleware\UserPageOwnerGatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
@@ -148,6 +149,7 @@ return [
 			'resource' => 'user_support/support_ticket/owner',
 			'middleware' => [
 				Gatekeeper::class,
+				UserPageOwnerGatekeeper::class,
 			],
 		],
 		'default:user_support:help_center' => [
@@ -257,9 +259,9 @@ return [
 			'menu:user_hover' => [
 				'\ColdTrick\UserSupport\Menus\UserHover::registerStaff' => [],
 			],
-			'menu:user_support' => [
-				'\ColdTrick\UserSupport\Menus\UserSupport::registerStaff' => [],
-				'\ColdTrick\UserSupport\Menus\UserSupport::registerUserSupportTickets' => [],
+			'menu:filter:support_ticket' => [
+				'\ColdTrick\UserSupport\Menus\FilterSupportTicket::registerStaff' => [],
+				'\ColdTrick\UserSupport\Menus\FilterSupportTicket::registerUserSupportTickets' => [],
 			],
 		],
 		'reshare' => [

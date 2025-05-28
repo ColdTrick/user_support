@@ -23,7 +23,8 @@ echo elgg_call($flag, function() use ($guid) {
 	return elgg_view_page($title_text, [
 		'content' => $content,
 		'entity' => $entity,
-		'filter' => false,
+		'filter_id' => 'support_ticker/view',
+		'filter_value' => 'view',
 	]);
 });
 

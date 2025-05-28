@@ -75,8 +75,6 @@ $body = elgg_list_entities($options, $getter);
 
 echo elgg_view_page($title_text, [
 	'content' => $search . $body,
-	'filter' => elgg_view_menu('user_support', [
-		'class' => 'elgg-tabs',
-		'sort_by' => 'priority',
-	]),
+	'filter_id' => 'support_ticket',
+	'filter_value' => $user->guid === elgg_get_logged_in_user_guid() ? $status !== \UserSupportTicket::CLOSED ? 'mine' : 'my_archive' : 'none',
 ]);

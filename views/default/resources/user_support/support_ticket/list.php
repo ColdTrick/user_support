@@ -37,8 +37,6 @@ $body = elgg_call(ELGG_IGNORE_ACCESS, function() use ($options, $getter) {
 
 echo elgg_view_page(elgg_echo('user_support:tickets:list:title'), [
 	'content' => $search . $body,
-	'filter' => elgg_view_menu('user_support', [
-		'class' => 'elgg-tabs',
-		'sort_by' => 'priority',
-	]),
+	'filter_id' => 'support_ticket',
+	'filter_value' => 'all',
 ]);

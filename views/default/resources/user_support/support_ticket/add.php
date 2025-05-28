@@ -26,5 +26,6 @@ $form = elgg_view_form('user_support/support_ticket/edit', [
 
 echo elgg_view_page(elgg_echo('user_support:help_center:ask'), [
 	'content' => $form,
-	'filter' => false,
+	'filter_id' => 'support_ticker/edit',
+	'filter_value' => 'add',
 ]);

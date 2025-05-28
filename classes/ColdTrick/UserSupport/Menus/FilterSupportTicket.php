@@ -5,14 +5,14 @@ namespace ColdTrick\UserSupport\Menus;
 use Elgg\Menu\MenuItems;
 
 /**
- * Add menu items to the user_support menu
+ * Add menu items to the filter:support_ticket menu
  */
-class UserSupport {
+class FilterSupportTicket {
 	
 	/**
-	 * Add menu items to the user_support menu
+	 * Add menu items to the filter:support_ticket menu
 	 *
-	 * @param \Elgg\Event $event 'register', 'menu:user_support'
+	 * @param \Elgg\Event $event 'register', 'menu:filter:support_ticket'
 	 *
 	 * @return null|MenuItems
 	 */
@@ -48,9 +48,9 @@ class UserSupport {
 	}
 	
 	/**
-	 * Add menu items to the user_support menu
+	 * Add menu items to the filter:support_ticket menu
 	 *
-	 * @param \Elgg\Event $event 'register', 'menu:user_support'
+	 * @param \Elgg\Event $event 'register', 'menu:filter:support_ticket'
 	 *
 	 * @return null|MenuItems
 	 */
