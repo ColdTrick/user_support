@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.3 (2025-06-18):
+
+- added: option to send source url to support ticket
+
 11.2 (2025-05-28):
 
 - changed: replaced user_support menu with filter:support_ticket menu

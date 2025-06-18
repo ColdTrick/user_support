@@ -9,7 +9,7 @@ require_once(dirname(__FILE__) . '/lib/functions.php');
 
 return [
 	'plugin' => [
-		'version' => '11.2',
+		'version' => '11.3',
 	],
 	'settings' => [
 		'help_enabled' => 'yes',
