@@ -43,11 +43,11 @@ trait ContextProvider {
 	/**
 	 * Get a route url
 	 *
-	 * @param Route $route (optional) route to use
+	 * @param Route|null $route (optional) route to use
 	 *
 	 * @return null|string
 	 */
-	protected function getUrl(Route $route = null): ?string {
+	protected function getUrl(?Route $route = null): ?string {
 		if (!$route instanceof Route) {
 			$route = $this->getRandomRoute();
 		}
@@ -77,11 +77,11 @@ trait ContextProvider {
 	/**
 	 * Get the help context from a route
 	 *
-	 * @param Route $route (optional) route to use
+	 * @param Route|null $route (optional) route to use
 	 *
 	 * @return null|string
 	 */
-	protected function getHelpContext(Route $route = null): ?string {
+	protected function getHelpContext(?Route $route = null): ?string {
 		if (!$route instanceof Route) {
 			$route = $this->getRandomRoute();
 		}
