@@ -3,12 +3,11 @@
 namespace ColdTrick\UserSupport\Notifications;
 
 use Elgg\Notifications\NotificationEventHandler;
-use Elgg\Database\QueryBuilder;
 
 /**
  * Notification Event Handler for 'object' 'support_ticket' 'create' action
  */
-class CreateSupportTicketEventHandler extends NotificationEventHandler {
+class CreateSupportTicketAdminHandler extends NotificationEventHandler {
 
 	/**
 	 * {@inheritdoc}

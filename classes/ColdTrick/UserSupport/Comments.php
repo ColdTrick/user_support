@@ -33,7 +33,7 @@ class Comments {
 		}
 		
 		if ($object->description === elgg_echo('user_support:support_ticket:reopened')) {
-			// ticket was reopend, using the action, do nothing
+			// ticket was reopened, using the action, do nothing
 			return;
 		}
 		

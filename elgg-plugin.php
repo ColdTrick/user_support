@@ -1,5 +1,7 @@
 <?php
 
+use ColdTrick\UserSupport\Notifications\CreateSupportTicketAdminHandler;
+use ColdTrick\UserSupport\Notifications\CreateSupportTicketOwnerHandler;
 use ColdTrick\UserSupport\StaffGatekeeper;
 use Elgg\Router\Middleware\Gatekeeper;
 use Elgg\Router\Middleware\GroupPageOwnerGatekeeper;
@@ -299,6 +301,14 @@ return [
 			],
 		],
 	],
+	'notifications' => [
+		'object' => [
+			'support_ticket' => [
+				'create' => CreateSupportTicketAdminHandler::class,
+				'create:owner' => CreateSupportTicketOwnerHandler::class,
+			],
+		],
+	],
 	'view_extensions' => [
 		'elgg.css' => [
 			'user_support/site.css' => [],
@@ -311,13 +321,6 @@ return [
 		],
 		'forms/comment/save' => [
 			'user_support/support_ticket/comment' => [],
-		],
-	],
-	'notifications' => [
-		'object' => [
-			'support_ticket' => [
-				'create' => \ColdTrick\UserSupport\Notifications\CreateSupportTicketEventHandler::class,
-			],
 		],
 	],
 	'widgets' => [
