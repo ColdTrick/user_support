@@ -15,7 +15,7 @@ class CreateSupportTicketAdminHandler extends NotificationEventHandler {
 	protected function getNotificationSubject(\ElggUser $recipient, string $method): string {
 		return elgg_echo('user_support:notify:admin:create:subject', [
 			$this->event->getObject()->getDisplayName(),
-		], $recipient->getLanguage());
+		]);
 	}
 
 	/**
@@ -24,7 +24,7 @@ class CreateSupportTicketAdminHandler extends NotificationEventHandler {
 	protected function getNotificationSummary(\ElggUser $recipient, string $method): string {
 		return elgg_echo('user_support:notify:admin:create:summary', [
 			$this->event->getObject()->getDisplayName(),
-		], $recipient->getLanguage());
+		]);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ class CreateSupportTicketAdminHandler extends NotificationEventHandler {
 			$actor->getDisplayName(),
 			$entity->description,
 			$entity->getURL(),
-		], $recipient->getLanguage());
+		]);
 	}
 
 	/**
