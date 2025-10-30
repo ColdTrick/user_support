@@ -28,8 +28,8 @@ class Notifications {
 		}
 		
 		// get object
-		$object = $notification_event->getObject();
-		if (!$object instanceof \ElggComment) {
+		$comment = $notification_event->getObject();
+		if (!$comment instanceof \ElggComment) {
 			return null;
 		}
 		
@@ -40,31 +40,33 @@ class Notifications {
 		}
 		
 		// get the entity the comment was made on
-		$entity = $object->getContainerEntity();
-		if (!$entity instanceof \UserSupportTicket) {
+		$ticket = $comment->getContainerEntity();
+		if (!$ticket instanceof \UserSupportTicket) {
 			return null;
 		}
 		
 		// did the user comment or some other admin/staff
-		if ($entity->owner_guid !== $actor->guid) {
+		if ($ticket->owner_guid !== $actor->guid) {
 			// admin or staff, this will notify ticket owner
-			return null;
+			$return_value = $event->getValue();
+			
+			$return_value[$ticket->owner_guid] = ['email'];
+			
+			return $return_value;
 		}
 		
 		// by default notify nobody
 		$return_value = [];
 		
 		// get all the admins to notify
-		$users = user_support_get_admin_notify_users($entity);
+		$users = user_support_get_admin_notify_users($ticket);
 		if (empty($users)) {
 			return $return_value;
 		}
 		
 		// pass all the guids of the admins/staff
-		/* @var $user \ElggUser */
 		foreach ($users as $user) {
-			$settings = $user->getNotificationSettings('user_support_ticket');
-			$settings = array_keys(array_filter($settings));
+			$settings = $user->getNotificationSettings('user_support_ticket', true);
 			if (empty($settings)) {
 				continue;
 			}
@@ -93,8 +95,8 @@ class Notifications {
 		}
 		
 		// get object
-		$object = $notification_event->getObject();
-		if (!$object instanceof \ElggComment) {
+		$comment = $notification_event->getObject();
+		if (!$comment instanceof \ElggComment) {
 			return null;
 		}
 		
@@ -105,24 +107,22 @@ class Notifications {
 		}
 		
 		// get the entity the comment was made on
-		$entity = $object->getContainerEntity();
-		if (!$entity instanceof \UserSupportTicket) {
+		$ticket = $comment->getContainerEntity();
+		if (!$ticket instanceof \UserSupportTicket) {
 			return null;
 		}
 		
-		$language = $event->getParam('language');
-		
-		/* @var $return_value Notification */
+		/** @var Notification $return_value */
 		$return_value = $event->getValue();
 		
-		$return_value->subject = elgg_echo('user_support:notify:admin:updated:subject', [$entity->getDisplayName()], $language);
-		$return_value->summary = elgg_echo('user_support:notify:admin:updated:summary', [$entity->getDisplayName()], $language);
+		$return_value->subject = elgg_echo('user_support:notify:admin:updated:subject', [$ticket->getDisplayName()]);
+		$return_value->summary = elgg_echo('user_support:notify:admin:updated:summary', [$ticket->getDisplayName()]);
 		$return_value->body = elgg_echo('user_support:notify:admin:updated:message', [
 			$actor->getDisplayName(),
-			$entity->getDisplayName(),
-			$object->description,
-			$entity->getURL(),
-		], $language);
+			$ticket->getDisplayName(),
+			$comment->description,
+			$ticket->getURL(),
+		]);
 		
 		return $return_value;
 	}
