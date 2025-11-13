@@ -1,6 +1,12 @@
 Version history
 ===============
 
+12.0 (2025-11-13):
+
+- changed: updated for Elgg 6.3
+- fixed: PHP implicit null declaration
+- fixed: support ticket comments by staff should notify owner
+
 11.3 (2025-06-18):
 
 - added: option to send source url to support ticket
