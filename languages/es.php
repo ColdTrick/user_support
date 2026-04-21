@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v11.1
- * On 2023-05-17 15:28
+ * This file was created by Translation Editor v14.0.4
+ * On 2026-04-21 11:30
  */
 
 return array (
@@ -17,7 +17,7 @@ return array (
   'user_support:support_type:request' => 'Solicitud de funcionalidad',
   'user_support:support_type:status:open' => 'Abierto',
   'user_support:support_type:status:closed' => 'Cerrado',
-  'user_support:anwser' => 'Respuesta',
+  'user_support:answer' => 'Respuesta',
   'user_support:question' => 'Consulta',
   'user_support:url' => 'URL',
   'user_support:allow_comments' => 'Permitir comentarios',
@@ -74,14 +74,11 @@ Sigue el enlace para ver el ticket:
   'user_support:forms:help:title' => 'Crear Ayuda Contextual',
   'user_support:faq:edit:title:edit' => 'Editar un elemento del FAQ',
   'user_support:faq:create:title' => 'Crear un elemento del FAQ',
-  'user_support:tickets:list:title' => 'Soportar tickets',
-  'user_support:tickets:mine:title' => 'Mis tickets de soporte',
-  'user_support:tickets:mine:archive:title' => 'Mis tickets de soporte cerrados',
-  'user_support:tickets:owner:title' => '%s Tickets de Soporte',
-  'user_support:tickets:owner:archive:title' => '%s Tickets de Soporte cerrados',
-  'user_support:tickets:archive:title' => 'Archivo de Tickets de Soporte',
-  'user_support:faq:list:title' => 'Ver todos los elementos del FAQ',
-  'user_support:faq:not_found' => 'No hay elementos disponibles en el FAQ',
+  'collection:object:support_ticket:all' => 'Soportar tickets',
+  'collection:object:support_ticket:owner' => '%s Tickets de Soporte',
+  'collection:object:support_ticket:owner_archive' => '%s Tickets de Soporte cerrados',
+  'collection:object:support_ticket:archive' => 'Archivo de Tickets de Soporte',
+  'collection:object:faq:all' => 'Ver todos los elementos del FAQ',
   'user_support:group:tool_option' => 'Activar soporte para FAQs de grupo',
   'user_support:faq:group:title' => '%s FAQ',
   'widgets:faq:name' => 'FAQ',
@@ -92,11 +89,9 @@ Sigue el enlace para ver el ticket:
   'user_support:widgets:support_ticket:filter:all' => 'Todos',
   'widgets:support_staff:name' => 'Personal de soporte',
   'widgets:support_staff:description' => 'Muestra una lista de tickets abiertos',
-  'user_support:action:help:edit:error:save' => 'Hubo un error desconocido al guardar la ayuda contextual',
-  'user_support:action:help:edit:success' => 'La ayuda contextual se guardó correctamente',
-  'user_support:action:ticket:edit:error:save' => 'Hubo un error desconocido al guardar el ticket de soporte',
-  'user_support:action:ticket:edit:success' => 'El ticket de soporte se guardó correctamente',
-  'user_support:action:faq:edit:success' => 'FAQ creado/editado correctamente',
+  'entity:edit:object:help:success' => 'La ayuda contextual se guardó correctamente',
+  'entity:edit:object:support_ticket:success' => 'El ticket de soporte se guardó correctamente',
+  'entity:edit:object:faq:success' => 'FAQ creado/editado correctamente',
   'user_support:action:ticket:close:error:disable' => 'Hubo un error desconocido al cerrar el Ticket de Soporte',
   'user_support:action:ticket:close:success' => 'Ticket de Soporte cerrado correctamente',
   'user_support:action:ticket:reopen:error:enable' => 'Hubo un error al reabrir el Ticket de Soporte',

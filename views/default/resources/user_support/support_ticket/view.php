@@ -8,7 +8,7 @@ $flag = user_support_is_support_staff() ? ELGG_IGNORE_ACCESS : 0;
 echo elgg_call($flag, function() use ($guid) {
 	elgg_entity_gatekeeper($guid, 'object', \UserSupportTicket::SUBTYPE);
 	
-	/* @var $entity \UserSupportTicket */
+	/** @var \UserSupportTicket $entity */
 	$entity = get_entity($guid);
 	
 	// build page elements

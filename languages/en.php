@@ -12,8 +12,26 @@ return array(
 	'collection:object:faq' => "User support FAQs",
 	'collection:object:help' => "User support Contextual help",
 	'collection:object:support_ticket' => "User support Tickets",
-
+	
+	'list:object:faq:no_results' => "No FAQs found",
+	'list:object:help:no_results' => "No contextual help found",
+	'list:object:support_ticket:no_results' => "No support tickets found",
+	
+	'collection:object:faq:all' => "View all FAQ items",
+	'collection:object:faq:context' => "Related FAQs",
+	'collection:object:faq:search' => "FAQ results for '%s'",
+	'collection:object:faq:group' => "Group FAQ",
+	
+	'collection:object:support_ticket:all' => "Support tickets",
+	'collection:object:support_ticket:archive' => "Support tickets archive",
+	'collection:object:support_ticket:owner' => "%s's Support Tickets",
+	'collection:object:support_ticket:owner_archive' => "%s's closed Support Tickets",
+	
 	'input:container_guid:object:faq:info' => "This User support FAQ will be posted in %s",
+	
+	'entity:edit:object:faq:success' => "The FAQ was created/edited successfully",
+	'entity:edit:object:help:success' => "The contextual help was saved successfully",
+	'entity:edit:object:support_ticket:success' => "The support ticket was saved successfully",
 	
 	// general
 	'user_support:support_type' => "Category",
@@ -24,7 +42,7 @@ return array(
 	'user_support:support_type:status:open' => "Open",
 	'user_support:support_type:status:closed' => "Closed",
 	
-	'user_support:anwser' => "Answer",
+	'user_support:answer' => "Answer",
 	'user_support:question' => "Question",
 	'user_support:url' => "URL",
 	'user_support:url:info' => "This ticket has been created %shere%s.",
@@ -135,27 +153,12 @@ To view the Ticket click on this link:
 	'user_support:faq:edit:title:edit' => "Edit a FAQ item",
 	'user_support:faq:create:title' => "Create a FAQ item",
 
-	// ticket - list
-	'user_support:tickets:list:title' => "Support tickets",
-	
-	// ticket - mine
-	'user_support:tickets:mine:title' => "My Support Tickets",
-	'user_support:tickets:mine:archive:title' => "My closed Support Tickets",
-	'user_support:tickets:owner:title' => "%s Support Tickets",
-	'user_support:tickets:owner:archive:title' => "%s closed Support Tickets",
-	
-	// ticket - archive
-	'user_support:tickets:archive:title' => "Support tickets archive",
-	
 	// ticket - staff
-	'user_support:tickets:staff:title' => "Support staff",
+	'collection:user:user:support_staff' => "Support staff",
 	'user_support:tickets:staff:no_results' => "No users assigned as support staff. Site administrators always are support staff.",
 
 	// faq - list
 	'user_support:faq:sidebar:filter' => "Filter FAQ on tag",
-	'user_support:faq:list:title' => "View all FAQ items",
-	'user_support:faq:not_found' => "No FAQ items available",
-	'user_support:faq:context' => "Related FAQs",
 	'user_support:faq:read_more' => "Read %s more FAQs",
 	
 	// group faq
@@ -175,18 +178,6 @@ To view the Ticket click on this link:
 	'widgets:support_staff:description' => "Shows you a list of the open support tickets",
 	
 	// actions
-	// help - edit
-	'user_support:action:help:edit:error:save' => "An unknown error occurred while saving the contextual help",
-	'user_support:action:help:edit:success' => "The contextual help was saved successfully",
-	
-	// ticket - edit
-	'user_support:action:ticket:edit:error:save' => "An unknown error occurred while saving the support ticket",
-	'user_support:action:ticket:edit:success' => "The support ticket was saved successfully",
-
-	// faq - edit
-	'user_support:action:faq:edit:error:save' => "An unknown error occurred while saving the FAQ",
-	'user_support:action:faq:edit:success' => "The FAQ was created/edited successfully",
-	
 	// ticket = close
 	'user_support:action:ticket:close:error:disable' => "An unknown error occurred while closing the Support Ticket",
 	'user_support:action:ticket:close:success' => "The Support Ticket was closed successfully",

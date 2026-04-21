@@ -34,7 +34,7 @@ class SupportTickets extends Seed {
 			try {
 				$logger->disable();
 				
-				/* @var $entity \UserSupportTicket */
+				/** @var \UserSupportTicket $entity */
 				$entity = $this->createObject([
 					'subtype' => \UserSupportTicket::SUBTYPE,
 					'owner_guid' => $owner->guid,
@@ -71,7 +71,7 @@ class SupportTickets extends Seed {
 	 * {@inheritdoc}
 	 */
 	public function unseed() {
-		/* @var $entities \ElggBatch */
+		/** @var \ElggBatch $entities */
 		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => \UserSupportTicket::SUBTYPE,
@@ -81,7 +81,7 @@ class SupportTickets extends Seed {
 			'batch_inc_offset' => false,
 		]);
 		
-		/* @var $entity \UserSupportTicket */
+		/** @var \UserSupportTicket $entity */
 		foreach ($entities as $entity) {
 			if ($entity->delete()) {
 				$this->log("Deleted support ticket {$entity->guid}");

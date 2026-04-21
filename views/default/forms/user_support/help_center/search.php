@@ -8,6 +8,7 @@ echo elgg_view_field([
 	'fields' => [
 		[
 			'#type' => 'search',
+			'#class' => 'elgg-field-stretch',
 			'name' => 'q',
 			'placeholder' => elgg_echo('user_support:help_center:search'),
 			'class' => 'user-support-help-center-search-input',

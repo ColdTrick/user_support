@@ -55,15 +55,9 @@ class CreateSupportTicketAdminHandler extends NotificationEventHandler {
 		}
 		
 		// pass all the guids of the admins/staff
-		/* @var $user \ElggUser */
+		/** @var \ElggUser $user */
 		foreach ($users as $user) {
-			$settings = $user->getNotificationSettings('user_support_ticket');
-			$settings = array_keys(array_filter($settings));
-			if (empty($settings)) {
-				continue;
-			}
-			
-			$result[$user->guid] = $settings;
+			$result[$user->guid] = $user->getNotificationSettings('user_support_ticket', true);
 		}
 		
 		return $result;

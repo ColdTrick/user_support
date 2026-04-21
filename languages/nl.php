@@ -1,12 +1,17 @@
 <?php
 /**
- * This file was created by Translation Editor v11.1
- * On 2023-05-17 15:27
+ * This file was created by Translation Editor v14.0.4
+ * On 2026-04-21 11:29
  */
 
 return array (
+  'list:object:faq:no_results' => 'Geen FAQ\'s gevonden',
+  'list:object:help:no_results' => 'Geen contextuele help gevonden',
+  'list:object:support_ticket:no_results' => 'Geen support tickets gevonden',
+  'collection:object:faq:search' => 'FAQ resultaten voor \'%s\'',
+  'collection:object:faq:group' => 'Groep FAQ',
   'user_support:menu:support_tickets:staff' => 'Support medewerkers',
-  'user_support:tickets:staff:title' => 'Support medewerkers',
+  'collection:user:user:support_staff' => 'Support medewerkers',
   'user_support:tickets:staff:no_results' => 'Er zijn geen gebruikers toegewezen als support medewerkers. Site beheerders zijn altijd support medewerkers.',
   'user_support:notifications:support_ticket' => 'Ontvang een notificatie als er een Support Ticket wordt aangemaakt/bijgewerkt',
   'input:container_guid:object:faq:info' => 'Deze User Support FAQ zal worden geplaatst in %s',
@@ -16,7 +21,7 @@ return array (
   'user_support:settings:faq:group_faq' => 'Schakel FAQ in groepen in',
   'user_support:settings:faq:group_faq:yes_off' => 'Ja, standaard uitgeschakeld',
   'user_support:settings:faq:group_faq:yes' => 'Ja, standaard ingeschakeld',
-  'user_support:faq:context' => 'Gerelateerde FAQ\'s',
+  'collection:object:faq:context' => 'Gerelateerde FAQ\'s',
   'user_support:faq:read_more' => 'Lees %s meer FAQ\'s',
   'user_support:help_center:search' => 'Zoek in het Helpcenter en de FAQ',
   'user_support:faq:sidebar:filter' => 'Filter FAQ op tag',
@@ -28,7 +33,6 @@ return array (
   'user_support:menu:user_hover:remove_staff' => 'Verwijderen van de support staf',
   'user_support:menu:entity:comment_promote' => 'Maak FAQ',
   'user_support:menu:entity:comment_promote:title' => 'Verander deze reactie in een FAQ',
-  'user_support:action:faq:edit:error:save' => 'Een onbekend probleem is opgetreden tijdens het opslaan van de FAQ',
   'user_support:notify:user:create:message' => 'Bedankt voor het melden van een nieuw Helpdesk ticket. We gaan hier zo snel mogelijk mee aan de slag.
 
 Klik op de volgende link om het ticket te bekijken:
@@ -63,8 +67,8 @@ Ga naar onderstaande link voor een overzicht van al je gemelde tickets.
   'river:create:object:support_ticket' => '%s reageerde op %s',
   'user_support:menu:faq:group' => 'Groep FAQ',
   'user_support:faq:create:title' => 'Maak een FAQ item',
-  'user_support:tickets:owner:title' => '%s Support Tickets',
-  'user_support:tickets:owner:archive:title' => '%s gesloten Support Tickets',
+  'collection:object:support_ticket:owner' => '%s Support Tickets',
+  'collection:object:support_ticket:owner_archive' => '%s gesloten Support Tickets',
   'user_support:group:tool_option' => 'Schakel FAQ ondersteuning voor groepen in',
   'user_support:faq:group:title' => '%s FAQ',
   'widgets:faq:name' => 'FAQ',
@@ -97,7 +101,7 @@ Klik op de volgende link om het ticket te bekijken:
   'user_support:support_type:question' => 'Vraag',
   'user_support:support_type:bug' => 'Bug',
   'user_support:support_type:request' => 'Functionele Wens',
-  'user_support:anwser' => 'Antwoord',
+  'user_support:answer' => 'Antwoord',
   'user_support:question' => 'Vraag',
   'user_support:url' => 'URL',
   'user_support:url:info' => 'Dit ticket is %shier%s gemaakt.',
@@ -122,17 +126,12 @@ Klik op de volgende link om het ticket te bekijken:
   'user_support:help_center:faq:title' => 'FAQ',
   'user_support:forms:help:title' => 'Maak een contextuele help pagina',
   'user_support:faq:edit:title:edit' => 'Bewerk een FAQ item',
-  'user_support:tickets:list:title' => 'Support Tickets',
-  'user_support:tickets:mine:title' => 'Mijn Support Tickets',
-  'user_support:tickets:mine:archive:title' => 'Mijn afgesloten Support Tickets',
-  'user_support:tickets:archive:title' => 'Support Tickets archief',
-  'user_support:faq:list:title' => 'Toon alle FAQ items',
-  'user_support:faq:not_found' => 'Geen FAQ items beschikbaar',
-  'user_support:action:help:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van de help pagina',
-  'user_support:action:help:edit:success' => 'De help pagina is succesvol opgeslagen',
-  'user_support:action:ticket:edit:error:save' => 'Een onbekende fout is opgetreden tijdens het opslaan van het support ticket',
-  'user_support:action:ticket:edit:success' => 'Het support ticket is succesvol opgeslagen',
-  'user_support:action:faq:edit:success' => 'Het FAQ item is succesvol opgeslagen',
+  'collection:object:support_ticket:all' => 'Support Tickets',
+  'collection:object:support_ticket:archive' => 'Support Tickets archief',
+  'collection:object:faq:all' => 'Toon alle FAQ items',
+  'entity:edit:object:help:success' => 'De help pagina is succesvol opgeslagen',
+  'entity:edit:object:support_ticket:success' => 'Het support ticket is succesvol opgeslagen',
+  'entity:edit:object:faq:success' => 'Het FAQ item is succesvol opgeslagen',
   'user_support:action:ticket:close:error:disable' => 'Een onbekende fout is opgetreden tijdens het sluiten van de Support Tickets',
   'user_support:action:ticket:close:success' => 'De Support Tickets zijn succesvol gesloten',
   'user_support:action:ticket:reopen:error:enable' => 'Een onbekende fout tijdens het heropenen van het Support Ticket',

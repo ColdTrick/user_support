@@ -26,7 +26,7 @@ class Entity {
 			return null;
 		}
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		if ($entity->getStatus() === \UserSupportTicket::OPEN) {
@@ -67,7 +67,7 @@ class Entity {
 			return null;
 		}
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		if ($entity->canEdit()) {
@@ -107,7 +107,7 @@ class Entity {
 			return null;
 		}
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		$return_value[] = \ElggMenuItem::factory([

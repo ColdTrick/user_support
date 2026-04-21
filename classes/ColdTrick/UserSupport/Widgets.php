@@ -37,9 +37,11 @@ class Widgets {
 				return elgg_generate_url($route_name, $route_params);
 				
 			case 'support_ticket':
-				$route_params = [];
+				$route_params = [
+					'username' => $owner->username,
+				];
 				if ($entity->filter === \UserSupportTicket::CLOSED) {
-					$route_params['status'] = \UserSupportTicket::CLOSED;
+					return elgg_generate_url('collection:object:support_ticket:owner_archive', $route_params);
 				}
 				return elgg_generate_url('collection:object:support_ticket:owner', $route_params);
 				

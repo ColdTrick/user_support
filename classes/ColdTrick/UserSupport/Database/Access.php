@@ -32,7 +32,7 @@ class Access {
 		
 		$access_wheres = $event->getValue();
 		
-		/* @var $qb \Elgg\Database\QueryBuilder */
+		/** @var \Elgg\Database\QueryBuilder $qb */
 		$qb = $event->getParam('query_builder');
 		$access_column = $event->getParam('access_column');
 		$table_alias = $event->getParam('table_alias');

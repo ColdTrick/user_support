@@ -28,8 +28,8 @@ echo elgg_view_field([
 <script type='module'>
 	import 'jquery';
 	
-	var $button = $('.user-support-ticket-comment-close');
-	var $form = $button.closest('.elgg-form-comment-save');
+	let $button = $('.user-support-ticket-comment-close');
+	const $form = $button.closest('.elgg-form-comment-save');
 
 	$form.find('.elgg-form-footer .elgg-field-submit').after($button);
 	$button.removeClass('hidden');

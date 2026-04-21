@@ -3,7 +3,7 @@
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', \UserSupportTicket::SUBTYPE, true);
 
-/* @var $entity \UserSupportTicket */
+/** @var \UserSupportTicket $entity */
 $entity = get_entity($guid);
 
 // breadcrumb

@@ -3,7 +3,7 @@
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE, true);
 
-/* @var $entity \UserSupportFAQ */
+/** @var \UserSupportFAQ $entity */
 $entity = get_entity($guid);
 
 // check for group container

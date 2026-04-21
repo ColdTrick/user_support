@@ -1,13 +1,13 @@
 <?php
 
-namespace ColdTrick\UserSupport\Menus;
+namespace ColdTrick\UserSupport\Menus\Filter;
 
 use Elgg\Menu\MenuItems;
 
 /**
  * Add menu items to the filter:support_ticket menu
  */
-class FilterSupportTicket {
+class SupportTicket {
 	
 	/**
 	 * Add menu items to the filter:support_ticket menu
@@ -22,7 +22,7 @@ class FilterSupportTicket {
 			return null;
 		}
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		$return_value[] = \ElggMenuItem::factory([
@@ -35,11 +35,10 @@ class FilterSupportTicket {
 		]);
 		
 		$return_value[] = \ElggMenuItem::factory([
-			'name' => 'my_archive',
+			'name' => 'owner_archive',
 			'text' => elgg_echo('user_support:menu:support_tickets:mine:archive'),
-			'href' => elgg_generate_url('collection:object:support_ticket:owner', [
+			'href' => elgg_generate_url('collection:object:support_ticket:owner_archive', [
 				'username' => $user->username,
-				'status' => \UserSupportTicket::CLOSED,
 			]),
 			'priority' => 200,
 		]);
@@ -59,7 +58,7 @@ class FilterSupportTicket {
 			return null;
 		}
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		$return_value[] = \ElggMenuItem::factory([

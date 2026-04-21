@@ -17,28 +17,48 @@ class PrepareTicketFields {
 	public function __invoke(\Elgg\Event $event): array {
 		$vars = $event->getValue();
 		
-		$help_url = (string) get_input('ticket_url', elgg_extract('help_url', $vars));
+		$values = [];
 		
-		$values = [
-			'description' => (string) get_input('ticket_description'),
-			'tags' => [],
-			'support_type' => (string) get_input('ticket_type'),
-		];
+		$fields = elgg()->fields->get('object', \UserSupportHelp::SUBTYPE);
+		foreach ($fields as $field) {
+			$default_value = null;
+			$name = elgg_extract('name', $field);
+			
+			switch ($name) {
+				case 'description':
+					$default_value = (string) get_input('ticket_description');
+					break;
+					
+				case 'help_url':
+					$default_value = (string) get_input('ticket_url', elgg_extract('help_url', $vars));
+					break;
+					
+				case 'support_type':
+					$default_value = (string) get_input('ticket_type');
+					break;
+			}
+			
+			$values[$name] = $default_value;
+		}
 		
 		$overrides = [
-			'help_url' => $help_url,
-			'help_context' => user_support_get_help_context($help_url),
+			'help_url' => elgg_extract('help_url', $values),
+			'help_context' => user_support_get_help_context((string) elgg_extract('help_url', $values)),
 		];
 		
 		// edit
 		$entity = elgg_extract('entity', $vars);
 		if ($entity instanceof \UserSupportTicket) {
 			foreach ($values as $key => $value) {
-				$values[$key] = $entity->{$key};
+				if (isset($entity->{$key})) {
+					$values[$key] = $entity->{$key};
+				}
 			}
 			
 			foreach ($overrides as $key => $value) {
-				$overrides[$key] = $entity->{$key};
+				if (isset($entity->{$key})) {
+					$overrides[$key] = $entity->{$key};
+				}
 			}
 		}
 		

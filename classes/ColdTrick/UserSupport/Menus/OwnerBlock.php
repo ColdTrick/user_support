@@ -22,12 +22,12 @@ class OwnerBlock {
 			return null;
 		}
 		
-		/* @var $retur_value MenuItems */
+		/** @var MenuItems $retur_value */
 		$return_value = $event->getValue();
 		
 		$return_value[] = \ElggMenuItem::factory([
 			'name' => 'faq',
-			'text' => elgg_echo('user_support:menu:faq:group'),
+			'text' => elgg_echo('collection:object:faq:group'),
 			'href' => elgg_generate_url('collection:object:faq:group', [
 				'guid' => $entity->guid,
 			]),

@@ -16,7 +16,7 @@ if (!$entity->setStatus(\UserSupportTicket::OPEN)) {
 
 $user = elgg_get_logged_in_user_entity();
 
-/* @var $owner \ElggUser */
+/** @var \ElggUser $owner */
 $owner = $entity->getOwnerEntity();
 
 // add reopen comment

@@ -25,7 +25,7 @@ class Helps extends Seed {
 			try {
 				$logger->disable();
 				
-				/* @var $entity \UserSupportHelp */
+				/** @var \UserSupportHelp $entity */
 				$entity = $this->createObject([
 					'subtype' => \UserSupportHelp::SUBTYPE,
 					'owner_guid' => $site->guid,
@@ -50,7 +50,7 @@ class Helps extends Seed {
 	 * {@inheritdoc}
 	 */
 	public function unseed() {
-		/* @var $entities \ElggBatch */
+		/** @var \ElggBatch $entities */
 		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => \UserSupportHelp::SUBTYPE,
@@ -60,7 +60,7 @@ class Helps extends Seed {
 			'batch_inc_offset' => false,
 		]);
 		
-		/* @var $entity \UserSupportHelp */
+		/** @var \UserSupportHelp $entity */
 		foreach ($entities as $entity) {
 			if ($entity->delete()) {
 				$this->log("Deleted Help {$entity->guid}");

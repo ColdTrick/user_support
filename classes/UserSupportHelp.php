@@ -7,7 +7,7 @@
  */
 class UserSupportHelp extends \ElggObject {
 	
-	const SUBTYPE = 'help';
+	public const SUBTYPE = 'help';
 	
 	/**
 	 * {@inheritdoc}
@@ -21,5 +21,32 @@ class UserSupportHelp extends \ElggObject {
 		$this->attributes['access_id'] = ACCESS_PUBLIC;
 		$this->attributes['owner_guid'] = $site->guid;
 		$this->attributes['container_guid'] = $site->guid;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function getDefaultFields(): array {
+		$fields = [];
+		
+		$fields[] = [
+			'#type' => 'hidden',
+			'name' => 'help_context',
+		];
+		
+		$fields[] = [
+			'#type' => 'longtext',
+			'#label' => elgg_echo('description'),
+			'name' => 'description',
+			'required' => true,
+		];
+		
+		$fields[] = [
+			'#type' => 'tags',
+			'#label' => elgg_echo('tags'),
+			'name' => 'tags',
+		];
+		
+		return $fields;
 	}
 }

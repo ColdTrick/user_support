@@ -34,7 +34,7 @@ class UserHover {
 		
 		$is_staff = user_support_is_support_staff($entity->guid);
 		
-		/* @var $return_value MenuItems */
+		/** @var MenuItems $return_value */
 		$return_value = $event->getValue();
 		
 		$return_value[] = \ElggMenuItem::factory([

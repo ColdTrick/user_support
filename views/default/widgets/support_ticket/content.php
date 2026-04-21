@@ -1,12 +1,12 @@
 <?php
 
-/* @var $widget \ElggWidget */
+/** @var \ElggWidget $widget */
 $widget = elgg_extract('entity', $vars);
 $owner = $widget->getOwnerEntity();
 
 $filter = $widget->filter;
 if (empty($filter)) {
-	$filter = UserSupportTicket::OPEN;
+	$filter = \UserSupportTicket::OPEN;
 }
 
 $num_display = (int) $widget->num_display;

@@ -1,8 +1,13 @@
 <?php
 
+use ColdTrick\UserSupport\Controllers\Actions\EditFAQ;
+use ColdTrick\UserSupport\Controllers\Actions\EditTicket;
+use ColdTrick\UserSupport\Controllers\FAQListing;
+use ColdTrick\UserSupport\Controllers\SupportTicketListing;
 use ColdTrick\UserSupport\Notifications\CreateSupportTicketAdminHandler;
 use ColdTrick\UserSupport\Notifications\CreateSupportTicketOwnerHandler;
 use ColdTrick\UserSupport\StaffGatekeeper;
+use Elgg\Controllers\EntityEditAction;
 use Elgg\Router\Middleware\Gatekeeper;
 use Elgg\Router\Middleware\GroupPageOwnerGatekeeper;
 use Elgg\Router\Middleware\UserPageOwnerGatekeeper;
@@ -53,11 +58,22 @@ return [
 	'actions' => [
 		'user_support/help/edit' => [
 			'access' => 'admin',
+			'controller' => EntityEditAction::class,
+			'options' => [
+				'entity_type' => 'object',
+				'entity_subtype' => 'help',
+			],
 		],
 		'user_support/support_staff' => [
 			'access' => 'admin',
 		],
-		'user_support/support_ticket/edit' => [],
+		'user_support/support_ticket/edit' => [
+			'controller' => EditTicket::class,
+			'options' => [
+				'entity_type' => 'object',
+				'entity_subtype' => 'support_ticket',
+			],
+		],
 		'user_support/support_ticket/close' => [
 			'middleware' => [
 				StaffGatekeeper::class,
@@ -68,7 +84,13 @@ return [
 				StaffGatekeeper::class,
 			],
 		],
-		'user_support/faq/edit' => [],
+		'user_support/faq/edit' => [
+			'controller' => EditFAQ::class,
+			'options' => [
+				'entity_type' => 'object',
+				'entity_subtype' => 'faq',
+			],
+		],
 	],
 	'routes' => [
 		'add:object:faq' => [
@@ -91,18 +113,32 @@ return [
 		],
 		'collection:object:faq:group' => [
 			'path' => '/user_support/faq/group/{guid}',
-			'resource' => 'user_support/faq/group',
+			'controller' => FAQListing::class,
 			'middleware' => [
 				GroupPageOwnerGatekeeper::class,
+			],
+			'options' => [
+				'group_tool' => 'faq',
+			],
+			'required_plugins' => [
+				'groups',
 			],
 		],
 		'collection:object:faq:context' => [
 			'path' => '/user_support/faq/context',
-			'resource' => 'user_support/faq/context',
+			'controller' => FAQListing::class,
 		],
 		'collection:object:faq:all' => [
 			'path' => '/user_support/faq/list',
-			'resource' => 'user_support/faq/list',
+			'controller' => FAQListing::class,
+		],
+		'collection:object:faq:search' => [
+			'path' => '/user_support/faq/search',
+			'controller' => FAQListing::class,
+		],
+		'default:object:faq' => [
+			'path' => '/user_support/faq',
+			'controller' => FAQListing::class,
 		],
 		'add:object:support_ticket' => [
 			'path' => '/user_support/support_ticket/add/{guid?}',
@@ -125,33 +161,48 @@ return [
 				Gatekeeper::class,
 			],
 		],
-		'collection:object:support_ticket:all' => [
-			'path' => '/user_support/support_ticket/list',
-			'resource' => 'user_support/support_ticket/list',
+		'collection:object:support_ticket:archive' => [
+			'path' => '/user_support/support_ticket/archive',
+			'controller' => SupportTicketListing::class,
 			'middleware' => [
 				StaffGatekeeper::class,
 			],
 		],
-		'collection:object:support_ticket:archive' => [
-			'path' => '/user_support/support_ticket/archive',
-			'resource' => 'user_support/support_ticket/archive',
+		'collection:object:support_ticket:owner' => [
+			'path' => '/user_support/support_ticket/owner/{username}',
+			'controller' => SupportTicketListing::class,
+			'middleware' => [
+				Gatekeeper::class,
+				UserPageOwnerGatekeeper::class,
+			],
+		],
+		'collection:object:support_ticket:owner_archive' => [
+			'path' => '/user_support/support_ticket/owner/{username}/closed',
+			'controller' => SupportTicketListing::class,
+			'middleware' => [
+				Gatekeeper::class,
+				UserPageOwnerGatekeeper::class,
+			],
+		],
+		'collection:object:support_ticket:all' => [
+			'path' => '/user_support/support_ticket/list',
+			'controller' => SupportTicketListing::class,
+			'middleware' => [
+				StaffGatekeeper::class,
+			],
+		],
+		'default:object:support_ticket' => [
+			'path' => '/user_support/support_ticket',
+			'controller' => SupportTicketListing::class,
 			'middleware' => [
 				StaffGatekeeper::class,
 			],
 		],
 		'collection:user:user:support_staff' => [
 			'path' => '/user_support/support_ticket/staff',
-			'resource' => 'user_support/support_ticket/staff',
+			'controller' => SupportTicketListing::class,
 			'middleware' => [
 				StaffGatekeeper::class,
-			],
-		],
-		'collection:object:support_ticket:owner' => [
-			'path' => '/user_support/support_ticket/owner/{username}/{status?}',
-			'resource' => 'user_support/support_ticket/owner',
-			'middleware' => [
-				Gatekeeper::class,
-				UserPageOwnerGatekeeper::class,
 			],
 		],
 		'default:user_support:help_center' => [
@@ -161,14 +212,6 @@ return [
 		'default:user_support:search' => [
 			'path' => '/user_support/search',
 			'resource' => 'user_support/search',
-		],
-		'default:object:support_ticket' => [
-			'path' => '/user_support/support_ticket',
-			'resource' => 'user_support/support_ticket/list',
-		],
-		'default:object:faq' => [
-			'path' => '/user_support/faq',
-			'resource' => 'user_support/faq/list',
 		],
 	],
 	'events' => [
@@ -241,6 +284,13 @@ return [
 				'\ColdTrick\UserSupport\Menus\Entity::registerHelp' => [],
 				'\ColdTrick\UserSupport\Menus\Entity::registerTicket' => [],
 			],
+			'menu:filter:faq' => [
+				\ColdTrick\UserSupport\Menus\Filter\FAQ::class => [],
+			],
+			'menu:filter:support_ticket' => [
+				'\ColdTrick\UserSupport\Menus\Filter\SupportTicket::registerStaff' => [],
+				'\ColdTrick\UserSupport\Menus\Filter\SupportTicket::registerUserSupportTickets' => [],
+			],
 			'menu:footer' => [
 				'\ColdTrick\UserSupport\Menus\Footer::registerFAQ' => [],
 			],
@@ -260,10 +310,6 @@ return [
 			],
 			'menu:user_hover' => [
 				'\ColdTrick\UserSupport\Menus\UserHover::registerStaff' => [],
-			],
-			'menu:filter:support_ticket' => [
-				'\ColdTrick\UserSupport\Menus\FilterSupportTicket::registerStaff' => [],
-				'\ColdTrick\UserSupport\Menus\FilterSupportTicket::registerUserSupportTickets' => [],
 			],
 		],
 		'reshare' => [
@@ -304,8 +350,10 @@ return [
 	'notifications' => [
 		'object' => [
 			'support_ticket' => [
-				'create' => CreateSupportTicketAdminHandler::class,
-				'create:owner' => CreateSupportTicketOwnerHandler::class,
+				'create' => [
+					CreateSupportTicketAdminHandler::class => [],
+					CreateSupportTicketOwnerHandler::class => [],
+				],
 			],
 		],
 	],
@@ -318,6 +366,10 @@ return [
 		],
 		'page/elements/footer' => [
 			'user_support/button' => [],
+		],
+		'page/list/all' => [
+			'user_support/faq/search' => ['priority' => 400],
+			'user_support/support_ticket/search' => ['priority' => 400],
 		],
 		'forms/comment/save' => [
 			'user_support/support_ticket/comment' => [],

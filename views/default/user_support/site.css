@@ -2,7 +2,7 @@
 #user-support-button {
 	position: fixed;
 	
-	background: $(button-action-background-color);
+	background: var(--elgg-button-action-background-color);
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	
 	font-size: 16px;
@@ -13,7 +13,7 @@
 	z-index: 1000;
 	
 	&:hover {
-		background: $(button-action-background-color-hover);
+		background: var(--elgg-button-action-background-color-hover);
 	}
 	
 	&.position-horizontal-left {
@@ -27,7 +27,7 @@
 	}
 	
 	a {
-		color: white;
+		color: var(--elgg-button-action-font-color);
 		display: block;
 		padding: .5rem .25rem;
 		text-align: center;
@@ -39,21 +39,16 @@
 	
 	.elgg-anchor-icon-alt {
 		margin-top: 0.5rem;
-		color: white;
+		color: var(--elgg-button-action-font-color);
 	}
 	
 	.user-support-button-help-center.elgg-state-active .elgg-icon {
-		color: $(button-delete-background-color-hover);
+		color: var(--elgg-state-danger-font-color);
 	}
 }
 
 /* Help Center */
-
-form.elgg-form-user-support-help-center-search .user-support-help-center-search-input {
-	min-width: 500px;
-}
-
-@media $(media-tablet-up) {
+@media screen and (min-width: 50rem) {
 	#user_support_help_center_help {
 		max-height: 250px;
 		overflow-x: hidden;

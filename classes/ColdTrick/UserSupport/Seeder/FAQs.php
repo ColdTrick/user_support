@@ -25,7 +25,7 @@ class FAQs extends Seed {
 			try {
 				$logger->disable();
 				
-				/* @var $entity \UserSupportFAQ */
+				/** @var \UserSupportFAQ $entity */
 				$entity = $this->createObject([
 					'subtype' => \UserSupportFAQ::SUBTYPE,
 					'owner_guid' => $site->guid,
@@ -54,7 +54,7 @@ class FAQs extends Seed {
 	 * {@inheritdoc}
 	 */
 	public function unseed() {
-		/* @var $entities \ElggBatch */
+		/** @var \ElggBatch $entities */
 		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => \UserSupportFAQ::SUBTYPE,
@@ -64,7 +64,7 @@ class FAQs extends Seed {
 			'batch_inc_offset' => false,
 		]);
 		
-		/* @var $entity \UserSupportFAQ */
+		/** @var \UserSupportFAQ $entity */
 		foreach ($entities as $entity) {
 			if ($entity->delete()) {
 				$this->log("Deleted FAQ {$entity->guid}");

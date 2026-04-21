@@ -1,7 +1,7 @@
 <?php
 
 $group = elgg_extract('group', $vars);
-/* @var $contextual_help_object \UserSupportHelp */
+/** @var \UserSupportHelp $contextual_help_object */
 $contextual_help_object = elgg_extract('contextual_help_object', $vars);
 $faq = elgg_extract('faq', $vars);
 
@@ -11,7 +11,6 @@ $help_enabled = elgg_get_plugin_setting('help_enabled', 'user_support') === 'yes
 if (elgg_is_xhr()) {
 	echo elgg_view_form('user_support/help_center/search', [
 		'action' => elgg_generate_url('default:user_support:search'),
-		'class' => 'mbs',
 		'prevent_double_submit' => false,
 	]);
 
@@ -55,7 +54,7 @@ if (elgg_is_xhr()) {
 	}
 	
 	echo elgg_view_menu('help_center', [
-		'class' => 'elgg-menu-hz',
+		'class' => 'elgg-menu-hz mvl',
 		'items' => $buttons,
 	]);
 }
@@ -84,7 +83,6 @@ if (elgg_is_xhr() && $help_enabled) {
 	
 	if (elgg_is_admin_logged_in()) {
 		elgg_import_esm('user_support/help_center/help');
-//		echo elgg_format_element('script', [], 'require(["user_support/help_center/help"]);');
 		
 		$form = elgg_view_form('user_support/help/edit', [
 			'sticky_enabled' => true,

@@ -12,10 +12,10 @@ use Elgg\Exceptions\InvalidArgumentException;
  */
 class UserSupportTicket extends \ElggObject {
 	
-	const SUBTYPE = 'support_ticket';
+	public const SUBTYPE = 'support_ticket';
 	
-	const OPEN = 'open';
-	const CLOSED = 'closed';
+	public const OPEN = 'open';
+	public const CLOSED = 'closed';
 	
 	/**
 	 * {@inheritdoc}
@@ -56,6 +56,52 @@ class UserSupportTicket extends \ElggObject {
 		}
 		
 		return parent::save();
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function getDefaultFields(): array {
+		$fields = [];
+		
+		$fields[] = [
+			'#type' => 'hidden',
+			'name' => 'help_context',
+		];
+		
+		$fields[] = [
+			'#type' => 'longtext',
+			'#label' => elgg_echo('user_support:question'),
+			'name' => 'description',
+			'required' => true,
+			'editor_type' => 'simple',
+		];
+		
+		$fields[] = [
+			'#type' => 'select',
+			'#label' => elgg_echo('user_support:support_type'),
+			'name' => 'support_type',
+			'required' => true,
+			'options_values' => [
+				'question' => elgg_echo('user_support:support_type:question'),
+				'bug' => elgg_echo('user_support:support_type:bug'),
+				'request' => elgg_echo('user_support:support_type:request'),
+			],
+		];
+		
+		$fields[] = [
+			'#type' => 'tags',
+			'#label' => elgg_echo('tags'),
+			'name' => 'tags',
+		];
+		
+		$fields[] = [
+			'#type' => 'url',
+			'#label' => elgg_echo('user_support:url'),
+			'name' => 'help_url',
+		];
+		
+		return $fields;
 	}
 	
 	/**

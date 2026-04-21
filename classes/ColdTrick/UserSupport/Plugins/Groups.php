@@ -23,7 +23,7 @@ class Groups {
 			return null;
 		}
 		
-		/* @var $result Collection */
+		/** @var Collection $result */
 		$result = $event->getValue();
 		
 		$result[] = new Tool('faq', [

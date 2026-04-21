@@ -17,17 +17,29 @@ class PrepareHelpFields {
 	public function __invoke(\Elgg\Event $event): array {
 		$vars = $event->getValue();
 		
-		$values = [
-			'description' => '',
-			'tags' => [],
-			'help_context' => user_support_get_help_context(elgg_extract('help_url', $vars, '')),
-		];
+		$values = [];
+		
+		$fields = elgg()->fields->get('object', \UserSupportHelp::SUBTYPE);
+		foreach ($fields as $field) {
+			$default_value = null;
+			$name = elgg_extract('name', $field);
+			
+			switch ($name) {
+				case 'help_context':
+					$default_value = user_support_get_help_context((string) elgg_extract('help_url', $vars));
+					break;
+			}
+			
+			$values[$name] = $default_value;
+		}
 		
 		// edit
 		$entity = elgg_extract('entity', $vars);
 		if ($entity instanceof \UserSupportHelp) {
 			foreach ($values as $key => $value) {
-				$values[$key] = $entity->$key;
+				if (isset($entity->{$key})) {
+					$values[$key] = $entity->{$key};
+				}
 			}
 		}
 		

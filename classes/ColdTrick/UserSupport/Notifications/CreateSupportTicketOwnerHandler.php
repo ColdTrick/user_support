@@ -2,12 +2,26 @@
 
 namespace ColdTrick\UserSupport\Notifications;
 
-use Elgg\Notifications\InstantNotificationEventHandler;
+use Elgg\Notifications\NonConfigurableNotificationEventHandler;
 
 /**
  * Send a confirmation to the ticket owner that their issue was saved
  */
-class CreateSupportTicketOwnerHandler extends InstantNotificationEventHandler {
+class CreateSupportTicketOwnerHandler extends NonConfigurableNotificationEventHandler {
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getSubscriptions(): array {
+		$ticket = $this->event->getObject();
+		if (!$ticket instanceof \UserSupportTicket) {
+			return [];
+		}
+		
+		return [
+			$ticket->owner_guid => ['email'],
+		];
+	}
 	
 	/**
 	 * {@inheritdoc}
@@ -48,12 +62,5 @@ class CreateSupportTicketOwnerHandler extends InstantNotificationEventHandler {
 				'username' => $recipient->username,
 			]),
 		]);
-	}
-	
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function getNotificationMethods(): array {
-		return ['email'];
 	}
 }
