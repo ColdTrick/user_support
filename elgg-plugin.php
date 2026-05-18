@@ -41,7 +41,6 @@ return [
 			'subtype' => 'help',
 			'class' => \UserSupportHelp::class,
 			'capabilities' => [
-				'commentable' => false,
 				'searchable' => true,
 			],
 		],
