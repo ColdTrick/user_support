@@ -48,7 +48,7 @@ class Site {
 		
 		$options = [
 			'name' => 'help_center',
-			'icon' => 'life-ring-regular',
+			'icon' => 'life-ring',
 			'text' => elgg_echo('user_support:button:text'),
 			'href' => elgg_generate_url('default:user_support:help_center'),
 		];
