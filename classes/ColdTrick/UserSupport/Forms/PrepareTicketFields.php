@@ -19,7 +19,7 @@ class PrepareTicketFields {
 		
 		$values = [];
 		
-		$fields = elgg()->fields->get('object', \UserSupportHelp::SUBTYPE);
+		$fields = elgg()->fields->get('object', \UserSupportTicket::SUBTYPE);
 		foreach ($fields as $field) {
 			$default_value = null;
 			$name = elgg_extract('name', $field);
