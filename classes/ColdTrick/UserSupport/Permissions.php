@@ -107,4 +107,28 @@ class Permissions {
 		
 		return user_support_is_support_staff($user->guid);
 	}
+	
+	/**
+	 * Prevent comments on FAQs when comments are disabled
+	 *
+	 * @param \Elgg\Event $event 'container_logic_check', 'object'
+	 *
+	 * @return bool|null
+	 */
+	public static function preventFAQCommentsWhenDisabled(\Elgg\Event $event): ?bool {
+		if ($event->getParam('subtype') !== 'comment') {
+			return null;
+		}
+		
+		$container = $event->getParam('container');
+		if (!$container instanceof \UserSupportFAQ) {
+			return null;
+		}
+		
+		if ($container->allow_comments !== 'yes') {
+			return false;
+		}
+		
+		return null;
+	}
 }

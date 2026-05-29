@@ -26,17 +26,6 @@ class UserSupportFAQ extends \ElggObject {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function canComment(int $user_guid = 0): bool {
-		if ($this->allow_comments !== 'yes') {
-			return false;
-		}
-		
-		return parent::canComment($user_guid);
-	}
-	
-	/**
-	 * {@inheritdoc}
-	 */
 	public static function getDefaultFields(): array {
 		$fields = [];
 		

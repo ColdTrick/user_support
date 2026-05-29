@@ -217,6 +217,7 @@ return [
 		'container_logic_check' => [
 			'object' => [
 				\ColdTrick\UserSupport\GroupToolContainerLogicCheckFAQ::class => [],
+				'\ColdTrick\UserSupport\Permissions::preventFAQCommentsWhenDisabled' => [],
 			],
 		],
 		'container_permissions_check' => [
