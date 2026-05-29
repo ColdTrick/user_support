@@ -2,19 +2,14 @@
 
 // make sure we have the correct entity
 $guid = (int) elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE);
 
 /** @var \UserSupportFAQ $entity */
-$entity = get_entity($guid);
+$entity = elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE);
 
 elgg_push_entity_breadcrumbs($entity);
 
-$body = elgg_view_entity($entity, [
-	'show_responses' => ($entity->allow_comments === 'yes'),
-]);
-
 echo elgg_view_page($entity->getDisplayName(), [
-	'content' => $body,
+	'content' => elgg_view_entity($entity),
 	'entity' => $entity,
 	'filter' => false,
 ]);
