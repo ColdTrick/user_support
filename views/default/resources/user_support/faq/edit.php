@@ -1,15 +1,12 @@
 <?php
 
 $guid = (int) elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE, true);
 
 /** @var \UserSupportFAQ $entity */
-$entity = get_entity($guid);
+$entity = elgg_entity_gatekeeper($guid, 'object', \UserSupportFAQ::SUBTYPE, true);
 
-// check for group container
 elgg_push_entity_breadcrumbs($entity);
 
-// build page elements
 $form = elgg_view_form('user_support/faq/edit', [
 	'sticky_enabled' => true,
 ], [
