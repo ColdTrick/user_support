@@ -29,7 +29,7 @@ function user_support_get_help_context(string $url = ''): ?string {
 		return null;
 	}
 	
-	$path = rtrim(parse_url($url, PHP_URL_PATH), '/');
+	$path = rtrim((string) parse_url($url, PHP_URL_PATH), '/');
 	if (empty($path)) {
 		return '_index';
 	}
